@@ -1,0 +1,164 @@
+# 🧠 Skill: springboot-tdd
+
+> **Adaptada do ECC:** `springboot-tdd` — via `sync-ecc.sh`
+> **Fonte original:** `ECC/skills/springboot-tdd/SKILL.md`
+
+## Descrição
+
+Test-driven development for Spring Boot using JUnit 5, Mockito, MockMvc, Testcontainers, and JaCoCo. Use when adding features, fixing bugs, or refactoring.
+
+---
+
+## ⚠️ Adaptação para Codebuff
+
+
+
+| Conceito ECC (Claude) | Equivalente Codebuff |
+|-----------------------|---------------------|
+| Hooks | Instruções no `.codebuff/instructions.md` |
+| Comandos slash | Skills via `skill` tool |
+| `settings.json` | `.codebuff/instructions.md` |
+| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
+
+---
+
+## Conteúdo Adaptado
+
+# Spring Boot TDD Workflow
+
+TDD guidance for Spring Boot services with 80%+ coverage (unit + integration).
+
+## When to Use
+
+- New features or endpoints
+- Bug fixes or refactors
+- Adding data access logic or security rules
+
+## Workflow
+
+1) Write tests first (they should fail)
+2) Implement minimal code to pass
+3) Refactor with tests green
+4) Enforce coverage (JaCoCo)
+
+## Unit Tests (JUnit 5 + Mockito)
+
+```java
+@ExtendWith(MockitoExtension.class)
+class MarketServiceTest {
+  @Mock MarketRepository repo;
+  @InjectMocks MarketService service;
+
+  @Test
+  void createsMarket() {
+    CreateMarketRequest req = new CreateMarketRequest("name", "desc", Instant.now(), List.of("cat"));
+    when(repo.save(any())).thenAnswer(inv -> inv.getArgument(0));
+
+    Market result = service.create(req);
+
+    assertThat(result.name()).isEqualTo("name");
+    verify(repo).save(any());
+  }
+}
+```
+
+Patterns:
+- Arrange-Act-Assert
+- Avoid partial mocks; prefer explicit stubbing
+- Use `@ParameterizedTest` for variants
+
+## Web Layer Tests (MockMvc)
+
+```java
+@WebMvcTest(MarketController.class)
+class MarketControllerTest {
+  @Autowired MockMvc mockMvc;
+  @MockBean MarketService marketService;
+
+  @Test
+  void returnsMarkets() throws Exception {
+    when(marketService.list(any())).thenReturn(Page.empty());
+
+    mockMvc.perform(get("/api/markets"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.content").isArray());
+  }
+}
+```
+
+## Integration Tests (SpringBootTest)
+
+```java
+@SpringBootTest
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
+class MarketIntegrationTest {
+  @Autowired MockMvc mockMvc;
+
+  @Test
+  void createsMarket() throws Exception {
+    mockMvc.perform(post("/api/markets")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content("""
+          {"name":"Test","description":"Desc","endDate":"2030-01-01T00:00:00Z","categories":["general"]}
+        """))
+      .andExpect(status().isCreated());
+  }
+}
+```
+
+## Persistence Tests (DataJpaTest)
+
+```java
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(TestContainersConfig.class)
+class MarketRepositoryTest {
+  @Autowired MarketRepository repo;
+
+  @Test
+  void savesAndFinds() {
+    MarketEntity entity = new MarketEntity();
+    entity.setName("Test");
+    repo.save(entity);
+
+    Optional<MarketEntity> found = repo.findByName("Test");
+    assertThat(found).isPresent();
+  }
+}
+```
+
+## Testcontainers
+
+- Use reusable containers for Postgres/Redis to mirror production
+- Wire via `@DynamicPropertySource` to inject JDBC URLs into Spring context
+
+## Coverage (JaCoCo)
+
+Maven snippet:
+```xml
+<plugin>
+  <groupId>org.jacoco</groupId>
+  <artifactId>jacoco-maven-plugin</artifactId>
+  <version>0.8.14</version>
+  <executions>
+    <execution>
+      <goals><goal>prepare-agent</goal></goals>
+    </execution>
+    <execution>
+      <id>report</id>
+      <phase>verify</phase>
+      <goals><goal>report</goal></goals>
+    </execution>
+  </executions>
+</plugin>
+```
+
+## Assertions
+
+- Prefer A
+
+---
+
+**ECC Original:** `ECC/skills/springboot-tdd/SKILL.md`
+**Atualizado em:** 2026-07-02 22:11:33

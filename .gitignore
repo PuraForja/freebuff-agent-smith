@@ -1,0 +1,17 @@
+# Logs e relatórios de sincronização
+/logs/
+*.log
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Diretórios node_modules (caso alguém instale algo)
+node_modules/
+
+# Arquivos de ambiente
+.env
+.env.local

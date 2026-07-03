@@ -1,0 +1,96 @@
+# 🧠 Skill: frontend-design-direction
+
+> **Adaptada do ECC:** `frontend-design-direction` — via `sync-ecc.sh`
+> **Fonte original:** `ECC/skills/frontend-design-direction/SKILL.md`
+
+## Descrição
+
+Set an ECC-specific frontend design direction for production UI work. Use when building or improving websites, dashboards, applications, components, landing pages, visual tools, or any web UI that needs stronger product-specific design judgment.
+
+---
+
+## ⚠️ Adaptação para Codebuff
+
+
+
+| Conceito ECC (Claude) | Equivalente Codebuff |
+|-----------------------|---------------------|
+| Hooks | Instruções no `.codebuff/instructions.md` |
+| Comandos slash | Skills via `skill` tool |
+| `settings.json` | `.codebuff/instructions.md` |
+| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
+
+---
+
+## Conteúdo Adaptado
+
+# Frontend Design Direction
+
+Use this skill when the work is not just making UI function, but making it feel
+purposeful, polished, and appropriate to the product domain.
+
+Source: salvaged from stale community PR #1659 by `linus707`.
+
+Note: ECC intentionally does not rebundle the canonical Anthropic
+`frontend-design` skill. Install that from `anthropics/skills` when you want the
+official upstream skill. This skill is the ECC-specific design-direction salvage
+of the useful local guidance from #1659.
+
+## When to Use
+
+- The user asks to build a web page, app, dashboard, artifact, component, or UI.
+- The user asks to make an interface more polished, distinctive, beautiful, or
+  less generic.
+- The implementation needs visual hierarchy, typography, color, motion, layout,
+  and interaction choices.
+- The current UI works but reads as flat, generic, templated, or mismatched to
+  the audience.
+
+## Design Direction
+
+Before coding, choose a specific direction:
+
+1. Purpose: what job does the interface do?
+2. Audience: who repeats this workflow, and what do they need to scan first?
+3. Tone: utilitarian, editorial, playful, industrial, refined, technical,
+   maximal, minimal, dense, calm, or another explicit direction.
+4. Memorable detail: one design idea that makes the result feel intentional.
+5. Constraints: framework, accessibility, performance, responsiveness, and
+   existing design system.
+
+Match the direction to the domain. A SaaS operations tool should usually be
+dense, quiet, and scannable. A portfolio, launch page, game, or editorial piece
+can be more expressive. Do not force a landing-page composition onto a tool that
+needs repeated daily use.
+
+## Implementation Guidance
+
+- Build the actual usable experience as the first screen unless the user
+  explicitly asks for marketing copy.
+- Use existing project components, tokens, icon libraries, and routing patterns
+  before introducing a new visual system.
+- Use real or generated visual assets when the interface depends on images,
+  products, places, people, gameplay, charts, or inspectable media.
+- Prefer contextual typography and spacing over generic oversized hero text.
+- Keep palettes multi-dimensional: avoid a UI dominated by one hue family.
+- Use CSS variables or existing design tokens so the direction remains
+  coherent across states.
+- Design responsive constraints explicitly: grids, aspect ratios, min/max
+  sizes, stable toolbars, and fixed-format controls should not shift when labels
+  or hover states appear.
+- Use motion sparingly but deliberately. Prefer high-signal transitions that
+  clarify state over decorative animation.
+- Verify text fit on mobile and desktop. Long labels must wrap or resize
+  cleanly rather than overflowing.
+
+## Anti-Patterns
+
+- Do not default to common generated patterns: purple gradients, decorative
+  blobs, oversized cards, vague hero copy, or stock-like atmospheric media.
+- Do not add UI cards inside other cards.
+- Do not use a single decorative style everywhere when 
+
+---
+
+**ECC Original:** `ECC/skills/frontend-design-direction/SKILL.md`
+**Atualizado em:** 2026-07-02 22:11:23

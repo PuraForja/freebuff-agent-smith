@@ -1,0 +1,130 @@
+# 🧠 Skill: scientific-thinking-scholar-evaluation
+
+> **Adaptada do ECC:** `scientific-thinking-scholar-evaluation` — via `sync-ecc.sh`
+> **Fonte original:** `ECC/skills/scientific-thinking-scholar-evaluation/SKILL.md`
+
+## Descrição
+
+Structured scholarly-work evaluation for papers, proposals, literature reviews, methods sections, evidence quality, citation support, and research-writing feedback.
+
+---
+
+## ⚠️ Adaptação para Codebuff
+
+
+
+| Conceito ECC (Claude) | Equivalente Codebuff |
+|-----------------------|---------------------|
+| Hooks | Instruções no `.codebuff/instructions.md` |
+| Comandos slash | Skills via `skill` tool |
+| `settings.json` | `.codebuff/instructions.md` |
+| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
+
+---
+
+## Conteúdo Adaptado
+
+# Scholar Evaluation
+
+Use this skill to evaluate academic or scientific work with a repeatable rubric.
+
+## When to Use
+
+- Reviewing a research paper, proposal, thesis chapter, or literature review.
+- Checking whether claims are supported by cited evidence.
+- Evaluating methodology, study design, analysis, or limitations.
+- Comparing two or more papers for quality or relevance.
+- Producing structured feedback for revision.
+
+## Evaluation Scope
+
+Start by identifying the artifact:
+
+- empirical research paper
+- theoretical paper
+- technical report
+- systematic or narrative literature review
+- research proposal
+- thesis or dissertation chapter
+- conference abstract or short paper
+
+Then choose scope:
+
+- **comprehensive**: all rubric dimensions
+- **targeted**: one or two dimensions, such as method or citations
+- **comparative**: rank multiple works against the same rubric
+
+## Rubric
+
+Score each applicable dimension from 1 to 5:
+
+- 5: excellent; clear, rigorous, and publication-ready
+- 4: good; minor improvements needed
+- 3: adequate; meaningful gaps but usable
+- 2: weak; substantial revision needed
+- 1: poor; major validity or clarity problems
+
+Use `N/A` for dimensions that do not apply.
+
+### 1. Problem and Research Question
+
+- Is the problem clear and specific?
+- Is the contribution meaningful?
+- Are scope and assumptions explicit?
+- Does the question match the claimed contribution?
+
+### 2. Literature and Context
+
+- Is relevant prior work covered?
+- Does the work synthesize rather than merely list sources?
+- Are gaps accurately identified?
+- Are recent and foundational sources balanced?
+
+### 3. Methodology
+
+- Does the method answer the research question?
+- Are design choices justified?
+- Are variables, datasets, participants, or materials described clearly?
+- Could another researcher reproduce the work?
+- Are ethical and practical constraints acknowledged?
+
+### 4. Data and Evidence
+
+- Are data sources credible and appropriate?
+- Is sample size or corpus coverage adequate?
+- Are inclusion, exclusion, and preprocessing decisions documented?
+- Are missing data and bias risks discussed?
+
+### 5. Analysis
+
+- Are statistical, qualitative, or computational methods appropriate?
+- Are baselines and controls fair?
+- Are uncertainty, sensitivity, or robustness checks included when needed?
+- Are alternative explanations considered?
+
+### 6. Results and Interpretation
+
+- Are results clearly presented?
+- Do claims stay within the evidence?
+- Are figures, tables, and metrics understandable?
+- Are negative or null results handled honestly?
+
+### 7. Limitations and Threats to Validity
+
+- Are limitations specific rather than generic?
+- Are internal, external, construct, and conclusion-validity risks addressed?
+- Does the paper distinguish speculation from demonstrated results?
+
+### 8. Writing and Structure
+
+- Is the argument easy to follow?
+- Are sections organized around the research question?
+- Are definitions and notation clear?
+- Is the tone precise and scholarly?
+
+###
+
+---
+
+**ECC Original:** `ECC/skills/scientific-thinking-scholar-evaluation/SKILL.md`
+**Atualizado em:** 2026-07-02 22:11:32
