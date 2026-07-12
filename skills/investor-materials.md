@@ -1,28 +1,21 @@
 # 🧠 Skill: investor-materials
 
-> **Adaptada do ECC:** `investor-materials` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `investor-materials` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/investor-materials/SKILL.md`
 
 ## Descrição
 
-Create and update pitch decks, one-pagers, investor memos, accelerator applications, financial models, and fundraising materials. Use when the user needs investor-facing documents, projections, use-of-funds tables, milestone plans, or materials that must stay internally consistent across multiple fundraising assets.
+--- name: investor-materials description: Create and update pitch decks, one-pagers, investor memos, accelerator applications, financial models, and fundraising materials. Use when the user needs investor-facing documents, projections, use-of-funds tables, milestone plans, or materials that must stay internally consistent across multiple fundraising assets.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: investor-materials
+description: Create and update pitch decks, one-pagers, investor memos, accelerator applications, financial models, and fundraising materials. Use when the user needs investor-facing documents, projections, use-of-funds tables, milestone plans, or materials that must stay internally consistent across multiple fundraising assets.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Investor Materials
 
@@ -118,4 +111,4 @@ Before delivering:
 ---
 
 **ECC Original:** `ECC/skills/investor-materials/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:25
+**Atualizado em:** 2026-07-12 11:45:46

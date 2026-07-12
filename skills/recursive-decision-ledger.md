@@ -1,28 +1,22 @@
 # 🧠 Skill: recursive-decision-ledger
 
-> **Adaptada do ECC:** `recursive-decision-ledger` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `recursive-decision-ledger` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/recursive-decision-ledger/SKILL.md`
 
 ## Descrição
 
-Use when the user asks for repeated rollouts, marked decision processes, high-dimensional search, stochastic optimization, local-optima exploration, ensemble comparison, or recursive reasoning with a visible evidence trail.
+--- name: recursive-decision-ledger description: Use when the user asks for repeated rollouts, marked decision processes, high-dimensional search, stochastic optimization, local-optima exploration, ensemble comparison, or recursive reasoning with a visible evidence trail.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: recursive-decision-ledger
+description: Use when the user asks for repeated rollouts, marked decision processes, high-dimensional search, stochastic optimization, local-optima exploration, ensemble comparison, or recursive reasoning with a visible evidence trail.
+metadata:
+  origin: ECC
+tools: Read, Write, Edit, Bash, Grep, Glob
 ---
-
-## Conteúdo Adaptado
 
 # Recursive Decision Ledger
 
@@ -100,4 +94,4 @@ below threshold.
 ---
 
 **ECC Original:** `ECC/skills/recursive-decision-ledger/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:31
+**Atualizado em:** 2026-07-12 11:45:49

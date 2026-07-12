@@ -1,28 +1,22 @@
 # 🧠 Skill: growth-log
 
-> **Adaptada do ECC:** `growth-log` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `growth-log` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/growth-log/SKILL.md`
 
 ## Descrição
 
-Use after a complex task, failure, or when reviewing what was learned. Teaches how to write growth logs that extract reusable patterns — not diary entries.
+--- name: growth-log description: "Use after a complex task, failure, or when reviewing what was learned. Teaches how to write growth logs that extract reusable patterns — not diary entries."
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: growth-log
+description: "Use after a complex task, failure, or when reviewing what was learned. Teaches how to write growth logs that extract reusable patterns — not diary entries."
+version: 1.1.0
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Growth Log Skill
 
@@ -69,9 +63,83 @@ If you can't write that sentence, you haven't extracted the pattern yet.
 2. Ask "why?" iteratively until you reach root cause (usually 3-5 whys)
 3. Generalize: "What class of problem is this?" (not "Chrome 128 bug" but "browser default change breaking existing behavior")
 4. Formulate as: "Next time I see [signal], I will [action]."
-5. Name the signal: what specific observable tells you this patter
+5. Name the signal: what specific observable tells you this pattern is active?
+
+## Entry Template
+
+**Scope:** One entry per distinct root cause. Typical length: 4-8 sentences. If it takes >2 minutes to write, you're narrating events. If <30 seconds, you haven't gone deep enough.
+
+```markdown
+## [Title: the pattern, not the event]
+
+### Context
+- What was I trying to do?
+- What went wrong / what worked surprisingly well?
+
+### Root Cause / Core Insight
+- The underlying mechanism, not just the symptom
+
+### The Pattern (transferable)
+- Next time [similar situation], I will [specific action].
+- Signal to recognize: [what observable tells me this pattern is active?]
+
+### Related
+- [entry-name](../path/to/related-entry.md)
+```
+
+## Entry Types
+
+All four types use the template above. The type determines which sections carry the most weight:
+
+| Type | When to Use | Emphasis | Example Title |
+|------|------------|----------|---------------|
+| **Failure** | Something broke, needed debugging, or required rework | Root Cause | "Config inheritance ≠ behavior inheritance across sessions" |
+| **Methodology** | A repeatable process emerged from the work | Context / Pattern | "PPT → open-book exam study guide: three-layer structure" |
+| **Pattern Discovery** | A reusable insight about tools, systems, or thinking | Pattern section | "PR description template: describe the gap, not the feature" |
+| **Capability Change** | A measurable skill improvement | Context (before vs after) | "Git: from clone/push to independent PR with 12 commits" |
+
+## Quality Checklist
+
+Before finalizing a growth log entry:
+
+- [ ] Does the title name the *pattern*, not the event?
+- [ ] Is there a "Next time I will..." sentence?
+- [ ] Is the "Signal to recognize" specific enough to trigger the pattern next time?
+- [ ] Did I search existing entries for duplicates before writing? (Bole Principle)
+- [ ] Is the root cause distinguished from the symptom?
+- [ ] Are related memories cross-linked?
+- [ ] Is the entry 4-8 sentences? Shorter = too shallow; longer = narrating events.
+
+## Anti-Patterns
+
+- Avoid: "Fixed bug in payment module" (event, not pattern)
+- Avoid: Copying the git commit message verbatim (commits describe what changed; logs extract why it matters)
+- Avoid: Writing an entry for every commit (only when a pattern emerges)
+- Avoid: Skipping the transferable sentence (without it, it's just a diary — this is non-negotiable)
+- Avoid: Duplicating the same pattern under different titles (violates Bole Principle — search before writing)
+
+## Storage
+
+Store entries wherever you keep notes. Common patterns:
+- Markdown files in a `growth-log/` directory (one file per day: `YYYY-MM-DD.md`)
+- A dedicated section in Notion, Obsidian, or your note-taking app
+- Plain text files with a consistent naming convention
+
+Pick one convention and stick to it. Searchability matters more than format.
+
+## If You Use Delivery Gate
+
+The `delivery-gate` Stop hook checks that learning files were modified today via filesystem timestamps. This skill teaches *what to write* — so the file that delivery-gate checks actually contains useful patterns, not empty timestamps.
+
+```
+Task completes → delivery-gate checks: was the learning file touched today?
+  → Stale (no file modified): block — "what did you learn?"
+  → Fresh (file touched): pass — this skill ensures the content is useful
+```
+
+Having enforcement without methodology → empty entries. Having methodology without enforcement → forgotten captures. Each is independently useful; together they close the loop.
 
 ---
 
 **ECC Original:** `ECC/skills/growth-log/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:24
+**Atualizado em:** 2026-07-12 11:45:45

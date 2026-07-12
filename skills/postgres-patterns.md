@@ -1,28 +1,21 @@
 # 🧠 Skill: postgres-patterns
 
-> **Adaptada do ECC:** `postgres-patterns` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `postgres-patterns` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/postgres-patterns/SKILL.md`
 
 ## Descrição
 
-PostgreSQL database patterns for query optimization, schema design, indexing, and security. Based on Supabase best practices.
+--- name: postgres-patterns description: PostgreSQL database patterns for query optimization, schema design, indexing, and security. Based on Supabase best practices.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: postgres-patterns
+description: PostgreSQL database patterns for query optimization, schema design, indexing, and security. Based on Supabase best practices.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # PostgreSQL Patterns
 
@@ -139,9 +132,34 @@ ORDER BY n_dead_tup DESC;
 ### Configuration Template
 
 ```sql
--- Connection limits (adjust f
+-- Connection limits (adjust for RAM)
+ALTER SYSTEM SET max_connections = 100;
+ALTER SYSTEM SET work_mem = '8MB';
+
+-- Timeouts
+ALTER SYSTEM SET idle_in_transaction_session_timeout = '30s';
+ALTER SYSTEM SET statement_timeout = '30s';
+
+-- Monitoring
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+
+-- Security defaults
+REVOKE ALL ON SCHEMA public FROM public;
+
+SELECT pg_reload_conf();
+```
+
+## Related
+
+- Agent: `database-reviewer` - Full database review workflow
+- Skill: `clickhouse-io` - ClickHouse analytics patterns
+- Skill: `backend-patterns` - API and backend patterns
+
+---
+
+*Based on Supabase Agent Skills (credit: Supabase team) (MIT License)*
 
 ---
 
 **ECC Original:** `ECC/skills/postgres-patterns/SKILL.md`
-**Atualizado em:** 2026-07-01 13:21:04
+**Atualizado em:** 2026-07-12 11:45:48

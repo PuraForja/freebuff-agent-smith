@@ -1,28 +1,21 @@
 # 🧠 Skill: visa-doc-translate
 
-> **Adaptada do ECC:** `visa-doc-translate` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `visa-doc-translate` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/visa-doc-translate/SKILL.md`
 
 ## Descrição
 
-Translate visa application documents (images) to English and create a bilingual PDF with original and translation
+--- name: visa-doc-translate description: Translate visa application documents (images) to English and create a bilingual PDF with original and translation
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: visa-doc-translate
+description: Translate visa application documents (images) to English and create a bilingual PDF with original and translation
 ---
 
-## Conteúdo Adaptado
+You are helping translate visa application documents for visa applications.
 
 ## Instructions
 
@@ -114,9 +107,28 @@ pip install pyobjc-framework-Vision pyobjc-framework-Quartz
 - Try multiple OCR methods if one fails
 - Ensure all numbers, dates, and amounts are accurately translated
 - Use clean, professional formatting
-- Compl
+- Complete the entire process and report the final PDF location
+
+## Example Usage
+
+```bash
+/visa-doc-translate RetirementCertificate.PNG
+/visa-doc-translate BankStatement.HEIC
+/visa-doc-translate EmploymentLetter.jpg
+```
+
+## Output Example
+
+The skill will:
+1. Extract text using available OCR method
+2. Translate to professional English
+3. Generate `<filename>_Translated.pdf` with:
+   - Page 1: Original document image
+   - Page 2: Professional English translation
+
+Perfect for visa applications to Australia, USA, Canada, UK, and other countries requiring translated documents.
 
 ---
 
 **ECC Original:** `ECC/skills/visa-doc-translate/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:34
+**Atualizado em:** 2026-07-12 11:45:51

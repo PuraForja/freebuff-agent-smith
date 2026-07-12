@@ -1,28 +1,21 @@
 # 🧠 Skill: orch-build-mvp
 
-> **Adaptada do ECC:** `orch-build-mvp` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `orch-build-mvp` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/orch-build-mvp/SKILL.md`
 
 ## Descrição
 
-Orchestrate bootstrapping a working MVP from a design or spec document — ingest the doc, plan thin vertical slices, scaffold the first end-to-end slice, then TDD-implement, review, and gated commit. Use to turn an SDD/PRD into a running starting point.
+--- name: orch-build-mvp description: Orchestrate bootstrapping a working MVP from a design or spec document — ingest the doc, plan thin vertical slices, scaffold the first end-to-end slice, then TDD-implement, review, and gated commit. Use to turn an SDD/PRD into a running starting point.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: orch-build-mvp
+description: Orchestrate bootstrapping a working MVP from a design or spec document — ingest the doc, plan thin vertical slices, scaffold the first end-to-end slice, then TDD-implement, review, and gated commit. Use to turn an SDD/PRD into a running starting point.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # orch-build-mvp
 
@@ -70,4 +63,4 @@ orch-build-mvp: civicpulse/docs/SDD-v0.6.md
 ---
 
 **ECC Original:** `ECC/skills/orch-build-mvp/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:29
+**Atualizado em:** 2026-07-12 11:45:48

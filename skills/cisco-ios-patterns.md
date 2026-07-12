@@ -1,28 +1,21 @@
 # 🧠 Skill: cisco-ios-patterns
 
-> **Adaptada do ECC:** `cisco-ios-patterns` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `cisco-ios-patterns` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/cisco-ios-patterns/SKILL.md`
 
 ## Descrição
 
-Cisco IOS and IOS-XE review patterns for show commands, config hierarchy, wildcard masks, ACL placement, interface hygiene, and safe change-window verification.
+--- name: cisco-ios-patterns description: Cisco IOS and IOS-XE review patterns for show commands, config hierarchy, wildcard masks, ACL placement, interface hygiene, and safe change-window verification.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: cisco-ios-patterns
+description: Cisco IOS and IOS-XE review patterns for show commands, config hierarchy, wildcard masks, ACL placement, interface hygiene, and safe change-window verification.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Cisco IOS Patterns
 
@@ -123,9 +116,66 @@ operational goal includes observing misses, and confirm logging volume is safe.
 
 ## ACL Placement Review
 
-Before applying an ACL to an interface, answer these questi
+Before applying an ACL to an interface, answer these questions:
+
+- Which traffic direction is being filtered, `in` or `out`?
+- Is management traffic sourced from a known jump host or management subnet?
+- Is there an explicit permit for required routing, DNS, NTP, monitoring, or
+  application traffic?
+- Are hit counters available from a safe test source?
+- Is there a rollback command and an active console or out-of-band path?
+
+Do not test reachability by removing firewall or ACL protections. Read counters,
+logs, and route state first.
+
+## Interface Hygiene
+
+```text
+interface GigabitEthernet0/1
+ description UPLINK-TO-CORE
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30
+ switchport trunk native vlan 999
+ no shutdown
+```
+
+Use clear descriptions, explicit switchport mode, and documented native VLANs.
+On routed interfaces, confirm the mask, peer addressing, and routing process
+before assuming link state means forwarding is correct.
+
+## Change-Window Verification
+
+Use before/after checks that match the actual change.
+
+```text
+show running-config | section interface GigabitEthernet0/1
+show interfaces GigabitEthernet0/1
+show logging | include GigabitEthernet0/1|changed state|line protocol
+show ip route <prefix>
+show ip access-lists <name>
+```
+
+For routing changes, also capture neighbor state and route tables before and
+after the change. For ACL changes, compare hit counters from a planned test
+source rather than relying on a generic ping.
+
+## Anti-Patterns
+
+- Applying a generated config without a device-specific diff.
+- Saving configuration before post-change checks pass.
+- Using a subnet mask where IOS expects a wildcard mask.
+- Applying an ACL to the wrong interface direction.
+- Troubleshooting by disabling ACLs, route policies, or authentication.
+- Pasting full configs into public tools without sanitizing secrets and topology.
+
+## See Also
+
+- Agent: `network-config-reviewer`
+- Agent: `network-troubleshooter`
+- Skill: `network-config-validation`
+- Skill: `network-interface-health`
 
 ---
 
 **ECC Original:** `ECC/skills/cisco-ios-patterns/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:20
+**Atualizado em:** 2026-07-12 11:45:42

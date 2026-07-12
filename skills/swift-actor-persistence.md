@@ -1,28 +1,21 @@
 # 🧠 Skill: swift-actor-persistence
 
-> **Adaptada do ECC:** `swift-actor-persistence` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `swift-actor-persistence` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/swift-actor-persistence/SKILL.md`
 
 ## Descrição
 
-Thread-safe data persistence in Swift using actors — in-memory cache with file-backed storage, eliminating data races by design.
+--- name: swift-actor-persistence description: Thread-safe data persistence in Swift using actors — in-memory cache with file-backed storage, eliminating data races by design.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: swift-actor-persistence
+description: Thread-safe data persistence in Swift using actors — in-memory cache with file-backed storage, eliminating data races by design.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Swift Actors for Thread-Safe Persistence
 
@@ -132,9 +125,37 @@ final class QuestionListViewModel {
 
 | Decision | Rationale |
 |----------|-----------|
-| A
+| Actor (not class + lock) | Compiler-enforced thread safety, no manual synchronization |
+| In-memory cache + file persistence | Fast reads from cache, durable writes to disk |
+| Synchronous init loading | Avoids async initialization complexity |
+| Dictionary keyed by ID | O(1) lookups by identifier |
+| Generic over `Codable & Identifiable` | Reusable across any model type |
+| Atomic file writes (`.atomic`) | Prevents partial writes on crash |
+
+## Best Practices
+
+- **Use `Sendable` types** for all data crossing actor boundaries
+- **Keep the actor's public API minimal** — only expose domain operations, not persistence details
+- **Use `.atomic` writes** to prevent data corruption if the app crashes mid-write
+- **Load synchronously in `init`** — async initializers add complexity with minimal benefit for local files
+- **Combine with `@Observable`** ViewModels for reactive UI updates
+
+## Anti-Patterns to Avoid
+
+- Using `DispatchQueue` or `NSLock` instead of actors for new Swift concurrency code
+- Exposing the internal cache dictionary to external callers
+- Making the file URL configurable without validation
+- Forgetting that all actor method calls are `await` — callers must handle async context
+- Using `nonisolated` to bypass actor isolation (defeats the purpose)
+
+## When to Use
+
+- Local data storage in iOS/macOS apps (user data, settings, cached content)
+- Offline-first architectures that sync to a server later
+- Any shared mutable state that multiple parts of the app access concurrently
+- Replacing legacy `DispatchQueue`-based thread safety with modern Swift concurrency
 
 ---
 
 **ECC Original:** `ECC/skills/swift-actor-persistence/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:33
+**Atualizado em:** 2026-07-12 11:45:50

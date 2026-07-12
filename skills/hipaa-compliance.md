@@ -1,28 +1,22 @@
 # 🧠 Skill: hipaa-compliance
 
-> **Adaptada do ECC:** `hipaa-compliance` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `hipaa-compliance` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/hipaa-compliance/SKILL.md`
 
 ## Descrição
 
-HIPAA-specific entrypoint for healthcare privacy and security work. Use when a task is explicitly framed around HIPAA, PHI handling, covered entities, BAAs, breach posture, or US healthcare compliance requirements.
+--- name: hipaa-compliance description: HIPAA-specific entrypoint for healthcare privacy and security work. Use when a task is explicitly framed around HIPAA, PHI handling, covered entities, BAAs, breach posture, or US healthcare compliance requirements.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: hipaa-compliance
+description: HIPAA-specific entrypoint for healthcare privacy and security work. Use when a task is explicitly framed around HIPAA, PHI handling, covered entities, BAAs, breach posture, or US healthcare compliance requirements.
+metadata:
+  origin: ECC direct-port adaptation
+version: "1.0.0"
 ---
-
-## Conteúdo Adaptado
 
 # HIPAA Compliance
 
@@ -85,9 +79,18 @@ User request:
 Response pattern:
 
 - Assume those messages may contain PHI
-- Block the design u
+- Block the design unless the analytics vendor is approved for HIPAA-bound workloads and the data path is minimized
+- Require redaction or a non-PHI event model when possible
+
+## Related Skills
+
+- `healthcare-phi-compliance`
+- `healthcare-reviewer`
+- `healthcare-emr-patterns`
+- `healthcare-eval-harness`
+- `security-review`
 
 ---
 
 **ECC Original:** `ECC/skills/hipaa-compliance/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:24
+**Atualizado em:** 2026-07-12 11:45:45

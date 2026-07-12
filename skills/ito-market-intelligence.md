@@ -1,28 +1,21 @@
 # 🧠 Skill: ito-market-intelligence
 
-> **Adaptada do ECC:** `ito-market-intelligence` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ito-market-intelligence` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ito-market-intelligence/SKILL.md`
 
 ## Descrição
 
-Research prediction-market events, venues, underliers, liquidity, and news context for Itô basket workflows. Use for read-only market intelligence, API-gated Itô exploration, and source-grounded prediction-market briefings without investment advice or live trading.
+--- name: ito-market-intelligence description: Research prediction-market events, venues, underliers, liquidity, and news context for Itô basket workflows. Use for read-only market intelligence, API-gated Itô exploration, and source-grounded prediction-market briefings without investment advice or live trading.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ito-market-intelligence
+description: Research prediction-market events, venues, underliers, liquidity, and news context for Itô basket workflows. Use for read-only market intelligence, API-gated Itô exploration, and source-grounded prediction-market briefings without investment advice or live trading.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Itô Market Intelligence
 
@@ -82,4 +75,4 @@ using Itô-backed reads.
 ---
 
 **ECC Original:** `ECC/skills/ito-market-intelligence/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:25
+**Atualizado em:** 2026-07-12 11:45:46

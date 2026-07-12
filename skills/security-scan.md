@@ -1,28 +1,21 @@
 # 🧠 Skill: security-scan
 
-> **Adaptada do ECC:** `security-scan` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `security-scan` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/security-scan/SKILL.md`
 
 ## Descrição
 
-Scan your Claude Code configuration (.claude/ directory) for security vulnerabilities, misconfigurations, and injection risks using AgentShield. Checks CLAUDE.md, settings.json, MCP servers, hooks, and agent definitions.
+--- name: security-scan description: Scan your Claude Code configuration (.claude/ directory) for security vulnerabilities, misconfigurations, and injection risks using AgentShield. Checks CLAUDE.md, settings.json, MCP servers, hooks, and agent definitions.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: security-scan
+description: Scan your Claude Code configuration (.claude/ directory) for security vulnerabilities, misconfigurations, and injection risks using AgentShield. Checks CLAUDE.md, settings.json, MCP servers, hooks, and agent definitions.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Security Scan Skill
 
@@ -147,9 +140,44 @@ Add to your CI pipeline:
     fail-on-findings: true
 ```
 
-## Severit
+## Severity Levels
+
+| Grade | Score | Meaning |
+|-------|-------|---------|
+| A | 90-100 | Secure configuration |
+| B | 75-89 | Minor issues |
+| C | 60-74 | Needs attention |
+| D | 40-59 | Significant risks |
+| F | 0-39 | Critical vulnerabilities |
+
+## Interpreting Results
+
+### Critical Findings (fix immediately)
+- Hardcoded API keys or tokens in config files
+- `Bash(*)` in the allow list (unrestricted shell access)
+- Command injection in hooks via `${file}` interpolation
+- Shell-running MCP servers
+
+### High Findings (fix before production)
+- Auto-run instructions in CLAUDE.md (prompt injection vector)
+- Missing deny lists in permissions
+- Agents with unnecessary Bash access
+
+### Medium Findings (recommended)
+- Silent error suppression in hooks (`2>/dev/null`, `|| true`)
+- Missing PreToolUse security hooks
+- `npx -y` auto-install in MCP server configs
+
+### Info Findings (awareness)
+- Missing descriptions on MCP servers
+- Prohibitive instructions correctly flagged as good practice
+
+## Links
+
+- **GitHub**: [github.com/affaan-m/agentshield](https://github.com/affaan-m/agentshield)
+- **npm**: [npmjs.com/package/ecc-agentshield](https://www.npmjs.com/package/ecc-agentshield)
 
 ---
 
 **ECC Original:** `ECC/skills/security-scan/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:50

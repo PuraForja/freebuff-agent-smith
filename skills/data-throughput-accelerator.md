@@ -1,28 +1,22 @@
 # 🧠 Skill: data-throughput-accelerator
 
-> **Adaptada do ECC:** `data-throughput-accelerator` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `data-throughput-accelerator` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/data-throughput-accelerator/SKILL.md`
 
 ## Descrição
 
-Use when large data ingestion, backfill, export, ETL, warehouse loading, manifest catch-up, or table synchronization needs to become much faster while preserving data correctness.
+--- name: data-throughput-accelerator description: Use when large data ingestion, backfill, export, ETL, warehouse loading, manifest catch-up, or table synchronization needs to become much faster while preserving data correctness.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: data-throughput-accelerator
+description: Use when large data ingestion, backfill, export, ETL, warehouse loading, manifest catch-up, or table synchronization needs to become much faster while preserving data correctness.
+metadata:
+  origin: ECC
+tools: Read, Write, Edit, Bash, Grep, Glob
 ---
-
-## Conteúdo Adaptado
 
 # Data Throughput Accelerator
 
@@ -93,4 +87,4 @@ Data throughput result:
 ---
 
 **ECC Original:** `ECC/skills/data-throughput-accelerator/SKILL.md`
-**Atualizado em:** 2026-07-01 13:21:04
+**Atualizado em:** 2026-07-12 11:45:43

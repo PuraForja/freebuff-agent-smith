@@ -1,28 +1,21 @@
 # 🧠 Skill: council
 
-> **Adaptada do ECC:** `council` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `council` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/council/SKILL.md`
 
 ## Descrição
 
-Convene a four-voice council for ambiguous decisions, tradeoffs, and go/no-go calls. Use when multiple valid paths exist and you need structured disagreement before choosing.
+--- name: council description: Convene a four-voice council for ambiguous decisions, tradeoffs, and go/no-go calls. Use when multiple valid paths exist and you need structured disagreement before choosing.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: council
+description: Convene a four-voice council for ambiguous decisions, tradeoffs, and go/no-go calls. Use when multiple valid paths exist and you need structured disagreement before choosing.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Council
 
@@ -126,9 +119,103 @@ Respond with:
 3. Risk — biggest risk in your recommendation
 4. Surprise — one thing the other voices may miss
 
-Be direct. No hedging. Keep it under 300 w
+Be direct. No hedging. Keep it under 300 words.
+```
+
+Role emphasis:
+- Skeptic: challenge framing, question assumptions, propose the simplest credible alternative
+- Pragmatist: optimize for speed, simplicity, and real-world execution
+- Critic: surface downside risk, edge cases, and reasons the plan could fail
+
+### 5. Synthesize with bias guardrails
+
+You are both a participant and the synthesizer, so use these rules:
+- do not dismiss an external view without explaining why
+- if an external voice changed your recommendation, say so explicitly
+- always include the strongest dissent, even if you reject it
+- if two voices align against your initial position, treat that as a real signal
+- keep the raw positions visible before the verdict
+
+### 6. Present a compact verdict
+
+Use this output shape:
+
+```markdown
+## Council: [short decision title]
+
+**Architect:** [1-2 sentence position]
+[1 line on why]
+
+**Skeptic:** [1-2 sentence position]
+[1 line on why]
+
+**Pragmatist:** [1-2 sentence position]
+[1 line on why]
+
+**Critic:** [1-2 sentence position]
+[1 line on why]
+
+### Verdict
+- **Consensus:** [where they align]
+- **Strongest dissent:** [most important disagreement]
+- **Premise check:** [did the Skeptic challenge the question itself?]
+- **Recommendation:** [the synthesized path]
+```
+
+Keep it scannable on a phone screen.
+
+## Persistence Rule
+
+Do **not** write ad-hoc notes to `~/.claude/notes` or other shadow paths from this skill.
+
+If the council materially changes the recommendation:
+- use `knowledge-ops` to store the lesson in the right durable location
+- or use `/save-session` if the outcome belongs in session memory
+- or update the relevant GitHub / Linear issue directly if the decision changes active execution truth
+
+Only persist a decision when it changes something real.
+
+## Multi-Round Follow-up
+
+Default is one round.
+
+If the user wants another round:
+- keep the new question focused
+- include the previous verdict only if it is necessary
+- keep the Skeptic as clean as possible to preserve anti-anchoring value
+
+## Anti-Patterns
+
+- using council for code review
+- using council when the task is just implementation work
+- feeding the subagents the entire conversation transcript
+- hiding disagreement in the final verdict
+- persisting every decision as a note regardless of importance
+
+## Related Skills
+
+- `santa-method` — adversarial verification
+- `knowledge-ops` — persist durable decision deltas correctly
+- `search-first` — gather external reference material before the council if needed
+- `architecture-decision-records` — formalize the outcome when the decision becomes long-lived system policy
+
+## Example
+
+Question:
+
+```text
+Should we ship ECC 2.0 as alpha now, or hold until the control-plane UI is more complete?
+```
+
+Likely council shape:
+- Architect pushes for structural integrity and avoiding a confused surface
+- Skeptic questions whether the UI is actually the gating factor
+- Pragmatist asks what can be shipped now without harming trust
+- Critic focuses on support burden, expectation debt, and rollout confusion
+
+The value is not unanimity. The value is making the disagreement legible before choosing.
 
 ---
 
 **ECC Original:** `ECC/skills/council/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:21
+**Atualizado em:** 2026-07-12 11:45:43

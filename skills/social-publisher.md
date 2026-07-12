@@ -1,28 +1,21 @@
 # 🧠 Skill: social-publisher
 
-> **Adaptada do ECC:** `social-publisher` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `social-publisher` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/social-publisher/SKILL.md`
 
 ## Descrição
 
-Agent-driven scheduling and publishing of social media posts across 13 platforms via SocialClaw. Use when the user wants to publish to X, LinkedIn, Instagram, Facebook Pages, TikTok, Discord, Telegram, YouTube, Reddit, WordPress, or Pinterest — or when managing campaigns, uploading media, or monitoring post delivery status.
+--- name: social-publisher description: Agent-driven scheduling and publishing of social media posts across 13 platforms via SocialClaw. Use when the user wants to publish to X, LinkedIn, Instagram, Facebook Pages, TikTok, Discord, Telegram, YouTube, Reddit, WordPress, or Pinterest — or when managing campaigns, uploading media, or monitoring post delivery status.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: social-publisher
+description: Agent-driven scheduling and publishing of social media posts across 13 platforms via SocialClaw. Use when the user wants to publish to X, LinkedIn, Instagram, Facebook Pages, TikTok, Discord, Telegram, YouTube, Reddit, WordPress, or Pinterest — or when managing campaigns, uploading media, or monitoring post delivery status.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Social Publisher (SocialClaw)
 
@@ -43,8 +36,7 @@ Connects Claude Code to [SocialClaw](https://getsocialclaw.com) for agent-driven
 export SC_API_KEY="<workspace-key>"
 
 # Verify access
-printf 'header = "Authorization: Bearer %s"
-' "$SC_API_KEY" |
+printf 'header = "Authorization: Bearer %s"\n' "$SC_API_KEY" |
   curl -sS -K - https://getsocialclaw.com/v1/keys/validate
 
 # Install CLI (optional but recommended)
@@ -134,9 +126,22 @@ socialclaw posts list --json
 
 ## Security
 
-- Outbo
+- Outbound requests go to `getsocialclaw.com` only
+- Provider OAuth is in the SocialClaw dashboard — no per-provider secrets exposed to the agent
+- `SC_API_KEY` is a workspace-scoped key
+
+## Related Skills
+
+- `x-api` — direct X/Twitter API operations
+- `social-graph-ranker` — network analysis for outreach targeting
+- `TweetClaw` - optional approved OpenClaw X/Twitter source evidence before SocialClaw scheduling
+
+## Source
+
+- npm: `npm install -g socialclaw@0.1.12`
+- Dashboard: [SocialClaw dashboard](https://getsocialclaw.com/dashboard)
 
 ---
 
 **ECC Original:** `ECC/skills/social-publisher/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:33
+**Atualizado em:** 2026-07-12 11:45:50

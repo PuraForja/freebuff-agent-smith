@@ -1,28 +1,21 @@
 # 🧠 Skill: orch-add-feature
 
-> **Adaptada do ECC:** `orch-add-feature` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `orch-add-feature` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/orch-add-feature/SKILL.md`
 
 ## Descrição
 
-Orchestrate building a brand-new feature end to end — research, plan, TDD implementation, review, and gated commit — by delegating each phase to the matching ECC agent. Use when adding a capability that does not exist yet.
+--- name: orch-add-feature description: Orchestrate building a brand-new feature end to end — research, plan, TDD implementation, review, and gated commit — by delegating each phase to the matching ECC agent. Use when adding a capability that does not exist yet.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: orch-add-feature
+description: Orchestrate building a brand-new feature end to end — research, plan, TDD implementation, review, and gated commit — by delegating each phase to the matching ECC agent. Use when adding a capability that does not exist yet.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # orch-add-feature
 
@@ -66,4 +59,4 @@ orch-add-feature: add OAuth2 login to nws-poller
 ---
 
 **ECC Original:** `ECC/skills/orch-add-feature/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:28
+**Atualizado em:** 2026-07-12 11:45:48

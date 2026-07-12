@@ -1,28 +1,19 @@
 # 🧠 Skill: hookify-rules
 
-> **Adaptada do ECC:** `hookify-rules` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `hookify-rules` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/hookify-rules/SKILL.md`
 
 ## Descrição
 
-This skill should be used when the user asks to create a hookify rule, write a hook rule, configure hookify, add a hookify rule, or needs guidance on hookify rule syntax and patterns.
+--- name: hookify-rules description: This skill should be used when the user asks to create a hookify rule, write a hook rule, configure hookify, add a hookify rule, or needs guidance on hookify rule syntax and patterns.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: hookify-rules
+description: This skill should be used when the user asks to create a hookify rule, write a hook rule, configure hookify, add a hookify rule, or needs guidance on hookify rule syntax and patterns.
 ---
-
-## Conteúdo Adaptado
 
 # Writing Hookify Rules
 
@@ -115,7 +106,7 @@ Match user prompt content for workflow enforcement.
 ### Common Pitfalls
 - **Too broad**: `log` matches "login", "dialog" — use `console\.log\(`
 - **Too specific**: `rm -rf /tmp` — use `rm\s+-rf`
-- **YAML escaping**: Use unquoted patterns; quoted strings need `\s`
+- **YAML escaping**: Use unquoted patterns; quoted strings need `\\s`
 
 ### Testing
 ```bash
@@ -131,9 +122,24 @@ python3 -c "import re; print(re.search(r'your_pattern', 'test text'))"
 ## Commands
 
 - `/hookify [description]` - Create new rules (auto-analyzes conversation if no args)
+- `/hookify-list` - View all rules in table format
+- `/hookify-configure` - Toggle rules on/off interactively
+- `/hookify-help` - Full documentation
 
+## Quick Reference
+
+Minimum viable rule:
+```markdown
+---
+name: my-rule
+enabled: true
+event: bash
+pattern: dangerous_command
+---
+Warning message here
+```
 
 ---
 
 **ECC Original:** `ECC/skills/hookify-rules/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:24
+**Atualizado em:** 2026-07-12 11:45:45

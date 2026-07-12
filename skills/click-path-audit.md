@@ -1,28 +1,21 @@
 # 🧠 Skill: click-path-audit
 
-> **Adaptada do ECC:** `click-path-audit` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `click-path-audit` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/click-path-audit/SKILL.md`
 
 ## Descrição
 
-Trace every user-facing button/touchpoint through its full state change sequence to find bugs where functions individually work but cancel each other out, produce wrong final state, or leave the UI in an inconsistent state. Use when: systematic debugging found no bugs but users report broken buttons, or after any major refactor touching shared state stores.
+--- name: click-path-audit description: "Trace every user-facing button/touchpoint through its full state change sequence to find bugs where functions individually work but cancel each other out, produce wrong final state, or leave the UI in an inconsistent state. Use when: systematic debugging found no bugs but users report broken buttons, or after any major refactor touching shared state stores."
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: click-path-audit
+description: "Trace every user-facing button/touchpoint through its full state change sequence to find bugs where functions individually work but cancel each other out, produce wrong final state, or leave the UI in an inconsistent state. Use when: systematic debugging found no bugs but users report broken buttons, or after any major refactor touching shared state stores."
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # /click-path-audit — Behavioural Flow Audit
 
@@ -109,9 +102,161 @@ TOUCHPOINT: [Button label] in [Component:line]
 
 **Check each of these bug patterns:**
 
-#### Pattern 1: Sequ
+#### Pattern 1: Sequential Undo
+```
+handler() {
+  setState_A(true)     // sets X = true
+  setState_B(null)     // side effect: resets X = false
+}
+// Result: X is false. First call was pointless.
+```
+
+#### Pattern 2: Async Race
+```
+handler() {
+  fetchA().then(() => setState({ loading: false }))
+  fetchB().then(() => setState({ loading: true }))
+}
+// Result: final loading state depends on which resolves first
+```
+
+#### Pattern 3: Stale Closure
+```
+const [count, setCount] = useState(0)
+const handler = useCallback(() => {
+  setCount(count + 1)  // captures stale count
+  setCount(count + 1)  // same stale count — increments by 1, not 2
+}, [count])
+```
+
+#### Pattern 4: Missing State Transition
+```
+// Button says "Save" but handler only validates, never actually saves
+// Button says "Delete" but handler sets a flag without calling the API
+// Button says "Send" but the API endpoint is removed/broken
+```
+
+#### Pattern 5: Conditional Dead Path
+```
+handler() {
+  if (someState) {        // someState is ALWAYS false at this point
+    doTheActualThing()    // never reached
+  }
+}
+```
+
+#### Pattern 6: useEffect Interference
+```
+// Button sets stateX = true
+// A useEffect watches stateX and resets it to false
+// User sees nothing happen
+```
+
+### Step 3: Report
+
+For each bug found:
+
+```
+CLICK-PATH-NNN: [severity: CRITICAL/HIGH/MEDIUM/LOW]
+  Touchpoint: [Button label] in [file:line]
+  Pattern: [Sequential Undo / Async Race / Stale Closure / Missing Transition / Dead Path / useEffect Interference]
+  Handler: [function name or inline]
+  Trace:
+    1. [call] → sets {field: value}
+    2. [call] → RESETS {field: value}  ← CONFLICT
+  Expected: [what user expects]
+  Actual: [what actually happens]
+  Fix: [specific fix]
+```
+
+---
+
+## Scope Control
+
+This audit is expensive. Scope it appropriately:
+
+- **Full app audit:** Use when launching or after major refactor. Launch parallel agents per page.
+- **Single page audit:** Use after building a new page or after a user reports a broken button.
+- **Store-focused audit:** Use after modifying a Zustand store — audit all consumers of the changed actions.
+
+### Recommended agent split for full app:
+
+```
+Agent 1: Map ALL state stores (Step 1) — this is shared context for all other agents
+Agent 2: Dashboard (Tasks, Notes, Journal, Ideas)
+Agent 3: Chat (DanteChatColumn, JustChatPage)
+Agent 4: Emails (ThreadList, DraftArea, EmailsPage)
+Agent 5: Projects (ProjectsPage, ProjectOverviewTab, NewProjectWizard)
+Agent 6: CRM (all sub-tabs)
+Agent 7: Profile, Settings, Vault, Notifications
+Agent 8: Management Suite (all pages)
+```
+
+Agent 1 MUST complete first. Its output is input for all other agents.
+
+---
+
+## When to Use
+
+- After systematic debugging finds "no bugs" but users report broken UI
+- After modifying any Zustand store action (check all callers)
+- After any refactor that touches shared state
+- Before release, on critical user flows
+- When a button "does nothing" — this is THE tool for that
+
+## When NOT to Use
+
+- For API-level bugs (wrong response shape, missing endpoint) — use systematic-debugging
+- For styling/layout issues — visual inspection
+- For performance issues — profiling tools
+
+---
+
+## Integration with Other Skills
+
+- Run AFTER `/superpowers:systematic-debugging` (which finds the other 54 bug types)
+- Run BEFORE `/superpowers:verification-before-completion` (which verifies fixes work)
+- Feeds into `/superpowers:test-driven-development` — every bug found here should get a test
+
+---
+
+## Example: The Bug That Inspired This Skill
+
+**ThreadList.tsx "New Email" button:**
+```
+onClick={() => {
+  useEmailStore.getState().setComposeMode(true)   // ✓ sets composeMode = true
+  useEmailStore.getState().selectThread(null)      // ✗ RESETS composeMode = false
+}}
+```
+
+Store definition:
+```
+selectThread: (thread) => set({
+  selectedThread: thread,
+  selectedThreadId: thread?.id ?? null,
+  messages: [],
+  drafts: [],
+  selectedDraft: null,
+  summary: null,
+  composeMode: false,     // ← THIS silent reset killed the button
+  composeData: null,
+  redraftOpen: false,
+})
+```
+
+**Systematic debugging missed it** because:
+- The button has an onClick handler (not dead)
+- Both functions exist (no missing wiring)
+- Neither function crashes (no runtime error)
+- The data types are correct (no type mismatch)
+
+**Click-path audit catches it** because:
+- Step 1 maps `selectThread` resets `composeMode`
+- Step 2 traces the handler: call 1 sets true, call 2 resets false
+- Verdict: Sequential Undo — final state contradicts button intent
 
 ---
 
 **ECC Original:** `ECC/skills/click-path-audit/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:20
+**Atualizado em:** 2026-07-12 11:45:42

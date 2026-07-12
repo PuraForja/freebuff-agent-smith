@@ -1,28 +1,21 @@
 # 🧠 Skill: orch-pipeline
 
-> **Adaptada do ECC:** `orch-pipeline` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `orch-pipeline` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/orch-pipeline/SKILL.md`
 
 ## Descrição
 
-Shared orchestration engine for the orch-* skill family. Defines the gated Research-Plan-TDD-Review-Commit pipeline, the size classifier, the agent map, and the two human gates that the orch-* operation skills delegate to. Not usually invoked directly.
+--- name: orch-pipeline description: Shared orchestration engine for the orch-* skill family. Defines the gated Research-Plan-TDD-Review-Commit pipeline, the size classifier, the agent map, and the two human gates that the orch-* operation skills delegate to. Not usually invoked directly.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: orch-pipeline
+description: Shared orchestration engine for the orch-* skill family. Defines the gated Research-Plan-TDD-Review-Commit pipeline, the size classifier, the agent map, and the two human gates that the orch-* operation skills delegate to. Not usually invoked directly.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Orchestrator Pipeline (shared engine)
 
@@ -80,8 +73,66 @@ Each phase delegates — it does not do the work inline.
   doc and extract scope, locked decisions, and a feature list.
 - **1. Research & Reuse** — per `rules/common/development-workflow.md`: `gh search repos` /
   `gh search code`, then Context7 / vendor docs, then package registries, then
+  Exa. Prefer adopting a proven implementation over net-new code.
+- **2. Plan** — delegate to the `planner` agent (or `architect` /
+  `code-architect` for structural decisions). Output a `task_list` ordered as
+  thin vertical slices. → **GATE 1.**
+- **3. Scaffold** — `orch-build-mvp` only: stand up the first end-to-end slice.
+- **4. Implement (TDD)** — drive each task through the `tdd-guide` agent (or the `tdd-workflow` skill):
+  red → green → refactor. Honor the operation's first-move rule.
+- **5. Review** — `code-reviewer` agent / `/code-review`. Add `security-reviewer`
+  whenever the diff touches a security trigger (below).
+- **6. Commit** — conventional commits (`feat:` / `fix:` / `refactor:` / …), one
+  per logical chunk. → **GATE 2.**
+
+## The two gates
+
+This family is **gated, not autonomous**:
+
+1. **GATE 1 — after Plan.** Present the `task_list`; do not write implementation
+   code until the user approves.
+2. **GATE 2 — before Commit.** Present the diff summary and proposed messages;
+   do not commit until the user confirms.
+
+Everything between the gates flows without stopping.
+
+## Agent / command map
+
+| Phase | Primary | Fallback / escalation |
+|-------|---------|----------------------|
+| Intake / understand | `code-explorer` | trace existing paths before a tweak, fix, or refactor |
+| Plan | `planner` | `architect`, `code-architect` for structural calls |
+| Implement | `tdd-guide` (or `tdd-workflow` skill) | `build-error-resolver` / `/build-fix` on build breaks |
+| Review | `code-reviewer` / `/code-review` | language reviewer (`python-reviewer`, `typescript-reviewer`, …) |
+| Security | `security-reviewer` | — |
+| MVP inner loop | `/gan-build "<brief>" --skip-planner` | drives `gan-generator` → `gan-evaluator`; tune `--max-iterations` / `--pass-threshold` |
+
+Match the language reviewer to the repo (see the repo's own `CLAUDE.md`).
+
+## Security-review trigger
+
+Pull in `security-reviewer` when the diff touches any of: authentication or
+authorization, user-input handling, database queries, file-system paths,
+external API calls, cryptography, or secrets / credentials. (Per `rules/common/security.md`.)
+
+## Handoff artifacts
+
+The pipeline carries no hidden state — the planning docs *are* the handoff:
+
+- `task_list` (from Plan) drives the Implement loop.
+- Larger work may also emit PRD / architecture / system_design under the repo's
+  `docs/` per `rules/common/development-workflow.md`.
+- Review findings (CRITICAL / HIGH) must be resolved before Gate 2.
+
+## Verification
+
+- size tier was stated and matched the work
+- Gate 1 (plan) and Gate 2 (commit) were both honored
+- `security-reviewer` ran iff a security trigger was touched
+- commits are conventional and scoped to one logical change
+- new / changed behavior has tests; coverage ≥ 80% per `rules/common/testing.md`
 
 ---
 
 **ECC Original:** `ECC/skills/orch-pipeline/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:29
+**Atualizado em:** 2026-07-12 11:45:48

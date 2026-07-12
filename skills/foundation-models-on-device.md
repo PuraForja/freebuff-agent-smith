@@ -1,28 +1,19 @@
 # 🧠 Skill: foundation-models-on-device
 
-> **Adaptada do ECC:** `foundation-models-on-device` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `foundation-models-on-device` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/foundation-models-on-device/SKILL.md`
 
 ## Descrição
 
-Apple FoundationModels framework for on-device LLM — text generation, guided generation with @Generable, tool calling, and snapshot streaming in iOS 26+.
+--- name: foundation-models-on-device description: Apple FoundationModels framework for on-device LLM — text generation, guided generation with @Generable, tool calling, and snapshot streaming in iOS 26+.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: foundation-models-on-device
+description: Apple FoundationModels framework for on-device LLM — text generation, guided generation with @Generable, tool calling, and snapshot streaming in iOS 26+.
 ---
-
-## Conteúdo Adaptado
 
 # FoundationModels: On-Device LLM (iOS 26)
 
@@ -115,9 +106,155 @@ let response = try await session.respond(
 )
 
 // Access structured fields directly
-print("Na
+print("Name: \(response.content.name)")
+print("Age: \(response.content.age)")
+print("Profile: \(response.content.profile)")
+```
+
+### Supported @Guide Constraints
+
+- `.range(0...20)` — numeric range
+- `.count(3)` — array element count
+- `description:` — semantic guidance for generation
+
+## Core Pattern — Tool Calling
+
+Let the model invoke custom code for domain-specific tasks:
+
+### 1. Define a Tool
+
+```swift
+struct RecipeSearchTool: Tool {
+    let name = "recipe_search"
+    let description = "Search for recipes matching a given term and return a list of results."
+
+    @Generable
+    struct Arguments {
+        var searchTerm: String
+        var numberOfResults: Int
+    }
+
+    func call(arguments: Arguments) async throws -> ToolOutput {
+        let recipes = await searchRecipes(
+            term: arguments.searchTerm,
+            limit: arguments.numberOfResults
+        )
+        return .string(recipes.map { "- \($0.name): \($0.description)" }.joined(separator: "\n"))
+    }
+}
+```
+
+### 2. Create Session with Tools
+
+```swift
+let session = LanguageModelSession(tools: [RecipeSearchTool()])
+let response = try await session.respond(to: "Find me some pasta recipes")
+```
+
+### 3. Handle Tool Errors
+
+```swift
+do {
+    let answer = try await session.respond(to: "Find a recipe for tomato soup.")
+} catch let error as LanguageModelSession.ToolCallError {
+    print(error.tool.name)
+    if case .databaseIsEmpty = error.underlyingError as? RecipeSearchToolError {
+        // Handle specific tool error
+    }
+}
+```
+
+## Core Pattern — Snapshot Streaming
+
+Stream structured responses for real-time UI with `PartiallyGenerated` types:
+
+```swift
+@Generable
+struct TripIdeas {
+    @Guide(description: "Ideas for upcoming trips")
+    var ideas: [String]
+}
+
+let stream = session.streamResponse(
+    to: "What are some exciting trip ideas?",
+    generating: TripIdeas.self
+)
+
+for try await partial in stream {
+    // partial: TripIdeas.PartiallyGenerated (all properties Optional)
+    print(partial)
+}
+```
+
+### SwiftUI Integration
+
+```swift
+@State private var partialResult: TripIdeas.PartiallyGenerated?
+@State private var errorMessage: String?
+
+var body: some View {
+    List {
+        ForEach(partialResult?.ideas ?? [], id: \.self) { idea in
+            Text(idea)
+        }
+    }
+    .overlay {
+        if let errorMessage { Text(errorMessage).foregroundStyle(.red) }
+    }
+    .task {
+        do {
+            let stream = session.streamResponse(to: prompt, generating: TripIdeas.self)
+            for try await partial in stream {
+                partialResult = partial
+            }
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+}
+```
+
+## Key Design Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| On-device execution | Privacy — no data leaves the device; works offline |
+| 4,096 token limit | On-device model constraint; chunk large data across sessions |
+| Snapshot streaming (not deltas) | Structured output friendly; each snapshot is a complete partial state |
+| `@Generable` macro | Compile-time safety for structured generation; auto-generates `PartiallyGenerated` type |
+| Single request per session | `isResponding` prevents concurrent requests; create multiple sessions if needed |
+| `response.content` (not `.output`) | Correct API — always access results via `.content` property |
+
+## Best Practices
+
+- **Always check `model.availability`** before creating a session — handle all unavailability cases
+- **Use `instructions`** to guide model behavior — they take priority over prompts
+- **Check `isResponding`** before sending a new request — sessions handle one request at a time
+- **Access `response.content`** for results — not `.output`
+- **Break large inputs into chunks** — 4,096 token limit applies to instructions + prompt + output combined
+- **Use `@Generable`** for structured output — stronger guarantees than parsing raw strings
+- **Use `GenerationOptions(temperature:)`** to tune creativity (higher = more creative)
+- **Monitor with Instruments** — use Xcode Instruments to profile request performance
+
+## Anti-Patterns to Avoid
+
+- Creating sessions without checking `model.availability` first
+- Sending inputs exceeding the 4,096 token context window
+- Attempting concurrent requests on a single session
+- Using `.output` instead of `.content` to access response data
+- Parsing raw string responses when `@Generable` structured output would work
+- Building complex multi-step logic in a single prompt — break into multiple focused prompts
+- Assuming the model is always available — device eligibility and settings vary
+
+## When to Use
+
+- On-device text generation for privacy-sensitive apps
+- Structured data extraction from user input (forms, natural language commands)
+- AI-assisted features that must work offline
+- Streaming UI that progressively shows generated content
+- Domain-specific AI actions via tool calling (search, compute, lookup)
 
 ---
 
 **ECC Original:** `ECC/skills/foundation-models-on-device/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:23
+**Atualizado em:** 2026-07-12 11:45:44

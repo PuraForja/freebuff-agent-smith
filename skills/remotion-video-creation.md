@@ -1,28 +1,21 @@
 # 🧠 Skill: remotion-video-creation
 
-> **Adaptada do ECC:** `remotion-video-creation` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `remotion-video-creation` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/remotion-video-creation/SKILL.md`
 
 ## Descrição
 
-Best practices for Remotion - Video creation in React. 29 domain-specific rules covering 3D, animations, audio, captions, charts, transitions, and more.
+--- name: remotion-video-creation description: Best practices for Remotion - Video creation in React. 29 domain-specific rules covering 3D, animations, audio, captions, charts, transitions, and more.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: remotion-video-creation
+description: Best practices for Remotion - Video creation in React. 29 domain-specific rules covering 3D, animations, audio, captions, charts, transitions, and more.
+metadata:
+  tags: remotion, video, react, animation, composition, three.js, lottie
 ---
-
-## Conteúdo Adaptado
 
 ## When to use
 
@@ -57,9 +50,11 @@ Read individual rule files for detailed explanations and code examples:
 - [rules/text-animations.md](rules/text-animations.md) - Typography and text animation patterns for Remotion
 - [rules/timing.md](rules/timing.md) - Interpolation curves in Remotion - linear, easing, spring animations
 - [rules/transcribe-captions.md](rules/transcribe-captions.md) - Transcribing audio to generate captions in Remotion
-- [rules/transitions.md](rules/transitions.md) - Scene transiti
+- [rules/transitions.md](rules/transitions.md) - Scene transition patterns for Remotion
+- [rules/trimming.md](rules/trimming.md) - Trimming patterns for Remotion - cut the beginning or end of animations
+- [rules/videos.md](rules/videos.md) - Embedding videos in Remotion - trimming, volume, speed, looping, pitch
 
 ---
 
 **ECC Original:** `ECC/skills/remotion-video-creation/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:31
+**Atualizado em:** 2026-07-12 11:45:49

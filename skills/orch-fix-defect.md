@@ -1,28 +1,21 @@
 # 🧠 Skill: orch-fix-defect
 
-> **Adaptada do ECC:** `orch-fix-defect` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `orch-fix-defect` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/orch-fix-defect/SKILL.md`
 
 ## Descrição
 
-Orchestrate fixing a bug — reproduce it as a failing regression test, fix to green, review, and gated commit — by delegating each phase to the matching ECC agent. Use when existing behavior is broken or wrong.
+--- name: orch-fix-defect description: Orchestrate fixing a bug — reproduce it as a failing regression test, fix to green, review, and gated commit — by delegating each phase to the matching ECC agent. Use when existing behavior is broken or wrong.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: orch-fix-defect
+description: Orchestrate fixing a bug — reproduce it as a failing regression test, fix to green, review, and gated commit — by delegating each phase to the matching ECC agent. Use when existing behavior is broken or wrong.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # orch-fix-defect
 
@@ -64,4 +57,4 @@ orch-fix-defect: poller crashes on empty NWS response
 ---
 
 **ECC Original:** `ECC/skills/orch-fix-defect/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:29
+**Atualizado em:** 2026-07-12 11:45:48

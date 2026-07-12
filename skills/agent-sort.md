@@ -1,28 +1,21 @@
 # 🧠 Skill: agent-sort
 
-> **Adaptada do ECC:** `agent-sort` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `agent-sort` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/agent-sort/SKILL.md`
 
 ## Descrição
 
-Build an evidence-backed ECC install plan for a specific repo by sorting skills, commands, rules, hooks, and extras into DAILY vs LIBRARY buckets using parallel repo-aware review passes. Use when ECC should be trimmed to what a project actually needs instead of loading the full bundle.
+--- name: agent-sort description: Build an evidence-backed ECC install plan for a specific repo by sorting skills, commands, rules, hooks, and extras into DAILY vs LIBRARY buckets using parallel repo-aware review passes. Use when ECC should be trimmed to what a project actually needs instead of loading the full bundle.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: agent-sort
+description: Build an evidence-backed ECC install plan for a specific repo by sorting skills, commands, rules, hooks, and extras into DAILY vs LIBRARY buckets using parallel repo-aware review passes. Use when ECC should be trimmed to what a project actually needs instead of loading the full bundle.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Agent Sort
 
@@ -134,9 +127,107 @@ For every candidate surface, record:
 - repo evidence
 - short justification
 
+Use this format:
 
+```text
+skills/frontend-patterns | skill | DAILY | 84 .tsx files, next.config.ts present | core frontend stack
+skills/django-patterns   | skill | LIBRARY | no .py files, no pyproject.toml       | not active in this repo
+rules/typescript/*       | rules | DAILY | package.json + tsconfig.json            | active TS repo
+rules/python/*           | rules | LIBRARY | zero Python source files             | keep accessible only
+```
+
+### 3. Decide DAILY vs LIBRARY
+
+Promote to `DAILY` when:
+
+- the repo clearly uses the matching stack
+- the component is general enough to help every session
+- the repo already depends on the corresponding runtime or workflow
+
+Demote to `LIBRARY` when:
+
+- the component is off-stack
+- the repo might need it later, but not every day
+- it adds context overhead without immediate relevance
+
+### 4. Build the install plan
+
+Translate the classification into action:
+
+- DAILY skills -> install or keep in `.claude/skills/`
+- DAILY commands -> keep as explicit shims only if still useful
+- DAILY rules -> install only matching language sets
+- DAILY hooks/scripts -> keep only compatible ones
+- LIBRARY surfaces -> keep accessible through search or `skill-library`
+
+If the repo already uses selective installs, update that plan instead of creating another system.
+
+### 5. Create the optional library router
+
+If the project wants a searchable library surface, create:
+
+- `.claude/skills/skill-library/SKILL.md`
+
+That router should contain:
+
+- a short explanation of DAILY vs LIBRARY
+- grouped trigger keywords
+- where the library references live
+
+Do not duplicate every skill body inside the router.
+
+### 6. Verify the result
+
+After the plan is applied, verify:
+
+- every DAILY file exists where expected
+- stale language rules were not left active
+- incompatible hooks were not installed
+- the resulting install actually matches the repo stack
+
+Return a compact report with:
+
+- DAILY count
+- LIBRARY count
+- removed stale surfaces
+- open questions
+
+## Handoffs
+
+If the next step is interactive installation or repair, hand off to:
+
+- `configure-ecc`
+
+If the next step is overlap cleanup or catalog review, hand off to:
+
+- `skill-stocktake`
+
+If the next step is broader context trimming, hand off to:
+
+- `strategic-compact`
+
+## Output Format
+
+Return the result in this order:
+
+```text
+STACK
+- language/framework/runtime summary
+
+DAILY
+- always-loaded items with evidence
+
+LIBRARY
+- searchable/reference items with evidence
+
+INSTALL PLAN
+- what should be installed, removed, or routed
+
+VERIFICATION
+- checks run and remaining gaps
+```
 
 ---
 
 **ECC Original:** `ECC/skills/agent-sort/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:19
+**Atualizado em:** 2026-07-12 11:45:41

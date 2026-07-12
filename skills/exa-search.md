@@ -1,28 +1,21 @@
 # 🧠 Skill: exa-search
 
-> **Adaptada do ECC:** `exa-search` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `exa-search` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/exa-search/SKILL.md`
 
 ## Descrição
 
-Neural search via Exa MCP for web, code, and company research. Use when the user needs web search, code examples, company intel, people lookup, or AI-powered deep research with Exa's neural search engine.
+--- name: exa-search description: Neural search via Exa MCP for web, code, and company research. Use when the user needs web search, code examples, company intel, people lookup, or AI-powered deep research with Exa's neural search engine.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: exa-search
+description: Neural search via Exa MCP for web, code, and company research. Use when the user needs web search, code examples, company intel, people lookup, or AI-powered deep research with Exa's neural search engine.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Exa Search
 
@@ -118,9 +111,15 @@ get_code_context_exa(query: "WebAssembly component model examples", tokensNum: 4
 
 - Use `web_search_exa` for current information, company lookups, and broad discovery
 - Use search operators like `site:`, quoted phrases, and `intitle:` to narrow results
-- Lower `tokensNum` 
+- Lower `tokensNum` (1000-2000) for focused code snippets, higher (5000+) for comprehensive context
+- Use `get_code_context_exa` when you need API usage or code examples rather than general web pages
+
+## Related Skills
+
+- `deep-research` — Full research workflow using firecrawl + exa together
+- `market-research` — Business-oriented research with decision frameworks
 
 ---
 
 **ECC Original:** `ECC/skills/exa-search/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:22
+**Atualizado em:** 2026-07-12 11:45:44

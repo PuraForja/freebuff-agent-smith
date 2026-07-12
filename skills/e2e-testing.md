@@ -1,28 +1,21 @@
 # 🧠 Skill: e2e-testing
 
-> **Adaptada do ECC:** `e2e-testing` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `e2e-testing` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/e2e-testing/SKILL.md`
 
 ## Descrição
 
-Playwright E2E testing patterns, Page Object Model, configuration, CI/CD integration, artifact management, and flaky test strategies.
+--- name: e2e-testing description: Playwright E2E testing patterns, Page Object Model, configuration, CI/CD integration, artifact management, and flaky test strategies.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: e2e-testing
+description: Playwright E2E testing patterns, Page Object Model, configuration, CI/CD integration, artifact management, and flaky test strategies.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # E2E Testing Patterns
 
@@ -142,9 +135,210 @@ export default defineConfig({
     navigationTimeout: 30000,
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Deskt
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+    { name: 'mobile-chrome', use: { ...devices['Pixel 5'] } },
+  ],
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://localhost:3000',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120000,
+  },
+})
+```
+
+## Flaky Test Patterns
+
+### Quarantine
+
+```typescript
+test('flaky: complex search', async ({ page }) => {
+  test.fixme(true, 'Flaky - Issue #123')
+  // test code...
+})
+
+test('conditional skip', async ({ page }) => {
+  test.skip(process.env.CI, 'Flaky in CI - Issue #123')
+  // test code...
+})
+```
+
+### Identify Flakiness
+
+```bash
+npx playwright test tests/search.spec.ts --repeat-each=10
+npx playwright test tests/search.spec.ts --retries=3
+```
+
+### Common Causes & Fixes
+
+**Race conditions:**
+```typescript
+// Bad: assumes element is ready
+await page.click('[data-testid="button"]')
+
+// Good: auto-wait locator
+await page.locator('[data-testid="button"]').click()
+```
+
+**Network timing:**
+```typescript
+// Bad: arbitrary timeout
+await page.waitForTimeout(5000)
+
+// Good: wait for specific condition
+await page.waitForResponse(resp => resp.url().includes('/api/data'))
+```
+
+**Animation timing:**
+```typescript
+// Bad: click during animation
+await page.click('[data-testid="menu-item"]')
+
+// Good: wait for stability
+await page.locator('[data-testid="menu-item"]').waitFor({ state: 'visible' })
+await page.waitForLoadState('networkidle')
+await page.locator('[data-testid="menu-item"]').click()
+```
+
+## Artifact Management
+
+### Screenshots
+
+```typescript
+await page.screenshot({ path: 'artifacts/after-login.png' })
+await page.screenshot({ path: 'artifacts/full-page.png', fullPage: true })
+await page.locator('[data-testid="chart"]').screenshot({ path: 'artifacts/chart.png' })
+```
+
+### Traces
+
+```typescript
+await browser.startTracing(page, {
+  path: 'artifacts/trace.json',
+  screenshots: true,
+  snapshots: true,
+})
+// ... test actions ...
+await browser.stopTracing()
+```
+
+### Video
+
+```typescript
+// In playwright.config.ts
+use: {
+  video: 'retain-on-failure',
+  videosPath: 'artifacts/videos/'
+}
+```
+
+## CI/CD Integration
+
+```yaml
+# .github/workflows/e2e.yml
+name: E2E Tests
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npx playwright test
+        env:
+          BASE_URL: ${{ vars.STAGING_URL }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+```
+
+## Test Report Template
+
+```markdown
+# E2E Test Report
+
+**Date:** YYYY-MM-DD HH:MM
+**Duration:** Xm Ys
+**Status:** PASSING / FAILING
+
+## Summary
+- Total: X | Passed: Y (Z%) | Failed: A | Flaky: B | Skipped: C
+
+## Failed Tests
+
+### test-name
+**File:** `tests/e2e/feature.spec.ts:45`
+**Error:** Expected element to be visible
+**Screenshot:** artifacts/failed.png
+**Recommended Fix:** [description]
+
+## Artifacts
+- HTML Report: playwright-report/index.html
+- Screenshots: artifacts/*.png
+- Videos: artifacts/videos/*.webm
+- Traces: artifacts/*.zip
+```
+
+## Wallet / Web3 Testing
+
+```typescript
+test('wallet connection', async ({ page, context }) => {
+  // Mock wallet provider
+  await context.addInitScript(() => {
+    window.ethereum = {
+      isMetaMask: true,
+      request: async ({ method }) => {
+        if (method === 'eth_requestAccounts')
+          return ['0x1234567890123456789012345678901234567890']
+        if (method === 'eth_chainId') return '0x1'
+      }
+    }
+  })
+
+  await page.goto('/')
+  await page.locator('[data-testid="connect-wallet"]').click()
+  await expect(page.locator('[data-testid="wallet-address"]')).toContainText('0x1234')
+})
+```
+
+## Financial / Critical Flow Testing
+
+```typescript
+test('trade execution', async ({ page }) => {
+  // Skip on production — real money
+  test.skip(process.env.NODE_ENV === 'production', 'Skip on production')
+
+  await page.goto('/markets/test-market')
+  await page.locator('[data-testid="position-yes"]').click()
+  await page.locator('[data-testid="trade-amount"]').fill('1.0')
+
+  // Verify preview
+  const preview = page.locator('[data-testid="trade-preview"]')
+  await expect(preview).toContainText('1.0')
+
+  // Confirm and wait for blockchain
+  await page.locator('[data-testid="confirm-trade"]').click()
+  await page.waitForResponse(
+    resp => resp.url().includes('/api/trade') && resp.status() === 200,
+    { timeout: 30000 }
+  )
+
+  await expect(page.locator('[data-testid="trade-success"]')).toBeVisible()
+})
+```
 
 ---
 
 **ECC Original:** `ECC/skills/e2e-testing/SKILL.md`
-**Atualizado em:** 2026-07-01 13:21:05
+**Atualizado em:** 2026-07-12 11:45:44

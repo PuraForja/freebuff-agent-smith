@@ -1,28 +1,22 @@
 # 🧠 Skill: skill-comply
 
-> **Adaptada do ECC:** `skill-comply` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `skill-comply` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/skill-comply/SKILL.md`
 
 ## Descrição
 
-Visualize whether skills, rules, and agent definitions are actually followed — auto-generates scenarios at 3 prompt strictness levels, runs agents, classifies behavioral sequences, and reports compliance rates with full tool call timelines
+--- name: skill-comply description: Visualize whether skills, rules, and agent definitions are actually followed — auto-generates scenarios at 3 prompt strictness levels, runs agents, classifies behavioral sequences, and reports compliance rates with full tool call timelines
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: skill-comply
+description: Visualize whether skills, rules, and agent definitions are actually followed — auto-generates scenarios at 3 prompt strictness levels, runs agents, classifies behavioral sequences, and reports compliance rates with full tool call timelines
+metadata:
+  origin: ECC
+tools: Read, Bash
 ---
-
-## Conteúdo Adaptado
 
 # skill-comply: Automated Compliance Measurement
 
@@ -79,4 +73,4 @@ For users familiar with hooks, reports also include hook promotion recommendatio
 ---
 
 **ECC Original:** `ECC/skills/skill-comply/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:50

@@ -1,28 +1,21 @@
 # 🧠 Skill: product-capability
 
-> **Adaptada do ECC:** `product-capability` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `product-capability` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/product-capability/SKILL.md`
 
 ## Descrição
 
-Translate PRD intent, roadmap asks, or product discussions into an implementation-ready capability plan that exposes constraints, invariants, interfaces, and unresolved decisions before multi-service work starts. Use when the user needs an ECC-native PRD-to-SRS lane instead of vague planning prose.
+--- name: product-capability description: Translate PRD intent, roadmap asks, or product discussions into an implementation-ready capability plan that exposes constraints, invariants, interfaces, and unresolved decisions before multi-service work starts. Use when the user needs an ECC-native PRD-to-SRS lane instead of vague planning prose.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: product-capability
+description: Translate PRD intent, roadmap asks, or product discussions into an implementation-ready capability plan that exposes constraints, invariants, interfaces, and unresolved decisions before multi-service work starts. Use when the user needs an ECC-native PRD-to-SRS lane instead of vague planning prose.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Product Capability
 
@@ -112,9 +105,55 @@ Produce an SRS-style capability plan with:
 
 ### 4. Translate into execution
 
-End with the exa
+End with the exact handoff:
+
+- ready for direct implementation
+- needs architecture review first
+- needs product clarification first
+
+If useful, point to the next ECC-native lane:
+
+- `project-flow-ops`
+- `workspace-surface-audit`
+- `api-connector-builder`
+- `dashboard-builder`
+- `tdd-workflow`
+- `verification-loop`
+
+## Output Format
+
+Return the result in this order:
+
+```text
+CAPABILITY
+- one-paragraph restatement
+
+CONSTRAINTS
+- fixed rules, invariants, and boundaries
+
+IMPLEMENTATION CONTRACT
+- actors
+- surfaces
+- states and transitions
+- interface/data implications
+
+NON-GOALS
+- what this lane explicitly does not own
+
+OPEN QUESTIONS
+- blockers or product decisions still required
+
+HANDOFF
+- what should happen next and which ECC lane should take it
+```
+
+## Good Outcomes
+
+- Product intent is now concrete enough to implement without rediscovering hidden constraints mid-PR.
+- Engineering review has a durable artifact instead of relying on memory or Slack context.
+- The resulting plan is reusable across Claude Code, Codex, Cursor, OpenCode, and ECC 2.0 planning surfaces.
 
 ---
 
 **ECC Original:** `ECC/skills/product-capability/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:30
+**Atualizado em:** 2026-07-12 11:45:48

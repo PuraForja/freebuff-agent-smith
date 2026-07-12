@@ -1,28 +1,21 @@
 # 🧠 Skill: enterprise-agent-ops
 
-> **Adaptada do ECC:** `enterprise-agent-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `enterprise-agent-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/enterprise-agent-ops/SKILL.md`
 
 ## Descrição
 
-Operate long-lived agent workloads with observability, security boundaries, and lifecycle management.
+--- name: enterprise-agent-ops description: Operate long-lived agent workloads with observability, security boundaries, and lifecycle management.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: enterprise-agent-ops
+description: Operate long-lived agent workloads with observability, security boundaries, and lifecycle management.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Enterprise Agent Ops
 
@@ -72,4 +65,4 @@ This skill pairs with:
 ---
 
 **ECC Original:** `ECC/skills/enterprise-agent-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:22
+**Atualizado em:** 2026-07-12 11:45:44

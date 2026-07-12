@@ -1,28 +1,21 @@
 # 🧠 Skill: messages-ops
 
-> **Adaptada do ECC:** `messages-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `messages-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/messages-ops/SKILL.md`
 
 ## Descrição
 
-Evidence-first live messaging workflow for ECC. Use when the user wants to read texts or DMs, recover a recent one-time code, inspect a thread before replying, or prove which message source was actually checked.
+--- name: messages-ops description: Evidence-first live messaging workflow for ECC. Use when the user wants to read texts or DMs, recover a recent one-time code, inspect a thread before replying, or prove which message source was actually checked.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: messages-ops
+description: Evidence-first live messaging workflow for ECC. Use when the user wants to read texts or DMs, recover a recent one-time code, inspect a thread before replying, or prove which message source was actually checked.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Messages Ops
 
@@ -126,4 +119,4 @@ STATUS
 ---
 
 **ECC Original:** `ECC/skills/messages-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:27
+**Atualizado em:** 2026-07-12 11:45:47

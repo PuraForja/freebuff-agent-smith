@@ -1,28 +1,21 @@
 # 🧠 Skill: search-first
 
-> **Adaptada do ECC:** `search-first` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `search-first` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/search-first/SKILL.md`
 
 ## Descrição
 
-Research-before-coding workflow. Search for existing tools, libraries, and patterns before writing custom code. Invokes the researcher agent.
+--- name: search-first description: Research-before-coding workflow. Search for existing tools, libraries, and patterns before writing custom code. Invokes the researcher agent.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: search-first
+description: Research-before-coding workflow. Search for existing tools, libraries, and patterns before writing custom code. Invokes the researcher agent.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # /search-first — Research Before You Code
 
@@ -94,9 +87,114 @@ that are relevant to the task and project in front of you.
 | MCP/docs tools | Available tool list or local MCP config | Fall back to official docs/web search |
 | Skills directory | `ls ~/.claude/skills ~/.codex/skills` where applicable | Say no local skill catalog was available |
 
-#
+### Quick Mode (inline)
+
+Before writing a utility or adding functionality, mentally run through:
+
+0. Does this already exist in the repo? → `rg` through relevant modules/tests first
+1. Is this a common problem? → Search npm/PyPI
+2. Is there an MCP for this? → Check `~/.claude/settings.json` and search
+3. Is there a skill for this? → Check `~/.claude/skills/`
+4. Is there a GitHub implementation/template? → Run GitHub code search for maintained OSS before writing net-new code
+
+### Full Mode (agent)
+
+For non-trivial functionality, launch the researcher agent:
+
+```
+Agent(subagent_type="general-purpose", prompt="
+  Research existing tools for: [DESCRIPTION]
+  Language/framework: [LANG]
+  Constraints: [ANY]
+
+  Search: npm/PyPI, MCP servers, Claude Code skills, GitHub
+  Return: Structured comparison with recommendation
+")
+```
+
+Older Claude Code docs may call this `Task(...)`; use the current agent/subagent
+tool name exposed by the active harness.
+
+## Search Shortcuts by Category
+
+### Development Tooling
+- Linting → `eslint`, `ruff`, `textlint`, `markdownlint`
+- Formatting → `prettier`, `black`, `gofmt`
+- Testing → `jest`, `pytest`, `go test`
+- Pre-commit → `husky`, `lint-staged`, `pre-commit`
+
+### AI/LLM Integration
+- Claude SDK → Context7 for latest docs
+- Prompt management → Check MCP servers
+- Document processing → `unstructured`, `pdfplumber`, `mammoth`
+
+### Data & APIs
+- HTTP clients → `httpx` (Python), `ky`/`undici` (Node)
+- Validation → `zod` (TS), `pydantic` (Python)
+- Database → Check for MCP servers first
+
+### Content & Publishing
+- Markdown processing → `remark`, `unified`, `markdown-it`
+- Image optimization → `sharp`, `imagemin`
+
+## Integration Points
+
+### With planner agent
+The planner should invoke researcher before Phase 1 (Architecture Review):
+- Researcher identifies available tools
+- Planner incorporates them into the implementation plan
+- Avoids "reinventing the wheel" in the plan
+
+### With architect agent
+The architect should consult researcher for:
+- Technology stack decisions
+- Integration pattern discovery
+- Existing reference architectures
+
+### With iterative-retrieval skill
+Combine for progressive discovery:
+- Cycle 1: Broad search (npm, PyPI, MCP)
+- Cycle 2: Evaluate top candidates in detail
+- Cycle 3: Test compatibility with project constraints
+
+## Examples
+
+### Example 1: "Add dead link checking"
+```
+Need: Check markdown files for broken links
+Search: npm "markdown dead link checker"
+Found: textlint-rule-no-dead-link (score: 9/10)
+Action: ADOPT — npm install textlint-rule-no-dead-link
+Result: Zero custom code, battle-tested solution
+```
+
+### Example 2: "Add HTTP client wrapper"
+```
+Need: Resilient HTTP client with retries and timeout handling
+Search: npm "http client retry", PyPI "httpx retry"
+Found: got (Node) with retry plugin, httpx (Python) with built-in retry
+Action: ADOPT — use got/httpx directly with retry config
+Result: Zero custom code, production-proven libraries
+```
+
+### Example 3: "Add config file linter"
+```
+Need: Validate project config files against a schema
+Search: npm "config linter schema", "json schema validator cli"
+Found: ajv-cli (score: 8/10)
+Action: ADOPT + EXTEND — install ajv-cli, write project-specific schema
+Result: 1 package + 1 schema file, no custom validation logic
+```
+
+## Anti-Patterns
+
+- **Jumping to code**: Writing a utility without checking if one exists
+- **Ignoring MCP**: Not checking if an MCP server already provides the capability
+- **Silent skipping**: Reporting "nothing found" when a search channel was unavailable
+- **Over-customizing**: Wrapping a library so heavily it loses its benefits
+- **Dependency bloat**: Installing a massive package for one small feature
 
 ---
 
 **ECC Original:** `ECC/skills/search-first/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:50

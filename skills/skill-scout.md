@@ -1,28 +1,21 @@
 # 🧠 Skill: skill-scout
 
-> **Adaptada do ECC:** `skill-scout` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `skill-scout` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/skill-scout/SKILL.md`
 
 ## Descrição
 
-Search existing local, marketplace, GitHub, and web skill sources before creating a new skill. Use when the user wants to create, build, fork, or find a skill for a workflow.
+--- name: skill-scout description: Search existing local, marketplace, GitHub, and web skill sources before creating a new skill. Use when the user wants to create, build, fork, or find a skill for a workflow.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: skill-scout
+description: Search existing local, marketplace, GitHub, and web skill sources before creating a new skill. Use when the user wants to create, build, fork, or find a skill for a workflow.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Skill Scout
 
@@ -126,9 +119,40 @@ finds no close match.
 
 ## Examples
 
-### Res
+### Result Table
+
+```markdown
+| # | Skill | Source | Why it matches | Gap |
+| --- | --- | --- | --- | --- |
+| 1 | article-writing | Local ECC | Drafts articles and guides | Not focused on release notes |
+| 2 | content-engine | Local ECC | Multi-format content workflow | Heavier than needed |
+| 3 | blog-writer | GitHub | Blog writing skill with recent commits | Needs security review |
+```
+
+### User-Facing Summary
+
+```markdown
+I found two close local matches and one external candidate. The closest fit is
+`article-writing`; it covers drafting and revision, but it does not include the
+release-note checklist you asked for. I can either use it as-is, fork it into a
+release-note variant, or create a fresh skill.
+```
+
+## Anti-Patterns
+
+- Do not jump directly to new skill creation when a search is reasonable.
+- Do not install external skills without reading them first.
+- Do not present a long unranked list of weak matches.
+- Do not treat web-only mentions as trusted sources.
+- Do not edit installed marketplace originals in place.
+
+## Related
+
+- `search-first` - General search-before-building workflow.
+- `skill-stocktake` - Audit installed skills for health, duplicates, and gaps.
+- `agent-sort` - Categorize and organize existing agents and skills.
 
 ---
 
 **ECC Original:** `ECC/skills/skill-scout/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:50

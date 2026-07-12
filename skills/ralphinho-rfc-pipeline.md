@@ -1,28 +1,21 @@
 # 🧠 Skill: ralphinho-rfc-pipeline
 
-> **Adaptada do ECC:** `ralphinho-rfc-pipeline` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ralphinho-rfc-pipeline` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ralphinho-rfc-pipeline/SKILL.md`
 
 ## Descrição
 
-RFC-driven multi-agent DAG execution pattern with quality gates, merge queues, and work unit orchestration.
+--- name: ralphinho-rfc-pipeline description: RFC-driven multi-agent DAG execution pattern with quality gates, merge queues, and work unit orchestration.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ralphinho-rfc-pipeline
+description: RFC-driven multi-agent DAG execution pattern with quality gates, merge queues, and work unit orchestration.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Ralphinho RFC Pipeline
 
@@ -89,4 +82,4 @@ If a unit stalls:
 ---
 
 **ECC Original:** `ECC/skills/ralphinho-rfc-pipeline/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:31
+**Atualizado em:** 2026-07-12 11:45:49

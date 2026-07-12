@@ -1,28 +1,21 @@
 # 🧠 Skill: dynamic-workflow-mode
 
-> **Adaptada do ECC:** `dynamic-workflow-mode` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `dynamic-workflow-mode` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/dynamic-workflow-mode/SKILL.md`
 
 ## Descrição
 
-Design task-local harnesses, eval gates, and reusable skill extraction for Claude dynamic workflow mode and other adaptive agent harnesses.
+--- name: dynamic-workflow-mode description: "Design task-local harnesses, eval gates, and reusable skill extraction for Claude dynamic workflow mode and other adaptive agent harnesses."
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: dynamic-workflow-mode
+description: "Design task-local harnesses, eval gates, and reusable skill extraction for Claude dynamic workflow mode and other adaptive agent harnesses."
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Dynamic Workflow Mode
 
@@ -97,9 +90,52 @@ Promote a task-local harness into a shared skill only when at least two of these
 - The workflow has a stable input/output contract.
 - The workflow benefits from a control pane, status board, or team handoff.
 
-When extracting, write the 
+When extracting, write the skill first in `skills/<name>/SKILL.md`. Add command shims only if a legacy slash-entry surface is still required.
+
+## Control Pane Checkpoints
+
+Dynamic workflow mode becomes team-usable when it exposes state. Record these checkpoints whenever the task spans more than one session:
+
+- **Plan**: objective, owner, acceptance criteria, and risky external systems.
+- **Queue**: work items, assigned agent role, branch/worktree, and dependency edges.
+- **Run**: active harness, current loop step, recent eval result, and token/cost signal if available.
+- **Gate**: test results, browser screenshots, security review, and merge readiness.
+- **Handoff**: what is done, what failed, what needs a human decision.
+
+If the repo has ECC2 state enabled, prefer adding or reading checkpoints through the ECC control pane or state-store-backed scripts instead of scattering untracked notes.
+
+## Eval Gates
+
+Every dynamic harness needs a task-specific eval. Pick the cheapest reliable gate:
+
+| Work Type | Eval Gate |
+| --- | --- |
+| Code feature | Focused test, lint, coverage, and one integration path |
+| UI/control pane | Browser smoke with screenshot and overflow/error checks |
+| Agent workflow | Fixture transcript or seeded work item with expected routing |
+| Research/content | Source-neutral brief, claim checklist, and publish-ready outline |
+| Integration | Dry-run command, config validation, and no-secret scan |
+
+Do not claim a dynamic workflow is reusable until the eval can be rerun by another teammate.
+
+## Anti-Patterns
+
+- Generating scripts that hide the real decision logic from the operator.
+- Treating dynamic workflow mode as permission to skip tests.
+- Creating one-off docs when a shared skill or status artifact is the real product.
+- Running multiple agents without ownership, merge gate, or conflict policy.
+- Letting raw private research data leak into public docs.
+
+## Output Standard
+
+Finish with:
+
+- The harness or skill path.
+- The eval commands and results.
+- The control pane or handoff artifact path.
+- The next reusable extraction candidate.
 
 ---
 
 **ECC Original:** `ECC/skills/dynamic-workflow-mode/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:22
+**Atualizado em:** 2026-07-12 11:45:44

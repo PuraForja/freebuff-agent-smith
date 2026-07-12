@@ -1,32 +1,21 @@
 # 🧠 Skill: article-writing
 
-> **Adaptada do ECC:** `article-writing` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `article-writing` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/article-writing/SKILL.md`
 
 ## Descrição
 
-Write articles, guides, blog posts, tutorials, newsletter issues, and other long-form content in a distinctive voice derived from supplied examples or brand guidance. Use when the user wants polished written content longer than a paragraph, especially when voice consistency, structure, and credibility matter.
+--- name: article-writing description: Write articles, guides, blog posts, tutorials, newsletter issues, and other long-form content in a distinctive voice derived from supplied examples or brand guidance. Use when the user wants polished written content longer than a paragraph, especially when voice consistency, structure, and credibility matter.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-
-
+name: article-writing
+description: Write articles, guides, blog posts, tutorials, newsletter issues, and other long-form content in a distinctive voice derived from supplied examples or brand guidance. Use when the user wants polished written content longer than a paragraph, especially when voice consistency, structure, and credibility matter.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Article Writing
 
@@ -104,7 +93,5 @@ Before delivering:
 
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/article-writing/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/article-writing/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:41

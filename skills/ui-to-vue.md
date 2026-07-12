@@ -1,28 +1,21 @@
 # 🧠 Skill: ui-to-vue
 
-> **Adaptada do ECC:** `ui-to-vue` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ui-to-vue` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ui-to-vue/SKILL.md`
 
 ## Descrição
 
-Use when the user has UI screenshots or design exports that need batch conversion into Vue 3 components, especially with Vant, Element Plus, or Ant Design Vue.
+--- name: ui-to-vue description: Use when the user has UI screenshots or design exports that need batch conversion into Vue 3 components, especially with Vant, Element Plus, or Ant Design Vue.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ui-to-vue
+description: Use when the user has UI screenshots or design exports that need batch conversion into Vue 3 components, especially with Vant, Element Plus, or Ant Design Vue.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # UI To Vue
 
@@ -123,9 +116,37 @@ If a local config file is required, keep it out of version control:
 
 ## Security and Privacy
 
-- Treat design screenshots as source material that m
+- Treat design screenshots as source material that may be sent to an external model API.
+- Do not run this flow on private customer designs without permission.
+- Pin the converter version in repeatable workflows instead of using `@latest`.
+- Review generated Vue code before committing it.
+- Do not commit `.ui-to-vue.config.json`, API keys, generated secrets, or customer screenshots.
+
+## Output Review Checklist
+
+- [ ] Page components were generated under `views/` or the chosen output directory.
+- [ ] Repeated UI regions were extracted into `components/` only when reuse is clear.
+- [ ] Router output is compatible with the target project's router style.
+- [ ] Generated components use the requested UI library consistently.
+- [ ] Generated CSS units match the design baseline.
+- [ ] The code passes the project's formatter, linter, type checker, and build.
+- [ ] Placeholder copy, mock data, and generated assets were reviewed before commit.
+
+## Troubleshooting
+
+| Issue | Check |
+| --- | --- |
+| `401` or authentication error | Confirm `DASHSCOPE_API_KEY` is set in the shell running the command. |
+| `command not found: ui-to-vue` | Use the `npx ui-to-vue-converter@1.0.2` form or install the package globally. |
+| Cut images are ignored | Confirm the asset directory name is supported and nested under the matching page or module. |
+| Components ignore the requested UI library | Re-run with an explicit `--ui` value and inspect the generated imports. |
+| Generated layout dimensions look wrong | Confirm the screenshot export width matches the target library baseline. |
+
+## References
+
+- npm package: `ui-to-vue-converter`
 
 ---
 
 **ECC Original:** `ECC/skills/ui-to-vue/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:34
+**Atualizado em:** 2026-07-12 11:45:51

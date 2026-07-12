@@ -1,28 +1,21 @@
 # 🧠 Skill: frontend-design-direction
 
-> **Adaptada do ECC:** `frontend-design-direction` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `frontend-design-direction` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/frontend-design-direction/SKILL.md`
 
 ## Descrição
 
-Set an ECC-specific frontend design direction for production UI work. Use when building or improving websites, dashboards, applications, components, landing pages, visual tools, or any web UI that needs stronger product-specific design judgment.
+--- name: frontend-design-direction description: Set an ECC-specific frontend design direction for production UI work. Use when building or improving websites, dashboards, applications, components, landing pages, visual tools, or any web UI that needs stronger product-specific design judgment.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: frontend-design-direction
+description: Set an ECC-specific frontend design direction for production UI work. Use when building or improving websites, dashboards, applications, components, landing pages, visual tools, or any web UI that needs stronger product-specific design judgment.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Frontend Design Direction
 
@@ -88,9 +81,30 @@ needs repeated daily use.
 - Do not default to common generated patterns: purple gradients, decorative
   blobs, oversized cards, vague hero copy, or stock-like atmospheric media.
 - Do not add UI cards inside other cards.
-- Do not use a single decorative style everywhere when 
+- Do not use a single decorative style everywhere when the domain calls for
+  restraint.
+- Do not hide the primary product, tool, object, or workflow behind generic
+  marketing sections.
+- Do not add a new dependency for a design flourish unless it clearly pays for
+  itself.
+- Do not describe the UI's features inside the UI when the controls can speak
+  for themselves.
+
+## Review Checklist
+
+- The first viewport immediately communicates the product, workflow, or object.
+- The visual hierarchy supports scanning and repeated use.
+- Typography fits the container and does not overlap adjacent content.
+- Color choices have contrast and do not collapse into a one-note palette.
+- Icons are used for familiar tool actions where available.
+- Responsive layout has stable dimensions for boards, grids, toolbars,
+  controls, tiles, and counters.
+- Assets render and carry the subject matter instead of acting as filler.
+- Motion improves orientation and does not mask sluggishness.
+- The result matches the repo's existing frontend conventions unless there is a
+  clear reason to depart.
 
 ---
 
 **ECC Original:** `ECC/skills/frontend-design-direction/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:23
+**Atualizado em:** 2026-07-12 11:45:45

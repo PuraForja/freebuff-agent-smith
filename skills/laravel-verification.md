@@ -1,28 +1,21 @@
 # 🧠 Skill: laravel-verification
 
-> **Adaptada do ECC:** `laravel-verification` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `laravel-verification` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/laravel-verification/SKILL.md`
 
 ## Descrição
 
-Verification loop for Laravel projects: env checks, linting, static analysis, tests with coverage, security scans, and deployment readiness.
+--- name: laravel-verification description: "Verification loop for Laravel projects: env checks, linting, static analysis, tests with coverage, security scans, and deployment readiness."
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: laravel-verification
+description: "Verification loop for Laravel projects: env checks, linting, static analysis, tests with coverage, security scans, and deployment readiness."
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Laravel Verification Loop
 
@@ -152,9 +145,53 @@ If `queue:monitor` is available, use it to check backlog without processing jobs
 php artisan queue:monitor default --max=100
 ```
 
-Active verification (staging only): dispatch a no-op job to a dedicated queue and r
+Active verification (staging only): dispatch a no-op job to a dedicated queue and run a single worker to process it (ensure a non-`sync` queue connection is configured).
+
+```bash
+php artisan tinker --execute="dispatch((new App\\Jobs\\QueueHealthcheck())->onQueue('healthcheck'))"
+php artisan queue:work --once --queue=healthcheck
+```
+
+Verify the job produced the expected side effect (log entry, healthcheck table row, or metric).
+
+Only run this on non-production environments where processing a test job is safe.
+
+## Examples
+
+Minimal flow:
+
+```bash
+php -v
+composer --version
+php artisan --version
+composer validate
+vendor/bin/pint --test
+vendor/bin/phpstan analyse
+php artisan test
+composer audit
+php artisan migrate --pretend
+php artisan config:cache
+php artisan queue:failed
+```
+
+CI-style pipeline:
+
+```bash
+composer validate
+composer dump-autoload -o
+vendor/bin/pint --test
+vendor/bin/phpstan analyse
+XDEBUG_MODE=coverage php artisan test --coverage
+composer audit
+php artisan migrate --pretend
+php artisan optimize:clear
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan schedule:list
+```
 
 ---
 
 **ECC Original:** `ECC/skills/laravel-verification/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:26
+**Atualizado em:** 2026-07-12 11:45:46

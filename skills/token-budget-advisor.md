@@ -1,28 +1,33 @@
 # 🧠 Skill: token-budget-advisor
 
-> **Adaptada do ECC:** `token-budget-advisor` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `token-budget-advisor` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/token-budget-advisor/SKILL.md`
 
 ## Descrição
 
->-
+--- name: token-budget-advisor description: >-
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: token-budget-advisor
+description: >-
+  Offers the user an informed choice about how much response depth to
+  consume before answering. Use this skill when the user explicitly
+  wants to control response length, depth, or token budget.
+  TRIGGER when: "token budget", "token count", "token usage", "token limit",
+  "response length", "answer depth", "short version", "brief answer",
+  "detailed answer", "exhaustive answer", "respuesta corta vs larga",
+  "cuántos tokens", "ahorrar tokens", "responde al 50%", "dame la versión
+  corta", "quiero controlar cuánto usas", or clear variants where the
+  user is explicitly asking to control answer size or depth.
+  DO NOT TRIGGER when: user has already specified a level in the current
+  session (maintain it), the request is clearly a one-word answer, or
+  "token" refers to auth/session/payment tokens rather than response size.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Token Budget Advisor (TBA)
 
@@ -94,9 +99,53 @@ Level token estimates (within the response window):
 ### Step 4 — Respond at the chosen level
 
 | Level            | Target length       | Include                                             | Omit                                              |
-|------------------|---------------------|-----------------------------------------------------|-----------------------------------------
+|------------------|---------------------|-----------------------------------------------------|---------------------------------------------------|
+| 25% Essential    | 2-4 sentences max   | Direct answer, key conclusion                       | Context, examples, nuance, alternatives           |
+| 50% Moderate     | 1-3 paragraphs      | Answer + necessary context + 1 example              | Deep analysis, edge cases, references             |
+| 75% Detailed     | Structured response | Multiple examples, pros/cons, alternatives          | Extreme edge cases, exhaustive references         |
+| 100% Exhaustive  | No restriction      | Everything — full analysis, all code, all perspectives | Nothing                                        |
+
+## Shortcuts — skip the question
+
+If the user already signals a level, respond at that level immediately without asking:
+
+| What they say                                      | Level |
+|----------------------------------------------------|-------|
+| "1" / "25% depth" / "short version" / "brief answer" / "tldr"  | 25%   |
+| "2" / "50% depth" / "moderate depth" / "balanced answer"        | 50%   |
+| "3" / "75% depth" / "detailed answer" / "thorough answer"       | 75%   |
+| "4" / "100% depth" / "exhaustive answer" / "full deep dive"     | 100%  |
+
+If the user set a level earlier in the session, **maintain it silently** for subsequent responses unless they change it.
+
+## Precision note
+
+This skill uses heuristic estimation — no real tokenizer. Accuracy ~85-90%, variance ±15%. Always show the disclaimer.
+
+## Examples
+
+### Triggers
+
+- "Give me the short version first."
+- "How many tokens will your answer use?"
+- "Respond at 50% depth."
+- "I want the exhaustive answer, not the summary."
+- "Dame la version corta y luego la detallada."
+
+### Does Not Trigger
+
+- "What is a JWT token?"
+- "The checkout flow uses a payment token."
+- "Is this normal?"
+- "Complete the refactor."
+- Follow-up questions after the user already chose a depth for the session
+
+## Source
+
+Standalone skill from [TBA — Token Budget Advisor for Claude Code](https://github.com/Xabilimon1/Token-Budget-Advisor-Claude-Code-).
+Original project also ships a Python estimator script, but this repository keeps the skill self-contained and heuristic-only.
 
 ---
 
 **ECC Original:** `ECC/skills/token-budget-advisor/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:34
+**Atualizado em:** 2026-07-12 11:45:50

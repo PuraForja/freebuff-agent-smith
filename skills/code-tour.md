@@ -1,28 +1,21 @@
 # 🧠 Skill: code-tour
 
-> **Adaptada do ECC:** `code-tour` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `code-tour` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/code-tour/SKILL.md`
 
 ## Descrição
 
-Create CodeTour `.tour` files — persona-targeted, step-by-step walkthroughs with real file and line anchors. Use for onboarding tours, architecture walkthroughs, PR tours, RCA tours, and structured explain how this works requests.
+--- name: code-tour description: Create CodeTour `.tour` files — persona-targeted, step-by-step walkthroughs with real file and line anchors. Use for onboarding tours, architecture walkthroughs, PR tours, RCA tours, and structured "explain how this works" requests.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: code-tour
+description: Create CodeTour `.tour` files — persona-targeted, step-by-step walkthroughs with real file and line anchors. Use for onboarding tours, architecture walkthroughs, PR tours, RCA tours, and structured "explain how this works" requests.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Code Tour
 
@@ -117,9 +110,162 @@ Before finishing:
 
 ## The `ref` Field
 
-`ref` ties the
+`ref` ties the tour to a git branch or commit. It matters more than it looks: when `ref` is not the branch the reader has checked out, CodeTour opens each step's file from that revision in git, not from the files on disk. If a file is not in that revision, the step will not open — the reader sees *"The editor could not be opened because the file was not found"* even though the file is sitting right there. The tour and its comments still show, so the real cause is easy to miss.
+
+Pick `ref` by tour type:
+
+| Tour type | Set `ref` to |
+| --- | --- |
+| PR tour | the PR branch — never the base branch |
+| Onboarding / architecture | the branch the reader will be on (often `main`), or leave it out |
+| Not sure | leave `ref` out, so CodeTour reads files straight from disk |
+
+The PR case is the common trap: a PR usually adds new files, and new files do not exist on the base branch yet. Point `ref` at the base (e.g. `develop`) and every step on a new file fails to open.
+
+Before finishing, confirm each step's file actually exists at the `ref` you chose.
+
+## Step Types
+
+### Content
+
+Use sparingly, usually only for a closing step:
+
+```json
+{ "title": "Next Steps", "description": "You can now trace the request path end to end." }
+```
+
+Do not make the first step content-only.
+
+### Directory
+
+Use to orient the reader to a module:
+
+```json
+{ "directory": "src/services", "title": "Service Layer", "description": "The core orchestration logic lives here." }
+```
+
+### File + line
+
+This is the default step type:
+
+```json
+{ "file": "src/auth/middleware.ts", "line": 42, "title": "Auth Gate", "description": "Every protected request passes here first." }
+```
+
+### Selection
+
+Use when one code block matters more than the whole file:
+
+```json
+{
+  "file": "src/core/pipeline.ts",
+  "selection": {
+    "start": { "line": 15, "character": 0 },
+    "end": { "line": 34, "character": 0 }
+  },
+  "title": "Request Pipeline",
+  "description": "This block wires validation, auth, and downstream execution."
+}
+```
+
+### Pattern
+
+Use when exact lines may drift:
+
+```json
+{ "file": "src/app.ts", "pattern": "export default class App", "title": "Application Entry" }
+```
+
+### URI
+
+Use for PRs, issues, or docs when helpful:
+
+```json
+{ "uri": "https://github.com/org/repo/pull/456", "title": "The PR" }
+```
+
+## Writing Rule: SMIG
+
+Each description should answer:
+- **Situation**: what the reader is looking at
+- **Mechanism**: how it works
+- **Implication**: why it matters for this persona
+- **Gotcha**: what a smart reader might miss
+
+Keep descriptions compact, specific, and grounded in the actual code.
+
+## Narrative Shape
+
+Use this arc unless the task clearly needs something different:
+1. orientation
+2. module map
+3. core execution path
+4. edge case or gotcha
+5. closing / next move
+
+The tour should feel like a path, not an inventory.
+
+## Example
+
+```json
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "API Service Tour",
+  "description": "Walkthrough of the request path for the payments service.",
+  "ref": "main",
+  "steps": [
+    {
+      "directory": "src",
+      "title": "Source Root",
+      "description": "All runtime code for the service starts here."
+    },
+    {
+      "file": "src/server.ts",
+      "line": 12,
+      "title": "Entry Point",
+      "description": "The server boots here and wires middleware before any route is reached."
+    },
+    {
+      "file": "src/routes/payments.ts",
+      "line": 8,
+      "title": "Payment Routes",
+      "description": "Every payments request enters through this router before hitting service logic."
+    },
+    {
+      "title": "Next Steps",
+      "description": "You can now follow any payment request end to end with the main anchors in place."
+    }
+  ]
+}
+```
+
+## Anti-Patterns
+
+| Anti-pattern | Fix |
+| --- | --- |
+| Flat file listing | Tell a story with dependency between steps |
+| Generic descriptions | Name the concrete code path or pattern |
+| Guessed anchors | Verify every file and line first |
+| Too many steps for a quick tour | Cut aggressively |
+| First step is content-only | Anchor the first step to a real file or directory |
+| Persona mismatch | Write for the actual reader, not a generic engineer |
+
+## Best Practices
+
+- keep step count proportional to repo size and persona depth
+- use directory steps for orientation, file steps for substance
+- for PR tours, cover changed files first
+- for monorepos, scope to the relevant packages instead of touring everything
+- close with what the reader can now do, not a recap
+
+## Related Skills
+
+- `codebase-onboarding`
+- `coding-standards`
+- `council`
+- official upstream format: `microsoft/codetour`
 
 ---
 
 **ECC Original:** `ECC/skills/code-tour/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:20
+**Atualizado em:** 2026-07-12 11:45:42

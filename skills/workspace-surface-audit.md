@@ -1,28 +1,21 @@
 # 🧠 Skill: workspace-surface-audit
 
-> **Adaptada do ECC:** `workspace-surface-audit` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `workspace-surface-audit` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/workspace-surface-audit/SKILL.md`
 
 ## Descrição
 
-Audit the active repo, MCP servers, plugins, connectors, env surfaces, and harness setup, then recommend the highest-value ECC-native skills, hooks, agents, and operator workflows. Use when the user wants help setting up Claude Code or understanding what capabilities are actually available in their environment.
+--- name: workspace-surface-audit description: Audit the active repo, MCP servers, plugins, connectors, env surfaces, and harness setup, then recommend the highest-value ECC-native skills, hooks, agents, and operator workflows. Use when the user wants help setting up Claude Code or understanding what capabilities are actually available in their environment.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: workspace-surface-audit
+description: Audit the active repo, MCP servers, plugins, connectors, env surfaces, and harness setup, then recommend the highest-value ECC-native skills, hooks, agents, and operator workflows. Use when the user wants help setting up Claude Code or understanding what capabilities are actually available in their environment.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Workspace Surface Audit
 
@@ -94,9 +87,57 @@ Do not just list names. For each comparison, answer:
 
 1. what they actually do
 2. whether ECC already has parity
-3. whether ECC only has
+3. whether ECC only has primitives
+4. whether ECC is missing the workflow entirely
+
+### Phase 3: Turn Gaps Into ECC Decisions
+
+For every real gap, recommend the correct ECC-native shape:
+
+| Gap Type | Preferred ECC Shape |
+|----------|---------------------|
+| Repeatable operator workflow | Skill |
+| Automatic enforcement or side-effect | Hook |
+| Specialized delegated role | Agent |
+| External tool bridge | MCP server or connector |
+| Install/bootstrap guidance | Setup or audit skill |
+
+Default to user-facing skills that orchestrate existing tools when the need is operational rather than infrastructural.
+
+## Output Format
+
+Return five sections in this order:
+
+1. **Current surface**
+   - what is already usable right now
+2. **Parity**
+   - where ECC already matches or exceeds the benchmark
+3. **Primitive-only gaps**
+   - tools exist, but ECC lacks a clean operator skill
+4. **Missing integrations**
+   - capability not available yet
+5. **Top 3-5 next moves**
+   - concrete ECC-native additions, ordered by impact
+
+## Recommendation Rules
+
+- Recommend at most 1-2 highest-value ideas per category.
+- Favor skills with obvious user intent and business value:
+  - setup audit
+  - billing/customer ops
+  - issue/program ops
+  - Google Workspace ops
+  - deployment/ops control
+- If a connector is company-specific, recommend it only when it is genuinely available or clearly useful to the user's workflow.
+- If ECC already has a strong primitive, propose a wrapper skill instead of inventing a brand-new subsystem.
+
+## Good Outcomes
+
+- The user can immediately see what is connected, what is missing, and what ECC should own next.
+- Recommendations are specific enough to implement in the repo without another discovery pass.
+- The final answer is organized around workflows, not API brands.
 
 ---
 
 **ECC Original:** `ECC/skills/workspace-surface-audit/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:34
+**Atualizado em:** 2026-07-12 11:45:51

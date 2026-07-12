@@ -1,32 +1,21 @@
 # 🧠 Skill: documentation-lookup
 
-> **Adaptada do ECC:** `documentation-lookup` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `documentation-lookup` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/documentation-lookup/SKILL.md`
 
 ## Descrição
 
-Use up-to-date library and framework docs via Context7 MCP instead of training data. Activates for setup questions, API references, code examples, or when the user names a framework (e.g. React, Next.js, Prisma).
+--- name: documentation-lookup description: Use up-to-date library and framework docs via Context7 MCP instead of training data. Activates for setup questions, API references, code examples, or when the user names a framework (e.g. React, Next.js, Prisma).
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-
-
+name: documentation-lookup
+description: Use up-to-date library and framework docs via Context7 MCP instead of training data. Activates for setup questions, API references, code examples, or when the user names a framework (e.g. React, Next.js, Prisma).
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Documentation Lookup (Context7)
 
@@ -115,7 +104,5 @@ Limit: do not call query-docs (or resolve-library-id) more than 3 times per ques
 
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/documentation-lookup/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/documentation-lookup/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:44

@@ -1,28 +1,21 @@
 # 🧠 Skill: finance-billing-ops
 
-> **Adaptada do ECC:** `finance-billing-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `finance-billing-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/finance-billing-ops/SKILL.md`
 
 ## Descrição
 
-Evidence-first revenue, pricing, refunds, team-billing, and billing-model truth workflow for ECC. Use when the user wants a sales snapshot, pricing comparison, duplicate-charge diagnosis, or code-backed billing reality instead of generic payments advice.
+--- name: finance-billing-ops description: Evidence-first revenue, pricing, refunds, team-billing, and billing-model truth workflow for ECC. Use when the user wants a sales snapshot, pricing comparison, duplicate-charge diagnosis, or code-backed billing reality instead of generic payments advice.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: finance-billing-ops
+description: Evidence-first revenue, pricing, refunds, team-billing, and billing-model truth workflow for ECC. Use when the user wants a sales snapshot, pricing comparison, duplicate-charge diagnosis, or code-backed billing reality instead of generic payments advice.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Finance Billing Ops
 
@@ -130,9 +123,23 @@ DECISION
 - refund / preserve / convert / no-op
 
 PRODUCT GAP
-- exact follow-up item to 
+- exact follow-up item to build or fix
+```
+
+## Pitfalls
+
+- do not conflate failed attempts with net revenue
+- do not infer team billing from marketing language alone
+- do not compare competitor pricing from memory when current evidence is available
+- do not jump from diagnosis straight to refund without classifying the issue
+
+## Verification
+
+- the answer includes a live-data statement or snapshot timestamp
+- product-truth claims are code-backed
+- customer-impact and broader pricing/product conclusions are separated cleanly
 
 ---
 
 **ECC Original:** `ECC/skills/finance-billing-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:22
+**Atualizado em:** 2026-07-12 11:45:44

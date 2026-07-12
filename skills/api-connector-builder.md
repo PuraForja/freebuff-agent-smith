@@ -1,32 +1,22 @@
 # 🧠 Skill: api-connector-builder
 
-> **Adaptada do ECC:** `api-connector-builder` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `api-connector-builder` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/api-connector-builder/SKILL.md`
 
 ## Descrição
 
-Build a new API connector or provider by matching the target repo's existing integration pattern exactly. Use when adding one more integration without inventing a second architecture.
+--- name: api-connector-builder description: Build a new API connector or provider by matching the target repo's existing integration pattern exactly. Use when adding one more integration without inventing a second architecture.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-> ⚠️ **Atenção:** Esta skill original usava hooks do Claude Code. A versão adaptada substitui hooks por instruções no `.codebuff/instructions.md`.
-
+name: api-connector-builder
+description: Build a new API connector or provider by matching the target repo's existing integration pattern exactly. Use when adding one more integration without inventing a second architecture.
+metadata:
+  origin: ECC direct-port adaptation
+version: "1.0.0"
 ---
-
-## Conteúdo Adaptado
 
 # API Connector Builder
 
@@ -128,9 +118,21 @@ src/integrations/
 
 ## Quality Checklist
 
+- [ ] matches an existing in-repo integration pattern
+- [ ] config validation exists
+- [ ] auth and error handling are explicit
+- [ ] pagination/retry behavior follows repo norms
+- [ ] registry/discovery wiring is complete
+- [ ] tests mirror the host repo's style
+- [ ] docs/examples are updated if expected by the repo
+
+## Related Skills
+
+- `backend-patterns`
+- `mcp-server-patterns`
+- `github-ops`
+
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/api-connector-builder/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/api-connector-builder/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:41

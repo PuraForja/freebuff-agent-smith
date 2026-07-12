@@ -1,28 +1,21 @@
 # 🧠 Skill: crosspost
 
-> **Adaptada do ECC:** `crosspost` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `crosspost` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/crosspost/SKILL.md`
 
 ## Descrição
 
-Multi-platform content distribution across X, LinkedIn, Threads, and Bluesky. Adapts content per platform using content-engine patterns. Never posts identical content cross-platform. Use when the user wants to distribute content across social platforms.
+--- name: crosspost description: Multi-platform content distribution across X, LinkedIn, Threads, and Bluesky. Adapts content per platform using content-engine patterns. Never posts identical content cross-platform. Use when the user wants to distribute content across social platforms.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: crosspost
+description: Multi-platform content distribution across X, LinkedIn, Threads, and Bluesky. Adapts content per platform using content-engine patterns. Never posts identical content cross-platform. Use when the user wants to distribute content across social platforms.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Crosspost
 
@@ -126,9 +119,11 @@ Before delivering:
 
 ## Related Skills
 
-- `brand-voice` for 
+- `brand-voice` for reusable source-derived voice capture
+- `content-engine` for voice capture and source shaping
+- `x-api` for X publishing workflows
 
 ---
 
 **ECC Original:** `ECC/skills/crosspost/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:21
+**Atualizado em:** 2026-07-12 11:45:43

@@ -1,28 +1,21 @@
 # 🧠 Skill: make-interfaces-feel-better
 
-> **Adaptada do ECC:** `make-interfaces-feel-better` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `make-interfaces-feel-better` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/make-interfaces-feel-better/SKILL.md`
 
 ## Descrição
 
-Apply concrete design-engineering details that make interfaces feel polished. Use when reviewing or improving UI spacing, typography, borders, shadows, motion, hit areas, icons, text wrapping, and interaction states.
+--- name: make-interfaces-feel-better description: Apply concrete design-engineering details that make interfaces feel polished. Use when reviewing or improving UI spacing, typography, borders, shadows, motion, hit areas, icons, text wrapping, and interaction states.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: make-interfaces-feel-better
+description: Apply concrete design-engineering details that make interfaces feel polished. Use when reviewing or improving UI spacing, typography, borders, shadows, motion, hit areas, icons, text wrapping, and interaction states.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Make Interfaces Feel Better
 
@@ -129,9 +122,48 @@ Never use `transition: all`. Specify the changed properties:
 .button {
   transition-property: transform, background-color, box-shadow;
   transition-duration: 150ms;
-  transition-timing-function: eas
+  transition-timing-function: ease-out;
+}
+```
+
+Use `will-change` only for first-frame stutter on compositor-friendly
+properties such as `transform`, `opacity`, and `filter`. Never use
+`will-change: all`.
+
+### Hit Areas
+
+Interactive controls should have at least a 40x40px hit area, ideally 44x44px
+where the layout allows it. Expand with a pseudo-element when the visible icon
+is smaller, but do not let expanded hit areas overlap.
+
+## Review Output
+
+When reviewing a UI polish pass, report concrete changes in before/after rows:
+
+| Principle | Before | After |
+| --- | --- | --- |
+| Concentric radius | Same radius on parent and child | Parent radius accounts for padding |
+| Tabular numbers | Counter shifts as digits change | Counter uses `tabular-nums` |
+| Transition scope | `transition: all` | Explicit transition properties |
+
+Include file paths and properties when they are not obvious from the snippets.
+Omit principles that you checked but did not change.
+
+## Checklist
+
+- Nested rounded elements are optically coherent.
+- Icons are visually centered.
+- Buttons, cards, and popovers use borders or shadows for the right reason.
+- Headings and short text avoid awkward wrapping.
+- Dynamic numbers use tabular numerals.
+- Images have neutral outlines where needed.
+- Enter and exit animations are split, subtle, and interruptible where
+  appropriate.
+- Buttons have tactile active states without exaggerated motion.
+- `transition: all` and `will-change: all` are absent.
+- Small controls still have usable hit areas.
 
 ---
 
 **ECC Original:** `ECC/skills/make-interfaces-feel-better/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:27
+**Atualizado em:** 2026-07-12 11:45:47

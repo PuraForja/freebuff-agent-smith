@@ -1,28 +1,21 @@
 # 🧠 Skill: ito-basket-compare
 
-> **Adaptada do ECC:** `ito-basket-compare` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ito-basket-compare` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ito-basket-compare/SKILL.md`
 
 ## Descrição
 
-Compare Itô prediction-market baskets against a user's knowledge base, portfolio notes, financial context, watchlist, or research thesis. Use for read-only basket comparison and gap analysis without investment advice or live trading.
+--- name: ito-basket-compare description: Compare Itô prediction-market baskets against a user's knowledge base, portfolio notes, financial context, watchlist, or research thesis. Use for read-only basket comparison and gap analysis without investment advice or live trading.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ito-basket-compare
+description: Compare Itô prediction-market baskets against a user's knowledge base, portfolio notes, financial context, watchlist, or research thesis. Use for read-only basket comparison and gap analysis without investment advice or live trading.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Itô Basket Compare
 
@@ -85,4 +78,4 @@ This comparison is informational and not investment or trading advice.
 ---
 
 **ECC Original:** `ECC/skills/ito-basket-compare/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:25
+**Atualizado em:** 2026-07-12 11:45:46

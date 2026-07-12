@@ -1,28 +1,21 @@
 # 🧠 Skill: prediction-market-oracle-research
 
-> **Adaptada do ECC:** `prediction-market-oracle-research` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `prediction-market-oracle-research` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/prediction-market-oracle-research/SKILL.md`
 
 ## Descrição
 
-Research prediction markets as data sources or oracle signals for products, agents, dashboards, and corporate decision intelligence. Use for source-grounded analysis of market-implied probabilities, caveats, and integration patterns without investment advice.
+--- name: prediction-market-oracle-research description: Research prediction markets as data sources or oracle signals for products, agents, dashboards, and corporate decision intelligence. Use for source-grounded analysis of market-implied probabilities, caveats, and integration patterns without investment advice.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: prediction-market-oracle-research
+description: Research prediction markets as data sources or oracle signals for products, agents, dashboards, and corporate decision intelligence. Use for source-grounded analysis of market-implied probabilities, caveats, and integration patterns without investment advice.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Prediction Market Oracle Research
 
@@ -85,4 +78,4 @@ Prediction-market signals are informational inputs, not investment advice.
 ---
 
 **ECC Original:** `ECC/skills/prediction-market-oracle-research/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:29
+**Atualizado em:** 2026-07-12 11:45:48

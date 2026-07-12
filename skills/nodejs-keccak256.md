@@ -1,28 +1,22 @@
 # 🧠 Skill: nodejs-keccak256
 
-> **Adaptada do ECC:** `nodejs-keccak256` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `nodejs-keccak256` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/nodejs-keccak256/SKILL.md`
 
 ## Descrição
 
-Prevent Ethereum hashing bugs in JavaScript and TypeScript. Node's sha3-256 is NIST SHA3, not Ethereum Keccak-256, and silently breaks selectors, signatures, storage slots, and address derivation.
+--- name: nodejs-keccak256 description: Prevent Ethereum hashing bugs in JavaScript and TypeScript. Node's sha3-256 is NIST SHA3, not Ethereum Keccak-256, and silently breaks selectors, signatures, storage slots, and address derivation.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: nodejs-keccak256
+description: Prevent Ethereum hashing bugs in JavaScript and TypeScript. Node's sha3-256 is NIST SHA3, not Ethereum Keccak-256, and silently breaks selectors, signatures, storage slots, and address derivation.
+metadata:
+  origin: ECC direct-port adaptation
+version: "1.0.0"
 ---
-
-## Conteúdo Adaptado
 
 # Node.js Keccak-256
 
@@ -123,4 +117,4 @@ For Ethereum contexts, never use `crypto.createHash('sha3-256')`. Use Keccak-awa
 ---
 
 **ECC Original:** `ECC/skills/nodejs-keccak256/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:28
+**Atualizado em:** 2026-07-12 11:45:47

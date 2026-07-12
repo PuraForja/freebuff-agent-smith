@@ -1,28 +1,21 @@
 # 🧠 Skill: repo-scan
 
-> **Adaptada do ECC:** `repo-scan` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `repo-scan` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/repo-scan/SKILL.md`
 
 ## Descrição
 
-Cross-stack source code asset audit — classifies every file, detects embedded third-party libraries, and delivers actionable four-level verdicts per module with interactive HTML reports.
+--- name: repo-scan description: Cross-stack source code asset audit — classifies every file, detects embedded third-party libraries, and delivers actionable four-level verdicts per module with interactive HTML reports.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: repo-scan
+description: Cross-stack source code asset audit — classifies every file, detects embedded third-party libraries, and delivers actionable four-level verdicts per module with interactive HTML reports.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # repo-scan
 
@@ -88,9 +81,16 @@ On a 50,000-file C++ monorepo:
 
 ## Best Practices
 
-- Start with `standard` depth for firs
+- Start with `standard` depth for first-time audits
+- Use `fast` for monorepos with 100+ modules to get a quick inventory
+- Run `deep` incrementally on modules flagged for refactoring
+- Review the cross-module analysis for duplicate detection across sub-projects
+
+## Links
+
+- [GitHub Repository](https://github.com/haibindev/repo-scan)
 
 ---
 
 **ECC Original:** `ECC/skills/repo-scan/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:31
+**Atualizado em:** 2026-07-12 11:45:49

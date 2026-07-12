@@ -1,28 +1,21 @@
 # 🧠 Skill: manim-video
 
-> **Adaptada do ECC:** `manim-video` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `manim-video` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/manim-video/SKILL.md`
 
 ## Descrição
 
-Build reusable Manim explainers for technical concepts, graphs, system diagrams, and product walkthroughs, then hand off to the wider ECC video stack if needed. Use when the user wants a clean animated explainer rather than a generic talking-head script.
+--- name: manim-video description: Build reusable Manim explainers for technical concepts, graphs, system diagrams, and product walkthroughs, then hand off to the wider ECC video stack if needed. Use when the user wants a clean animated explainer rather than a generic talking-head script.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: manim-video
+description: Build reusable Manim explainers for technical concepts, graphs, system diagrams, and product walkthroughs, then hand off to the wider ECC video stack if needed. Use when the user wants a clean animated explainer rather than a generic talking-head script.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Manim Video
 
@@ -111,4 +104,4 @@ Return:
 ---
 
 **ECC Original:** `ECC/skills/manim-video/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:27
+**Atualizado em:** 2026-07-12 11:45:47

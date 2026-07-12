@@ -1,28 +1,21 @@
 # 🧠 Skill: seo
 
-> **Adaptada do ECC:** `seo` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `seo` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/seo/SKILL.md`
 
 ## Descrição
 
-Audit, plan, and implement SEO improvements across technical SEO, on-page optimization, structured data, Core Web Vitals, and content strategy. Use when the user wants better search visibility, SEO remediation, schema markup, sitemap/robots work, or keyword mapping.
+--- name: seo description: Audit, plan, and implement SEO improvements across technical SEO, on-page optimization, structured data, Core Web Vitals, and content strategy. Use when the user wants better search visibility, SEO remediation, schema markup, sitemap/robots work, or keyword mapping.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: seo
+description: Audit, plan, and implement SEO improvements across technical SEO, on-page optimization, structured data, Core Web Vitals, and content strategy. Use when the user wants better search visibility, SEO remediation, schema markup, sitemap/robots work, or keyword mapping.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # SEO
 
@@ -135,9 +128,45 @@ Action + topic + value proposition + one supporting detail
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline":
+  "headline": "Page Title Here",
+  "author": {
+    "@type": "Person",
+    "name": "Author Name"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Brand Name"
+  }
+}
+```
+
+### Audit output shape
+
+```text
+[HIGH] Duplicate title tags on product pages
+Location: src/routes/products/[slug].tsx
+Issue: Dynamic titles collapse to the same default string, which weakens relevance and creates duplicate signals.
+Fix: Generate a unique title per product using the product name and primary category.
+```
+
+## Anti-Patterns
+
+| Anti-pattern | Fix |
+| --- | --- |
+| keyword stuffing | write for users first |
+| thin near-duplicate pages | consolidate or differentiate them |
+| schema for content that is not actually present | match schema to reality |
+| content advice without checking the actual page | read the real page first |
+| generic “improve SEO” outputs | tie every recommendation to a page or asset |
+
+## Related Skills
+
+- `seo-specialist`
+- `frontend-patterns`
+- `brand-voice`
+- `market-research`
 
 ---
 
 **ECC Original:** `ECC/skills/seo/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:50

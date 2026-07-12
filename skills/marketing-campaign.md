@@ -1,28 +1,21 @@
 # 🧠 Skill: marketing-campaign
 
-> **Adaptada do ECC:** `marketing-campaign` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `marketing-campaign` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/marketing-campaign/SKILL.md`
 
 ## Descrição
 
-End-to-end marketing campaign planning and execution. Covers audience research, positioning, campaign angle definition, landing page copy, email sequences, social posts, ad copy, short-form video scripts, and content calendars. Use as the orchestration layer for multi-channel product launches.
+--- name: marketing-campaign description: End-to-end marketing campaign planning and execution. Covers audience research, positioning, campaign angle definition, landing page copy, email sequences, social posts, ad copy, short-form video scripts, and content calendars. Use as the orchestration layer for multi-channel product launches.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: marketing-campaign
+description: End-to-end marketing campaign planning and execution. Covers audience research, positioning, campaign angle definition, landing page copy, email sequences, social posts, ad copy, short-form video scripts, and content calendars. Use as the orchestration layer for multi-channel product launches.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Marketing Campaign
 
@@ -91,9 +84,48 @@ Gate every deliverable:
 A full campaign delivers:
 
 1. **Positioning brief** — angle, core benefit statement, tone profile
-2. **Landing page copy** — hero, problem, solution, features, how it works, proof, 
+2. **Landing page copy** — hero, problem, solution, features, how it works, proof, CTA
+3. **Email sequence** — subject + preview + body + CTA for each email, labelled by day and purpose
+4. **LinkedIn posts** — 3+ platform-native posts with distinct angles
+5. **X posts** — 5+ standalone posts + 1 thread
+6. **Short-form video scripts** — 2+ timestamp-blocked scripts with visual direction notes
+7. **Ad copy variants** — short headline / long headline / body per variant
+8. **Content calendar** — day-by-day schedule with channel, content type, timing, and dependencies
+9. **Copy review summary** — flagged issues and open questions before anything goes live
+
+## Quality Gate
+
+Before delivering any piece:
+
+- every deliverable sounds like the same author
+- no hollow superlatives or filler adjectives remain
+- every CTA is specific and earned (never "learn more" or "click here")
+- no copy is duplicated verbatim across platforms
+- hero copy passes the 5-second test
+- email subjects match email body (no bait-and-switch)
+- ad claims match landing page claims exactly
+- no copy would work unchanged for any other product in the category
+
+## Hard Bans
+
+Delete and rewrite any:
+
+- "game-changing", "revolutionary", "world-class", "cutting-edge"
+- "In today's competitive landscape"
+- fake urgency not backed by a real deadline
+- hollow social proof without specifics ("thousands trust us")
+- generic CTAs ("learn more", "find out more", "click here")
+- copy that could be unplugged and dropped into a competitor's campaign unchanged
+
+## Related Skills
+
+- `brand-voice` — source-derived voice capture (run before content production)
+- `content-engine` — platform-native content production
+- `crosspost` — multi-platform distribution
+- `market-research` — audience and competitive intelligence
+- `seo` — on-page optimisation for landing page copy
 
 ---
 
 **ECC Original:** `ECC/skills/marketing-campaign/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:27
+**Atualizado em:** 2026-07-12 11:45:47

@@ -1,28 +1,21 @@
 # 🧠 Skill: springboot-verification
 
-> **Adaptada do ECC:** `springboot-verification` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `springboot-verification` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/springboot-verification/SKILL.md`
 
 ## Descrição
 
-Verification loop for Spring Boot projects: build, static analysis, tests with coverage, security scans, and diff review before release or PR.
+--- name: springboot-verification description: "Verification loop for Spring Boot projects: build, static analysis, tests with coverage, security scans, and diff review before release or PR."
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: springboot-verification
+description: "Verification loop for Spring Boot projects: build, static analysis, tests with coverage, security scans, and diff review before release or PR."
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Spring Boot Verification Loop
 
@@ -147,9 +140,110 @@ Test controller layer with full Spring context:
 @WebMvcTest(UserController.class)
 class UserControllerTest {
 
-  @Autowired private Moc
+  @Autowired private MockMvc mockMvc;
+  @MockBean private UserService userService;
+
+  @Test
+  void createUser_validInput_returns201() throws Exception {
+    var user = new UserDto(1L, "Alice", "alice@example.com");
+    when(userService.create(any())).thenReturn(user);
+
+    mockMvc.perform(post("/api/users")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("""
+                {"name": "Alice", "email": "alice@example.com"}
+                """))
+        .andExpect(status().isCreated())
+        .andExpect(jsonPath("$.name").value("Alice"));
+  }
+
+  @Test
+  void createUser_invalidEmail_returns400() throws Exception {
+    mockMvc.perform(post("/api/users")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("""
+                {"name": "Alice", "email": "not-an-email"}
+                """))
+        .andExpect(status().isBadRequest());
+  }
+}
+```
+
+## Phase 4: Security Scan
+
+```bash
+# Dependency CVEs
+mvn org.owasp:dependency-check-maven:check
+# or
+./gradlew dependencyCheckAnalyze
+
+# Secrets in source
+grep -rn "password\s*=\s*\"" src/ --include="*.java" --include="*.yml" --include="*.properties"
+grep -rn "sk-\|api_key\|secret" src/ --include="*.java" --include="*.yml"
+
+# Secrets (git history)
+git secrets --scan  # if configured
+```
+
+### Common Security Findings
+
+```
+# Check for System.out.println (use logger instead)
+grep -rn "System\.out\.print" src/main/ --include="*.java"
+
+# Check for raw exception messages in responses
+grep -rn "e\.getMessage()" src/main/ --include="*.java"
+
+# Check for wildcard CORS
+grep -rn "allowedOrigins.*\*" src/main/ --include="*.java"
+```
+
+## Phase 5: Lint/Format (optional gate)
+
+```bash
+mvn spotless:apply   # if using Spotless plugin
+./gradlew spotlessApply
+```
+
+## Phase 6: Diff Review
+
+```bash
+git diff --stat
+git diff
+```
+
+Checklist:
+- No debugging logs left (`System.out`, `log.debug` without guards)
+- Meaningful errors and HTTP statuses
+- Transactions and validation present where needed
+- Config changes documented
+
+## Output Template
+
+```
+VERIFICATION REPORT
+===================
+Build:     [PASS/FAIL]
+Static:    [PASS/FAIL] (spotbugs/pmd/checkstyle)
+Tests:     [PASS/FAIL] (X/Y passed, Z% coverage)
+Security:  [PASS/FAIL] (CVE findings: N)
+Diff:      [X files changed]
+
+Overall:   [READY / NOT READY]
+
+Issues to Fix:
+1. ...
+2. ...
+```
+
+## Continuous Mode
+
+- Re-run phases on significant changes or every 30–60 minutes in long sessions
+- Keep a short loop: `mvn -T 4 test` + spotbugs for quick feedback
+
+**Remember**: Fast feedback beats late surprises. Keep the gate strict—treat warnings as defects in production systems.
 
 ---
 
 **ECC Original:** `ECC/skills/springboot-verification/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:33
+**Atualizado em:** 2026-07-12 11:45:50

@@ -1,28 +1,22 @@
 # 🧠 Skill: latency-critical-systems
 
-> **Adaptada do ECC:** `latency-critical-systems` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `latency-critical-systems` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/latency-critical-systems/SKILL.md`
 
 ## Descrição
 
-Use for latency-sensitive systems such as realtime dashboards, market data, streaming agents, execution gateways, queues, caches, or HFT-like infrastructure where freshness and p95 latency matter.
+--- name: latency-critical-systems description: Use for latency-sensitive systems such as realtime dashboards, market data, streaming agents, execution gateways, queues, caches, or HFT-like infrastructure where freshness and p95 latency matter.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: latency-critical-systems
+description: Use for latency-sensitive systems such as realtime dashboards, market data, streaming agents, execution gateways, queues, caches, or HFT-like infrastructure where freshness and p95 latency matter.
+metadata:
+  origin: ECC
+tools: Read, Write, Edit, Bash, Grep, Glob
 ---
-
-## Conteúdo Adaptado
 
 # Latency Critical Systems
 
@@ -94,4 +88,4 @@ ready.
 ---
 
 **ECC Original:** `ECC/skills/latency-critical-systems/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:26
+**Atualizado em:** 2026-07-12 11:45:46

@@ -1,28 +1,21 @@
 # 🧠 Skill: gateguard
 
-> **Adaptada do ECC:** `gateguard` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `gateguard` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/gateguard/SKILL.md`
 
 ## Descrição
 
-Fact-forcing gate that blocks Edit/Write/Bash (including MultiEdit) and demands concrete investigation (importers, data schemas, user instruction) before allowing the action. Measurably improves output quality by +2.25 points vs ungated agents.
+--- name: gateguard description: Fact-forcing gate that blocks Edit/Write/Bash (including MultiEdit) and demands concrete investigation (importers, data schemas, user instruction) before allowing the action. Measurably improves output quality by +2.25 points vs ungated agents.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: gateguard
+description: Fact-forcing gate that blocks Edit/Write/Bash (including MultiEdit) and demands concrete investigation (importers, data schemas, user instruction) before allowing the action. Measurably improves output quality by +2.25 points vs ungated agents.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # GateGuard — Fact-Forcing Pre-Action Gate
 
@@ -112,9 +105,46 @@ Triggers on: `rm -rf`, `git reset --hard`, `git push --force`, `drop table`, etc
 
 ### Option A: Use the ECC hook (zero install)
 
-The hook a
+The hook at `scripts/hooks/gateguard-fact-force.js` is included in this plugin. Enable it via hooks.json.
+
+If GateGuard blocks setup or repair work, start the session with
+`ECC_GATEGUARD=off`. For hook-level control, keep using
+`ECC_DISABLED_HOOKS` with the GateGuard hook ID.
+
+In long sessions, only the first `GATEGUARD_FACT_FORCE_FULL_DENIALS`
+fact-force denials (default 3) emit the full four-fact block; later
+denials are condensed to a single line carrying the denial ordinal, so
+near-identical blocks cannot accumulate in the context window and
+amplify model repetition loops (#2142). Retrying the same file or
+command after presenting facts never re-triggers the gate.
+
+### Option B: Full package with config
+
+```bash
+pip install gateguard-ai
+gateguard init
+```
+
+This adds `.gateguard.yml` for per-project configuration (custom messages, ignore paths, gate toggles).
+
+## Anti-Patterns
+
+- **Don't use self-evaluation instead.** "Are you sure?" always gets "yes." This is experimentally verified.
+- **Don't skip the data schema check.** Both A/B test agents assumed ISO-8601 dates when real data used `%Y/%m/%d %H:%M`. Checking data structure (with redacted values) prevents this entire class of bugs.
+- **Don't gate every single Bash command.** Routine bash gates once per session. Destructive bash gates every time. This balance avoids slowdown while catching real risks.
+
+## Best Practices
+
+- Let the gate fire naturally. Don't try to pre-answer the gate questions — the investigation itself is what improves quality.
+- Customize gate messages for your domain. If your project has specific conventions, add them to the gate prompts.
+- Use `.gateguard.yml` to ignore paths like `.venv/`, `node_modules/`, `.git/`.
+
+## Related Skills
+
+- `safety-guard` — Runtime safety checks (complementary, not overlapping)
+- `code-reviewer` — Post-edit review (GateGuard is pre-edit investigation)
 
 ---
 
 **ECC Original:** `ECC/skills/gateguard/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:23
+**Atualizado em:** 2026-07-12 11:45:45

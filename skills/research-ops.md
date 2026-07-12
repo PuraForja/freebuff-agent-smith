@@ -1,28 +1,21 @@
 # 🧠 Skill: research-ops
 
-> **Adaptada do ECC:** `research-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `research-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/research-ops/SKILL.md`
 
 ## Descrição
 
-Evidence-first current-state research workflow for ECC. Use when the user wants fresh facts, comparisons, enrichment, or a recommendation built from current public evidence and any supplied local context.
+--- name: research-ops description: Evidence-first current-state research workflow for ECC. Use when the user wants fresh facts, comparisons, enrichment, or a recommendation built from current public evidence and any supplied local context.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: research-ops
+description: Evidence-first current-state research workflow for ECC. Use when the user wants fresh facts, comparisons, enrichment, or a recommendation built from current public evidence and any supplied local context.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Research Ops
 
@@ -121,9 +114,17 @@ RECOMMENDATION
 ## Pitfalls
 
 - do not mix inference into sourced facts without labeling it
-- do not ignore
+- do not ignore user-provided evidence
+- do not use a heavy research lane for a question local repo context can answer
+- do not give freshness-sensitive answers without dates
+
+## Verification
+
+- important claims are labeled by evidence type
+- freshness-sensitive outputs include dates
+- the final recommendation matches the actual research mode used
 
 ---
 
 **ECC Original:** `ECC/skills/research-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:31
+**Atualizado em:** 2026-07-12 11:45:49

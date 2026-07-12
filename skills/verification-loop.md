@@ -1,90 +1,144 @@
 # 🧠 Skill: verification-loop
 
-> **Adaptada do ECC:** `verification-loop` — via `sync-ecc.sh`
-> **Fonte original:** `ECC/skills/verification-loop/`
+> **Adaptada do ECC:** `verification-loop` — via `ecc-install.sh`
+> **Fonte original:** `ECC/skills/verification-loop/SKILL.md`
 
 ## Descrição
 
-Loop de verificação que implementa quality gates em pipelines de dados.
-Complementa o `quality-gate` com verificações contínuas durante o desenvolvimento.
-
-## Quando usar
-
-- Durante o desenvolvimento de scripts de download
-- Após modificar arquivos de dados existentes
-- Antes de considerar uma tarefa como "pronta para revisão"
-
-## Tipos de Verificação
-
-### 1. Verificação de Checkpoint
-
-```python
-def ja_baixado(caminho, tamanho_minimo=1024):
-    """Verifica se arquivo já foi baixado (checkpoint)."""
-    return caminho.exists() and caminho.stat().st_size >= tamanho_minimo
-```
-
-### 2. Verificação de Integridade
-
-```python
-def validar_csv(caminho):
-    """Valida se CSV está bem formado."""
-    import csv
-    with open(caminho, 'r', encoding='utf-8') as f:
-        reader = csv.reader(f)
-        cabecalho = next(reader)
-        linhas = 0
-        for linha in reader:
-            if len(linha) != len(cabecalho):
-                return False, f"Linha {linhas+2}: {len(linha)} colunas (esperado {len(cabecalho)})"
-            linhas += 1
-    return True, f"OK: {cabecalho[0]}... ({linhas} linhas)"
-```
-
-### 3. Verificação de Encoding
-
-```python
-def verificar_encoding(caminho):
-    """Detecta e reporta encoding do arquivo."""
-    with open(caminho, 'rb') as f:
-        raw = f.read(10000)
-    import chardet
-    resultado = chardet.detect(raw)
-    return resultado['encoding']
-```
-
-### 4. Verificação de Metadados
-
-```python
-def verificar_metadados(diretorio):
-    """Verifica se metadados obrigatórios existem."""
-    obrigatorios = ['fonte.txt', '_metadata.json']
-    presentes = [f for f in obrigatorios if (diretorio / f).exists()]
-    ausentes = [f for f in obrigatorios if not (diretorio / f).exists()]
-    return presentes, ausentes
-```
-
-## Pipeline de Verificação
-
-```
-1. Antes da execução:
-   - Verificar checkpoint (já foi baixado?)
-   
-2. Durante a execução:
-   - Logging contínuo do progresso
-   - Tratamento de erros HTTP/FTP
-   
-3. Após a execução:
-   - Validar integridade do arquivo baixado
-   - Verificar encoding (deve ser UTF-8)
-   - Confirmar metadados salvos
-```
-
-## Referência
-
-- **ECC Original:** `verification-loop` — implementa quality gates como hooks
-  do Claude Code para verificar build/type/lint/test antes de permitir avançar.
+--- name: verification-loop description: "A comprehensive verification system for Claude Code sessions."
 
 ---
 
-*Atualizado em: 2026-07-01*
+## Conteúdo Original
+
+name: verification-loop
+description: "A comprehensive verification system for Claude Code sessions."
+metadata:
+  origin: ECC
+---
+
+# Verification Loop Skill
+
+A comprehensive verification system for Claude Code sessions.
+
+## When to Use
+
+Invoke this skill:
+- After completing a feature or significant code change
+- Before creating a PR
+- When you want to ensure quality gates pass
+- After refactoring
+
+## Verification Phases
+
+### Phase 1: Build Verification
+```bash
+# Check if project builds
+npm run build 2>&1 | tail -20
+# OR
+pnpm build 2>&1 | tail -20
+```
+
+If build fails, STOP and fix before continuing.
+
+### Phase 2: Type Check
+```bash
+# TypeScript projects
+npx tsc --noEmit 2>&1 | head -30
+
+# Python projects
+pyright . 2>&1 | head -30
+```
+
+Report all type errors. Fix critical ones before continuing.
+
+### Phase 3: Lint Check
+```bash
+# JavaScript/TypeScript
+npm run lint 2>&1 | head -30
+
+# Python
+ruff check . 2>&1 | head -30
+```
+
+### Phase 4: Test Suite
+```bash
+# Run tests with coverage
+npm run test -- --coverage 2>&1 | tail -50
+
+# Check coverage threshold
+# Target: 80% minimum
+```
+
+Report:
+- Total tests: X
+- Passed: X
+- Failed: X
+- Coverage: X%
+
+### Phase 5: Security Scan
+```bash
+# Check for secrets
+grep -rn "sk-" --include="*.ts" --include="*.js" . 2>/dev/null | head -10
+grep -rn "api_key" --include="*.ts" --include="*.js" . 2>/dev/null | head -10
+
+# Check for console.log
+grep -rn "console.log" --include="*.ts" --include="*.tsx" src/ 2>/dev/null | head -10
+```
+
+### Phase 6: Diff Review
+```bash
+# Show what changed
+git diff --stat
+git diff HEAD~1 --name-only
+```
+
+Review each changed file for:
+- Unintended changes
+- Missing error handling
+- Potential edge cases
+
+## Output Format
+
+After running all phases, produce a verification report:
+
+```
+VERIFICATION REPORT
+==================
+
+Build:     [PASS/FAIL]
+Types:     [PASS/FAIL] (X errors)
+Lint:      [PASS/FAIL] (X warnings)
+Tests:     [PASS/FAIL] (X/Y passed, Z% coverage)
+Security:  [PASS/FAIL] (X issues)
+Diff:      [X files changed]
+
+Overall:   [READY/NOT READY] for PR
+
+Issues to Fix:
+1. ...
+2. ...
+```
+
+## Continuous Mode
+
+For long sessions, run verification every 15 minutes or after major changes:
+
+```markdown
+Set a mental checkpoint:
+- After completing each function
+- After finishing a component
+- Before moving to next task
+
+Run: /verify
+```
+
+## Integration with Hooks
+
+This skill complements PostToolUse hooks but provides deeper verification.
+Hooks catch issues immediately; this skill provides comprehensive review.
+
+---
+
+**ECC Original:** `ECC/skills/verification-loop/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:51

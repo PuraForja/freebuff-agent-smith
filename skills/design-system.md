@@ -1,28 +1,21 @@
 # 🧠 Skill: design-system
 
-> **Adaptada do ECC:** `design-system` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `design-system` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/design-system/SKILL.md`
 
 ## Descrição
 
-Use this skill to generate or audit design systems, check visual consistency, and review PRs that touch styling.
+--- name: design-system description: Use this skill to generate or audit design systems, check visual consistency, and review PRs that touch styling.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: design-system
+description: Use this skill to generate or audit design systems, check visual consistency, and review PRs that touch styling.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Design System — Generate & Audit Visual Systems
 
@@ -104,4 +97,4 @@ Identifies generic AI-generated design patterns:
 ---
 
 **ECC Original:** `ECC/skills/design-system/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:21
+**Atualizado em:** 2026-07-12 11:45:43

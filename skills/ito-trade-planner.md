@@ -1,28 +1,21 @@
 # 🧠 Skill: ito-trade-planner
 
-> **Adaptada do ECC:** `ito-trade-planner` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ito-trade-planner` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ito-trade-planner/SKILL.md`
 
 ## Descrição
 
-Build a non-advisory prediction-market trade planning worksheet for Itô or venue workflows. Use to inspect venues, underliers, constraints, order prerequisites, and manual execution steps without placing trades or recommending positions.
+--- name: ito-trade-planner description: Build a non-advisory prediction-market trade planning worksheet for Itô or venue workflows. Use to inspect venues, underliers, constraints, order prerequisites, and manual execution steps without placing trades or recommending positions.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ito-trade-planner
+description: Build a non-advisory prediction-market trade planning worksheet for Itô or venue workflows. Use to inspect venues, underliers, constraints, order prerequisites, and manual execution steps without placing trades or recommending positions.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Itô Trade Planner
 
@@ -89,4 +82,4 @@ rules and make any trading decisions yourself.
 ---
 
 **ECC Original:** `ECC/skills/ito-trade-planner/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:25
+**Atualizado em:** 2026-07-12 11:45:46

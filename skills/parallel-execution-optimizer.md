@@ -1,28 +1,22 @@
 # 🧠 Skill: parallel-execution-optimizer
 
-> **Adaptada do ECC:** `parallel-execution-optimizer` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `parallel-execution-optimizer` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/parallel-execution-optimizer/SKILL.md`
 
 ## Descrição
 
-Use when the user wants a task done much faster through parallel work, concurrent agents, batched tool calls, isolated worktrees, or many independent verification lanes without losing correctness.
+--- name: parallel-execution-optimizer description: Use when the user wants a task done much faster through parallel work, concurrent agents, batched tool calls, isolated worktrees, or many independent verification lanes without losing correctness.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: parallel-execution-optimizer
+description: Use when the user wants a task done much faster through parallel work, concurrent agents, batched tool calls, isolated worktrees, or many independent verification lanes without losing correctness.
+metadata:
+  origin: ECC
+tools: Read, Write, Edit, Bash, Grep, Glob
 ---
-
-## Conteúdo Adaptado
 
 # Parallel Execution Optimizer
 
@@ -93,4 +87,4 @@ Parallel execution result:
 ---
 
 **ECC Original:** `ECC/skills/parallel-execution-optimizer/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:29
+**Atualizado em:** 2026-07-12 11:45:48

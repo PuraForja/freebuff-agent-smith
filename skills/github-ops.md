@@ -1,28 +1,21 @@
 # 🧠 Skill: github-ops
 
-> **Adaptada do ECC:** `github-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `github-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/github-ops/SKILL.md`
 
 ## Descrição
 
-GitHub repository operations, automation, and management. Issue triage, PR management, CI/CD operations, release management, and security monitoring using the gh CLI. Use when the user wants to manage GitHub issues, PRs, CI status, releases, contributors, stale items, or any GitHub operational task beyond simple git commands.
+--- name: github-ops description: GitHub repository operations, automation, and management. Issue triage, PR management, CI/CD operations, release management, and security monitoring using the gh CLI. Use when the user wants to manage GitHub issues, PRs, CI status, releases, contributors, stale items, or any GitHub operational task beyond simple git commands.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: github-ops
+description: GitHub repository operations, automation, and management. Issue triage, PR management, CI/CD operations, release management, and security monitoring using the gh CLI. Use when the user wants to manage GitHub issues, PRs, CI status, releases, contributors, stale items, or any GitHub operational task beyond simple git commands.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # GitHub Operations
 
@@ -122,9 +115,48 @@ gh run rerun <run-id> --failed
 When preparing a release:
 
 1. Check all CI is green on main
-2.
+2. Review unreleased changes: `gh pr list --state merged --base main`
+3. Generate changelog from PR titles
+4. Create release: `gh release create`
+
+```bash
+# List merged PRs since last release
+gh pr list --state merged --base main --search "merged:>2026-03-01"
+
+# Create a release
+gh release create v1.2.0 --title "v1.2.0" --generate-notes
+
+# Create a pre-release
+gh release create v1.3.0-rc1 --prerelease --title "v1.3.0 Release Candidate 1"
+```
+
+## Security Monitoring
+
+```bash
+# Check Dependabot alerts
+gh api repos/{owner}/{repo}/dependabot/alerts --jq '.[].security_advisory.summary'
+
+# Check secret scanning alerts
+gh api repos/{owner}/{repo}/secret-scanning/alerts --jq '.[].state'
+
+# Review and auto-merge safe dependency bumps
+gh pr list --label "dependencies" --json number,title
+```
+
+- Review and auto-merge safe dependency bumps
+- Flag any critical/high severity alerts immediately
+- Check for new Dependabot alerts weekly at minimum
+
+## Quality Gate
+
+Before completing any GitHub operations task:
+- all issues triaged have appropriate labels
+- no PRs older than 7 days without a review or comment
+- CI failures have been investigated (not just re-run)
+- releases include accurate changelogs
+- security alerts are acknowledged and tracked
 
 ---
 
 **ECC Original:** `ECC/skills/github-ops/SKILL.md`
-**Atualizado em:** 2026-07-01 13:21:04
+**Atualizado em:** 2026-07-12 11:45:45

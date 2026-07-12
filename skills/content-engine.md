@@ -1,32 +1,21 @@
 # 🧠 Skill: content-engine
 
-> **Adaptada do ECC:** `content-engine` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `content-engine` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/content-engine/SKILL.md`
 
 ## Descrição
 
-Create platform-native content systems for X, LinkedIn, TikTok, YouTube, newsletters, and repurposed multi-platform campaigns. Use when the user wants social posts, threads, scripts, content calendars, or one source asset adapted cleanly across platforms.
+--- name: content-engine description: Create platform-native content systems for X, LinkedIn, TikTok, YouTube, newsletters, and repurposed multi-platform campaigns. Use when the user wants social posts, threads, scripts, content calendars, or one source asset adapted cleanly across platforms.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-
-
+name: content-engine
+description: Create platform-native content systems for X, LinkedIn, TikTok, YouTube, newsletters, and repurposed multi-platform campaigns. Use when the user wants social posts, threads, scripts, content calendars, or one source asset adapted cleanly across platforms.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Content Engine
 
@@ -129,9 +118,32 @@ Delete and rewrite any of these:
 6. Strip platform-shaped filler.
 7. Run the quality gate.
 
+## Deliverables
+
+When asked for a campaign, return:
+- a short voice profile if voice matching matters
+- the core angle
+- platform-native drafts
+- posting order only if it helps execution
+- gaps that must be filled before publishing
+
+## Quality Gate
+
+Before delivering:
+- every draft sounds like the intended author, not the platform stereotype
+- every draft contains a real claim, proof point, or concrete observation
+- no generic hype language remains
+- no fake engagement bait remains
+- no duplicated copy across platforms unless requested
+- any CTA is earned and user-approved
+
+## Related Skills
+
+- `brand-voice` for source-derived voice profiles
+- `crosspost` for platform-specific distribution
+- `x-api` for sourcing recent posts and publishing approved X output
+
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/content-engine/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/content-engine/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:43

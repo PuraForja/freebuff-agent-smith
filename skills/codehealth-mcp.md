@@ -1,28 +1,21 @@
 # 🧠 Skill: codehealth-mcp
 
-> **Adaptada do ECC:** `codehealth-mcp` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `codehealth-mcp` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/codehealth-mcp/SKILL.md`
 
 ## Descrição
 
-Real-time structural Code Health via CodeScene MCP — review before edits, verify score deltas after changes, gate commits and PRs. Use when reviewing code quality, refactoring, checking if AI changes degraded a file, or before commit/PR.
+--- name: codehealth-mcp description: Real-time structural Code Health via CodeScene MCP — review before edits, verify score deltas after changes, gate commits and PRs. Use when reviewing code quality, refactoring, checking if AI changes degraded a file, or before commit/PR.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: codehealth-mcp
+description: Real-time structural Code Health via CodeScene MCP — review before edits, verify score deltas after changes, gate commits and PRs. Use when reviewing code quality, refactoring, checking if AI changes degraded a file, or before commit/PR.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Code Health MCP (CodeScene)
 
@@ -73,9 +66,119 @@ Copy the `codescene` entry from `mcp-configs/mcp-servers.json` into your harness
 
 **Project-scoped:** merge the same block into `.mcp.json` at the repo root.
 
-Token setup is documented in the upstream repo (link above). Standalone mode does not require a paid CodeScene platform account for the four tools listed below. Restart the session and
+Token setup is documented in the upstream repo (link above). Standalone mode does not require a paid CodeScene platform account for the four tools listed below. Restart the session and confirm the `codescene` server is connected before relying on scores.
+
+### 2. Call standalone tools only
+
+| Tool | When to use |
+|------|-------------|
+| `code_health_review` | Full structural analysis **before** modifying a file |
+| `code_health_score` | Quick numeric score after each change (delta check) |
+| `pre_commit_code_health_safeguard` | Block commits that introduce Code Health regressions |
+| `analyze_change_set` | Branch-level check **before** opening a PR |
+
+Do **not** call platform-only tools (e.g. repository-wide technical debt hotspot lists). Do **not** reference `delta_analysis` — not available on standalone.
+
+### 3. Interpret scores (1–10)
+
+| Range | Meaning | Agent behavior |
+|-------|---------|----------------|
+| **9.0–10.0** | Green — healthy | Safer to extend; still prefer vertical slices |
+| **4.0–8.9** | Yellow — debt | Tread carefully; no drive-by refactors |
+| **1.0–3.9** | Red — severe debt | Narrow scope only |
+
+### 4. Run the feedback loop
+
+**Before touching a file**
+
+1. Run `code_health_review` on the target path.
+2. Record baseline score and listed code smells.
+3. Plan the smallest change that addresses the task.
+
+Scope by score: **below 5** — minimal diff only; **5–7** — no broad refactors; **above 7** — safer to refactor, still verify after each edit.
+
+**After each change**
+
+1. Run `code_health_score` on the same file.
+2. Compare to the baseline from `code_health_review`.
+3. If the score **regressed**, fix before continuing. Never mark the task done while the score is lower than when you started.
+
+**Before every commit** — run `pre_commit_code_health_safeguard` on the repository path.
+
+**Before a PR** — run `analyze_change_set` against the base branch (e.g. `main`).
+
+## Examples
+
+### Example: Flask maintainability improvement
+
+On `pallets/flask`, an agent loop using only standalone tools:
+
+1. `code_health_review` on a target module (baseline **4.82**)
+2. Targeted refactor addressing listed smells
+3. `code_health_score` after each edit
+4. `pre_commit_code_health_safeguard` before commit
+5. `analyze_change_set` before PR
+
+Result: Code Health **4.82 → 9.1** (free standalone token only).
+
+### Example: AGENTS.md enforcement block
+
+Paste into the project `AGENTS.md` or `CLAUDE.md`:
+
+```md
+## Code Health (CodeScene MCP)
+
+Before modifying any file: run `code_health_review`, note score and issues.
+
+- Score below 5: problematic range — scope changes narrowly.
+- Score 5–7: warning range — no broad refactors.
+
+After each change: run `code_health_score` to verify delta.
+
+- If score regressed: fix before continuing; never declare done if score dropped.
+
+Before every commit: run `pre_commit_code_health_safeguard`.
+
+Before PR: run `analyze_change_set`.
+```
+
+### Example: anti-patterns vs correct loop
+
+```markdown
+# BAD: Edit first, check later
+[large refactor without code_health_review]
+
+# BAD: Ignore score drop
+"Tests pass" → mark task done while Code Health decreased
+
+# BAD: Broad refactor on red-score file (below 5)
+Drive-by cleanup across the module
+
+# GOOD: review → small change → score → commit safeguard → analyze_change_set
+```
+
+## Pairing with ECC
+
+| ECC skill / flow | Code Health MCP role |
+|------------------|----------------------|
+| `coding-standards` | Style/naming; Code Health = structure/complexity |
+| `plankton-code-quality` | Write-time lint/format; Code Health = pre/post edit structural gate |
+| `verification-loop` / `/quality-gate` | Add structural regression check before "done" |
+| `security-review` | Security vs maintainability — use both when relevant |
+| `tdd-workflow` | Tests pass ≠ healthy design — check score after refactors |
+
+**Context tip:** ECC recommends keeping MCP count low. Enable `codescene` when doing substantive edits; disable when not needed.
+
+## Related Skills
+
+- `coding-standards` — baseline conventions
+- `plankton-code-quality` — write-time lint/format hooks
+- `verification-loop` — build/test/lint gate
+- `tdd-workflow` — test-first development
+- `security-review` — security checklist
+- `documentation-lookup` — library docs via Context7 (orthogonal)
 
 ---
 
 **ECC Original:** `ECC/skills/codehealth-mcp/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:20
+**Atualizado em:** 2026-07-12 11:45:42

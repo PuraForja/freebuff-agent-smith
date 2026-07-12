@@ -1,28 +1,21 @@
 # 🧠 Skill: ai-first-engineering
 
-> **Adaptada do ECC:** `ai-first-engineering` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ai-first-engineering` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ai-first-engineering/SKILL.md`
 
 ## Descrição
 
-Engineering operating model for teams where AI agents generate a large share of implementation output.
+--- name: ai-first-engineering description: Engineering operating model for teams where AI agents generate a large share of implementation output.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ai-first-engineering
+description: Engineering operating model for teams where AI agents generate a large share of implementation output.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # AI-First Engineering
 
@@ -73,4 +66,4 @@ Raise testing bar for generated code:
 ---
 
 **ECC Original:** `ECC/skills/ai-first-engineering/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:19
+**Atualizado em:** 2026-07-12 11:45:41

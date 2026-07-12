@@ -1,28 +1,21 @@
 # 🧠 Skill: springboot-tdd
 
-> **Adaptada do ECC:** `springboot-tdd` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `springboot-tdd` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/springboot-tdd/SKILL.md`
 
 ## Descrição
 
-Test-driven development for Spring Boot using JUnit 5, Mockito, MockMvc, Testcontainers, and JaCoCo. Use when adding features, fixing bugs, or refactoring.
+--- name: springboot-tdd description: Test-driven development for Spring Boot using JUnit 5, Mockito, MockMvc, Testcontainers, and JaCoCo. Use when adding features, fixing bugs, or refactoring.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: springboot-tdd
+description: Test-driven development for Spring Boot using JUnit 5, Mockito, MockMvc, Testcontainers, and JaCoCo. Use when adding features, fixing bugs, or refactoring.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Spring Boot TDD Workflow
 
@@ -156,9 +149,28 @@ Maven snippet:
 
 ## Assertions
 
-- Prefer A
+- Prefer AssertJ (`assertThat`) for readability
+- For JSON responses, use `jsonPath`
+- For exceptions: `assertThatThrownBy(...)`
+
+## Test Data Builders
+
+```java
+class MarketBuilder {
+  private String name = "Test";
+  MarketBuilder withName(String name) { this.name = name; return this; }
+  Market build() { return new Market(null, name, MarketStatus.ACTIVE); }
+}
+```
+
+## CI Commands
+
+- Maven: `mvn -T 4 test` or `mvn verify`
+- Gradle: `./gradlew test jacocoTestReport`
+
+**Remember**: Keep tests fast, isolated, and deterministic. Test behavior, not implementation details.
 
 ---
 
 **ECC Original:** `ECC/skills/springboot-tdd/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:33
+**Atualizado em:** 2026-07-12 11:45:50

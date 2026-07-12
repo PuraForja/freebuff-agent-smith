@@ -1,32 +1,21 @@
 # 🧠 Skill: context-budget
 
-> **Adaptada do ECC:** `context-budget` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `context-budget` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/context-budget/SKILL.md`
 
 ## Descrição
 
-Audits Claude Code context window consumption across agents, skills, MCP servers, and rules. Identifies bloat, redundant components, and produces prioritized token-savings recommendations.
+--- name: context-budget description: Audits Claude Code context window consumption across agents, skills, MCP servers, and rules. Identifies bloat, redundant components, and produces prioritized token-savings recommendations.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-
-
+name: context-budget
+description: Audits Claude Code context window consumption across agents, skills, MCP servers, and rules. Identifies bloat, redundant components, and produces prioritized token-savings recommendations.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Context Budget
 
@@ -128,9 +117,37 @@ In verbose mode, additionally output per-file token counts, line-by-line breakdo
 
 ## Examples
 
+**Basic audit**
+```
+User: /context-budget
+Skill: Scans setup → 16 agents (12,400 tokens), 28 skills (6,200), 87 MCP tools (43,500), 2 CLAUDE.md (1,200)
+       Flags: 3 heavy agents, 14 MCP servers (3 CLI-replaceable)
+       Top saving: remove 3 MCP servers → -27,500 tokens (47% overhead reduction)
+```
+
+**Verbose mode**
+```
+User: /context-budget --verbose
+Skill: Full report + per-file breakdown showing planner.md (213 lines, 1,840 tokens),
+       MCP tool list with per-tool sizes, duplicated rule lines side by side
+```
+
+**Pre-expansion check**
+```
+User: I want to add 5 more MCP servers, do I have room?
+Skill: Current overhead 33% → adding 5 servers (~50 tools) would add ~25,000 tokens → pushes to 45% overhead
+       Recommendation: remove 2 CLI-replaceable servers first to stay under 40%
+```
+
+## Best Practices
+
+- **Token estimation**: use `words × 1.3` for prose, `chars / 4` for code-heavy files
+- **MCP is the biggest lever**: each tool schema costs ~500 tokens; a 30-tool server costs more than all your skills combined
+- **Agent descriptions are loaded always**: even if the agent is never invoked, its description field is present in every Task tool context
+- **Verbose mode for debugging**: use when you need to pinpoint the exact files driving overhead, not for regular audits
+- **Audit after changes**: run after adding any agent, skill, or MCP server to catch creep early
+
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/context-budget/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/context-budget/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:43

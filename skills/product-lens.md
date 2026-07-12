@@ -1,28 +1,21 @@
 # 🧠 Skill: product-lens
 
-> **Adaptada do ECC:** `product-lens` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `product-lens` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/product-lens/SKILL.md`
 
 ## Descrição
 
-Use this skill to validate the why before building, run product diagnostics, and pressure-test product direction before the request becomes an implementation contract.
+--- name: product-lens description: Use this skill to validate the "why" before building, run product diagnostics, and pressure-test product direction before the request becomes an implementation contract.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: product-lens
+description: Use this skill to validate the "why" before building, run product diagnostics, and pressure-test product direction before the request becomes an implementation contract.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Product Lens — Think Before You Build
 
@@ -114,4 +107,4 @@ Pair with:
 ---
 
 **ECC Original:** `ECC/skills/product-lens/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:30
+**Atualizado em:** 2026-07-12 11:45:48

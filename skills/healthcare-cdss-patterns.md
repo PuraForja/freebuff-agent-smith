@@ -1,28 +1,22 @@
 # 🧠 Skill: healthcare-cdss-patterns
 
-> **Adaptada do ECC:** `healthcare-cdss-patterns` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `healthcare-cdss-patterns` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/healthcare-cdss-patterns/SKILL.md`
 
 ## Descrição
 
-Clinical Decision Support System (CDSS) development patterns. Drug interaction checking, dose validation, clinical scoring (NEWS2, qSOFA), alert severity classification, and integration into EMR workflows.
+--- name: healthcare-cdss-patterns description: Clinical Decision Support System (CDSS) development patterns. Drug interaction checking, dose validation, clinical scoring (NEWS2, qSOFA), alert severity classification, and integration into EMR workflows.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: healthcare-cdss-patterns
+description: Clinical Decision Support System (CDSS) development patterns. Drug interaction checking, dose validation, clinical scoring (NEWS2, qSOFA), alert severity classification, and integration into EMR workflows.
+metadata:
+  origin: Health1 Super Speciality Hospitals — contributed by Dr. Keyur Patel
+version: "1.0.0"
 ---
-
-## Conteúdo Adaptado
 
 # Healthcare CDSS Development Patterns
 
@@ -104,9 +98,166 @@ Interaction pairs must be **bidirectional**: if Drug A interacts with Drug B, th
 interface DoseValidationResult {
   valid: boolean;
   message: string;
-  suggestedRange: { min
+  suggestedRange: { min: number; max: number; unit: string } | null;
+  factors: string[];
+}
+
+function validateDose(
+  drug: string,
+  dose: number,
+  route: 'oral' | 'iv' | 'im' | 'sc' | 'topical',
+  patientWeight?: number,
+  patientAge?: number,
+  renalFunction?: number
+): DoseValidationResult {
+  const rules = getDoseRules(drug, route);
+  if (!rules) return { valid: true, message: 'No validation rules available', suggestedRange: null, factors: [] };
+  const factors: string[] = [];
+
+  // SAFETY: if rules require weight but weight missing, BLOCK (not pass)
+  if (rules.weightBased) {
+    if (!patientWeight || patientWeight <= 0) {
+      return { valid: false, message: `Weight required for ${drug} (mg/kg drug)`,
+        suggestedRange: null, factors: ['weight_missing'] };
+    }
+    factors.push('weight');
+    const maxDose = rules.maxPerKg * patientWeight;
+    if (dose > maxDose) {
+      return { valid: false, message: `Dose exceeds max for ${patientWeight}kg`,
+        suggestedRange: { min: rules.minPerKg * patientWeight, max: maxDose, unit: rules.unit }, factors };
+    }
+  }
+
+  // Age-based adjustment (when rules define age brackets and age is provided)
+  if (rules.ageAdjusted && patientAge !== undefined) {
+    factors.push('age');
+    const ageMax = rules.getAgeAdjustedMax(patientAge);
+    if (dose > ageMax) {
+      return { valid: false, message: `Exceeds age-adjusted max for ${patientAge}yr`,
+        suggestedRange: { min: rules.typicalMin, max: ageMax, unit: rules.unit }, factors };
+    }
+  }
+
+  // Renal adjustment (when rules define eGFR brackets and eGFR is provided)
+  if (rules.renalAdjusted && renalFunction !== undefined) {
+    factors.push('renal');
+    const renalMax = rules.getRenalAdjustedMax(renalFunction);
+    if (dose > renalMax) {
+      return { valid: false, message: `Exceeds renal-adjusted max for eGFR ${renalFunction}`,
+        suggestedRange: { min: rules.typicalMin, max: renalMax, unit: rules.unit }, factors };
+    }
+  }
+
+  // Absolute max
+  if (dose > rules.absoluteMax) {
+    return { valid: false, message: `Exceeds absolute max ${rules.absoluteMax}${rules.unit}`,
+      suggestedRange: { min: rules.typicalMin, max: rules.absoluteMax, unit: rules.unit },
+      factors: [...factors, 'absolute_max'] };
+  }
+  return { valid: true, message: 'Within range',
+    suggestedRange: { min: rules.typicalMin, max: rules.typicalMax, unit: rules.unit }, factors };
+}
+```
+
+### Clinical Scoring: NEWS2
+
+```typescript
+interface NEWS2Input {
+  respiratoryRate: number; oxygenSaturation: number; supplementalOxygen: boolean;
+  temperature: number; systolicBP: number; heartRate: number;
+  consciousness: 'alert' | 'voice' | 'pain' | 'unresponsive';
+}
+interface NEWS2Result {
+  total: number;           // 0-20
+  risk: 'low' | 'low-medium' | 'medium' | 'high';
+  components: Record<string, number>;
+  escalation: string;
+}
+```
+
+Scoring tables must match the Royal College of Physicians specification exactly.
+
+### Alert Severity and UI Behavior
+
+| Severity | UI Behavior | Clinician Action Required |
+|----------|-------------|--------------------------|
+| Critical | Block action. Non-dismissable modal. Red. | Must document override reason to proceed |
+| Major | Warning banner inline. Orange. | Must acknowledge before proceeding |
+| Minor | Info note inline. Yellow. | Awareness only, no action required |
+
+Critical alerts must NEVER be auto-dismissed or implemented as toast notifications. Override reasons must be stored in the audit trail.
+
+### Testing CDSS (Zero Tolerance for False Negatives)
+
+```typescript
+describe('CDSS — Patient Safety', () => {
+  INTERACTION_PAIRS.forEach(({ drugA, drugB, severity }) => {
+    it(`detects ${drugA} + ${drugB} (${severity})`, () => {
+      const alerts = checkInteractions(drugA, [drugB], []);
+      expect(alerts.length).toBeGreaterThan(0);
+      expect(alerts[0].severity).toBe(severity);
+    });
+    it(`detects ${drugB} + ${drugA} (reverse)`, () => {
+      const alerts = checkInteractions(drugB, [drugA], []);
+      expect(alerts.length).toBeGreaterThan(0);
+    });
+  });
+  it('blocks mg/kg drug when weight is missing', () => {
+    const result = validateDose('gentamicin', 300, 'iv');
+    expect(result.valid).toBe(false);
+    expect(result.factors).toContain('weight_missing');
+  });
+  it('handles malformed drug data gracefully', () => {
+    expect(() => checkInteractions('', [], [])).not.toThrow();
+  });
+});
+```
+
+Pass criteria: 100%. A single missed interaction is a patient safety event.
+
+### Anti-Patterns
+
+- Making CDSS checks optional or skippable without documented reason
+- Implementing interaction checks as toast notifications
+- Using `any` types for drug or clinical data
+- Hardcoding interaction pairs instead of using a maintainable data structure
+- Silently catching errors in CDSS engine (must surface failures loudly)
+- Skipping weight-based validation when weight is not available (must block, not pass)
+
+## Examples
+
+### Example 1: Drug Interaction Check
+
+```typescript
+const alerts = checkInteractions('warfarin', ['aspirin', 'metformin'], ['penicillin']);
+// [{ severity: 'critical', pair: ['warfarin', 'aspirin'],
+//    message: 'Increased bleeding risk', recommendation: 'Avoid combination' }]
+```
+
+### Example 2: Dose Validation
+
+```typescript
+const ok = validateDose('paracetamol', 1000, 'oral', 70, 45);
+// { valid: true, suggestedRange: { min: 500, max: 4000, unit: 'mg' } }
+
+const bad = validateDose('paracetamol', 5000, 'oral', 70, 45);
+// { valid: false, message: 'Exceeds absolute max 4000mg' }
+
+const noWeight = validateDose('gentamicin', 300, 'iv');
+// { valid: false, factors: ['weight_missing'] }
+```
+
+### Example 3: NEWS2 Scoring
+
+```typescript
+const result = calculateNEWS2({
+  respiratoryRate: 24, oxygenSaturation: 93, supplementalOxygen: true,
+  temperature: 38.5, systolicBP: 100, heartRate: 110, consciousness: 'voice'
+});
+// { total: 13, risk: 'high', escalation: 'Urgent clinical review. Consider ICU.' }
+```
 
 ---
 
 **ECC Original:** `ECC/skills/healthcare-cdss-patterns/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:24
+**Atualizado em:** 2026-07-12 11:45:45

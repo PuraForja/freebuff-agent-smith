@@ -1,28 +1,21 @@
 # 🧠 Skill: ios-icon-gen
 
-> **Adaptada do ECC:** `ios-icon-gen` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ios-icon-gen` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ios-icon-gen/SKILL.md`
 
 ## Descrição
 
-Generate iOS app icons as PNG imagesets for Xcode asset catalogs from SF Symbols (5000+ Apple-native) or Iconify API (275k+ open source icons from 200+ collections). Use when generating icons, creating icon assets, adding icons to asset catalog, or searching for icons for iOS projects.
+--- name: ios-icon-gen description: Generate iOS app icons as PNG imagesets for Xcode asset catalogs from SF Symbols (5000+ Apple-native) or Iconify API (275k+ open source icons from 200+ collections). Use when generating icons, creating icon assets, adding icons to asset catalog, or searching for icons for iOS projects.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ios-icon-gen
+description: Generate iOS app icons as PNG imagesets for Xcode asset catalogs from SF Symbols (5000+ Apple-native) or Iconify API (275k+ open source icons from 200+ collections). Use when generating icons, creating icon assets, adding icons to asset catalog, or searching for icons for iOS projects.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # iOS Icon Generator
 
@@ -123,9 +116,60 @@ Options: `--size <pt>` (default: 68), `--color <hex>` (default: 8E8E93), `--outp
 # Basic generation
 swift $SKILL_DIR/scripts/generate_icons.swift doc.text.below.ecg editTool_expenseReport
 
-# Custom
+# Custom color, weight, and output
+swift $SKILL_DIR/scripts/generate_icons.swift person.crop.rectangle myIcon --color 007AFF --weight regular --output ./Assets.xcassets/icons
+```
+
+Options: `--size <pt>` (default: 68), `--color <hex>` (default: 8E8E93), `--weight <name>` (default: thin), `--output <dir>` (default: /tmp/icons)
+
+### Step 5: Verify and Integrate
+
+1. Read the generated @2x PNG to verify visually
+2. Copy to asset catalog if not output there directly:
+   ```bash
+   cp -r /tmp/icons/<name>.imageset path/to/Assets.xcassets/<group>/
+   ```
+3. Build the project to verify Xcode picks up the new assets
+
+## Popular Iconify Collections
+
+| Prefix | Name | Count | Style |
+|--------|------|-------|-------|
+| `mdi` | Material Design Icons | 7400+ | Filled + outline variants |
+| `ph` | Phosphor | 9000+ | 6 weights per icon |
+| `solar` | Solar | 7400+ | Bold, linear, outline |
+| `tabler` | Tabler Icons | 6000+ | Consistent stroke width |
+| `lucide` | Lucide | 1700+ | Clean, minimal |
+| `ri` | Remix Icon | 3100+ | Filled + line variants |
+| `carbon` | Carbon | 2400+ | IBM design language |
+| `heroicons` | HeroIcons | 1200+ | Tailwind CSS companion |
+
+Browse all: <https://icon-sets.iconify.design/>
+
+## Scripts Reference
+
+| Script | Source | Path |
+|--------|--------|------|
+| `iconify_gen.sh` | Iconify API (275k+ icons) | `$SKILL_DIR/scripts/iconify_gen.sh` |
+| `generate_icons.swift` | SF Symbols (5k+ icons) | `$SKILL_DIR/scripts/generate_icons.swift` |
+
+## Best Practices
+
+- **Search before generating** -- browse available icons to find the best match
+- **Match existing project style** -- check dimensions, color, and weight of existing icons before generating new ones
+- **Use Iconify for variety** -- 200+ collections means you can find the exact style you need
+- **Use SF Symbols for Apple consistency** -- they match system UI perfectly
+- **Generate directly to asset catalog** -- use `--output ./Assets.xcassets/icons` to skip manual copying
+- **Verify visually** -- always preview the @2x PNG before committing
+
+## Anti-Patterns
+
+- Generating icons without checking existing project icon style
+- Using default colors when the project has a defined color palette
+- Generating at wrong sizes (check existing icons first)
+- Committing generated icons without visual verification
 
 ---
 
 **ECC Original:** `ECC/skills/ios-icon-gen/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:25
+**Atualizado em:** 2026-07-12 11:45:46

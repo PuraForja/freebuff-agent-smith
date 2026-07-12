@@ -1,32 +1,24 @@
 # 🧠 Skill: brand-discovery
 
-> **Adaptada do ECC:** `brand-discovery` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `brand-discovery` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/brand-discovery/SKILL.md`
 
 ## Descrição
 
->-
+--- name: brand-discovery description: >-
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-
-
+name: brand-discovery
+description: >-
+  Use when a brand needs to discover or articulate its identity through
+  structured multi-session interviews. Covers purpose, positioning, audience,
+  personality, voice, narrative, and founder-brand tension across 8 modules
+  using laddering, 5 Whys, and projective techniques. Produces a resumable
+  session with disk-persisted state and a master brandbook (90_SYNTHESIS.md).
 ---
-
-## Conteúdo Adaptado
 
 # Brand Discovery
 
@@ -129,9 +121,42 @@ Schema:
 }
 ```
 
+After writing, confirm: "Module X saved. State updated. Next: Y."
+
+**Terminal module (90_SYNTHESIS.md):** when writing the final synthesis,
+set `inProgressModule` to `"90_SYNTHESIS.md"` and `nextModule` to `null`
+in `state.json`. After writing, set `completedModules` to include
+`"90_SYNTHESIS.md"`, then set `inProgressModule` to `null` — leaving it
+populated would cause a future resumption to treat the completed brandbook
+as still in progress. Confirm: "Brandbook complete. All modules saved."
+
+## Multi-founder mode
+
+When more than one founder participates, write each founder's answers to
+`founders/{participant}.md` instead of the main module files. Validate the
+`participant` name before writing: accept only alphanumeric characters and
+hyphens (e.g. `founder-a`, `anna`); reject names containing path separators
+(`/`, `\`, `..`) or special characters. Validate `moduleFile` against the
+enumerated module sequence (10 through 90 only). Validate `outputPath` to
+ensure it is an absolute path within the project directory — reject relative
+paths and paths that escape via `..` segments. After all founders complete a
+module, run a reconciliation pass: summarise convergences and divergences in
+the module file, flag "productive tensions" for the group alignment workshop.
+
+## Anti-Patterns
+
+- **Starting without reading state first.** Every session must open by checking for existing module files and `state.json`. Skipping this loses all continuity from prior sessions.
+- **Asking multiple questions at once.** One question at a time is not optional — lists produce checklist answers, not real insight.
+- **Moving to Synthesis before saturation.** If the last two probes produced no new information, the module is done. If they did — it isn't.
+- **Skipping multi-founder reconciliation.** When multiple stakeholders are involved, individual interviews must complete before reconciliation. Discussing the brand collectively first introduces anchoring bias.
+- **Treating this as a one-shot session.** This skill is designed for multiple sessions. Rushing to `90_SYNTHESIS.md` in one conversation produces shallow output.
+
+## Related Skills
+
+- `competitive-platform-analysis` — after brand-discovery establishes the positioning brief, use this to scope and categorise the competitor set.
+- `brand-voice` (ECC) — if the brand-discovery voice-and-tone module needs a separate, source-derived writing-style profile.
+
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/brand-discovery/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/brand-discovery/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:42

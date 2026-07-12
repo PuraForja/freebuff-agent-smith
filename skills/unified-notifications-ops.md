@@ -1,28 +1,21 @@
 # 🧠 Skill: unified-notifications-ops
 
-> **Adaptada do ECC:** `unified-notifications-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `unified-notifications-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/unified-notifications-ops/SKILL.md`
 
 ## Descrição
 
-Operate notifications as one ECC-native workflow across GitHub, Linear, desktop alerts, hooks, and connected communication surfaces. Use when the real problem is alert routing, deduplication, escalation, or inbox collapse.
+--- name: unified-notifications-ops description: Operate notifications as one ECC-native workflow across GitHub, Linear, desktop alerts, hooks, and connected communication surfaces. Use when the real problem is alert routing, deduplication, escalation, or inbox collapse.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: unified-notifications-ops
+description: Operate notifications as one ECC-native workflow across GitHub, Linear, desktop alerts, hooks, and connected communication surfaces. Use when the real problem is alert routing, deduplication, escalation, or inbox collapse.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Unified Notifications Ops
 
@@ -113,9 +106,100 @@ Use these defaults:
 - digest for medium-signal updates
 - log-only for telemetry and low-signal lifecycle markers
 
-### 3. Collapse duplicates before adding channel
+### 3. Collapse duplicates before adding channels
+
+Look for:
+- the same PR event appearing in GitHub, Linear, and local logs
+- repeated hook notifications for the same failure
+- comments or status churn that should be summarized instead of forwarded raw
+- channels that duplicate each other without adding a better action path
+
+Prefer:
+- one canonical summary
+- one owner
+- one primary channel
+- one fallback path
+
+### 4. Design the ECC-native workflow
+
+For each real notification need, define:
+- **source**
+- **gate**
+- **shape**: immediate alert, digest, queue, or dashboard-only
+- **channel**
+- **action**
+
+If ECC already has the primitive, prefer:
+- a skill for operator triage
+- a hook for automatic emission/enforcement
+- an agent for delegated classification
+- an MCP/connector only when a real bridge is missing
+
+### 5. Return an action-biased design
+
+End with:
+- what to keep
+- what to suppress
+- what to merge
+- what ECC should wrap next
+
+## Output Format
+
+```text
+CURRENT SURFACE
+- sources
+- channels
+- duplicates
+- gaps
+
+EVENT MODEL
+- critical
+- high
+- medium
+- low
+
+ROUTING PLAN
+- source -> channel
+- why
+- operator owner
+
+CONSOLIDATION
+- suppress
+- merge
+- canonical summaries
+
+NEXT ECC MOVE
+- skill / hook / agent / MCP
+- exact workflow to build next
+```
+
+## Recommendation Rules
+
+- prefer one strong lane over many weak ones
+- prefer digests for medium and low-signal updates
+- prefer hooks when the signal should emit automatically
+- prefer operator skills when the work is triage, routing, and review-first decision-making
+- prefer `project-flow-ops` when the root cause is backlog / PR coordination rather than alerts
+- prefer `workspace-surface-audit` when the user first needs a source inventory
+- if desktop notifications are enough, do not invent an unnecessary external bridge
+
+## Good Use Cases
+
+- "We have GitHub, Linear, and local hook alerts, but no single operator flow"
+- "Our CI failures are noisy and people ignore them"
+- "I want one notification policy across Claude, OpenCode, and Codex surfaces"
+- "Figure out what should interrupt versus land in a digest"
+- "Collapse overlapping notification PR ideas into one canonical ECC lane"
+
+## Related Skills
+
+- `workspace-surface-audit`
+- `project-flow-ops`
+- `github-ops`
+- `knowledge-ops`
+- `customer-billing-ops` when the notification pain is billing/customer operations rather than engineering
 
 ---
 
 **ECC Original:** `ECC/skills/unified-notifications-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:34
+**Atualizado em:** 2026-07-12 11:45:51

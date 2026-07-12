@@ -1,28 +1,22 @@
 # 🧠 Skill: security-bounty-hunter
 
-> **Adaptada do ECC:** `security-bounty-hunter` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `security-bounty-hunter` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/security-bounty-hunter/SKILL.md`
 
 ## Descrição
 
-Hunt for exploitable, bounty-worthy security issues in repositories. Focuses on remotely reachable vulnerabilities that qualify for real reports instead of noisy local-only findings.
+--- name: security-bounty-hunter description: Hunt for exploitable, bounty-worthy security issues in repositories. Focuses on remotely reachable vulnerabilities that qualify for real reports instead of noisy local-only findings.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: security-bounty-hunter
+description: Hunt for exploitable, bounty-worthy security issues in repositories. Focuses on remotely reachable vulnerabilities that qualify for real reports instead of noisy local-only findings.
+metadata:
+  origin: ECC direct-port adaptation
+version: "1.0.0"
 ---
-
-## Conteúdo Adaptado
 
 # Security Bounty Hunter
 
@@ -110,9 +104,14 @@ Then manually filter:
 
 Before submitting:
 
-- The code path is reachable from a real user
+- The code path is reachable from a real user or network boundary
+- The input is genuinely user-controlled
+- The sink is meaningful and exploitable
+- The PoC works
+- The issue is not already covered by an advisory, CVE, or open ticket
+- The target is actually in scope for the bounty program
 
 ---
 
 **ECC Original:** `ECC/skills/security-bounty-hunter/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:50

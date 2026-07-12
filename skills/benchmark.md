@@ -1,32 +1,21 @@
 # 🧠 Skill: benchmark
 
-> **Adaptada do ECC:** `benchmark` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `benchmark` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/benchmark/SKILL.md`
 
 ## Descrição
 
-Use this skill to measure performance baselines, detect regressions before/after PRs, and compare stack alternatives.
+--- name: benchmark description: Use this skill to measure performance baselines, detect regressions before/after PRs, and compare stack alternatives.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-
-
+name: benchmark
+description: Use this skill to measure performance baselines, detect regressions before/after PRs, and compare stack alternatives.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Benchmark — Performance Baseline & Regression Detection
 
@@ -118,7 +107,5 @@ Stores baselines in `.ecc/benchmarks/` as JSON. Git-tracked so the team shares b
 
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/benchmark/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/benchmark/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:42

@@ -1,28 +1,21 @@
 # 🧠 Skill: scientific-pkg-gget
 
-> **Adaptada do ECC:** `scientific-pkg-gget` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `scientific-pkg-gget` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/scientific-pkg-gget/SKILL.md`
 
 ## Descrição
 
-gget CLI and Python workflow for quick genomic database queries, sequence lookup, BLAST-style searches, enrichment checks, and reproducible bioinformatics evidence logs.
+--- name: gget description: gget CLI and Python workflow for quick genomic database queries, sequence lookup, BLAST-style searches, enrichment checks, and reproducible bioinformatics evidence logs.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: gget
+description: gget CLI and Python workflow for quick genomic database queries, sequence lookup, BLAST-style searches, enrichment checks, and reproducible bioinformatics evidence logs.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # gget
 
@@ -131,9 +124,61 @@ gget info ENSG00000012048 -o brca1-info.json
 Fetch a sequence:
 
 ```bash
-gget seq ENSG0000001204
+gget seq ENSG00000012048 -o brca1-seq.fa
+```
+
+Run a small BLAST query:
+
+```bash
+gget blast "MEEPQSDPSVEPPLSQETFSDLWKLLPEN" -l 10 -o blast-results.json
+```
+
+Python example:
+
+```python
+import gget
+
+genes = gget.search(["BRCA1", "DNA repair"], species="human")
+info = gget.info(["ENSG00000012048"])
+sequence = gget.seq("ENSG00000012048")
+```
+
+## Reproducibility Log
+
+For scientific outputs, include enough metadata to replay the query.
+
+```markdown
+| Date | gget version | Module | Query | Species/assembly | Output | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2026-05-11 | `gget --version` | search | `BRCA1 DNA repair` | human | `brca1-search.json` | Docs checked before run |
+```
+
+Also record:
+
+- Python version and environment manager.
+- Any optional dependency installed through `gget setup`.
+- Database-specific identifiers returned by the query.
+- Whether output is JSON, CSV, FASTA, or a DataFrame export.
+- Any failures that were resolved by upgrading `gget`.
+
+## Review Checklist
+
+- Did you upgrade or verify the installed `gget` version?
+- Did you check the current upstream module docs before using arguments?
+- Is the species or assembly explicit?
+- Are identifiers preserved exactly, including Ensembl/UniProt prefixes?
+- Is the result labeled as database output rather than clinical interpretation?
+- Is the query reproducible from the saved command or Python snippet?
+- Are optional dependencies installed in an isolated environment?
+
+## References
+
+- [gget documentation](https://pachterlab.github.io/gget/)
+- [gget updates](https://pachterlab.github.io/gget/en/updates.html)
+- [gget GitHub repository](https://github.com/pachterlab/gget)
+- [gget Bioinformatics paper](https://doi.org/10.1093/bioinformatics/btac836)
 
 ---
 
 **ECC Original:** `ECC/skills/scientific-pkg-gget/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:49

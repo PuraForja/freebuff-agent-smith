@@ -1,28 +1,22 @@
 # 🧠 Skill: defi-amm-security
 
-> **Adaptada do ECC:** `defi-amm-security` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `defi-amm-security` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/defi-amm-security/SKILL.md`
 
 ## Descrição
 
-Security checklist for Solidity AMM contracts, liquidity pools, and swap flows. Covers reentrancy, CEI ordering, donation or inflation attacks, oracle manipulation, slippage, admin controls, and integer math.
+--- name: defi-amm-security description: Security checklist for Solidity AMM contracts, liquidity pools, and swap flows. Covers reentrancy, CEI ordering, donation or inflation attacks, oracle manipulation, slippage, admin controls, and integer math.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: defi-amm-security
+description: Security checklist for Solidity AMM contracts, liquidity pools, and swap flows. Covers reentrancy, CEI ordering, donation or inflation attacks, oracle manipulation, slippage, admin controls, and integer math.
+metadata:
+  origin: ECC direct-port adaptation
+version: "1.0.0"
 ---
-
-## Conteúdo Adaptado
 
 # DeFi AMM Security
 
@@ -111,9 +105,80 @@ Spot prices are flash-loan manipulable. Prefer TWAP.
 ```solidity
 uint32[] memory secondsAgos = new uint32[](2);
 secondsAgos[0] = 1800;
-secondsAgos[
+secondsAgos[1] = 0;
+(int56[] memory tickCumulatives,) = IUniswapV3Pool(pool).observe(secondsAgos);
+int24 twapTick = int24(
+    (tickCumulatives[1] - tickCumulatives[0]) / int56(uint56(30 minutes))
+);
+uint160 sqrtPriceX96 = TickMath.getSqrtRatioAtTick(twapTick);
+```
+
+### Slippage protection
+
+Every swap path needs caller-provided slippage and a deadline.
+
+```solidity
+function swap(
+    uint256 amountIn,
+    uint256 amountOutMin,
+    uint256 deadline
+) external returns (uint256 amountOut) {
+    require(block.timestamp <= deadline, "Expired");
+    amountOut = _calculateOut(amountIn);
+    require(amountOut >= amountOutMin, "Slippage exceeded");
+    _executeSwap(amountIn, amountOut);
+}
+```
+
+### Safe reserve math
+
+```solidity
+import {FullMath} from "@uniswap/v3-core/contracts/libraries/FullMath.sol";
+
+uint256 result = FullMath.mulDiv(a, b, c);
+```
+
+For large reserve math, avoid naive `a * b / c` when overflow risk exists.
+
+### Admin controls
+
+```solidity
+import {Ownable2Step} from "@openzeppelin/contracts/access/Ownable2Step.sol";
+
+contract MyAMM is Ownable2Step {
+    function setFee(uint256 fee) external onlyOwner { ... }
+    function pause() external onlyOwner { ... }
+}
+```
+
+Prefer explicit acceptance for ownership transfer and gate every privileged path.
+
+## Security Checklist
+
+- Reentrancy-exposed entrypoints use `nonReentrant`
+- CEI ordering is respected
+- Share math does not depend on raw `balanceOf(address(this))`
+- ERC-20 transfers use `SafeERC20`
+- Deposits measure actual tokens received
+- Oracle reads use TWAP or another manipulation-resistant source
+- Swaps require `amountOutMin` and `deadline`
+- Overflow-sensitive reserve math uses safe primitives like `mulDiv`
+- Admin functions are access-controlled
+- Emergency pause exists and is tested
+- Static analysis and fuzzing are run before production
+
+## Audit Tools
+
+```bash
+pip install slither-analyzer
+slither . --exclude-dependencies
+
+echidna-test . --contract YourAMM --config echidna.yaml
+
+forge test --fuzz-runs 10000
+```
 
 ---
 
 **ECC Original:** `ECC/skills/defi-amm-security/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:21
+**Atualizado em:** 2026-07-12 11:45:43

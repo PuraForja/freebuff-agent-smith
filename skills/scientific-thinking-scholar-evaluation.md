@@ -1,28 +1,21 @@
 # 🧠 Skill: scientific-thinking-scholar-evaluation
 
-> **Adaptada do ECC:** `scientific-thinking-scholar-evaluation` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `scientific-thinking-scholar-evaluation` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/scientific-thinking-scholar-evaluation/SKILL.md`
 
 ## Descrição
 
-Structured scholarly-work evaluation for papers, proposals, literature reviews, methods sections, evidence quality, citation support, and research-writing feedback.
+--- name: scholar-evaluation description: Structured scholarly-work evaluation for papers, proposals, literature reviews, methods sections, evidence quality, citation support, and research-writing feedback.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: scholar-evaluation
+description: Structured scholarly-work evaluation for papers, proposals, literature reviews, methods sections, evidence quality, citation support, and research-writing feedback.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Scholar Evaluation
 
@@ -122,9 +115,64 @@ Use `N/A` for dimensions that do not apply.
 - Are definitions and notation clear?
 - Is the tone precise and scholarly?
 
-###
+### 9. Citations
+
+- Do cited papers support the claims attached to them?
+- Are primary sources used where possible?
+- Are reviews labeled as reviews?
+- Are preprints labeled as preprints?
+- Are citation metadata and links correct?
+
+## Review Process
+
+1. Read the abstract, introduction, figures, and conclusion for claimed
+   contribution.
+2. Read methods and results for evidence quality.
+3. Check the strongest claims against cited sources.
+4. Score each applicable dimension.
+5. Separate critical blockers from revision suggestions.
+6. End with concrete next edits.
+
+## Output Template
+
+```markdown
+# Scholar Evaluation: <Artifact>
+
+## Overall Assessment
+
+- Overall score: <1-5 or N/A>
+- Confidence: <high | medium | low>
+- Summary: <3-5 sentences>
+
+## Dimension Scores
+
+| Dimension | Score | Evidence | Revision priority |
+| --- | ---: | --- | --- |
+| Problem and question |  |  |  |
+| Literature and context |  |  |  |
+| Methodology |  |  |  |
+| Data and evidence |  |  |  |
+| Analysis |  |  |  |
+| Results and interpretation |  |  |  |
+| Limitations |  |  |  |
+| Writing and structure |  |  |  |
+| Citations |  |  |  |
+
+## Critical Issues
+
+## Recommended Revisions
+
+## Evidence Checks Needed
+```
+
+## Pitfalls
+
+- Do not use the score as a substitute for concrete feedback.
+- Do not penalize a paper for omitting a dimension outside its scope.
+- Do not treat citation count, venue, or author reputation as proof of quality.
+- Do not accept unsupported claims just because they appear in the abstract.
 
 ---
 
 **ECC Original:** `ECC/skills/scientific-thinking-scholar-evaluation/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:50

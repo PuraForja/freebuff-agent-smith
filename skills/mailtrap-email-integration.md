@@ -1,28 +1,20 @@
 # 🧠 Skill: mailtrap-email-integration
 
-> **Adaptada do ECC:** `mailtrap-email-integration` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `mailtrap-email-integration` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/mailtrap-email-integration/SKILL.md`
 
 ## Descrição
 
-Guides agents through integrating transactional email sending via Mailtrap's Email API, including sandbox testing, domain verification, and API authentication. Use when implementing email-sending features, debugging delivery issues, or setting up safe dev/staging email testing.
+--- name: mailtrap-email-integration description: Guides agents through integrating transactional email sending via Mailtrap's Email API, including sandbox testing, domain verification, and API authentication. Use when implementing email-sending features, debugging delivery issues, or setting up safe dev/staging email testing.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: mailtrap-email-integration
+description: Guides agents through integrating transactional email sending via Mailtrap's Email API, including sandbox testing, domain verification, and API authentication. Use when implementing email-sending features, debugging delivery issues, or setting up safe dev/staging email testing.
+origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Mailtrap Email Integration
 
@@ -87,9 +79,16 @@ const MAILTRAP_ENDPOINT = process.env.NODE_ENV === "production"
 
 ## Best Practices
 
-- Keep sa
+- Keep sandbox and production tokens in separate environment variables, never share one token across environments
+- Verify sending domain DNS records before any production launch involving email
+- Log delivery failures with enough context to debug (recipient, template, timestamp, response code)
+- Treat email sending as a fallible network call: wrap in try/catch, never assume success
+
+## Related Skills
+
+`api-and-interface-design`, `security-and-hardening`, `ci-cd-and-automation`
 
 ---
 
 **ECC Original:** `ECC/skills/mailtrap-email-integration/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:27
+**Atualizado em:** 2026-07-12 11:45:47

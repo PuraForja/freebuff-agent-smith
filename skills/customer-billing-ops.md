@@ -1,28 +1,21 @@
 # 🧠 Skill: customer-billing-ops
 
-> **Adaptada do ECC:** `customer-billing-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `customer-billing-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/customer-billing-ops/SKILL.md`
 
 ## Descrição
 
-Operate customer billing workflows such as subscriptions, refunds, churn triage, billing-portal recovery, and plan analysis using connected billing tools like Stripe. Use when the user needs to help a customer, inspect subscription state, or manage revenue-impacting billing operations.
+--- name: customer-billing-ops description: Operate customer billing workflows such as subscriptions, refunds, churn triage, billing-portal recovery, and plan analysis using connected billing tools like Stripe. Use when the user needs to help a customer, inspect subscription state, or manage revenue-impacting billing operations.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: customer-billing-ops
+description: Operate customer billing workflows such as subscriptions, refunds, churn triage, billing-portal recovery, and plan analysis using connected billing tools like Stripe. Use when the user needs to help a customer, inspect subscription state, or manage revenue-impacting billing operations.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Customer Billing Ops
 
@@ -113,9 +106,53 @@ If the customer pain comes from a missing operator surface, call it out explicit
 - no cancellation flow
 - no duplicate-subscription guard
 
-Treat those as ECC o
+Treat those as ECC or website follow-up items, not just support incidents.
+
+### 5. Produce the operator handoff
+
+End with:
+
+- customer state summary
+- action taken
+- revenue impact
+- follow-up text to send
+- product or backlog issue to create
+
+## Output Format
+
+Use this structure:
+
+```text
+CUSTOMER
+- name / email
+- relevant account identifiers
+
+BILLING STATE
+- active subscriptions
+- invoice or renewal state
+- anomalies
+
+DECISION
+- issue classification
+- why this action is correct
+
+ACTION TAKEN
+- refund / cancel / portal / no-op
+
+FOLLOW-UP
+- short customer message
+
+PRODUCT GAP
+- what should be fixed in the product or website
+```
+
+## Examples of Good Recommendations
+
+- "The right fix is a billing portal, not a custom dashboard yet"
+- "This looks like duplicate personal checkout, not a real team-seat purchase"
+- "Refund one duplicate charge, keep the remaining active subscription, then convert the customer to org billing later if needed"
 
 ---
 
 **ECC Original:** `ECC/skills/customer-billing-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:21
+**Atualizado em:** 2026-07-12 11:45:43

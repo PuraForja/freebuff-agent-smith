@@ -1,28 +1,22 @@
 # 🧠 Skill: eval-harness
 
-> **Adaptada do ECC:** `eval-harness` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `eval-harness` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/eval-harness/SKILL.md`
 
 ## Descrição
 
-Formal evaluation framework for Claude Code sessions implementing eval-driven development (EDD) principles
+--- name: eval-harness description: Formal evaluation framework for Claude Code sessions implementing eval-driven development (EDD) principles
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: eval-harness
+description: Formal evaluation framework for Claude Code sessions implementing eval-driven development (EDD) principles
+metadata:
+  origin: ECC
+tools: Read, Write, Edit, Bash, Grep, Glob
 ---
-
-## Conteúdo Adaptado
 
 # Eval Harness Skill
 
@@ -148,9 +142,147 @@ Write code to pass the defined evals.
 
 ### 3. Evaluate
 ```bash
-# Run capabil
+# Run capability evals
+[Run each capability eval, record PASS/FAIL]
+
+# Run regression evals
+npm test -- --testPathPattern="existing"
+
+# Generate report
+```
+
+### 4. Report
+```markdown
+EVAL REPORT: feature-xyz
+========================
+
+Capability Evals:
+  create-user:     PASS (pass@1)
+  validate-email:  PASS (pass@2)
+  hash-password:   PASS (pass@1)
+  Overall:         3/3 passed
+
+Regression Evals:
+  login-flow:      PASS
+  session-mgmt:    PASS
+  logout-flow:     PASS
+  Overall:         3/3 passed
+
+Metrics:
+  pass@1: 67% (2/3)
+  pass@3: 100% (3/3)
+
+Status: READY FOR REVIEW
+```
+
+## Integration Patterns
+
+### Pre-Implementation
+```
+/eval define feature-name
+```
+Creates eval definition file at `.claude/evals/feature-name.md`
+
+### During Implementation
+```
+/eval check feature-name
+```
+Runs current evals and reports status
+
+### Post-Implementation
+```
+/eval report feature-name
+```
+Generates full eval report
+
+## Eval Storage
+
+Store evals in project:
+```
+.claude/
+  evals/
+    feature-xyz.md      # Eval definition
+    feature-xyz.log     # Eval run history
+    baseline.json       # Regression baselines
+```
+
+## Best Practices
+
+1. **Define evals BEFORE coding** - Forces clear thinking about success criteria
+2. **Run evals frequently** - Catch regressions early
+3. **Track pass@k over time** - Monitor reliability trends
+4. **Use code graders when possible** - Deterministic > probabilistic
+5. **Human review for security** - Never fully automate security checks
+6. **Keep evals fast** - Slow evals don't get run
+7. **Version evals with code** - Evals are first-class artifacts
+
+## Example: Adding Authentication
+
+```markdown
+## EVAL: add-authentication
+
+### Phase 1: Define (10 min)
+Capability Evals:
+- [ ] User can register with email/password
+- [ ] User can login with valid credentials
+- [ ] Invalid credentials rejected with proper error
+- [ ] Sessions persist across page reloads
+- [ ] Logout clears session
+
+Regression Evals:
+- [ ] Public routes still accessible
+- [ ] API responses unchanged
+- [ ] Database schema compatible
+
+### Phase 2: Implement (varies)
+[Write code]
+
+### Phase 3: Evaluate
+Run: /eval check add-authentication
+
+### Phase 4: Report
+EVAL REPORT: add-authentication
+==============================
+Capability: 5/5 passed (pass@3: 100%)
+Regression: 3/3 passed (pass^3: 100%)
+Status: SHIP IT
+```
+
+## Product Evals (v1.8)
+
+Use product evals when behavior quality cannot be captured by unit tests alone.
+
+### Grader Types
+
+1. Code grader (deterministic assertions)
+2. Rule grader (regex/schema constraints)
+3. Model grader (LLM-as-judge rubric)
+4. Human grader (manual adjudication for ambiguous outputs)
+
+### pass@k Guidance
+
+- `pass@1`: direct reliability
+- `pass@3`: practical reliability under controlled retries
+- `pass^3`: stability test (all 3 runs must pass)
+
+Recommended thresholds:
+- Capability evals: pass@3 >= 0.90
+- Regression evals: pass^3 = 1.00 for release-critical paths
+
+### Eval Anti-Patterns
+
+- Overfitting prompts to known eval examples
+- Measuring only happy-path outputs
+- Ignoring cost and latency drift while chasing pass rates
+- Allowing flaky graders in release gates
+
+### Minimal Eval Artifact Layout
+
+- `.claude/evals/<feature>.md` definition
+- `.claude/evals/<feature>.log` run history
+- `docs/releases/<version>/eval-summary.md` release snapshot
 
 ---
 
 **ECC Original:** `ECC/skills/eval-harness/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:22
+**Atualizado em:** 2026-07-12 11:45:44

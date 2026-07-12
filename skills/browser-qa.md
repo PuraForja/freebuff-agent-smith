@@ -1,28 +1,21 @@
 # 🧠 Skill: browser-qa
 
-> **Adaptada do ECC:** `browser-qa` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `browser-qa` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/browser-qa/SKILL.md`
 
 ## Descrição
 
-Use this skill to automate visual testing and UI interaction verification using browser automation after deploying features.
+--- name: browser-qa description: Use this skill to automate visual testing and UI interaction verification using browser automation after deploying features.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: browser-qa
+description: Use this skill to automate visual testing and UI interaction verification using browser automation after deploying features.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Browser QA — Automated Visual Testing & Interaction
 
@@ -107,8 +100,23 @@ credentials/tokens/PII before saving any screenshot.
 - [✗] Hero section overflows on 375px viewport
 - [✓] Dark mode: all pages consistent
 
+### Accessibility
+- 2 AA violations: missing alt text on hero image, low contrast on footer links
+
+### Verdict: SHIP WITH FIXES (2 issues, 0 blockers)
+# verdict ∈ SHIP / SHIP WITH FIXES / DO NOT SHIP; use INCONCLUSIVE if no visual baseline
+```
+
+## Integration
+
+Works with any browser MCP:
+- `mChild__claude-in-chrome__*` tools (preferred — uses your actual Chrome)
+- Playwright via `mcp__browserbase__*`
+- Direct Puppeteer scripts
+
+Pair with `/canary-watch` for post-deploy monitoring.
 
 ---
 
 **ECC Original:** `ECC/skills/browser-qa/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:19
+**Atualizado em:** 2026-07-12 11:45:42

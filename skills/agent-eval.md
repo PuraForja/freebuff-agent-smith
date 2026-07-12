@@ -1,32 +1,22 @@
 # 🧠 Skill: agent-eval
 
-> **Adaptada do ECC:** `agent-eval` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `agent-eval` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/agent-eval/SKILL.md`
 
 ## Descrição
 
-Head-to-head comparison of coding agents (Claude Code, Aider, Codex, etc.) on custom tasks with pass rate, cost, time, and consistency metrics
+--- name: agent-eval description: Head-to-head comparison of coding agents (Claude Code, Aider, Codex, etc.) on custom tasks with pass rate, cost, time, and consistency metrics
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-
-
+name: agent-eval
+description: Head-to-head comparison of coding agents (Claude Code, Aider, Codex, etc.) on custom tasks with pass rate, cost, time, and consistency metrics
+metadata:
+  origin: ECC
+tools: Read, Write, Edit, Bash, Grep, Glob
 ---
-
-## Conteúdo Adaptado
 
 # Agent Eval Skill
 
@@ -128,10 +118,46 @@ Task: add-retry-logic (3 runs each)
 ### Code-Based (deterministic)
 
 ```yaml
+judge:
+  - type: pytest
+    command: pytest tests/ -v
+  - type: command
+    command: npm run build
+```
+
+### Pattern-Based
+
+```yaml
+judge:
+  - type: grep
+    pattern: "class.*Retry"
+    files: src/**/*.py
+```
+
+### Model-Based (LLM-as-judge)
+
+```yaml
+judge:
+  - type: llm
+    prompt: |
+      Does this implementation correctly handle exponential backoff?
+      Check for: max retries, increasing delays, jitter.
+```
+
+## Best Practices
+
+- **Start with 3-5 tasks** that represent your real workload, not toy examples
+- **Run at least 3 trials** per agent to capture variance — agents are non-deterministic
+- **Pin the commit** in your task YAML so results are reproducible across days/weeks
+- **Include at least one deterministic judge** (tests, build) per task — LLM judges add noise
+- **Track cost alongside pass rate** — a 95% agent at 10x the cost may not be the right choice
+- **Version your task definitions** — they are test fixtures, treat them as code
+
+## Links
+
+- Repository: [github.com/joaquinhuigomez/agent-eval](https://github.com/joaquinhuigomez/agent-eval)
 
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/agent-eval/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/agent-eval/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:41

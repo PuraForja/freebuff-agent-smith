@@ -1,28 +1,21 @@
 # 🧠 Skill: social-graph-ranker
 
-> **Adaptada do ECC:** `social-graph-ranker` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `social-graph-ranker` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/social-graph-ranker/SKILL.md`
 
 ## Descrição
 
-Weighted social-graph ranking for warm intro discovery, bridge scoring, and network gap analysis across X and LinkedIn. Use when the user wants the reusable graph-ranking engine itself, not the broader outreach or network-maintenance workflow layered on top of it.
+--- name: social-graph-ranker description: Weighted social-graph ranking for warm intro discovery, bridge scoring, and network gap analysis across X and LinkedIn. Use when the user wants the reusable graph-ranking engine itself, not the broader outreach or network-maintenance workflow layered on top of it.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: social-graph-ranker
+description: Weighted social-graph ranking for warm intro discovery, bridge scoring, and network gap analysis across X and LinkedIn. Use when the user wants the reusable graph-ranking engine itself, not the broader outreach or network-maintenance workflow layered on top of it.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Social Graph Ranker
 
@@ -83,12 +76,12 @@ Where:
 Second-order expansion:
 
 ```text
-B_ext(m) = B(m) + α · Σ_{m' ∈ N(m) \ M} Σ_{t ∈ T} w(t) · λ^(d(m',t))
+B_ext(m) = B(m) + α · Σ_{m' ∈ N(m) \\ M} Σ_{t ∈ T} w(t) · λ^(d(m',t))
 ```
 
 Where:
 
-- `N(m) \ M` is the set of people the mutual knows that you do not
+- `N(m) \\ M` is the set of people the mutual knows that you do not
 - `α` discounts second-order reach, usually `0.3`
 
 Response-adjusted final ranking:
@@ -135,9 +128,45 @@ Weight mutuals after traversal with:
 5. Rank by `R(m)`.
 6. Return:
    - best warm intro asks
-   - conditi
+   - conditional bridge paths
+   - graph gaps where no warm path exists
+
+## Output Shape
+
+```text
+SOCIAL GRAPH RANKING
+====================
+
+Priority Set:
+Platforms:
+Decay Model:
+
+Top Bridges
+- mutual / connection
+  base_score:
+  extended_score:
+  best_targets:
+  path_summary:
+  recommended_action:
+
+Conditional Paths
+- mutual / connection
+  reason:
+  extra hop cost:
+
+No Warm Path
+- target
+  recommendation: direct outreach / fill graph gap
+```
+
+## Related Skills
+
+- `lead-intelligence` uses this ranking model inside the broader target-discovery and outreach pipeline
+- `connections-optimizer` uses the same bridge logic when deciding who to keep, prune, or add
+- `brand-voice` should run before drafting any intro request or direct outreach
+- `x-api` provides X graph access and optional execution paths
 
 ---
 
 **ECC Original:** `ECC/skills/social-graph-ranker/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:33
+**Atualizado em:** 2026-07-12 11:45:50

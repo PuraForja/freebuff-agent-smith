@@ -1,28 +1,21 @@
 # 🧠 Skill: mcp-server-patterns
 
-> **Adaptada do ECC:** `mcp-server-patterns` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `mcp-server-patterns` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/mcp-server-patterns/SKILL.md`
 
 ## Descrição
 
-Build MCP servers with Node/TypeScript SDK — tools, resources, prompts, Zod validation, stdio vs Streamable HTTP. Use Context7 or official MCP docs for latest API.
+--- name: mcp-server-patterns description: Build MCP servers with Node/TypeScript SDK — tools, resources, prompts, Zod validation, stdio vs Streamable HTTP. Use Context7 or official MCP docs for latest API.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: mcp-server-patterns
+description: Build MCP servers with Node/TypeScript SDK — tools, resources, prompts, Zod validation, stdio vs Streamable HTTP. Use Context7 or official MCP docs for latest API.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # MCP Server Patterns
 
@@ -72,9 +65,23 @@ const server = new McpServer({ name: "my-server", version: "1.0.0" });
 
 Register tools and resources using the API your SDK version provides: some versions use `server.tool(name, description, schema, handler)` (positional args), others use `server.tool({ name, description, inputSchema }, handler)` or `registerTool()`. Same for resources — include a `uri` in the handler when the API provides it. Check the official MCP docs or Context7 for the current `@modelcontextprotocol/sdk` signatures to avoid copy-paste errors.
 
-Use **Zod** (or the
+Use **Zod** (or the SDK’s preferred schema format) for input validation.
+
+## Best Practices
+
+- **Schema first**: Define input schemas for every tool; document parameters and return shape.
+- **Errors**: Return structured errors or messages the model can interpret; avoid raw stack traces.
+- **Idempotency**: Prefer idempotent tools where possible so retries are safe.
+- **Rate and cost**: For tools that call external APIs, consider rate limits and cost; document in the tool description.
+- **Versioning**: Pin SDK version in package.json; check release notes when upgrading.
+
+## Official SDKs and Docs
+
+- **JavaScript/TypeScript**: `@modelcontextprotocol/sdk` (npm). Use Context7 with library name "MCP" for current registration and transport patterns.
+- **Go**: Official Go SDK on GitHub (`modelcontextprotocol/go-sdk`).
+- **C#**: Official C# SDK for .NET.
 
 ---
 
 **ECC Original:** `ECC/skills/mcp-server-patterns/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:27
+**Atualizado em:** 2026-07-12 11:45:47

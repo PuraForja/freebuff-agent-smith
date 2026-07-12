@@ -1,28 +1,21 @@
 # 🧠 Skill: brand-voice
 
-> **Adaptada do ECC:** `brand-voice` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `brand-voice` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/brand-voice/SKILL.md`
 
 ## Descrição
 
-Build a source-derived writing style profile from real posts, essays, launch notes, docs, or site copy, then reuse that profile across content, outreach, and social workflows. Use when the user wants voice consistency without generic AI writing tropes.
+--- name: brand-voice description: Build a source-derived writing style profile from real posts, essays, launch notes, docs, or site copy, then reuse that profile across content, outreach, and social workflows. Use when the user wants voice consistency without generic AI writing tropes.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: brand-voice
+description: Build a source-derived writing style profile from real posts, essays, launch notes, docs, or site copy, then reuse that profile across content, outreach, and social workflows. Use when the user wants voice consistency without generic AI writing tropes.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Brand Voice
 
@@ -102,9 +95,21 @@ Delete and rewrite any of these:
 
 - Reuse the latest confirmed `VOICE PROFILE` across related tasks in the same session.
 - If the user asks for a durable artifact, save the profile in the requested workspace location or memory surface.
-- Do not create repo-tracked files that store personal voice fingerprints unless the
+- Do not create repo-tracked files that store personal voice fingerprints unless the user explicitly asks for that.
+
+## Downstream Use
+
+Use this skill before or inside:
+
+- `content-engine`
+- `crosspost`
+- `lead-intelligence`
+- article or launch writing
+- cold or warm outbound across X, LinkedIn, and email
+
+If another skill already has a partial voice capture section, this skill is the canonical source of truth.
 
 ---
 
 **ECC Original:** `ECC/skills/brand-voice/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:19
+**Atualizado em:** 2026-07-12 11:45:42

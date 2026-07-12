@@ -1,28 +1,21 @@
 # 🧠 Skill: agentic-engineering
 
-> **Adaptada do ECC:** `agentic-engineering` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `agentic-engineering` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/agentic-engineering/SKILL.md`
 
 ## Descrição
 
-Operate as an agentic engineer using eval-first execution, decomposition, and cost-aware model routing.
+--- name: agentic-engineering description: Operate as an agentic engineer using eval-first execution, decomposition, and cost-aware model routing.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: agentic-engineering
+description: Operate as an agentic engineer using eval-first execution, decomposition, and cost-aware model routing.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Agentic Engineering
 
@@ -85,4 +78,4 @@ Escalate model tier only when lower tier fails with a clear reasoning gap.
 ---
 
 **ECC Original:** `ECC/skills/agentic-engineering/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:19
+**Atualizado em:** 2026-07-12 11:45:41

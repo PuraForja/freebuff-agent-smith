@@ -1,28 +1,21 @@
 # 🧠 Skill: ecc-guide
 
-> **Adaptada do ECC:** `ecc-guide` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ecc-guide` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ecc-guide/SKILL.md`
 
 ## Descrição
 
-Guide users through ECC's current agents, skills, commands, hooks, rules, install profiles, and project onboarding by reading the live repository surface before answering.
+--- name: ecc-guide description: Guide users through ECC's current agents, skills, commands, hooks, rules, install profiles, and project onboarding by reading the live repository surface before answering.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ecc-guide
+description: Guide users through ECC's current agents, skills, commands, hooks, rules, install profiles, and project onboarding by reading the live repository surface before answering.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # ECC Guide
 
@@ -110,9 +103,105 @@ For "what should I use for X?":
 
 1. Search `skills/`, `commands/`, and `agents/`.
 2. Prefer skills as the primary workflow surface.
-3. Use commands only when they are a maintained compatibility s
+3. Use commands only when they are a maintained compatibility shim or a user explicitly wants slash-command behavior.
+4. Mention agents when delegation is useful.
+
+Useful searches:
+
+```bash
+rg -n "<query>" skills commands agents docs
+find skills -maxdepth 2 -name SKILL.md | sort
+```
+
+### Install Guidance
+
+Use managed install paths:
+
+```bash
+node scripts/install-plan.js --list-profiles
+node scripts/install-plan.js --profile minimal --target claude --json
+node scripts/install-apply.js --profile minimal --target claude --dry-run
+```
+
+For specific skill installs:
+
+```bash
+node scripts/install-plan.js --skills <skill-id> --target claude --json
+node scripts/install-apply.js --skills <skill-id> --target claude --dry-run
+```
+
+Warn users not to stack plugin installs and full manual/profile installs unless they intentionally want duplicate surfaces.
+
+### Project Onboarding
+
+Use `/project-init` when the user wants ECC configured for a target repo. The expected sequence is:
+
+1. detect the stack from project files
+2. resolve a dry-run install plan
+3. inspect existing `CLAUDE.md` and settings files
+4. ask before applying changes
+5. keep generated guidance minimal and repo-specific
+
+### Troubleshooting
+
+Ask for the target harness and install path first, then inspect:
+
+- plugin install metadata
+- `.claude/`, `.cursor/`, `.codex/`, `.gemini/`, `.opencode/`, `.codebuddy/`, `.joycode/`, or `.qwen/`
+- `hooks/hooks.json`
+- install-state files
+- relevant command/skill files
+
+For repo health, suggest:
+
+```bash
+npm run harness:audit -- --format text
+npm run observability:ready
+npm test
+```
+
+## Output Templates
+
+### Short Recommendation
+
+```text
+Use <skill-or-command>. It fits because <reason>.
+
+Canonical file: <path>
+Verify with: <command>
+Next: <one concrete action>
+```
+
+### Search Results
+
+```text
+Best matches:
+- <path>: <why it matters>
+- <path>: <why it matters>
+
+Recommendation: <which one to use first and why>
+```
+
+### Install Plan Summary
+
+```text
+Detected: <stack evidence>
+Target: <harness>
+Plan: <profile/modules/skills>
+Dry run: <command>
+Would change: <paths>
+Needs approval before apply: <yes/no>
+```
+
+## Related Surfaces
+
+- `/project-init`: stack-aware onboarding plan for a target repo
+- `/harness-audit`: deterministic readiness scorecard
+- `/skill-health`: skill quality review
+- `/skill-create`: generate a new skill from local git history
+- `/security-scan`: inspect Claude/OpenCode configuration security
 
 ---
 
 **ECC Original:** `ECC/skills/ecc-guide/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:22
+**Atualizado em:** 2026-07-12 11:45:44

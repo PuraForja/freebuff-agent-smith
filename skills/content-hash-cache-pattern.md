@@ -1,28 +1,21 @@
 # 🧠 Skill: content-hash-cache-pattern
 
-> **Adaptada do ECC:** `content-hash-cache-pattern` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `content-hash-cache-pattern` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/content-hash-cache-pattern/SKILL.md`
 
 ## Descrição
 
-Cache expensive file processing results using SHA-256 content hashes — path-independent, auto-invalidating, with service layer separation.
+--- name: content-hash-cache-pattern description: Cache expensive file processing results using SHA-256 content hashes — path-independent, auto-invalidating, with service layer separation.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: content-hash-cache-pattern
+description: Cache expensive file processing results using SHA-256 content hashes — path-independent, auto-invalidating, with service layer separation.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Content-Hash File Cache Pattern
 
@@ -121,9 +114,66 @@ def extract_with_cache(
     # Check cache
     cached = read_cache(cache_dir, file_hash)
     if cached is not None:
-       
+        logger.info("Cache hit: %s (hash=%s)", file_path.name, file_hash[:12])
+        return cached.document
+
+    # Cache miss -> extract -> store
+    logger.info("Cache miss: %s (hash=%s)", file_path.name, file_hash[:12])
+    doc = extract_text(file_path)
+    entry = CacheEntry(file_hash=file_hash, source_path=str(file_path), document=doc)
+    write_cache(cache_dir, entry)
+    return doc
+```
+
+## Key Design Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| SHA-256 content hash | Path-independent, auto-invalidates on content change |
+| `{hash}.json` file naming | O(1) lookup, no index file needed |
+| Service layer wrapper | SRP: extraction stays pure, cache is a separate concern |
+| Manual JSON serialization | Full control over frozen dataclass serialization |
+| Corruption returns `None` | Graceful degradation, re-processes on next run |
+| `cache_dir.mkdir(parents=True)` | Lazy directory creation on first write |
+
+## Best Practices
+
+- **Hash content, not paths** — paths change, content identity doesn't
+- **Chunk large files** when hashing — avoid loading entire files into memory
+- **Keep processing functions pure** — they should know nothing about caching
+- **Log cache hit/miss** with truncated hashes for debugging
+- **Handle corruption gracefully** — treat invalid cache entries as misses, never crash
+
+## Anti-Patterns to Avoid
+
+```python
+# BAD: Path-based caching (breaks on file move/rename)
+cache = {"/path/to/file.pdf": result}
+
+# BAD: Adding cache logic inside the processing function (SRP violation)
+def extract_text(path, *, cache_enabled=False, cache_dir=None):
+    if cache_enabled:  # Now this function has two responsibilities
+        ...
+
+# BAD: Using dataclasses.asdict() with nested frozen dataclasses
+# (can cause issues with complex nested types)
+data = dataclasses.asdict(entry)  # Use manual serialization instead
+```
+
+## When to Use
+
+- File processing pipelines (PDF parsing, OCR, text extraction, image analysis)
+- CLI tools that benefit from `--cache/--no-cache` options
+- Batch processing where the same files appear across runs
+- Adding caching to existing pure functions without modifying them
+
+## When NOT to Use
+
+- Data that must always be fresh (real-time feeds)
+- Cache entries that would be extremely large (consider streaming instead)
+- Results that depend on parameters beyond file content (e.g., different extraction configs)
 
 ---
 
 **ECC Original:** `ECC/skills/content-hash-cache-pattern/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:20
+**Atualizado em:** 2026-07-12 11:45:43

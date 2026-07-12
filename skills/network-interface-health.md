@@ -1,28 +1,21 @@
 # 🧠 Skill: network-interface-health
 
-> **Adaptada do ECC:** `network-interface-health` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `network-interface-health` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/network-interface-health/SKILL.md`
 
 ## Descrição
 
-Diagnose interface errors, drops, CRCs, duplex mismatches, flapping, speed negotiation issues, and counter trends on routers, switches, and Linux hosts.
+--- name: network-interface-health description: Diagnose interface errors, drops, CRCs, duplex mismatches, flapping, speed negotiation issues, and counter trends on routers, switches, and Linux hosts.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: network-interface-health
+description: Diagnose interface errors, drops, CRCs, duplex mismatches, flapping, speed negotiation issues, and counter trends on routers, switches, and Linux hosts.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Network Interface Health
 
@@ -103,9 +96,75 @@ show interfaces <interface> | include duplex|speed
 
 Slice each interface block from one header to the next. Do not use an arbitrary
 character window; large interface blocks can cause counters to be missed or
-assigned to
+assigned to the wrong port.
+
+```python
+import re
+from typing import Any
+
+HEADER_RE = re.compile(
+    r"^(?P<name>\S+) is (?P<status>(?:administratively )?down|up), "
+    r"line protocol is (?P<protocol>up|down)",
+    re.I | re.M,
+)
+ERROR_RE = re.compile(r"(?P<input>\d+) input errors, (?P<crc>\d+) CRC", re.I)
+DROP_RE = re.compile(r"(?P<output>\d+) output errors", re.I)
+DUPLEX_RE = re.compile(r"(?P<duplex>Full|Half|Auto)-duplex,\s+(?P<speed>[^,]+)", re.I)
+
+def parse_show_interfaces(raw: str) -> list[dict[str, Any]]:
+    headers = list(HEADER_RE.finditer(raw))
+    interfaces = []
+    for index, header in enumerate(headers):
+        end = headers[index + 1].start() if index + 1 < len(headers) else len(raw)
+        block = raw[header.start():end]
+        errors = ERROR_RE.search(block)
+        drops = DROP_RE.search(block)
+        duplex = DUPLEX_RE.search(block)
+        interfaces.append({
+            "name": header.group("name"),
+            "status": header.group("status"),
+            "protocol": header.group("protocol"),
+            "duplex": duplex.group("duplex") if duplex else "unknown",
+            "speed": duplex.group("speed").strip() if duplex else "unknown",
+            "input_errors": int(errors.group("input")) if errors else 0,
+            "crc_errors": int(errors.group("crc")) if errors else 0,
+            "output_errors": int(drops.group("output")) if drops else 0,
+        })
+    return interfaces
+```
+
+## Examples
+
+### CRCs On One Switch Port
+
+1. Capture counters on the local port.
+2. Capture counters on the connected remote port.
+3. Replace the cable or optic before changing routing or firewall rules.
+4. Clear counters only after recording the baseline.
+5. Recheck after a fixed interval.
+
+### Internet Slow But LAN Is Fine
+
+1. Check WAN interface drops/errors.
+2. Check LAN uplink utilization and output drops.
+3. Check gateway CPU if the WAN link is clean but throughput is still low.
+4. Compare wired and wireless tests before blaming upstream service.
+
+## Anti-Patterns
+
+- Clearing counters before saving a baseline.
+- Looking at only one side of a link.
+- Assuming all historical CRCs are active problems without a time window.
+- Mixing auto-negotiation on one side with fixed speed/duplex on the other.
+- Treating output drops as a cable problem before checking congestion.
+
+## See Also
+
+- Agent: `network-troubleshooter`
+- Skill: `network-config-validation`
+- Skill: `homelab-network-setup`
 
 ---
 
 **ECC Original:** `ECC/skills/network-interface-health/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:28
+**Atualizado em:** 2026-07-12 11:45:47

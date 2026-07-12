@@ -1,28 +1,30 @@
 # 🧠 Skill: blueprint
 
-> **Adaptada do ECC:** `blueprint` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `blueprint` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/blueprint/SKILL.md`
 
 ## Descrição
 
->-
+--- name: blueprint description: >-
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: blueprint
+description: >-
+  Turn a one-line objective into a step-by-step construction plan for
+  multi-session, multi-agent engineering projects. Each step has a
+  self-contained context brief so a fresh agent can execute it cold.
+  Includes adversarial review gate, dependency graph, parallel step
+  detection, anti-pattern catalog, and plan mutation protocol.
+  TRIGGER when: user requests a plan, blueprint, or roadmap for a
+  complex multi-PR task, or describes work that needs multiple sessions.
+  DO NOT TRIGGER when: task is completable in a single PR or fewer
+  than 3 tool calls, or user says "just do it".
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Blueprint — Construction Plan Generator
 
@@ -77,9 +79,45 @@ Produces a plan with parallel steps where possible (e.g., "implement Anthropic p
 - **Cold-start execution** — Every step includes a self-contained context brief. No prior context needed.
 - **Adversarial review gate** — Every plan is reviewed by a strongest-model sub-agent against a checklist covering completeness, dependency correctness, and anti-pattern detection.
 - **Branch/PR/CI workflow** — Built into every step. Degrades gracefully to direct mode when git/gh is absent.
-- **Parallel step det
+- **Parallel step detection** — Dependency graph identifies steps with no shared files or output dependencies.
+- **Plan mutation protocol** — Steps can be split, inserted, skipped, reordered, or abandoned with formal protocols and audit trail.
+- **Zero runtime risk** — Pure Markdown skill. The entire repository contains only `.md` files — no hooks, no shell scripts, no executable code, no `package.json`, no build step. Nothing runs on install or invocation beyond Claude Code's native Markdown skill loader.
+
+## Installation
+
+This skill ships with Everything Claude Code. No separate installation is needed when ECC is installed.
+
+### Full ECC install
+
+If you are working from the ECC repository checkout, verify the skill is present with:
+
+```bash
+test -f skills/blueprint/SKILL.md
+```
+
+To update later, review the ECC diff before updating:
+
+```bash
+cd /path/to/everything-claude-code
+git fetch origin main
+git log --oneline HEAD..origin/main       # review new commits before updating
+git checkout <reviewed-full-sha>          # pin to a specific reviewed commit
+```
+
+### Vendored standalone install
+
+If you are vendoring only this skill outside the full ECC install, copy the reviewed file from the ECC repository into `~/.claude/skills/blueprint/SKILL.md`. Vendored copies do not have a git remote, so update them by re-copying the file from a reviewed ECC commit rather than running `git pull`.
+
+## Requirements
+
+- Claude Code (for `/blueprint` slash command)
+- Git + GitHub CLI (optional — enables full branch/PR/CI workflow; Blueprint detects absence and auto-switches to direct mode)
+
+## Source
+
+Inspired by antbotlab/blueprint — upstream project and reference design.
 
 ---
 
 **ECC Original:** `ECC/skills/blueprint/SKILL.md`
-**Atualizado em:** 2026-07-01 13:21:04
+**Atualizado em:** 2026-07-12 11:45:42

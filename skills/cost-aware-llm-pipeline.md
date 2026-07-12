@@ -1,28 +1,21 @@
 # 🧠 Skill: cost-aware-llm-pipeline
 
-> **Adaptada do ECC:** `cost-aware-llm-pipeline` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `cost-aware-llm-pipeline` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/cost-aware-llm-pipeline/SKILL.md`
 
 ## Descrição
 
-Cost optimization patterns for LLM API usage — model routing by task complexity, budget tracking, retry logic, and prompt caching.
+--- name: cost-aware-llm-pipeline description: Cost optimization patterns for LLM API usage — model routing by task complexity, budget tracking, retry logic, and prompt caching.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: cost-aware-llm-pipeline
+description: Cost optimization patterns for LLM API usage — model routing by task complexity, budget tracking, retry logic, and prompt caching.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Cost-Aware LLM Pipeline
 
@@ -130,9 +123,79 @@ Cache long system prompts to avoid resending them on every request.
 messages = [
     {
         "role": "user",
-        "content": 
+        "content": [
+            {
+                "type": "text",
+                "text": system_prompt,
+                "cache_control": {"type": "ephemeral"},  # Cache this
+            },
+            {
+                "type": "text",
+                "text": user_input,  # Variable part
+            },
+        ],
+    }
+]
+```
+
+## Composition
+
+Combine all four techniques in a single pipeline function:
+
+```python
+def process(text: str, config: Config, tracker: CostTracker) -> tuple[Result, CostTracker]:
+    # 1. Route model
+    model = select_model(len(text), estimated_items, config.force_model)
+
+    # 2. Check budget
+    if tracker.over_budget:
+        raise BudgetExceededError(tracker.total_cost, tracker.budget_limit)
+
+    # 3. Call with retry + caching
+    response = call_with_retry(lambda: client.messages.create(
+        model=model,
+        messages=build_cached_messages(system_prompt, text),
+    ))
+
+    # 4. Track cost (immutable)
+    record = CostRecord(model=model, input_tokens=..., output_tokens=..., cost_usd=...)
+    tracker = tracker.add(record)
+
+    return parse_result(response), tracker
+```
+
+## Pricing Reference (2025-2026)
+
+| Model | Input ($/1M tokens) | Output ($/1M tokens) | Relative Cost |
+|-------|---------------------|----------------------|---------------|
+| Haiku 4.5 | $0.80 | $4.00 | 1x |
+| Sonnet 4.6 | $3.00 | $15.00 | ~4x |
+| Opus 4.5 | $15.00 | $75.00 | ~19x |
+
+## Best Practices
+
+- **Start with the cheapest model** and only route to expensive models when complexity thresholds are met
+- **Set explicit budget limits** before processing batches — fail early rather than overspend
+- **Log model selection decisions** so you can tune thresholds based on real data
+- **Use prompt caching** for system prompts over 1024 tokens — saves both cost and latency
+- **Never retry on authentication or validation errors** — only transient failures (network, rate limit, server error)
+
+## Anti-Patterns to Avoid
+
+- Using the most expensive model for all requests regardless of complexity
+- Retrying on all errors (wastes budget on permanent failures)
+- Mutating cost tracking state (makes debugging and auditing difficult)
+- Hardcoding model names throughout the codebase (use constants or config)
+- Ignoring prompt caching for repetitive system prompts
+
+## When to Use
+
+- Any application calling Claude, OpenAI, or similar LLM APIs
+- Batch processing pipelines where cost adds up quickly
+- Multi-model architectures that need intelligent routing
+- Production systems that need budget guardrails
 
 ---
 
 **ECC Original:** `ECC/skills/cost-aware-llm-pipeline/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:20
+**Atualizado em:** 2026-07-12 11:45:43

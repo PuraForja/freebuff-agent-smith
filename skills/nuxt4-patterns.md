@@ -1,28 +1,21 @@
 # 🧠 Skill: nuxt4-patterns
 
-> **Adaptada do ECC:** `nuxt4-patterns` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `nuxt4-patterns` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/nuxt4-patterns/SKILL.md`
 
 ## Descrição
 
-Nuxt 4 app patterns for hydration safety, performance, route rules, lazy loading, and SSR-safe data fetching with useFetch and useAsyncData.
+--- name: nuxt4-patterns description: Nuxt 4 app patterns for hydration safety, performance, route rules, lazy loading, and SSR-safe data fetching with useFetch and useAsyncData.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: nuxt4-patterns
+description: Nuxt 4 app patterns for hydration safety, performance, route rules, lazy loading, and SSR-safe data fetching with useFetch and useAsyncData.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Nuxt 4 Patterns
 
@@ -88,9 +81,38 @@ export default defineNuxtConfig({
 - `prerender`: static HTML at build time
 - `swr`: serve cached content and revalidate in the background
 - `isr`: incremental static regeneration on supported platforms
--
+- `ssr: false`: client-rendered route
+- `cache` or `redirect`: Nitro-level response behavior
+
+Pick route rules per route group, not globally. Marketing pages, catalogs, dashboards, and APIs usually need different strategies.
+
+## Lazy Loading and Performance
+
+- Nuxt already code-splits pages by route. Keep route boundaries meaningful before micro-optimizing component splits.
+- Use the `Lazy` prefix to dynamically import non-critical components.
+- Conditionally render lazy components with `v-if` so the chunk is not loaded until the UI actually needs it.
+- Use lazy hydration for below-the-fold or non-critical interactive UI.
+
+```vue
+<template>
+  <LazyRecommendations v-if="showRecommendations" />
+  <LazyProductGallery hydrate-on-visible />
+</template>
+```
+
+- For custom strategies, use `defineLazyHydrationComponent()` with a visibility or idle strategy.
+- Nuxt lazy hydration works on single-file components. Passing new props to a lazily hydrated component will trigger hydration immediately.
+- Use `NuxtLink` for internal navigation so Nuxt can prefetch route components and generated payloads.
+
+## Review Checklist
+
+- First SSR render and hydrated client render produce the same markup
+- Page data uses `useFetch` or `useAsyncData`, not top-level `$fetch`
+- Non-critical data is lazy and has explicit loading UI
+- Route rules match the page's SEO and freshness requirements
+- Heavy interactive islands are lazy-loaded or lazily hydrated
 
 ---
 
 **ECC Original:** `ECC/skills/nuxt4-patterns/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:28
+**Atualizado em:** 2026-07-12 11:45:47

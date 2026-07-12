@@ -1,28 +1,21 @@
 # 🧠 Skill: safety-guard
 
-> **Adaptada do ECC:** `safety-guard` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `safety-guard` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/safety-guard/SKILL.md`
 
 ## Descrição
 
-Use this skill to prevent destructive operations when working on production systems or running agents autonomously.
+--- name: safety-guard description: Use this skill to prevent destructive operations when working on production systems or running agents autonomously.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: safety-guard
+description: Use this skill to prevent destructive operations when working on production systems or running agents autonomously.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Safety Guard — Prevent Destructive Operations
 
@@ -97,4 +90,4 @@ Uses PreToolUse hooks to intercept Bash, Write, Edit, and MultiEdit tool calls. 
 ---
 
 **ECC Original:** `ECC/skills/safety-guard/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:49

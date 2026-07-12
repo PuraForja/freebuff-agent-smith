@@ -1,28 +1,21 @@
 # 🧠 Skill: connections-optimizer
 
-> **Adaptada do ECC:** `connections-optimizer` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `connections-optimizer` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/connections-optimizer/SKILL.md`
 
 ## Descrição
 
-Reorganize the user's X and LinkedIn network with review-first pruning, add/follow recommendations, and channel-specific warm outreach drafted in the user's real voice. Use when the user wants to clean up following lists, grow toward current priorities, or rebalance a social graph around higher-signal relationships.
+--- name: connections-optimizer description: Reorganize the user's X and LinkedIn network with review-first pruning, add/follow recommendations, and channel-specific warm outreach drafted in the user's real voice. Use when the user wants to clean up following lists, grow toward current priorities, or rebalance a social graph around higher-signal relationships.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: connections-optimizer
+description: Reorganize the user's X and LinkedIn network with review-first pruning, add/follow recommendations, and channel-specific warm outreach drafted in the user's real voice. Use when the user wants to clean up following lists, grow toward current priorities, or rebalance a social graph around higher-signal relationships.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Connections Optimizer
 
@@ -125,9 +118,90 @@ Use these positive signals:
 - reciprocity
 - recent activity
 - alignment to current priorities
-- network bridg
+- network bridge value
+- role relevance
+- real engagement history
+- recent presence and responsiveness
+
+Use these negative signals:
+
+- disappeared or abandoned account
+- stale one-way follow
+- off-priority topic cluster
+- low-value noise
+- repeated non-response
+- no follow-back when many better replacements exist
+
+Mutuals and real warm-path bridges should be penalized less aggressively than one-way follows.
+
+## Workflow
+
+1. Capture priorities, do-not-touch constraints, and selected platforms.
+2. Pull the current following / connection inventory.
+3. Score prune candidates with explicit reasons.
+4. Score keep candidates with explicit reasons.
+5. Use `lead-intelligence` plus research surfaces to rank expansion candidates.
+6. Match the right channel:
+   - X DM for warm, fast social touch points
+   - LinkedIn message for professional graph adjacency
+   - Apple Mail draft for higher-context intros or outreach
+7. Run `brand-voice` before drafting messages.
+8. Return a review pack before any apply step.
+
+## Review Pack Format
+
+```text
+CONNECTIONS OPTIMIZER REPORT
+============================
+
+Mode:
+Platforms:
+Priority Set:
+
+Prune Queue
+- handle / profile
+  reason:
+  confidence:
+  action:
+
+Review Queue
+- handle / profile
+  reason:
+  risk:
+
+Keep / Protect
+- handle / profile
+  bridge value:
+
+Add / Follow Targets
+- person
+  why now:
+  warm path:
+  preferred channel:
+
+Drafts
+- X DM:
+- LinkedIn:
+- Apple Mail:
+```
+
+## Outbound Rules
+
+- Default email path is Apple Mail / Mail.app draft creation.
+- Do not send automatically.
+- Choose the channel based on warmth, relevance, and context depth.
+- Do not force a DM when an email or no outreach is the right move.
+- Drafts should sound like the user, not like automated sales copy.
+
+## Related Skills
+
+- `brand-voice` for the reusable voice profile
+- `social-graph-ranker` for the standalone bridge-scoring and warm-path math
+- `lead-intelligence` for weighted target and warm-path discovery
+- `x-api` for X graph access, drafting, and optional apply flows
+- `content-engine` when the user also wants public launch content around network moves
 
 ---
 
 **ECC Original:** `ECC/skills/connections-optimizer/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:20
+**Atualizado em:** 2026-07-12 11:45:43

@@ -1,28 +1,22 @@
 # 🧠 Skill: llm-trading-agent-security
 
-> **Adaptada do ECC:** `llm-trading-agent-security` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `llm-trading-agent-security` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/llm-trading-agent-security/SKILL.md`
 
 ## Descrição
 
-Security patterns for autonomous trading agents with wallet or transaction authority. Covers prompt injection, spend limits, pre-send simulation, circuit breakers, MEV protection, and key handling.
+--- name: llm-trading-agent-security description: Security patterns for autonomous trading agents with wallet or transaction authority. Covers prompt injection, spend limits, pre-send simulation, circuit breakers, MEV protection, and key handling.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: llm-trading-agent-security
+description: Security patterns for autonomous trading agents with wallet or transaction authority. Covers prompt injection, spend limits, pre-send simulation, circuit breakers, MEV protection, and key handling.
+metadata:
+  origin: ECC direct-port adaptation
+version: "1.0.0"
 ---
-
-## Conteúdo Adaptado
 
 # LLM Trading Agent Security
 
@@ -123,9 +117,48 @@ class TradingCircuitBreaker:
             return
 
         hourly_pnl = (portfolio_value - self.hour_start_value) / self.hour_start_value
-        if hour
+        if hourly_pnl < -self.MAX_HOURLY_LOSS_PCT:
+            self.halt(f"Hourly PnL {hourly_pnl:.1%} below threshold")
+```
+
+### Wallet isolation
+
+```python
+import os
+from eth_account import Account
+
+private_key = os.environ.get("TRADING_WALLET_PRIVATE_KEY")
+if not private_key:
+    raise EnvironmentError("TRADING_WALLET_PRIVATE_KEY not set")
+
+account = Account.from_key(private_key)
+```
+
+Use a dedicated hot wallet with only the required session funds. Never point the agent at a primary treasury wallet.
+
+### MEV and deadline protection
+
+```python
+import time
+
+PRIVATE_RPC = "https://rpc.flashbots.net"
+MAX_SLIPPAGE_BPS = {"stable": 10, "volatile": 50}
+deadline = int(time.time()) + 60
+```
+
+## Pre-Deploy Checklist
+
+- External data is sanitized before entering the LLM context
+- Spend limits are enforced independently from model output
+- Transactions are simulated before send
+- `min_amount_out` is mandatory
+- Circuit breakers halt on drawdown or invalid state
+- Keys come from env or a secret manager, never code or logs
+- Private mempool or protected routing is used when appropriate
+- Slippage and deadlines are set per strategy
+- All agent decisions are audit-logged, not just successful sends
 
 ---
 
 **ECC Original:** `ECC/skills/llm-trading-agent-security/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:27
+**Atualizado em:** 2026-07-12 11:45:47

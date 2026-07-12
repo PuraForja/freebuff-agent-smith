@@ -1,28 +1,21 @@
 # 🧠 Skill: agent-harness-construction
 
-> **Adaptada do ECC:** `agent-harness-construction` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `agent-harness-construction` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/agent-harness-construction/SKILL.md`
 
 ## Descrição
 
-Design and optimize AI agent action spaces, tool definitions, and observation formatting for higher completion rates.
+--- name: agent-harness-construction description: Design and optimize AI agent action spaces, tool definitions, and observation formatting for higher completion rates.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: agent-harness-construction
+description: Design and optimize AI agent action spaces, tool definitions, and observation formatting for higher completion rates.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Agent Harness Construction
 
@@ -95,4 +88,4 @@ Track:
 ---
 
 **ECC Original:** `ECC/skills/agent-harness-construction/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:18
+**Atualizado em:** 2026-07-12 11:45:41

@@ -1,28 +1,21 @@
 # 🧠 Skill: market-research
 
-> **Adaptada do ECC:** `market-research` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `market-research` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/market-research/SKILL.md`
 
 ## Descrição
 
-Conduct market research, competitive analysis, investor due diligence, and industry intelligence with source attribution and decision-oriented summaries. Use when the user wants market sizing, competitor comparisons, fund research, technology scans, or research that informs business decisions.
+--- name: market-research description: Conduct market research, competitive analysis, investor due diligence, and industry intelligence with source attribution and decision-oriented summaries. Use when the user wants market sizing, competitor comparisons, fund research, technology scans, or research that informs business decisions.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: market-research
+description: Conduct market research, competitive analysis, investor due diligence, and industry intelligence with source attribution and decision-oriented summaries. Use when the user wants market sizing, competitor comparisons, fund research, technology scans, or research that informs business decisions.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Market Research
 
@@ -97,4 +90,4 @@ Before delivering:
 ---
 
 **ECC Original:** `ECC/skills/market-research/SKILL.md`
-**Atualizado em:** 2026-07-01 13:21:04
+**Atualizado em:** 2026-07-12 11:45:47

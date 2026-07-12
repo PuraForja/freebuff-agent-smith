@@ -1,28 +1,21 @@
 # 🧠 Skill: canary-watch
 
-> **Adaptada do ECC:** `canary-watch` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `canary-watch` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/canary-watch/SKILL.md`
 
 ## Descrição
 
-Use this skill to monitor and verify a deployed URL after releases — checks HTTP endpoints, SSE streams, static assets, console errors, and performance regressions after deploys, merges, or dependency upgrades. Smoke / canary / post-deploy verification.
+--- name: canary-watch description: Use this skill to monitor and verify a deployed URL after releases — checks HTTP endpoints, SSE streams, static assets, console errors, and performance regressions after deploys, merges, or dependency upgrades. Smoke / canary / post-deploy verification.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: canary-watch
+description: Use this skill to monitor and verify a deployed URL after releases — checks HTTP endpoints, SSE streams, static assets, console errors, and performance regressions after deploys, merges, or dependency upgrades. Smoke / canary / post-deploy verification.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Canary Watch — Post-Deploy Monitoring
 
@@ -129,4 +122,4 @@ Pair with:
 ---
 
 **ECC Original:** `ECC/skills/canary-watch/SKILL.md`
-**Atualizado em:** 2026-07-01 13:21:04
+**Atualizado em:** 2026-07-12 11:45:42

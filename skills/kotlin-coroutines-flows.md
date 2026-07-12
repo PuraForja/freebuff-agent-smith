@@ -1,28 +1,21 @@
 # 🧠 Skill: kotlin-coroutines-flows
 
-> **Adaptada do ECC:** `kotlin-coroutines-flows` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `kotlin-coroutines-flows` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/kotlin-coroutines-flows/SKILL.md`
 
 ## Descrição
 
-Kotlin Coroutines and Flow patterns for Android and KMP — structured concurrency, Flow operators, StateFlow, error handling, and testing.
+--- name: kotlin-coroutines-flows description: Kotlin Coroutines and Flow patterns for Android and KMP — structured concurrency, Flow operators, StateFlow, error handling, and testing.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: kotlin-coroutines-flows
+description: Kotlin Coroutines and Flow patterns for Android and KMP — structured concurrency, Flow operators, StateFlow, error handling, and testing.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Kotlin Coroutines & Flows
 
@@ -139,9 +132,171 @@ val uiState: StateFlow<HomeState> = combine(
 searchQuery
     .debounce(300)
     .distinctUntilChanged()
-    .flatMapLatest { query -> repository.sea
+    .flatMapLatest { query -> repository.search(query) }
+    .catch { emit(emptyList()) }
+    .collect { results -> _state.update { it.copy(results = results) } }
+
+// Retry with exponential backoff
+fun fetchWithRetry(): Flow<Data> = flow { emit(api.fetch()) }
+    .retryWhen { cause, attempt ->
+        if (cause is IOException && attempt < 3) {
+            delay(1000L * (1 shl attempt.toInt()))
+            true
+        } else {
+            false
+        }
+    }
+```
+
+### SharedFlow for One-Time Events
+
+```kotlin
+class ItemListViewModel : ViewModel() {
+    private val _effects = MutableSharedFlow<Effect>()
+    val effects: SharedFlow<Effect> = _effects.asSharedFlow()
+
+    sealed interface Effect {
+        data class ShowSnackbar(val message: String) : Effect
+        data class NavigateTo(val route: String) : Effect
+    }
+
+    private fun deleteItem(id: String) {
+        viewModelScope.launch {
+            repository.delete(id)
+            _effects.emit(Effect.ShowSnackbar("Item deleted"))
+        }
+    }
+}
+
+// Collect in Composable
+LaunchedEffect(Unit) {
+    viewModel.effects.collect { effect ->
+        when (effect) {
+            is Effect.ShowSnackbar -> snackbarHostState.showSnackbar(effect.message)
+            is Effect.NavigateTo -> navController.navigate(effect.route)
+        }
+    }
+}
+```
+
+## Dispatchers
+
+```kotlin
+// CPU-intensive work
+withContext(Dispatchers.Default) { parseJson(largePayload) }
+
+// IO-bound work
+withContext(Dispatchers.IO) { database.query() }
+
+// Main thread (UI) — default in viewModelScope
+withContext(Dispatchers.Main) { updateUi() }
+```
+
+In KMP, use `Dispatchers.Default` and `Dispatchers.Main` (available on all platforms). `Dispatchers.IO` is JVM/Android only — use `Dispatchers.Default` on other platforms or provide via DI.
+
+## Cancellation
+
+### Cooperative Cancellation
+
+Long-running loops must check for cancellation:
+
+```kotlin
+suspend fun processItems(items: List<Item>) = coroutineScope {
+    for (item in items) {
+        ensureActive()  // throws CancellationException if cancelled
+        process(item)
+    }
+}
+```
+
+### Cleanup with try/finally
+
+```kotlin
+viewModelScope.launch {
+    try {
+        _state.update { it.copy(isLoading = true) }
+        val data = repository.fetch()
+        _state.update { it.copy(data = data) }
+    } finally {
+        _state.update { it.copy(isLoading = false) }  // always runs, even on cancellation
+    }
+}
+```
+
+## Testing
+
+### Testing StateFlow with Turbine
+
+```kotlin
+@Test
+fun `search updates item list`() = runTest {
+    val fakeRepository = FakeItemRepository().apply { emit(testItems) }
+    val viewModel = ItemListViewModel(GetItemsUseCase(fakeRepository))
+
+    viewModel.state.test {
+        assertEquals(ItemListState(), awaitItem())  // initial
+
+        viewModel.onSearch("query")
+        val loading = awaitItem()
+        assertTrue(loading.isLoading)
+
+        val loaded = awaitItem()
+        assertFalse(loaded.isLoading)
+        assertEquals(1, loaded.items.size)
+    }
+}
+```
+
+### Testing with TestDispatcher
+
+```kotlin
+@Test
+fun `parallel load completes correctly`() = runTest {
+    val viewModel = DashboardViewModel(
+        itemRepo = FakeItemRepo(),
+        statsRepo = FakeStatsRepo()
+    )
+
+    viewModel.load()
+    advanceUntilIdle()
+
+    val state = viewModel.state.value
+    assertNotNull(state.items)
+    assertNotNull(state.stats)
+}
+```
+
+### Faking Flows
+
+```kotlin
+class FakeItemRepository : ItemRepository {
+    private val _items = MutableStateFlow<List<Item>>(emptyList())
+
+    override fun observeItems(): Flow<List<Item>> = _items
+
+    fun emit(items: List<Item>) { _items.value = items }
+
+    override suspend fun getItemsByCategory(category: String): Result<List<Item>> {
+        return Result.success(_items.value.filter { it.category == category })
+    }
+}
+```
+
+## Anti-Patterns to Avoid
+
+- Using `GlobalScope` — leaks coroutines, no structured cancellation
+- Collecting Flows in `init {}` without a scope — use `viewModelScope.launch`
+- Using `MutableStateFlow` with mutable collections — always use immutable copies: `_state.update { it.copy(list = it.list + newItem) }`
+- Catching `CancellationException` — let it propagate for proper cancellation
+- Using `flowOn(Dispatchers.Main)` to collect — collection dispatcher is the caller's dispatcher
+- Creating `Flow` in `@Composable` without `remember` — recreates the flow every recomposition
+
+## References
+
+See skill: `compose-multiplatform-patterns` for UI consumption of Flows.
+See skill: `android-clean-architecture` for where coroutines fit in layers.
 
 ---
 
 **ECC Original:** `ECC/skills/kotlin-coroutines-flows/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:25
+**Atualizado em:** 2026-07-12 11:45:46

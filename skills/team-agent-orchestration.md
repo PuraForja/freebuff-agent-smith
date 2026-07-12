@@ -1,28 +1,21 @@
 # 🧠 Skill: team-agent-orchestration
 
-> **Adaptada do ECC:** `team-agent-orchestration` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `team-agent-orchestration` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/team-agent-orchestration/SKILL.md`
 
 ## Descrição
 
-Run team-based orchestration for agent squads using work items, ownership, agent Kanban, merge gates, and control pane handoffs.
+--- name: team-agent-orchestration description: "Run team-based orchestration for agent squads using work items, ownership, agent Kanban, merge gates, and control pane handoffs."
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: team-agent-orchestration
+description: "Run team-based orchestration for agent squads using work items, ownership, agent Kanban, merge gates, and control pane handoffs."
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Team Agent Orchestration
 
@@ -87,9 +80,49 @@ Each card should fit this schema:
 4. **Run agents**: each agent writes evidence and handoff notes, not just code.
 5. **Review in sequence**: tests first, then diff review, then security/risk checks, then content/product polish.
 6. **Merge deliberately**: one integrator resolves conflicts and updates the control pane or status artifact.
-7. **Extract reusable skill**: if the card pattern repeats, pr
+7. **Extract reusable skill**: if the card pattern repeats, promote it into `skills/`.
+
+## Control Pane Requirements
+
+A useful control pane for team orchestration should show:
+
+- Active work items and their agent Kanban state.
+- Owner, harness, branch, worktree, and last heartbeat.
+- Links to handoff artifacts, tests, screenshots, and PRs.
+- Blockers grouped by owner and unblock action.
+- Merge readiness by gate, not vibes.
+- Reusable workflow candidates that should become shared skills.
+
+Do not add more automation until the operator can answer: who owns this, what changed, what gate failed, and what can safely merge?
+
+## Dynamic Workflow Compatibility
+
+When a card needs dynamic workflow mode:
+
+- Put the task-local harness under the card owner.
+- Store inputs and outputs on the card.
+- Require an eval before moving from Running to Review.
+- Promote the harness to a shared skill only after repeat use.
+
+## Failure Modes To Watch
+
+- **Agent soup**: many agents running, no owner or merge gate.
+- **Invisible work**: useful output exists only in a chat transcript.
+- **Board theater**: a Kanban board exists but cards have no acceptance criteria.
+- **Overlapping writes**: parallel agents edit the same files without worktrees.
+- **No product artifact**: the process produces docs but no runnable or publishable surface.
+
+## Output Standard
+
+Finish each orchestration pass with:
+
+- Board/card changes.
+- Merged or pending branches.
+- Tests and eval evidence.
+- Blockers with owner and next action.
+- New shared skill candidates.
 
 ---
 
 **ECC Original:** `ECC/skills/team-agent-orchestration/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:33
+**Atualizado em:** 2026-07-12 11:45:50

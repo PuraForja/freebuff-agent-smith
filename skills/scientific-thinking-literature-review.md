@@ -1,28 +1,21 @@
 # 🧠 Skill: scientific-thinking-literature-review
 
-> **Adaptada do ECC:** `scientific-thinking-literature-review` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `scientific-thinking-literature-review` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/scientific-thinking-literature-review/SKILL.md`
 
 ## Descrição
 
-Systematic literature-review workflow for academic, biomedical, technical, and scientific topics, including search planning, source screening, synthesis, citation checks, and evidence logging.
+--- name: literature-review description: Systematic literature-review workflow for academic, biomedical, technical, and scientific topics, including search planning, source screening, synthesis, citation checks, and evidence logging.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: literature-review
+description: Systematic literature-review workflow for academic, biomedical, technical, and scientific topics, including search planning, source screening, synthesis, citation checks, and evidence logging.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Literature Review
 
@@ -138,8 +131,80 @@ Use a structured extraction table:
 
 ```markdown
 | Study | Design | Population/Data | Method | Comparator | Outcome | Key finding | Limitations |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Author Year | RCT/cohort/review/etc. | sample or corpus | method | baseline | measured outcome | result | caveat |
+```
+
+For technical papers, include dataset, benchmark, metric, baseline, and
+reproducibility notes.
+
+### 7. Synthesize
+
+Group evidence by theme rather than summarizing papers one by one.
+
+Useful synthesis lenses:
+
+- strongest evidence
+- conflicting evidence
+- methodological weaknesses
+- population or dataset limits
+- recency and replication
+- practical implications
+- unanswered questions
+
+Separate claims by confidence:
+
+- **High confidence**: replicated, high-quality evidence across sources.
+- **Medium confidence**: plausible but limited by sample, method, or recency.
+- **Low confidence**: early, speculative, single-source, or weakly measured.
+
+### 8. Verify Citations
+
+Before finalizing:
+
+- verify DOI, PMID, arXiv ID, or official URL
+- check author names and publication year
+- do not cite a paper for a claim it does not make
+- mark preprints as preprints
+- distinguish reviews from primary evidence
+
+## Output Template
+
+```markdown
+# Literature Review: <Topic>
+
+Generated: <date>
+Review type: <narrative | scoping | systematic | meta-analysis>
+Search window: <dates>
+Databases: <list>
+
+## Research Question
+
+## Search Strategy
+
+## Inclusion and Exclusion Criteria
+
+## Evidence Summary
+
+## Thematic Synthesis
+
+## Gaps and Limitations
+
+## References
+
+## Search Log
+```
+
+## Pitfalls
+
+- Do not treat search snippets as evidence.
+- Do not mix preprints, reviews, and primary studies without labeling them.
+- Do not omit negative or conflicting findings.
+- Do not claim systematic-review rigor without a reproducible protocol.
+- Do not use a single database for a broad claim unless the scope is explicitly
+  limited to that database.
 
 ---
 
 **ECC Original:** `ECC/skills/scientific-thinking-literature-review/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:49

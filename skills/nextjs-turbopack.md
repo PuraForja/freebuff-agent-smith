@@ -1,28 +1,21 @@
 # 🧠 Skill: nextjs-turbopack
 
-> **Adaptada do ECC:** `nextjs-turbopack` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `nextjs-turbopack` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/nextjs-turbopack/SKILL.md`
 
 ## Descrição
 
-Next.js 16+ and Turbopack — incremental bundling, FS caching, dev speed, and when to use Turbopack vs webpack.
+--- name: nextjs-turbopack description: Next.js 16+ and Turbopack — incremental bundling, FS caching, dev speed, and when to use Turbopack vs webpack.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: nextjs-turbopack
+description: Next.js 16+ and Turbopack — incremental bundling, FS caching, dev speed, and when to use Turbopack vs webpack.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Next.js and Turbopack
 
@@ -79,4 +72,4 @@ Reference: [Next.js proxy docs](https://nextjs.org/docs/app/getting-started/prox
 ---
 
 **ECC Original:** `ECC/skills/nextjs-turbopack/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:28
+**Atualizado em:** 2026-07-12 11:45:47

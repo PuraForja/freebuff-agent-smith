@@ -1,28 +1,21 @@
 # 🧠 Skill: tinystruct-patterns
 
-> **Adaptada do ECC:** `tinystruct-patterns` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `tinystruct-patterns` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/tinystruct-patterns/SKILL.md`
 
 ## Descrição
 
-Expert guidance for developing with the tinystruct Java framework. Use when working on the tinystruct codebase or any project built on tinystruct — including creating Application classes, @Action-mapped routes, unit tests, ActionRegistry, HTTP/CLI dual-mode handling, the built-in HTTP server, the event system, JSON with Builder/Builders, database persistence with AbstractData, POJO generation, Server-Sent Events (SSE), file uploads, and outbound HTTP networking.
+--- name: tinystruct-patterns description: Expert guidance for developing with the tinystruct Java framework. Use when working on the tinystruct codebase or any project built on tinystruct — including creating Application classes, @Action-mapped routes, unit tests, ActionRegistry, HTTP/CLI dual-mode handling, the built-in HTTP server, the event system, JSON with Builder/Builders, database persistence with AbstractData, POJO generation, Server-Sent Events (SSE), file uploads, and outbound HTTP networking.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-> ⚠️ Esta skill original usava hooks do Claude Code. Adaptada para Codebuff.
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: tinystruct-patterns
+description: Expert guidance for developing with the tinystruct Java framework. Use when working on the tinystruct codebase or any project built on tinystruct — including creating Application classes, @Action-mapped routes, unit tests, ActionRegistry, HTTP/CLI dual-mode handling, the built-in HTTP server, the event system, JSON with Builder/Builders, database persistence with AbstractData, POJO generation, Server-Sent Events (SSE), file uploads, and outbound HTTP networking.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # tinystruct Development Patterns
 
@@ -93,9 +86,211 @@ public String doLogin(Request<?, ?> request) throws ApplicationException {
 import org.tinystruct.data.component.Builder;
 import org.tinystruct.data.component.Builders;
 
-@Action("api/data
+@Action("api/data")
+public String getData() throws ApplicationException {
+    Builders dataList = new Builders();
+    Builder item = new Builder();
+    item.put("id", 1);
+    item.put("name", "James");
+    dataList.add(item);
+
+    Builder response = new Builder();
+    response.put("status", "success");
+    response.put("data", dataList);
+    return response.toString(); // {"status":"success","data":[{"id":1,"name":"James"}]}
+}
+```
+
+### SSE (Server-Sent Events)
+```java
+import org.tinystruct.http.SSEPushManager;
+
+@Action("sse/connect")
+public String connect() {
+    return "{\"type\":\"connect\",\"message\":\"Connected to SSE\"}";
+}
+
+// Push to a specific client
+String sessionId = getContext().getId();
+Builder msg = new Builder();
+msg.put("text", "Hello, user!");
+SSEPushManager.getInstance().push(sessionId, msg);
+
+// Broadcast to all
+// Broadcast to all
+SSEPushManager.getInstance().broadcast(msg);
+```
+
+### File Upload
+```java
+import org.tinystruct.data.FileEntity;
+
+@Action(value = "upload", mode = Mode.HTTP_POST)
+public String upload(Request<?, ?> request) throws ApplicationException {
+    List<FileEntity> files = request.getAttachments();
+    if (files != null) {
+        for (FileEntity file : files) {
+            System.out.println("Uploaded: " + file.getFilename());
+        }
+    }
+    return "Upload OK";
+}
+```
+
+## MCP Server and Tools Integration
+
+tinystruct provides native support for the Model Context Protocol (MCP) starting with SDK version **`1.7.26`**.
+The MCP APIs (e.g., `org.tinystruct.mcp.MCPTool`, `org.tinystruct.mcp.MCPServer`, `org.tinystruct.mcp.MCPException`) are included directly in the core dependency:
+```xml
+<dependency>
+    <groupId>org.tinystruct</groupId>
+    <artifactId>tinystruct</artifactId>
+    <version>1.7.26</version>
+</dependency>
+```
+
+> **SECURITY WARNING (Prompt Injection):**
+> Tool return values are fed directly back into the AI model's context window. You **MUST** validate and sanitize all caller-supplied arguments before including them in the tool's return string. Failure to sanitize inputs can allow an attacker to inject adversarial instructions (Prompt Injection) that override the model's behavior. Always validate length, character sets, and nullity.
+
+**To create an MCP Tool:**
+1. Extend `org.tinystruct.mcp.MCPTool`.
+2. Annotate operations with `@Action` and declare parameters using `@Argument` within the `arguments` array.
+3. Accept parameters as explicit method arguments matching the keys in `@Argument`. (Do **not** use `getContext().getAttribute(...)` for tool arguments).
+
+```java
+import org.tinystruct.mcp.MCPTool;
+import org.tinystruct.mcp.MCPException;
+import org.tinystruct.system.annotation.Action;
+import org.tinystruct.system.annotation.Argument;
+
+public class MyCustomTool extends MCPTool {
+    public MyCustomTool() {
+        super("custom", "A custom tool for demonstrating MCP");
+    }
+
+    @Action(
+        value = "custom/hello",
+        description = "Say hello to someone",
+        arguments = {
+            @Argument(key = "name", description = "The name to greet", type = "string", optional = false)
+        }
+    )
+    public String hello(String name) throws MCPException {
+        // SECURITY: Validate/sanitize tool inputs before returning to the model
+        // to prevent prompt injection vulnerabilities.
+        if (name == null || name.length() > 50 || !name.matches("^[a-zA-Z0-9 ]+$")) {
+            throw new MCPException("Invalid name provided");
+        }
+        return "Hello, " + name + "!";
+    }
+}
+```
+
+**To deploy an MCP Server:**
+1. Extend `org.tinystruct.mcp.MCPServer`.
+2. Override `init()` and register your tools using `this.registerTool()`. The framework automatically scans and maps the `@Action` methods.
+
+```java
+import org.tinystruct.mcp.MCPServer;
+
+public class MyMCPServer extends MCPServer {
+    @Override
+    public void init() {
+        super.init();
+        this.registerTool(new MyCustomTool());
+    }
+
+    @Override
+    public String version() {
+        return "1.0.0";
+    }
+}
+```
+
+Run the server via the dispatcher:
+```bash
+bin/dispatcher start --import org.tinystruct.system.HttpServer --import com.example.MyMCPServer
+```
+
+## Configuration
+
+Settings are managed in `src/main/resources/application.properties`.
+
+```properties
+# Database
+driver=org.h2.Driver
+database.url=jdbc:h2:~/mydb
+database.user=sa
+database.password=
+
+# Server
+default.home.page=hello
+server.port=8080
+
+# Locale
+default.language=en_US
+
+# Session (Redis for clustered environments)
+# default.session.repository=org.tinystruct.http.RedisSessionRepository
+# redis.host=127.0.0.1
+# redis.port=6379
+```
+
+Access config values in your application:
+```java
+String port = this.getConfiguration("server.port");
+```
+
+## Red Flags & Anti-patterns
+
+| Symptom | Correct Pattern |
+|---|---|
+| Importing `com.google.gson` or `com.fasterxml.jackson` | Use `org.tinystruct.data.component.Builder` / `Builders`. |
+| Using `List<Builder>` for JSON arrays | Use `Builders` to avoid generic type erasure issues. |
+| `ApplicationRuntimeException: template not found` | Call `setTemplateRequired(false)` in `init()` for API-only apps. |
+| Annotating `private` methods with `@Action` | Actions must be `public` to be registered by the framework. |
+| Hardcoding `main(String[] args)` in apps | Use `bin/dispatcher` as the entry point for all modules. |
+| Manual `ActionRegistry` registration | Prefer the `@Action` annotation for automatic discovery. |
+| Action not found at runtime | Ensure class is imported via `--import` or listed in `application.properties`. |
+| CLI arg not visible | Pass with `--key value`; access via `getContext().getAttribute("--key")`. |
+| Two methods same path, wrong one fires | Set explicit `mode` (e.g., `HTTP_GET` vs `HTTP_POST`) to disambiguate. |
+
+## Best Practices
+
+1. **Granular Applications**: Break logic into smaller, focused applications rather than one monolithic class.
+2. **Setup in `init()`**: Leverage `init()` for setup (config, DB) rather than the constructor. Do NOT call `setAction()` — use `@Action` annotation.
+3. **Mode Awareness**: Use the `Mode` parameter in `@Action` to restrict sensitive operations to `CLI` only or specific HTTP methods.
+4. **Context over Params**: For optional CLI flags, use `getContext().getAttribute("--flag")` rather than adding parameters to the method signature.
+5. **Asynchronous Events**: For heavy tasks triggered by events, use `CompletableFuture.runAsync()` inside the event handler.
+
+## Technical Reference
+
+Detailed guides are available in the `references/` directory:
+
+- [Architecture & Config](references/architecture.md) — Abstractions, Package Map, Properties
+- [Routing & @Action](references/routing.md) — Annotation details, Modes, Parameters
+- [Data Handling](references/data-handling.md) — Builder, Builders, JSON serialization & parsing
+- [Database Persistence](references/database.md) — AbstractData POJOs, CRUD, mapping XML, POJO generation
+- [System & Usage](references/system-usage.md) — Context, Sessions, SSE, File Uploads, Events, Networking
+- [Testing Patterns](references/testing.md) — JUnit 5 unit and HTTP integration testing
+
+## Reference Source Files (Internal)
+
+- `src/main/java/org/tinystruct/AbstractApplication.java` — Core base class with lifecycle hooks
+- `src/main/java/org/tinystruct/system/annotation/Action.java` — Annotation & Modes
+- `src/main/java/org/tinystruct/application/ActionRegistry.java` — Routing Engine
+- `src/main/java/org/tinystruct/data/component/Builder.java` — JSON object serializer
+- `src/main/java/org/tinystruct/data/component/Builders.java` — JSON array serializer
+- `src/main/java/org/tinystruct/data/component/AbstractData.java` — Base POJO class with CRUD
+- `src/main/java/org/tinystruct/data/Mapping.java` — Mapping XML parser
+- `src/main/java/org/tinystruct/data/tools/MySQLGenerator.java` — POJO generator reference
+- `src/main/java/org/tinystruct/data/component/FieldType.java` — SQL-to-Java type mappings
+- `src/main/java/org/tinystruct/data/component/Condition.java` — Fluent SQL query builder
+- `src/main/java/org/tinystruct/http/SSEPushManager.java` — SSE connection management
+- `src/test/java/org/tinystruct/application/ActionRegistryTest.java` — Registry test examples
+- `src/test/java/org/tinystruct/system/HttpServerHttpModeTest.java` — HTTP integration test patterns
 
 ---
 
 **ECC Original:** `ECC/skills/tinystruct-patterns/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:34
+**Atualizado em:** 2026-07-12 11:45:50

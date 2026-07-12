@@ -1,28 +1,21 @@
 # 🧠 Skill: hermes-imports
 
-> **Adaptada do ECC:** `hermes-imports` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `hermes-imports` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/hermes-imports/SKILL.md`
 
 ## Descrição
 
-Convert local Hermes operator workflows into sanitized ECC skills and release-pack artifacts. Use when preparing a Hermes workflow for public ECC reuse without leaking private workspace state, credentials, or local-only paths.
+--- name: hermes-imports description: Convert local Hermes operator workflows into sanitized ECC skills and release-pack artifacts. Use when preparing a Hermes workflow for public ECC reuse without leaking private workspace state, credentials, or local-only paths.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: hermes-imports
+description: Convert local Hermes operator workflows into sanitized ECC skills and release-pack artifacts. Use when preparing a Hermes workflow for public ECC reuse without leaking private workspace state, credentials, or local-only paths.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Hermes Imports
 
@@ -110,4 +103,4 @@ Return:
 ---
 
 **ECC Original:** `ECC/skills/hermes-imports/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:24
+**Atualizado em:** 2026-07-12 11:45:45

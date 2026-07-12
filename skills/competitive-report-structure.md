@@ -1,32 +1,24 @@
 # 🧠 Skill: competitive-report-structure
 
-> **Adaptada do ECC:** `competitive-report-structure` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `competitive-report-structure` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/competitive-report-structure/SKILL.md`
 
 ## Descrição
 
->-
+--- name: competitive-report-structure description: >-
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-
-
+name: competitive-report-structure
+description: >-
+  Use after benchmark-methodology has produced scored competitor profile cards.
+  Assembles findings into a decision-grade report: landscape map, competitor
+  profiles, benchmarking matrix, white-space analysis, strategic recommendations,
+  and team alignment trigger questions. Final step in the three-skill competitive
+  pipeline.
 ---
-
-## Conteúdo Adaptado
 
 # Competitive Report Structure
 
@@ -128,10 +120,60 @@ positioning brief** and flag any that would shift it. Sequence by impact ×
 effort.
 
 ### 8. Sources / methodology appendix
+The dimensions, weights, rubrics, the scoped set with tiers, source links per
+competitor, and verification notes (asserted vs proven). This is what makes the
+report auditable and defensible — carry the adversarial citation discipline
+through.
+
+## How to present data
+
+- **2×2 / positioning maps** — for landscape and the tension plot. Lead with
+  these; they carry the argument faster than prose.
+- **Heatmap matrix** — for the competitors × dimensions comparison (section 4).
+- **Profile cards** — the source unit feeding deep dives (section 5).
+- **Quadrant callouts** — name who sits in each quadrant explicitly, especially
+  the client's target one.
+- Keep tables scannable; push raw evidence and links to the appendix.
+
+## Decision framework (the report must resolve these)
+
+- **Who do we compete with?** — Name the Direct tier specifically; that's the
+  real fight.
+- **How do we compete?** — State the client's differentiator in one sentence,
+  grounded in the matrix (which dimensions the client owns).
+- **Where are our differentiators defensible?** — Identify the
+  dimensions/quadrant rivals can't easily copy (the moat), vs. the ones that
+  are table-stakes.
+
+## Trigger questions for the team alignment session
+
+End with questions that force decisions, not admiration of the analysis:
+
+- Is the target quadrant truly open, or is a rival already moving in?
+- Which Direct competitor is the sharpest threat in the next 12 months, and
+  what's the counter?
+- Does the brand balance still hold given the landscape — should any emphasis
+  shift?
+- Which dimension where the client trails is worth closing, and which to
+  deliberately concede?
+- What's the one move that most widens distinctiveness *without* costing
+  hireability / credibility?
+
+## Anti-Patterns
+
+- **Leading with methodology.** The executive summary opens with the most important finding, not an explanation of how the benchmark was run. Methodology belongs in the appendix.
+- **Presenting scores without the tension plot.** The 2×2 tension map is the headline artefact. A table of numbers without the map buries the strategic insight.
+- **Omitting the decision framework.** The report must resolve the three questions (who to compete with, how, where the moat is). Leaving these unanswered turns the report into a literature review.
+- **Starting before all profile cards are complete.** Benchmark-methodology must finish before assembly begins. Partial data produces gaps that undermine the heatmap and white-space analysis.
+- **Adding a blended total column to the matrix.** Explicitly excluded — it creates a false composite that obscures the asymmetry the client needs to act on.
+
+## Related Skills
+
+- `benchmark-methodology` — the prerequisite; produces the scored competitor profile cards this skill assembles.
+- `competitive-platform-analysis` — provides the tier structure (Direct / Adjacent / Aspirational) used in Section 3.
+- `brand-discovery` — use to establish the client's positioning brief if it hasn't been defined.
 
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/competitive-report-structure/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/competitive-report-structure/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:42

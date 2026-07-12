@@ -1,28 +1,21 @@
 # 🧠 Skill: orch-refine-code
 
-> **Adaptada do ECC:** `orch-refine-code` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `orch-refine-code` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/orch-refine-code/SKILL.md`
 
 ## Descrição
 
-Orchestrate a behavior-preserving refactor — confirm tests are green, restructure without changing behavior, keep tests green, review, and gated commit. Use when the structure should improve but behavior must not change.
+--- name: orch-refine-code description: Orchestrate a behavior-preserving refactor — confirm tests are green, restructure without changing behavior, keep tests green, review, and gated commit. Use when the structure should improve but behavior must not change.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: orch-refine-code
+description: Orchestrate a behavior-preserving refactor — confirm tests are green, restructure without changing behavior, keep tests green, review, and gated commit. Use when the structure should improve but behavior must not change.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # orch-refine-code
 
@@ -65,4 +58,4 @@ orch-refine-code: extract the NWS HTTP client out of poller.py
 ---
 
 **ECC Original:** `ECC/skills/orch-refine-code/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:29
+**Atualizado em:** 2026-07-12 11:45:48

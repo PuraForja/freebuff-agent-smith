@@ -1,28 +1,21 @@
 # 🧠 Skill: nanoclaw-repl
 
-> **Adaptada do ECC:** `nanoclaw-repl` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `nanoclaw-repl` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/nanoclaw-repl/SKILL.md`
 
 ## Descrição
 
-Operate and extend NanoClaw v2, ECC's zero-dependency session-aware REPL built on claude -p.
+--- name: nanoclaw-repl description: Operate and extend NanoClaw v2, ECC's zero-dependency session-aware REPL built on claude -p.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: nanoclaw-repl
+description: Operate and extend NanoClaw v2, ECC's zero-dependency session-aware REPL built on claude -p.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # NanoClaw REPL
 
@@ -55,4 +48,4 @@ Use this skill when running or extending `scripts/claw.js`.
 ---
 
 **ECC Original:** `ECC/skills/nanoclaw-repl/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:28
+**Atualizado em:** 2026-07-12 11:45:47

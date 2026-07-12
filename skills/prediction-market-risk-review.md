@@ -1,28 +1,21 @@
 # 🧠 Skill: prediction-market-risk-review
 
-> **Adaptada do ECC:** `prediction-market-risk-review` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `prediction-market-risk-review` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/prediction-market-risk-review/SKILL.md`
 
 ## Descrição
 
-Review prediction-market, basket, oracle, and trading-agent workflows for compliance, safety, data-quality, privacy, and execution risk. Use before any workflow handles venue auth, user portfolio data, API keys, or trade planning.
+--- name: prediction-market-risk-review description: Review prediction-market, basket, oracle, and trading-agent workflows for compliance, safety, data-quality, privacy, and execution risk. Use before any workflow handles venue auth, user portfolio data, API keys, or trade planning.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: prediction-market-risk-review
+description: Review prediction-market, basket, oracle, and trading-agent workflows for compliance, safety, data-quality, privacy, and execution risk. Use before any workflow handles venue auth, user portfolio data, API keys, or trade planning.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Prediction Market Risk Review
 
@@ -82,4 +75,4 @@ plan and explicit user approval.
 ---
 
 **ECC Original:** `ECC/skills/prediction-market-risk-review/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:29
+**Atualizado em:** 2026-07-12 11:45:48

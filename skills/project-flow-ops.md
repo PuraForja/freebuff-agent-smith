@@ -1,28 +1,21 @@
 # 🧠 Skill: project-flow-ops
 
-> **Adaptada do ECC:** `project-flow-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `project-flow-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/project-flow-ops/SKILL.md`
 
 ## Descrição
 
-Operate execution flow across GitHub and Linear by triaging issues and pull requests, linking active work, and keeping GitHub public-facing while Linear remains the internal execution layer. Use when the user wants backlog control, PR triage, or GitHub-to-Linear coordination.
+--- name: project-flow-ops description: Operate execution flow across GitHub and Linear by triaging issues and pull requests, linking active work, and keeping GitHub public-facing while Linear remains the internal execution layer. Use when the user wants backlog control, PR triage, or GitHub-to-Linear coordination.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: project-flow-ops
+description: Operate execution flow across GitHub and Linear by triaging issues and pull requests, linking active work, and keeping GitHub public-facing while Linear remains the internal execution layer. Use when the user wants backlog control, PR triage, or GitHub-to-Linear coordination.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Project Flow Ops
 
@@ -133,4 +126,4 @@ NEXT OPERATOR ACTION
 ---
 
 **ECC Original:** `ECC/skills/project-flow-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:30
+**Atualizado em:** 2026-07-12 11:45:48

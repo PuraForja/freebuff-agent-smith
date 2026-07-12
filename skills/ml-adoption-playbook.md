@@ -1,28 +1,20 @@
 # 🧠 Skill: ml-adoption-playbook
 
-> **Adaptada do ECC:** `ml-adoption-playbook` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ml-adoption-playbook` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ml-adoption-playbook/SKILL.md`
 
 ## Descrição
 
-End-to-end methodology for AI agents and software engineers to add machine learning algorithms to existing non-ML codebases. Covers problem framing, data readiness, architectural decoupling, and baseline model integration.
+--- name: ml-adoption-playbook description: End-to-end methodology for AI agents and software engineers to add machine learning algorithms to existing non-ML codebases. Covers problem framing, data readiness, architectural decoupling, and baseline model integration.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ml-adoption-playbook
+description: End-to-end methodology for AI agents and software engineers to add machine learning algorithms to existing non-ML codebases. Covers problem framing, data readiness, architectural decoupling, and baseline model integration.
+origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # ML Adoption Playbook
 
@@ -66,9 +58,17 @@ Structure the code for reproducibility and iteration.
 
 Once the baseline model is integrated, shift focus to continuous operations.
 - **Refer to `mle-workflow`:** Guide the user toward setting up experiment tracking, model registries, and drift detection.
-- **CI/CD:** Add the model evaluation step to the existing 
+- **CI/CD:** Add the model evaluation step to the existing CI pipeline to ensure future commits do not degrade model performance.
+
+## Iterative Agent Workflow
+
+When assisting a user via this playbook, agents should:
+1. **Ask clarifying questions** to complete Phase 1 before proposing architectures.
+2. **Draft a data contract** in Phase 2 for user approval.
+3. **Write the decoupling interface** (API/Service) in Phase 3 *before* writing the training loop.
+4. **Deliver a reproducible script** in Phase 4 that trains the model and saves the artifact.
 
 ---
 
 **ECC Original:** `ECC/skills/ml-adoption-playbook/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:27
+**Atualizado em:** 2026-07-12 11:45:47

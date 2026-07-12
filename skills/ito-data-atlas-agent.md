@@ -1,28 +1,21 @@
 # 🧠 Skill: ito-data-atlas-agent
 
-> **Adaptada do ECC:** `ito-data-atlas-agent` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `ito-data-atlas-agent` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/ito-data-atlas-agent/SKILL.md`
 
 ## Descrição
 
-Design background Data Atlas style agents for Itô basket research, market discovery, parameter drafting, and human-in-the-loop editing. Use for architecture and workflow planning, not live order execution.
+--- name: ito-data-atlas-agent description: Design background Data Atlas style agents for Itô basket research, market discovery, parameter drafting, and human-in-the-loop editing. Use for architecture and workflow planning, not live order execution.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: ito-data-atlas-agent
+description: Design background Data Atlas style agents for Itô basket research, market discovery, parameter drafting, and human-in-the-loop editing. Use for architecture and workflow planning, not live order execution.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Itô Data Atlas Agent
 
@@ -85,4 +78,4 @@ Return an implementation-ready workflow spec with:
 ---
 
 **ECC Original:** `ECC/skills/ito-data-atlas-agent/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:25
+**Atualizado em:** 2026-07-12 11:45:46

@@ -1,28 +1,21 @@
 # 🧠 Skill: orch-change-feature
 
-> **Adaptada do ECC:** `orch-change-feature` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `orch-change-feature` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/orch-change-feature/SKILL.md`
 
 ## Descrição
 
-Orchestrate altering an existing, working feature to new desired behavior — update its tests to the new spec, change the implementation to match, review, and gated commit. Use when behavior is not broken but should be different.
+--- name: orch-change-feature description: Orchestrate altering an existing, working feature to new desired behavior — update its tests to the new spec, change the implementation to match, review, and gated commit. Use when behavior is not broken but should be different.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: orch-change-feature
+description: Orchestrate altering an existing, working feature to new desired behavior — update its tests to the new spec, change the implementation to match, review, and gated commit. Use when behavior is not broken but should be different.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # orch-change-feature
 
@@ -64,4 +57,4 @@ orch-change-feature: make nws-poller alert at 2 warnings instead of 3
 ---
 
 **ECC Original:** `ECC/skills/orch-change-feature/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:29
+**Atualizado em:** 2026-07-12 11:45:48

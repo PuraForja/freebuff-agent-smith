@@ -1,28 +1,21 @@
 # 🧠 Skill: swift-protocol-di-testing
 
-> **Adaptada do ECC:** `swift-protocol-di-testing` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `swift-protocol-di-testing` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/swift-protocol-di-testing/SKILL.md`
 
 ## Descrição
 
-Protocol-based dependency injection for testable Swift code — mock file system, network, and external APIs using focused protocols and Swift Testing.
+--- name: swift-protocol-di-testing description: Protocol-based dependency injection for testable Swift code — mock file system, network, and external APIs using focused protocols and Swift Testing.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: swift-protocol-di-testing
+description: Protocol-based dependency injection for testable Swift code — mock file system, network, and external APIs using focused protocols and Swift Testing.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Swift Protocol-Based Dependency Injection for Testing
 
@@ -129,9 +122,87 @@ public actor SyncManager {
 
     public init(
         fileSystem: FileSystemProviding = DefaultFileSystemProvider(),
-   
+        fileAccessor: FileAccessorProviding = DefaultFileAccessor()
+    ) {
+        self.fileSystem = fileSystem
+        self.fileAccessor = fileAccessor
+    }
+
+    public func sync() async throws {
+        guard let containerURL = fileSystem.containerURL(for: .sync) else {
+            throw SyncError.containerNotAvailable
+        }
+        let data = try fileAccessor.read(
+            from: containerURL.appendingPathComponent("data.json")
+        )
+        // Process data...
+    }
+}
+```
+
+### 5. Write Tests with Swift Testing
+
+```swift
+import Testing
+
+@Test("Sync manager handles missing container")
+func testMissingContainer() async {
+    let mockFileSystem = MockFileSystemProvider(containerURL: nil)
+    let manager = SyncManager(fileSystem: mockFileSystem)
+
+    await #expect(throws: SyncError.containerNotAvailable) {
+        try await manager.sync()
+    }
+}
+
+@Test("Sync manager reads data correctly")
+func testReadData() async throws {
+    let mockFileAccessor = MockFileAccessor()
+    mockFileAccessor.files[testURL] = testData
+
+    let manager = SyncManager(fileAccessor: mockFileAccessor)
+    let result = try await manager.loadData()
+
+    #expect(result == expectedData)
+}
+
+@Test("Sync manager handles read errors gracefully")
+func testReadError() async {
+    let mockFileAccessor = MockFileAccessor()
+    mockFileAccessor.readError = CocoaError(.fileReadCorruptFile)
+
+    let manager = SyncManager(fileAccessor: mockFileAccessor)
+
+    await #expect(throws: SyncError.self) {
+        try await manager.sync()
+    }
+}
+```
+
+## Best Practices
+
+- **Single Responsibility**: Each protocol should handle one concern — don't create "god protocols" with many methods
+- **Sendable conformance**: Required when protocols are used across actor boundaries
+- **Default parameters**: Let production code use real implementations by default; only tests need to specify mocks
+- **Error simulation**: Design mocks with configurable error properties for testing failure paths
+- **Only mock boundaries**: Mock external dependencies (file system, network, APIs), not internal types
+
+## Anti-Patterns to Avoid
+
+- Creating a single large protocol that covers all external access
+- Mocking internal types that have no external dependencies
+- Using `#if DEBUG` conditionals instead of proper dependency injection
+- Forgetting `Sendable` conformance when used with actors
+- Over-engineering: if a type has no external dependencies, it doesn't need a protocol
+
+## When to Use
+
+- Any Swift code that touches file system, network, or external APIs
+- Testing error handling paths that are hard to trigger in real environments
+- Building modules that need to work in app, test, and SwiftUI preview contexts
+- Apps using Swift concurrency (actors, structured concurrency) that need testable architecture
 
 ---
 
 **ECC Original:** `ECC/skills/swift-protocol-di-testing/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:33
+**Atualizado em:** 2026-07-12 11:45:50

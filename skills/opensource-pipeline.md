@@ -1,28 +1,21 @@
 # 🧠 Skill: opensource-pipeline
 
-> **Adaptada do ECC:** `opensource-pipeline` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `opensource-pipeline` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/opensource-pipeline/SKILL.md`
 
 ## Descrição
 
-Open-source pipeline: fork, sanitize, and package private projects for safe public release. Chains 3 agents (forker, sanitizer, packager). Triggers: '/opensource', 'open source this', 'make this public', 'prepare for open source'.
+--- name: opensource-pipeline description: "Open-source pipeline: fork, sanitize, and package private projects for safe public release. Chains 3 agents (forker, sanitizer, packager). Triggers: '/opensource', 'open source this', 'make this public', 'prepare for open source'."
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: opensource-pipeline
+description: "Open-source pipeline: fork, sanitize, and package private projects for safe public release. Chains 3 agents (forker, sanitizer, packager). Triggers: '/opensource', 'open source this', 'make this public', 'prepare for open source'."
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Open-Source Pipeline Skill
 
@@ -130,9 +123,151 @@ Generate SANITIZATION_REPORT.md inside {STAGING_PATH}/ with PASS/FAIL verdict.
 
 Wait for completion. Read `{STAGING_PATH}/SANITIZATION_REPORT.md`.
 
-**If FAIL:** Show findings to user. Ask: "Fix these and re-s
+**If FAIL:** Show findings to user. Ask: "Fix these and re-scan, or abort?"
+- If fix: Apply fixes, re-run sanitizer (maximum 3 retry attempts — after 3 FAILs, present all findings and ask user to fix manually)
+- If abort: Clean up staging directory
+
+**If PASS or PASS WITH WARNINGS:** Continue to Step 5.
+
+#### Step 5: Run Packager Agent
+
+Spawn the `opensource-packager` agent:
+
+```
+Agent(
+  description="Package {PROJECT} for open-source",
+  subagent_type="opensource-packager",
+  prompt="""
+Generate open-source packaging for project.
+
+Project: {STAGING_PATH}
+License: {chosen_license}
+Project name: {PROJECT_NAME}
+Description: {description}
+GitHub repo: {github_repo}
+
+Generate:
+1. CLAUDE.md (commands, architecture, key files)
+2. setup.sh (one-command bootstrap, make executable)
+3. README.md (or enhance existing)
+4. LICENSE
+5. CONTRIBUTING.md
+6. .github/ISSUE_TEMPLATE/ (bug_report.md, feature_request.md)
+"""
+)
+```
+
+#### Step 6: Final Review
+
+Present to user:
+```
+Open-Source Fork Ready: {PROJECT_NAME}
+
+Location: {STAGING_PATH}
+License: {license}
+Files generated:
+  - CLAUDE.md
+  - setup.sh (executable)
+  - README.md
+  - LICENSE
+  - CONTRIBUTING.md
+  - .env.example ({N} variables)
+
+Sanitization: {sanitization_verdict}
+
+Next steps:
+  1. Review: cd {STAGING_PATH}
+  2. Create repo: gh repo create {github_org}/{github_repo} --public
+  3. Push: git remote add origin ... && git push -u origin main
+
+Proceed with GitHub creation? (yes/no/review first)
+```
+
+#### Step 7: GitHub Publish (on user approval)
+
+```bash
+cd "{STAGING_PATH}"
+gh repo create "{github_org}/{github_repo}" --public --source=. --push --description "{description}"
+```
+
+---
+
+### /opensource verify PROJECT
+
+Run sanitizer independently. Resolve path: if PROJECT contains `/`, treat as a path. Otherwise check `$HOME/opensource-staging/PROJECT`, then `$HOME/PROJECT`, then current directory.
+
+```
+Agent(
+  subagent_type="opensource-sanitizer",
+  prompt="Verify sanitization of: {resolved_path}. Run all 6 scan categories and generate SANITIZATION_REPORT.md."
+)
+```
+
+---
+
+### /opensource package PROJECT
+
+Run packager independently. Ask for "License?" and "Description?", then:
+
+```
+Agent(
+  subagent_type="opensource-packager",
+  prompt="Package: {resolved_path} ..."
+)
+```
+
+---
+
+### /opensource list
+
+```bash
+ls -d $HOME/opensource-staging/*/
+```
+
+Show each project with pipeline progress (FORK_REPORT.md, SANITIZATION_REPORT.md, CLAUDE.md presence).
+
+---
+
+### /opensource status PROJECT
+
+```bash
+cat $HOME/opensource-staging/${PROJECT}/SANITIZATION_REPORT.md
+cat $HOME/opensource-staging/${PROJECT}/FORK_REPORT.md
+```
+
+## Staging Layout
+
+```
+$HOME/opensource-staging/
+  my-project/
+    FORK_REPORT.md           # From forker agent
+    SANITIZATION_REPORT.md   # From sanitizer agent
+    CLAUDE.md                # From packager agent
+    setup.sh                 # From packager agent
+    README.md                # From packager agent
+    .env.example             # From forker agent
+    ...                      # Sanitized project files
+```
+
+## Anti-Patterns
+
+- **Never** push to GitHub without user approval
+- **Never** skip the sanitizer — it is the safety gate
+- **Never** proceed after a sanitizer FAIL without fixing all critical findings
+- **Never** leave `.env`, `*.pem`, or `credentials.json` in the staging directory
+
+## Best Practices
+
+- Always run the full pipeline (fork → sanitize → package) for new releases
+- The staging directory persists until explicitly cleaned up — use it for review
+- Re-run the sanitizer after any manual fixes before publishing
+- Parameterize secrets rather than deleting them — preserve project functionality
+
+## Related Skills
+
+See `security-review` for secret detection patterns used by the sanitizer.
 
 ---
 
 **ECC Original:** `ECC/skills/opensource-pipeline/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:28
+**Atualizado em:** 2026-07-12 11:45:48

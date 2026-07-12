@@ -1,28 +1,22 @@
 # 🧠 Skill: dashboard-builder
 
-> **Adaptada do ECC:** `dashboard-builder` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `dashboard-builder` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/dashboard-builder/SKILL.md`
 
 ## Descrição
 
-Build monitoring dashboards that answer real operator questions for Grafana, SigNoz, and similar platforms. Use when turning metrics into a working dashboard instead of a vanity board.
+--- name: dashboard-builder description: Build monitoring dashboards that answer real operator questions for Grafana, SigNoz, and similar platforms. Use when turning metrics into a working dashboard instead of a vanity board.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: dashboard-builder
+description: Build monitoring dashboards that answer real operator questions for Grafana, SigNoz, and similar platforms. Use when turning metrics into a working dashboard instead of a vanity board.
+metadata:
+  origin: ECC direct-port adaptation
+version: "1.0.0"
 ---
-
-## Conteúdo Adaptado
 
 # Dashboard Builder
 
@@ -129,4 +123,4 @@ Every panel should answer a real question. If it does not, remove it.
 ---
 
 **ECC Original:** `ECC/skills/dashboard-builder/SKILL.md`
-**Atualizado em:** 2026-07-01 13:21:04
+**Atualizado em:** 2026-07-12 11:45:43

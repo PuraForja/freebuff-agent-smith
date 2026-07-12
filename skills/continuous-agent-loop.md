@@ -1,28 +1,21 @@
 # 🧠 Skill: continuous-agent-loop
 
-> **Adaptada do ECC:** `continuous-agent-loop` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `continuous-agent-loop` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/continuous-agent-loop/SKILL.md`
 
 ## Descrição
 
-Patterns for continuous autonomous agent loops with quality gates, evals, and recovery controls.
+--- name: continuous-agent-loop description: Patterns for continuous autonomous agent loops with quality gates, evals, and recovery controls.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: continuous-agent-loop
+description: Patterns for continuous autonomous agent loops with quality gates, evals, and recovery controls.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Continuous Agent Loop
 
@@ -67,4 +60,4 @@ Recommended production stack:
 ---
 
 **ECC Original:** `ECC/skills/continuous-agent-loop/SKILL.md`
-**Atualizado em:** 2026-07-01 13:32:58
+**Atualizado em:** 2026-07-12 11:45:43

@@ -1,28 +1,21 @@
 # 🧠 Skill: jpa-patterns
 
-> **Adaptada do ECC:** `jpa-patterns` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `jpa-patterns` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/jpa-patterns/SKILL.md`
 
 ## Descrição
 
-JPA/Hibernate patterns for entity design, relationships, query optimization, transactions, auditing, indexing, pagination, and pooling in Spring Boot.
+--- name: jpa-patterns description: JPA/Hibernate patterns for entity design, relationships, query optimization, transactions, auditing, indexing, pagination, and pooling in Spring Boot.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: jpa-patterns
+description: JPA/Hibernate patterns for entity design, relationships, query optimization, transactions, auditing, indexing, pagination, and pooling in Spring Boot.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # JPA/Hibernate Patterns
 
@@ -133,9 +126,44 @@ For cursor-like pagination, include `id > :lastId` in JPQL with ordering.
 
 ## Indexing and Performance
 
-- Add indexes for common filters (`statu
+- Add indexes for common filters (`status`, `slug`, foreign keys)
+- Use composite indexes matching query patterns (`status, created_at`)
+- Avoid `select *`; project only needed columns
+- Batch writes with `saveAll` and `hibernate.jdbc.batch_size`
+
+## Connection Pooling (HikariCP)
+
+Recommended properties:
+```
+spring.datasource.hikari.maximum-pool-size=20
+spring.datasource.hikari.minimum-idle=5
+spring.datasource.hikari.connection-timeout=30000
+spring.datasource.hikari.validation-timeout=5000
+```
+
+For PostgreSQL LOB handling, add:
+```
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+```
+
+## Caching
+
+- 1st-level cache is per EntityManager; avoid keeping entities across transactions
+- For read-heavy entities, consider second-level cache cautiously; validate eviction strategy
+
+## Migrations
+
+- Use Flyway or Liquibase; never rely on Hibernate auto DDL in production
+- Keep migrations idempotent and additive; avoid dropping columns without plan
+
+## Testing Data Access
+
+- Prefer `@DataJpaTest` with Testcontainers to mirror production
+- Assert SQL efficiency using logs: set `logging.level.org.hibernate.SQL=DEBUG` and `logging.level.org.hibernate.orm.jdbc.bind=TRACE` for parameter values
+
+**Remember**: Keep entities lean, queries intentional, and transactions short. Prevent N+1 with fetch strategies and projections, and index for your read/write paths.
 
 ---
 
 **ECC Original:** `ECC/skills/jpa-patterns/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:25
+**Atualizado em:** 2026-07-12 11:45:46

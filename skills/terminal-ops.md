@@ -1,28 +1,21 @@
 # 🧠 Skill: terminal-ops
 
-> **Adaptada do ECC:** `terminal-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `terminal-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/terminal-ops/SKILL.md`
 
 ## Descrição
 
-Evidence-first repo execution workflow for ECC. Use when the user wants a command run, a repo checked, a CI failure debugged, or a narrow fix pushed with exact proof of what was executed and verified.
+--- name: terminal-ops description: Evidence-first repo execution workflow for ECC. Use when the user wants a command run, a repo checked, a CI failure debugged, or a narrow fix pushed with exact proof of what was executed and verified.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: terminal-ops
+description: Evidence-first repo execution workflow for ECC. Use when the user wants a command run, a repo checked, a CI failure debugged, or a narrow fix pushed with exact proof of what was executed and verified.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Terminal Ops
 
@@ -131,4 +124,4 @@ STATUS
 ---
 
 **ECC Original:** `ECC/skills/terminal-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:34
+**Atualizado em:** 2026-07-12 11:45:50

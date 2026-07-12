@@ -1,28 +1,21 @@
 # 🧠 Skill: email-ops
 
-> **Adaptada do ECC:** `email-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `email-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/email-ops/SKILL.md`
 
 ## Descrição
 
-Evidence-first mailbox triage, drafting, send verification, and sent-mail-safe follow-up workflow for ECC. Use when the user wants to organize email, draft or send through the real mail surface, or prove what landed in Sent.
+--- name: email-ops description: Evidence-first mailbox triage, drafting, send verification, and sent-mail-safe follow-up workflow for ECC. Use when the user wants to organize email, draft or send through the real mail surface, or prove what landed in Sent.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: email-ops
+description: Evidence-first mailbox triage, drafting, send verification, and sent-mail-safe follow-up workflow for ECC. Use when the user wants to organize email, draft or send through the real mail surface, or prove what landed in Sent.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Email Ops
 
@@ -136,9 +129,11 @@ NEXT STEP
 
 ## Verification
 
-- the response names the account and thread or recipi
+- the response names the account and thread or recipient
+- any send claim includes Sent proof or an explicit client-side confirmation
+- the final state is one of drafted / sent / blocked / awaiting verification
 
 ---
 
 **ECC Original:** `ECC/skills/email-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:22
+**Atualizado em:** 2026-07-12 11:45:44

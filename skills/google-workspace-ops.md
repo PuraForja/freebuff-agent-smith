@@ -1,28 +1,21 @@
 # 🧠 Skill: google-workspace-ops
 
-> **Adaptada do ECC:** `google-workspace-ops` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `google-workspace-ops` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/google-workspace-ops/SKILL.md`
 
 ## Descrição
 
-Operate across Google Drive, Docs, Sheets, and Slides as one workflow surface for plans, trackers, decks, and shared documents. Use when the user needs to find, summarize, edit, migrate, or clean up Google Workspace assets without dropping to raw tool calls.
+--- name: google-workspace-ops description: Operate across Google Drive, Docs, Sheets, and Slides as one workflow surface for plans, trackers, decks, and shared documents. Use when the user needs to find, summarize, edit, migrate, or clean up Google Workspace assets without dropping to raw tool calls.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: google-workspace-ops
+description: Operate across Google Drive, Docs, Sheets, and Slides as one workflow surface for plans, trackers, decks, and shared documents. Use when the user needs to find, summarize, edit, migrate, or clean up Google Workspace assets without dropping to raw tool calls.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Google Workspace Ops
 
@@ -117,4 +110,4 @@ FOLLOW-UPS
 ---
 
 **ECC Original:** `ECC/skills/google-workspace-ops/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:23
+**Atualizado em:** 2026-07-12 11:45:45

@@ -1,28 +1,19 @@
 # 🧠 Skill: swiftui-patterns
 
-> **Adaptada do ECC:** `swiftui-patterns` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `swiftui-patterns` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/swiftui-patterns/SKILL.md`
 
 ## Descrição
 
-SwiftUI architecture patterns, state management with @Observable, view composition, navigation, performance optimization, and modern iOS/macOS UI best practices.
+--- name: swiftui-patterns description: SwiftUI architecture patterns, state management with @Observable, view composition, navigation, performance optimization, and modern iOS/macOS UI best practices.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: swiftui-patterns
+description: SwiftUI architecture patterns, state management with @Observable, view composition, navigation, performance optimization, and modern iOS/macOS UI best practices.
 ---
-
-## Conteúdo Adaptado
 
 # SwiftUI Patterns
 
@@ -129,9 +120,157 @@ struct OrderView: View {
     var body: some View {
         VStack {
             OrderHeader(title: viewModel.title)
-            OrderItemList(items: viewModel.item
+            OrderItemList(items: viewModel.items)
+            OrderTotal(total: viewModel.total)
+        }
+    }
+}
+```
+
+### ViewModifier for Reusable Styling
+
+```swift
+struct CardModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .background(.regularMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+}
+
+extension View {
+    func cardStyle() -> some View {
+        modifier(CardModifier())
+    }
+}
+```
+
+## Navigation
+
+### Type-Safe NavigationStack
+
+Use `NavigationStack` with `NavigationPath` for programmatic, type-safe routing:
+
+```swift
+@Observable
+final class Router {
+    var path = NavigationPath()
+
+    func navigate(to destination: Destination) {
+        path.append(destination)
+    }
+
+    func popToRoot() {
+        path = NavigationPath()
+    }
+}
+
+enum Destination: Hashable {
+    case detail(Item.ID)
+    case settings
+    case profile(User.ID)
+}
+
+struct RootView: View {
+    @State private var router = Router()
+
+    var body: some View {
+        NavigationStack(path: $router.path) {
+            HomeView()
+                .navigationDestination(for: Destination.self) { dest in
+                    switch dest {
+                    case .detail(let id): ItemDetailView(itemID: id)
+                    case .settings: SettingsView()
+                    case .profile(let id): ProfileView(userID: id)
+                    }
+                }
+        }
+        .environment(router)
+    }
+}
+```
+
+## Performance
+
+### Use Lazy Containers for Large Collections
+
+`LazyVStack` and `LazyHStack` create views only when visible:
+
+```swift
+ScrollView {
+    LazyVStack(spacing: 8) {
+        ForEach(items) { item in
+            ItemRow(item: item)
+        }
+    }
+}
+```
+
+### Stable Identifiers
+
+Always use stable, unique IDs in `ForEach` — avoid using array indices:
+
+```swift
+// Use Identifiable conformance or explicit id
+ForEach(items, id: \.stableID) { item in
+    ItemRow(item: item)
+}
+```
+
+### Avoid Expensive Work in body
+
+- Never perform I/O, network calls, or heavy computation inside `body`
+- Use `.task {}` for async work — it cancels automatically when the view disappears
+- Use `.sensoryFeedback()` and `.geometryGroup()` sparingly in scroll views
+- Minimize `.shadow()`, `.blur()`, and `.mask()` in lists — they trigger offscreen rendering
+
+### Equatable Conformance
+
+For views with expensive bodies, conform to `Equatable` to skip unnecessary re-renders:
+
+```swift
+struct ExpensiveChartView: View, Equatable {
+    let dataPoints: [DataPoint] // DataPoint must conform to Equatable
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.dataPoints == rhs.dataPoints
+    }
+
+    var body: some View {
+        // Complex chart rendering
+    }
+}
+```
+
+## Previews
+
+Use `#Preview` macro with inline mock data for fast iteration:
+
+```swift
+#Preview("Empty state") {
+    ItemListView(viewModel: ItemListViewModel(repository: EmptyMockRepository()))
+}
+
+#Preview("Loaded") {
+    ItemListView(viewModel: ItemListViewModel(repository: PopulatedMockRepository()))
+}
+```
+
+## Anti-Patterns to Avoid
+
+- Using `ObservableObject` / `@Published` / `@StateObject` / `@EnvironmentObject` in new code — migrate to `@Observable`
+- Putting async work directly in `body` or `init` — use `.task {}` or explicit load methods
+- Creating view models as `@State` inside child views that don't own the data — pass from parent instead
+- Using `AnyView` type erasure — prefer `@ViewBuilder` or `Group` for conditional views
+- Ignoring `Sendable` requirements when passing data to/from actors
+
+## References
+
+See skill: `swift-actor-persistence` for actor-based persistence patterns.
+See skill: `swift-protocol-di-testing` for protocol-based DI and testing with Swift Testing.
 
 ---
 
 **ECC Original:** `ECC/skills/swiftui-patterns/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:33
+**Atualizado em:** 2026-07-12 11:45:50

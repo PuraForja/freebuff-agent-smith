@@ -1,28 +1,21 @@
 # 🧠 Skill: bun-runtime
 
-> **Adaptada do ECC:** `bun-runtime` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `bun-runtime` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/bun-runtime/SKILL.md`
 
 ## Descrição
 
-Bun as runtime, package manager, bundler, and test runner. When to choose Bun vs Node, migration notes, and Vercel support.
+--- name: bun-runtime description: Bun as runtime, package manager, bundler, and test runner. When to choose Bun vs Node, migration notes, and Vercel support.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: bun-runtime
+description: Bun as runtime, package manager, bundler, and test runner. When to choose Bun vs Node, migration notes, and Vercel support.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Bun Runtime
 
@@ -106,4 +99,4 @@ Bun.serve({
 ---
 
 **ECC Original:** `ECC/skills/bun-runtime/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:19
+**Atualizado em:** 2026-07-12 11:45:42

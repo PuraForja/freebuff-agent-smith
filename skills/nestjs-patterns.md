@@ -1,28 +1,21 @@
 # 🧠 Skill: nestjs-patterns
 
-> **Adaptada do ECC:** `nestjs-patterns` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `nestjs-patterns` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/nestjs-patterns/SKILL.md`
 
 ## Descrição
 
-NestJS architecture patterns for modules, controllers, providers, DTO validation, guards, interceptors, config, and production-grade TypeScript backends.
+--- name: nestjs-patterns description: NestJS architecture patterns for modules, controllers, providers, DTO validation, guards, interceptors, config, and production-grade TypeScript backends.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: nestjs-patterns
+description: NestJS architecture patterns for modules, controllers, providers, DTO validation, guards, interceptors, config, and production-grade TypeScript backends.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # NestJS Development Patterns
 
@@ -154,9 +147,102 @@ export class CreateUserDto {
 ```
 
 - Validate every request DTO with `class-validator`.
-- Use dedicated response DTOs 
+- Use dedicated response DTOs or serializers instead of returning ORM entities directly.
+- Avoid leaking internal fields such as password hashes, tokens, or audit columns.
+
+## Auth, Guards, and Request Context
+
+```ts
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles('admin')
+@Get('admin/report')
+getAdminReport(@Req() req: AuthenticatedRequest) {
+  return this.reportService.getForUser(req.user.id);
+}
+```
+
+- Keep auth strategies and guards module-local unless they are truly shared.
+- Encode coarse access rules in guards, then do resource-specific authorization in services.
+- Prefer explicit request types for authenticated request objects.
+
+## Exception Filters and Error Shape
+
+```ts
+@Catch()
+export class HttpExceptionFilter implements ExceptionFilter {
+  catch(exception: unknown, host: ArgumentsHost) {
+    const response = host.switchToHttp().getResponse<Response>();
+    const request = host.switchToHttp().getRequest<Request>();
+
+    if (exception instanceof HttpException) {
+      return response.status(exception.getStatus()).json({
+        path: request.url,
+        error: exception.getResponse(),
+      });
+    }
+
+    return response.status(500).json({
+      path: request.url,
+      error: 'Internal server error',
+    });
+  }
+}
+```
+
+- Keep one consistent error envelope across the API.
+- Throw framework exceptions for expected client errors; log and wrap unexpected failures centrally.
+
+## Config and Environment Validation
+
+```ts
+ConfigModule.forRoot({
+  isGlobal: true,
+  load: [configuration],
+  validate: validateEnv,
+});
+```
+
+- Validate env at boot, not lazily at first request.
+- Keep config access behind typed helpers or config services.
+- Split dev/staging/prod concerns in config factories instead of branching throughout feature code.
+
+## Persistence and Transactions
+
+- Keep repository / ORM code behind providers that speak domain language.
+- For Prisma or TypeORM, isolate transactional workflows in services that own the unit of work.
+- Do not let controllers coordinate multi-step writes directly.
+
+## Testing
+
+```ts
+describe('UsersController', () => {
+  let app: INestApplication;
+
+  beforeAll(async () => {
+    const moduleRef = await Test.createTestingModule({
+      imports: [UsersModule],
+    }).compile();
+
+    app = moduleRef.createNestApplication();
+    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    await app.init();
+  });
+});
+```
+
+- Unit test providers in isolation with mocked dependencies.
+- Add request-level tests for guards, validation pipes, and exception filters.
+- Reuse the same global pipes/filters in tests that you use in production.
+
+## Production Defaults
+
+- Enable structured logging and request correlation ids.
+- Terminate on invalid env/config instead of booting partially.
+- Prefer async provider initialization for DB/cache clients with explicit health checks.
+- Keep background jobs and event consumers in their own modules, not inside HTTP controllers.
+- Make rate limiting, auth, and audit logging explicit for public endpoints.
 
 ---
 
 **ECC Original:** `ECC/skills/nestjs-patterns/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:28
+**Atualizado em:** 2026-07-12 11:45:47

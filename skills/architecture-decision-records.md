@@ -1,32 +1,21 @@
 # 🧠 Skill: architecture-decision-records
 
-> **Adaptada do ECC:** `architecture-decision-records` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `architecture-decision-records` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/architecture-decision-records/SKILL.md`
 
 ## Descrição
 
-Capture architectural decisions made during Claude Code sessions as structured ADRs. Auto-detects decision moments, records context, alternatives considered, and rationale. Maintains an ADR log so future developers understand why the codebase is shaped the way it is.
+--- name: architecture-decision-records description: Capture architectural decisions made during Claude Code sessions as structured ADRs. Auto-detects decision moments, records context, alternatives considered, and rationale. Maintains an ADR log so future developers understand why the codebase is shaped the way it is.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-Esta skill foi convertida automaticamente do ECC (formato Claude Code) para o
-formato Codebuff. Ela mantém o conteúdo essencial do ECC, adaptando
-referências específicas do Claude Code:
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks (PreToolUse/PostToolUse) | Instruções no `.codebuff/instructions.md` |
-| Comandos slash (/multi-plan, etc.) | Skills carregadas via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
-
-
+name: architecture-decision-records
+description: Capture architectural decisions made during Claude Code sessions as structured ADRs. Auto-detects decision moments, records context, alternatives considered, and rationale. Maintains an ADR log so future developers understand why the codebase is shaped the way it is.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Architecture Decision Records
 
@@ -129,9 +118,80 @@ docs/
 
 ### ADR Index Format
 
+```markdown
+# Architecture Decision Records
+
+| ADR | Title | Status | Date |
+|-----|-------|--------|------|
+| [0001](0001-use-nextjs.md) | Use Next.js as frontend framework | accepted | 2026-01-15 |
+| [0002](0002-postgres-over-mongo.md) | PostgreSQL over MongoDB for primary datastore | accepted | 2026-01-20 |
+| [0003](0003-rest-over-graphql.md) | REST API over GraphQL | accepted | 2026-02-01 |
+```
+
+## Decision Detection Signals
+
+Watch for these patterns in conversation that indicate an architectural decision:
+
+**Explicit signals**
+- "Let's go with X"
+- "We should use X instead of Y"
+- "The trade-off is worth it because..."
+- "Record this as an ADR"
+
+**Implicit signals** (suggest recording an ADR — do not auto-create without user confirmation)
+- Comparing two frameworks or libraries and reaching a conclusion
+- Making a database schema design choice with stated rationale
+- Choosing between architectural patterns (monolith vs microservices, REST vs GraphQL)
+- Deciding on authentication/authorization strategy
+- Selecting deployment infrastructure after evaluating alternatives
+
+## What Makes a Good ADR
+
+### Do
+- **Be specific** — "Use Prisma ORM" not "use an ORM"
+- **Record the why** — the rationale matters more than the what
+- **Include rejected alternatives** — future developers need to know what was considered
+- **State consequences honestly** — every decision has trade-offs
+- **Keep it short** — an ADR should be readable in 2 minutes
+- **Use present tense** — "We use X" not "We will use X"
+
+### Don't
+- Record trivial decisions — variable naming or formatting choices don't need ADRs
+- Write essays — if the context section exceeds 10 lines, it's too long
+- Omit alternatives — "we just picked it" is not a valid rationale
+- Backfill without marking it — if recording a past decision, note the original date
+- Let ADRs go stale — superseded decisions should reference their replacement
+
+## ADR Lifecycle
+
+```
+proposed → accepted → [deprecated | superseded by ADR-NNNN]
+```
+
+- **proposed**: decision is under discussion, not yet committed
+- **accepted**: decision is in effect and being followed
+- **deprecated**: decision is no longer relevant (e.g., feature removed)
+- **superseded**: a newer ADR replaces this one (always link the replacement)
+
+## Categories of Decisions Worth Recording
+
+| Category | Examples |
+|----------|---------|
+| **Technology choices** | Framework, language, database, cloud provider |
+| **Architecture patterns** | Monolith vs microservices, event-driven, CQRS |
+| **API design** | REST vs GraphQL, versioning strategy, auth mechanism |
+| **Data modeling** | Schema design, normalization decisions, caching strategy |
+| **Infrastructure** | Deployment model, CI/CD pipeline, monitoring stack |
+| **Security** | Auth strategy, encryption approach, secret management |
+| **Testing** | Test framework, coverage targets, E2E vs integration balance |
+| **Process** | Branching strategy, review process, release cadence |
+
+## Integration with Other Skills
+
+- **Planner agent**: when the planner proposes architecture changes, suggest creating an ADR
+- **Code reviewer agent**: flag PRs that introduce architectural changes without a corresponding ADR
+
 ---
 
-## Referência
-
-- **ECC Original:** `ECC/skills/architecture-decision-records/SKILL.md`
-- **Atualizado em:** 2026-07-01 11:58:49
+**ECC Original:** `ECC/skills/architecture-decision-records/SKILL.md`
+**Atualizado em:** 2026-07-12 11:45:41

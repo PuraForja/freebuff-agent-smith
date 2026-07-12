@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**Ponte de adaptação entre o [ECC](https://github.com/affaan-m/ECC) e o [Codebuff](https://codebuff.com)**
+**[ECC](https://github.com/affaan-m/ECC) agents and skills for [Freebuff](https://freebuff.com)**
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/PuraForja/freebuff-ecc-bridge?branch=master)
 ![GitHub repo size](https://img.shields.io/github/repo-size/PuraForja/freebuff-ecc-bridge)
@@ -10,13 +10,11 @@
 
 ---
 
-| 🧠 Skills | 🎯 Agentes | 📏 Regras | ⚡ Comandos | 🔌 Hooks | 📝 Contextos |
-|:---------:|:----------:|:---------:|:-----------:|:--------:|:------------:|
-| 277 | 67 | 121 | 92 | 3 | 3 |
+| 🧠 Skills | 🎯 Agentes |
+|:---------:|:----------:|
+| 278 | 67 |
 
-**563 recursos do ECC adaptados → 100% de cobertura**
-
-> \* Bridge tem 278 skills (1 extra: `infinite-improvement-loop.md` — skill própria)
+**ECC content → Freebuff-compatible format**
 
 </div>
 
@@ -24,43 +22,36 @@
 
 ## 📋 O que é
 
-O [ECC](https://github.com/affaan-m/ECC) (224k+ ⭐) é um ecossistema massivo de skills, agentes e regras para **Claude Code**. Este projeto cria uma **ponte** entre o ECC e o **Codebuff**, adaptando automaticamente todo o conteúdo para o formato nativo do Codebuff.
-
-**Você não precisa conhecer o catálogo.** A IA (Buffy) carrega automaticamente as skills e agentes relevantes para cada tarefa.
+O [ECC](https://github.com/affaan-m/ECC) (224k+ ⭐) é um ecossistema massivo de skills e agentes para **Claude Code**. Este projeto adapta esse conteúdo para o **Freebuff**, convertendo agentes para TypeScript e skills para Markdown.
 
 ---
 
 ## 🚀 Como usar
 
-### Na prática (usuário)
-
-Apenas **peça tarefas normalmente**. A IA descobre e aplica as ferramentas relevantes automaticamente:
-
-| Você pede... | A IA carrega automaticamente... |
-|--------------|---------------------------------|
-| "Revise este código Python" | `python-patterns` + `python-reviewer` + regras Python |
-| "Crie uma API" | `api-design` + `backend-patterns` + `architect` |
-| "Teste isso" | `e2e-testing` + `tdd-workflow` + `tdd-guide` |
-| "Investigue um bug" | `error-handling` + `silent-failure-hunter` |
-| "Melhore performance" | `performance-optimizer` |
-| "Pesquise sobre X" | `deep-research` + `research-ops` |
-| "Faça deploy" | `deployment-patterns` + `docker-patterns` |
-
-### Sincronizar com o ECC oficial
+### Instalar/Atualizar
 
 ```bash
-./scripts/sync-ecc.sh
+# Instalação inicial
+bash scripts/ecc-install.sh
+
+# Atualizar apenas novos recursos
+bash scripts/ecc-install.sh --update
+
+# Forçar reinstalação completa
+bash scripts/ecc-install.sh --force
 ```
 
-Isso atualiza o clone do ECC e adapta automaticamente skills, agentes, regras, comandos, hooks e contextos novos.
-
----
-
-## 📦 Repositório
+### Usar agentes
 
 ```bash
-git clone https://github.com/PuraForja/freebuff-ecc-bridge.git
-cd freebuff-ecc-bridge
+# Usar um agente (TypeScript)
+@code-reviewer revise este código
+
+# Listar agentes disponíveis
+ls .agents/*.ts
+
+# Usar uma skill (Markdown)
+read_files skills/nome-da-skill.md
 ```
 
 ---
@@ -69,115 +60,73 @@ cd freebuff-ecc-bridge
 
 ```
 freebuff-ecc-bridge/
-├── .codebuff/
-│   └── instructions.md     ← ⚠️ Instruções permanentes (NÃO ignore)
-├── .gitignore
-├── CATALOGO.md             ← 📋 Catálogo completo de recursos
-├── README.md               ← Este arquivo
-├── SESSAO.md               ← 📓 Registro de sessão (continuidade)
+├── .agents/              ← 67 agentes TypeScript
+│   ├── types/            ← Tipos TypeScript
+│   ├── *.ts              ← Agentes convertidos
+│   └── .ecc-version      ← Versão do ECC
 │
-├── skills/                 ← 🧠 277 skills adaptadas
-│   ├── coding-standards.md
-│   ├── api-design.md
-│   ├── error-handling.md
-│   ├── deep-research.md
-│   └── ...
-│
-├── agents/                 ← 🎯 67 agentes como docs de referência
-│   ├── code-reviewer.md
-│   ├── architect.md
-│   ├── security-reviewer.md
-│   ├── python-reviewer.md
-│   ├── typescript-reviewer.md
-│   └── ...
-│
-├── rules/                  ← 📏 121 regras de qualidade por linguagem
-│   ├── python/
-│   ├── typescript/
-│   ├── golang/
-│   ├── react/
-│   └── ...
-│
-├── commands/               ← ⚡ 92 comandos de referência ECC
-├── hooks/                  ← 🔌 3 hooks adaptados
-├── contexts/               ← 📝 3 contextos de trabalho
+├── skills/               ← 278 skills Markdown
+│   └── *.md
 │
 ├── scripts/
-│   ├── sync-ecc.sh         ← 🔄 Sincronizador principal (9 passos, 6 categorias)
-│   ├── gerar-catalogo.sh   ← 📊 Gerador do CATALOGO.md (otimizado: ~15s)
-│   ├── auto-review.sh      ← 🔍 Auto-revisão de qualidade (372 checks)
-│   ├── auto-sync-check.sh  ← ⏰ Verificador automático (.bashrc)
-│   └── infinite-improvement-loop.sh  ← 🔁 Loop de melhoria contínua
+│   └── ecc-install.sh    ← Script de instalação
 │
-└── logs/                   ← 📄 Relatórios de sincronização (gitignored)
+├── CATALOGO.md           ← Catálogo completo
+├── knowledge.md          ← Documentação
+└── README.md             ← Este arquivo
 ```
 
 ---
 
 ## 📊 Estatísticas
 
-| Categoria | ECC | Bridge | Cobertura |
-|-----------|:---:|:------:|:---------:|
-| 🧠 Skills | 277 | 278* | **100%** |
+| Categoria | ECC | Freebuff | Cobertura |
+|-----------|:---:|:--------:|:---------:|
+| 🧠 Skills | 278 | 278 | **100%** |
 | 🎯 Agentes | 67 | 67 | **100%** |
-| 📏 Regras | 121 | 121 | **100%** |
-| ⚡ Comandos | 92 | 92 | **100%** |
-| 🔌 Hooks | 3 | 3 | **100%** |
-| 📝 Contextos | 3 | 3 | **100%** |
-| **Total** | **563** | **564** | **100%** |
-
-### Principais linguagens cobertas (rules)
-
-| Linguagem | Regras |
-|-----------|:------:|
-| Python | coding-style, patterns, security, testing |
-| TypeScript | coding-style, patterns, security, testing |
-| Golang | coding-style, patterns, security, testing |
-| React | patterns, performance, testing |
-| Rust | patterns, testing, security |
-| Kotlin | patterns, coroutines, testing |
-| +15 outras | cada uma com 3-4 regras |
 
 ---
 
-## 🔄 Auto-Review
+## 🔧 Script ecc-install.sh
 
-O projeto inclui um sistema de auto-revisão que verifica **372 pontos de qualidade**:
+O script `ecc-install.sh` faz:
 
-```bash
-bash scripts/auto-review.sh
-```
+1. **Baixa** o ECC do GitHub (clone shallow)
+2. **Converte** agentes `.md` → TypeScript `.ts`
+3. **Converte** skills `SKILL.md` → Markdown `.md`
+4. **Remove** recursos órfãos que não existem mais no ECC
+5. **Gera** `CATALOGO.md` atualizado
+6. **Valida** TypeScript gerado
 
-✅ Sintaxe bash de todos os scripts
-✅ Permissões de execução
-✅ Encoding UTF-8
-✅ Validação cruzada diretório × catálogo
-✅ Proveniência e documentação
+### Flags
+
+| Flag | Descrição |
+|------|-----------|
+| `--update` | Atualiza apenas recursos novos/modificados |
+| `--force` | Forçar reinstalação completa |
+| `--help` | Mostra ajuda |
 
 ---
 
-## ⚠️ Limitações conhecidas
+## ⚠️ Limitações
 
 | Limitação | Detalhe |
 |-----------|---------|
-| Skills NÃO registradas | As skills são arquivos `.md` — NÃO skills registradas no Codebuff. Ler com `read_files` |
-| Agentes NÃO spawnáveis | Agentes são docs de referência, não `@AgentName` executáveis |
-| ECC tools não usadas | Scripts nativos do ECC (`ecc.js`, `catalog.js`) NÃO são usados — só o conteúdo |
+| Skills são `.md` | Não são skills registradas no Freebuff — usar `read_files` |
+| Modelos limitados | Freebuff suporta apenas mimo/mimo-v2.5 e deepseek/deepseek-v4-flash |
 
 ---
 
 ## 🔗 Links
 
 - **ECC Original:** [github.com/affaan-m/ECC](https://github.com/affaan-m/ECC) — 224k⭐
-- **Codebuff:** [codebuff.com](https://codebuff.com)
-- **Bridge (aqui):** [github.com/PuraForja/freebuff-ecc-bridge](https://github.com/PuraForja/freebuff-ecc-bridge)
+- **Freebuff:** [freebuff.com](https://freebuff.com)
+- **Repositório:** [github.com/PuraForja/freebuff-ecc-bridge](https://github.com/PuraForja/freebuff-ecc-bridge)
 
 ---
 
 <div align="center">
 
-**Feito com ☕ e loops de melhoria contínua**
-
-*Primeiro commit: `b88f886` · 03/07/2026*
+*Gerado a partir do ECC via `ecc-install.sh`*
 
 </div>

@@ -1,28 +1,21 @@
 # 🧠 Skill: laravel-plugin-discovery
 
-> **Adaptada do ECC:** `laravel-plugin-discovery` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `laravel-plugin-discovery` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/laravel-plugin-discovery/SKILL.md`
 
 ## Descrição
 
-Discover and evaluate Laravel packages via LaraPlugins.io MCP. Use when the user wants to find plugins, check package health, or assess Laravel/PHP compatibility.
+--- name: laravel-plugin-discovery description: Discover and evaluate Laravel packages via LaraPlugins.io MCP. Use when the user wants to find plugins, check package health, or assess Laravel/PHP compatibility.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: laravel-plugin-discovery
+description: Discover and evaluate Laravel packages via LaraPlugins.io MCP. Use when the user wants to find plugins, check package health, or assess Laravel/PHP compatibility.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Laravel Plugin Discovery
 
@@ -123,9 +116,132 @@ Returns packages matching "authentication" with healthy status:
 
 ```
 SearchPluginTool({
-  text_search: 
+  text_search: "admin panel",
+  laravel_compatibility: "12"
+})
+```
+
+Returns packages compatible with Laravel 12.
+
+### Example: Get Package Details
+
+```
+GetPluginDetailsTool({
+  package: "spatie/laravel-permission",
+  include_versions: true
+})
+```
+
+Returns:
+- Health score and last activity
+- Laravel/PHP version support
+- Vendor reputation (risk score)
+- Version history
+- Brief description
+
+### Example: Find Packages by Vendor
+
+```
+SearchPluginTool({
+  vendor_filter: "spatie",
+  health_score: "Healthy"
+})
+```
+
+Returns all healthy packages from vendor "spatie".
+
+---
+
+## Filtering Best Practices
+
+### By Health Score
+
+| Health Band | Meaning |
+|-------------|---------|
+| `Healthy` | Active maintenance, recent updates |
+| `Medium` | Occasional updates, may need attention |
+| `Unhealthy` | Abandoned or infrequently maintained |
+| `Unrated` | Not yet assessed |
+
+**Recommendation**: Prefer `Healthy` packages for production applications.
+
+### By Laravel Version
+
+| Version | Notes |
+|---------|-------|
+| `13` | Latest Laravel |
+| `12` | Current stable |
+| `11` | Still widely used |
+| `10` | Legacy but common |
+| `5`-`9` | Deprecated |
+
+**Recommendation**: Match the target project's Laravel version.
+
+### Combining Filters
+
+```typescript
+// Find healthy, Laravel 12 compatible packages for permissions
+SearchPluginTool({
+  text_search: "permission",
+  health_score: "Healthy",
+  laravel_compatibility: "12"
+})
+```
+
+---
+
+## Response Interpretation
+
+### Search Results
+
+Each result includes:
+- Package name (e.g. `spatie/laravel-permission`)
+- Brief description
+- Health status indicator
+- Laravel version support badges
+
+### Package Details
+
+The detailed response includes:
+- **Health Score**: Numeric or band indicator
+- **Last Activity**: When the package was last updated
+- **Laravel Support**: Version compatibility matrix
+- **PHP Support**: PHP version compatibility
+- **Risk Score**: Vendor trust indicators
+- **Version History**: Recent release timeline
+
+---
+
+## Common Use Cases
+
+| Scenario | Recommended Approach |
+|----------|---------------------|
+| "What package for auth?" | Search "auth" with healthy filter |
+| "Is spatie/package still maintained?" | Get details, check health score |
+| "Need Laravel 12 packages" | Search with laravel_compatibility: "12" |
+| "Find admin panel packages" | Search "admin panel", review results |
+| "Check vendor reputation" | Search by vendor, check details |
+
+---
+
+## Best Practices
+
+1. **Always filter by health** — Use `health_score: "Healthy"` for production projects
+2. **Match Laravel version** — Always check `laravel_compatibility` matches the target project
+3. **Check vendor reputation** — Prefer packages from known vendors (spatie, laravel, etc.)
+4. **Review before recommending** — Use GetPluginDetailsTool for a comprehensive assessment
+5. **No API key needed** — The MCP is free, no authentication required
+
+---
+
+## Related Skills
+
+- `laravel-patterns` — Laravel architecture and patterns
+- `laravel-tdd` — Test-driven development for Laravel
+- `laravel-security` — Laravel security best practices
+- `documentation-lookup` — General library documentation lookup (Context7)
 
 ---
 
 **ECC Original:** `ECC/skills/laravel-plugin-discovery/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:26
+**Atualizado em:** 2026-07-12 11:45:46

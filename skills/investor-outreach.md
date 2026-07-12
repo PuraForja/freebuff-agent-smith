@@ -1,28 +1,21 @@
 # 🧠 Skill: investor-outreach
 
-> **Adaptada do ECC:** `investor-outreach` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `investor-outreach` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/investor-outreach/SKILL.md`
 
 ## Descrição
 
-Draft cold emails, warm intro blurbs, follow-ups, update emails, and investor communications for fundraising. Use when the user wants outreach to angels, VCs, strategic investors, or accelerators and needs concise, personalized, investor-facing messaging.
+--- name: investor-outreach description: Draft cold emails, warm intro blurbs, follow-ups, update emails, and investor communications for fundraising. Use when the user wants outreach to angels, VCs, strategic investors, or accelerators and needs concise, personalized, investor-facing messaging.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: investor-outreach
+description: Draft cold emails, warm intro blurbs, follow-ups, update emails, and investor communications for fundraising. Use when the user wants outreach to angels, VCs, strategic investors, or accelerators and needs concise, personalized, investor-facing messaging.
+metadata:
+  origin: ECC
 ---
-
-## Conteúdo Adaptado
 
 # Investor Outreach
 
@@ -113,4 +106,4 @@ Before delivering:
 ---
 
 **ECC Original:** `ECC/skills/investor-outreach/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:25
+**Atualizado em:** 2026-07-12 11:45:46

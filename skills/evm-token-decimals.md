@@ -1,28 +1,22 @@
 # 🧠 Skill: evm-token-decimals
 
-> **Adaptada do ECC:** `evm-token-decimals` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `evm-token-decimals` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/evm-token-decimals/SKILL.md`
 
 ## Descrição
 
-Prevent silent decimal mismatch bugs across EVM chains. Covers runtime decimal lookup, chain-aware caching, bridged-token precision drift, and safe normalization for bots, dashboards, and DeFi tools.
+--- name: evm-token-decimals description: Prevent silent decimal mismatch bugs across EVM chains. Covers runtime decimal lookup, chain-aware caching, bridged-token precision drift, and safe normalization for bots, dashboards, and DeFi tools.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: evm-token-decimals
+description: Prevent silent decimal mismatch bugs across EVM chains. Covers runtime decimal lookup, chain-aware caching, bridged-token precision drift, and safe normalization for bots, dashboards, and DeFi tools.
+metadata:
+  origin: ECC direct-port adaptation
+version: "1.0.0"
 ---
-
-## Conteúdo Adaptado
 
 # EVM Token Decimals
 
@@ -125,9 +119,30 @@ const ERC20_ABI = [
 ];
 
 async function getBalance(provider: any, tokenAddress: string, wallet: string): Promise<string> {
-  const token = new Contract(tokenAddress, ERC20_ABI,
+  const token = new Contract(tokenAddress, ERC20_ABI, provider);
+  const [decimals, raw] = await Promise.all([
+    token.decimals(),
+    token.balanceOf(wallet),
+  ]);
+  return formatUnits(raw, decimals);
+}
+```
+
+### Quick on-chain check
+
+```bash
+cast call <token_address> "decimals()(uint8)" --rpc-url <rpc>
+```
+
+## Rules
+
+- Always query `decimals()` at runtime
+- Cache by chain plus token address, not symbol
+- Use `Decimal`, `BigInt`, or equivalent exact math, not float
+- Re-query decimals after bridging or wrapper changes
+- Normalize internal accounting consistently before comparison or pricing
 
 ---
 
 **ECC Original:** `ECC/skills/evm-token-decimals/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:22
+**Atualizado em:** 2026-07-12 11:45:44

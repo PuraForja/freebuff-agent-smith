@@ -1,28 +1,21 @@
 # 🧠 Skill: homelab-network-setup
 
-> **Adaptada do ECC:** `homelab-network-setup` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `homelab-network-setup` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/homelab-network-setup/SKILL.md`
 
 ## Descrição
 
-Practical home and homelab network planning for gateways, switches, access points, IP ranges, DHCP reservations, DNS, cabling, and common beginner mistakes.
+--- name: homelab-network-setup description: Practical home and homelab network planning for gateways, switches, access points, IP ranges, DHCP reservations, DNS, cabling, and common beginner mistakes.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: homelab-network-setup
+description: Practical home and homelab network planning for gateways, switches, access points, IP ranges, DHCP reservations, DNS, cabling, and common beginner mistakes.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # Homelab Network Setup
 
@@ -119,9 +112,36 @@ switch-01.home.arpa
 
 Goal: Keep the ISP router but stabilize a small lab.
 
-1. Set DHCP reservati
+1. Set DHCP reservations for NAS, Pi, and any SSH hosts.
+2. Move local names to `home.arpa`.
+3. Disable duplicate DHCP servers on secondary routers or APs.
+4. Wire the main AP instead of relying on wireless backhaul.
+
+### VLAN-Ready Plan
+
+Goal: Prepare for future segmentation without enabling it immediately.
+
+1. Choose non-overlapping /24 ranges for trusted, IoT, servers, guest, and
+   management.
+2. Reserve .1 for the gateway and .2-.49 for infrastructure on every subnet.
+3. Buy a gateway and switch that support VLANs and inter-VLAN firewall rules.
+4. Document which SSIDs and switch ports will eventually map to each network.
+
+## Anti-Patterns
+
+- Double NAT without a reason or documentation.
+- Using `192.168.1.0/24` when VPN access is planned.
+- Dynamic addresses for NAS, Pi-hole, Home Assistant, or other service hosts.
+- Consumer routers repurposed as APs while their DHCP servers are still enabled.
+- Flat networks with cameras, smart plugs, laptops, and servers all sharing the
+  same trust boundary.
+
+## See Also
+
+- Skill: `network-interface-health`
+- Skill: `network-config-validation`
 
 ---
 
 **ECC Original:** `ECC/skills/homelab-network-setup/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:24
+**Atualizado em:** 2026-07-12 11:45:45

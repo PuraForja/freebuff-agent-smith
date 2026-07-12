@@ -1,28 +1,21 @@
 # 🧠 Skill: scientific-db-pubmed-database
 
-> **Adaptada do ECC:** `scientific-db-pubmed-database` — via `sync-ecc.sh`
+> **Adaptada do ECC:** `scientific-db-pubmed-database` — via `ecc-install.sh`
 > **Fonte original:** `ECC/skills/scientific-db-pubmed-database/SKILL.md`
 
 ## Descrição
 
-Direct PubMed and NCBI E-utilities search workflows for biomedical literature, MeSH queries, PMID lookup, citation retrieval, and API-backed literature monitoring.
+--- name: pubmed-database description: Direct PubMed and NCBI E-utilities search workflows for biomedical literature, MeSH queries, PMID lookup, citation retrieval, and API-backed literature monitoring.
 
 ---
 
-## ⚠️ Adaptação para Codebuff
+## Conteúdo Original
 
-
-
-| Conceito ECC (Claude) | Equivalente Codebuff |
-|-----------------------|---------------------|
-| Hooks | Instruções no `.codebuff/instructions.md` |
-| Comandos slash | Skills via `skill` tool |
-| `settings.json` | `.codebuff/instructions.md` |
-| Rules em `~/.claude/rules/` | Skills em `.agents/skills/` |
-
+name: pubmed-database
+description: Direct PubMed and NCBI E-utilities search workflows for biomedical literature, MeSH queries, PMID lookup, citation retrieval, and API-backed literature monitoring.
+metadata:
+  origin: community
 ---
-
-## Conteúdo Adaptado
 
 # PubMed Database
 
@@ -143,9 +136,58 @@ def esearch(query: str, retmax: int = 20) -> list[str]:
     if api_key:
         params["api_key"] = api_key
 
-    response = requests.get(f"{BASE}/e
+    response = requests.get(f"{BASE}/esearch.fcgi", params=params, timeout=30)
+    response.raise_for_status()
+    time.sleep(0.35)
+    return response.json()["esearchresult"]["idlist"]
+
+
+pmids = esearch("hypertension[mh] AND randomized controlled trial[pt] AND 2024:2026[dp]")
+print(pmids)
+```
+
+For batches, prefer NCBI history server parameters (`usehistory=y`,
+`WebEnv`, `query_key`) instead of passing very long PMID lists through URLs.
+
+## Output Discipline
+
+For each search pass, record:
+
+- exact search string
+- database searched
+- date searched
+- filters used
+- result count
+- export format
+- any manual exclusions
+
+Example:
+
+```markdown
+| Database | Date searched | Query | Filters | Results |
+| --- | --- | --- | --- | ---: |
+| PubMed | 2026-05-11 | `sickle cell disease[mh] AND CRISPR[tiab]` | 2020:2026[dp], English | 42 |
+```
+
+## Review Checklist
+
+- Are field tags valid PubMed tags?
+- Are MeSH terms paired with free-text synonyms for newer topics?
+- Is the date range explicit and appropriate?
+- Does the search log include enough detail to reproduce the query?
+- Are API keys loaded from the environment?
+- Does HTTP code call `raise_for_status()` or otherwise handle non-200
+  responses before parsing?
+- Are rate limits respected?
+
+## References
+
+- [PubMed help](https://pubmed.ncbi.nlm.nih.gov/help/)
+- [NCBI E-utilities documentation](https://www.ncbi.nlm.nih.gov/books/NBK25501/)
+- [NCBI API key guidance](https://support.nlm.nih.gov/kbArticle/?pn=KA-05317)
+- NCBI support: <eutilities@ncbi.nlm.nih.gov>
 
 ---
 
 **ECC Original:** `ECC/skills/scientific-db-pubmed-database/SKILL.md`
-**Atualizado em:** 2026-07-02 22:11:32
+**Atualizado em:** 2026-07-12 11:45:49
