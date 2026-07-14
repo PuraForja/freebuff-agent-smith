@@ -1,11 +1,11 @@
-# 🔄 freebuff-ecc-bridge
+# 🔄 freebuff-agent-smith
 
 <div align="center">
 
 **Ponte de adaptação entre o [ECC](https://github.com/affaan-m/ECC) e o [Codebuff](https://codebuff.com)**
 
-![GitHub last commit](https://img.shields.io/github/last-commit/PuraForja/freebuff-ecc-bridge?branch=master)
-![GitHub repo size](https://img.shields.io/github/repo-size/PuraForja/freebuff-ecc-bridge)
+![GitHub last commit](https://img.shields.io/github/last-commit/PuraForja/freebuff-agent-smith?branch=master)
+![GitHub repo size](https://img.shields.io/github/repo-size/PuraForja/freebuff-agent-smith)
 ![Static Badge](https://img.shields.io/badge/license-proprietary-blue)
 
 ---
@@ -59,8 +59,8 @@ Isso atualiza o clone do ECC e adapta automaticamente skills, agentes, regras, c
 ## 📦 Repositório
 
 ```bash
-git clone https://github.com/PuraForja/freebuff-ecc-bridge.git
-cd freebuff-ecc-bridge
+git clone https://github.com/PuraForja/freebuff-agent-smith.git
+cd freebuff-agent-smith
 ```
 
 ---
@@ -68,7 +68,7 @@ cd freebuff-ecc-bridge
 ## 📁 Estrutura
 
 ```
-freebuff-ecc-bridge/
+freebuff-agent-smith/
 ├── .codebuff/
 │   └── instructions.md     ← ⚠️ Instruções permanentes (NÃO ignore)
 ├── .gitignore
@@ -170,7 +170,7 @@ bash scripts/auto-review.sh
 
 - **ECC Original:** [github.com/affaan-m/ECC](https://github.com/affaan-m/ECC) — 224k⭐
 - **Codebuff:** [codebuff.com](https://codebuff.com)
-- **Bridge (aqui):** [github.com/PuraForja/freebuff-ecc-bridge](https://github.com/PuraForja/freebuff-ecc-bridge)
+- **Bridge (aqui):** [github.com/PuraForja/freebuff-agent-smith](https://github.com/PuraForja/freebuff-agent-smith)
 
 ---
 

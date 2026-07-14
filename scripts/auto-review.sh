@@ -131,7 +131,7 @@ echo -e "${CYAN}[4/4] Gerando relatório...${NC}"
 {
     echo "# 📋 Auto-Review Report"
     echo "**Data:** $(date '+%Y-%m-%d %H:%M:%S')"
-    echo "**Projeto:** freebuff-ecc-bridge"
+    echo "**Projeto:** freebuff-agent-smith"
     echo ""
     echo "## Resultados"
     echo ""

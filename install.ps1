@@ -1,17 +1,17 @@
 # ═══════════════════════════════════════════════════════════════
-#  install.ps1 — Instalador Leve do ECC Bridge (Windows)
+#  install.ps1 — Instalador Leve do Freebuff Agente Smit (Windows)
 # ═══════════════════════════════════════════════════════════════
-#  Baixa APENAS o @agent-manager e configura o ambiente.
-#  O @agent-manager é quem faz o trabalho pesado (lê ECC via API).
+#  Baixa APENAS o @agent-smith e configura o ambiente.
+#  O @agent-smith é quem faz o trabalho pesado (lê ECC via API).
 #
 #  Uso (PowerShell):
-#  iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PuraForja/freebuff-ecc-bridge/master/install.ps1").Content
+#  iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PuraForja/freebuff-agent-smith/master/install.ps1").Content
 # ═══════════════════════════════════════════════════════════════
 
 $ErrorActionPreference = "Stop"
 
 # Configurações
-$BRIDGE_REPO = "https://github.com/PuraForja/freebuff-ecc-bridge"
+$BRIDGE_REPO = "https://github.com/PuraForja/freebuff-agent-smith"
 $RAW_BASE = "$BRIDGE_REPO/raw/master"
 $INSTALL_DIR = Get-Location
 
@@ -38,8 +38,8 @@ function Test-FreebuffInstalled {
 
 Write-Color ""
 Write-Color "╔═══════════════════════════════════════════════════════════════╗" "Cyan"
-Write-Color "║      🔄  ECC BRIDGE — Instalador Leve (Windows)             ║" "Cyan"
-Write-Color "║      Baixa apenas o @agent-manager (sem baixar ECC)         ║" "Cyan"
+Write-Color "║      🔄  FREEBUFF AGENTE SMIT — Instalador Leve (Windows)             ║" "Cyan"
+Write-Color "║      Baixa apenas o @agent-smith (sem baixar ECC)         ║" "Cyan"
 Write-Color "╚═══════════════════════════════════════════════════════════════╝" "Cyan"
 Write-Color ""
 
@@ -82,23 +82,23 @@ Write-Color "  ✅ Estrutura criada em $INSTALL_DIR\.agents\" "Green"
 Write-Color ""
 
 # ═══════════════════════════════════════════════════════════════
-# STEP 3: BAIXAR @AGENT-MANAGER (APENAS 1 ARQUIVO)
+# STEP 3: BAIXAR @AGENT-SMITH (APENAS 1 ARQUIVO)
 # ═══════════════════════════════════════════════════════════════
-Write-Color "[3/6] Baixando @agent-manager..." "Cyan"
+Write-Color "[3/6] Baixando @agent-smith..." "Cyan"
 
 try {
     $ProgressPreference = "SilentlyContinue"
-    Invoke-WebRequest -Uri "$RAW_BASE/.agents/agent-manager.ts" -OutFile "$INSTALL_DIR\.agents\agent-manager.ts" -UseBasicParsing
+    Invoke-WebRequest -Uri "$RAW_BASE/.agents/agent-smith.ts" -OutFile "$INSTALL_DIR\.agents\agent-smith.ts" -UseBasicParsing
     
-    if (Test-TypeScript "$INSTALL_DIR\.agents\agent-manager.ts") {
-        Write-Color "  ✅ agent-manager.ts baixado e verificado" "Green"
+    if (Test-TypeScript "$INSTALL_DIR\.agents\agent-smith.ts") {
+        Write-Color "  ✅ agent-smith.ts baixado e verificado" "Green"
     } else {
         Write-Color "  ❌ Arquivo baixado não é TypeScript válido" "Red"
-        Remove-Item "$INSTALL_DIR\.agents\agent-manager.ts" -Force -ErrorAction SilentlyContinue
+        Remove-Item "$INSTALL_DIR\.agents\agent-smith.ts" -Force -ErrorAction SilentlyContinue
         exit 1
     }
 } catch {
-    Write-Color "  ❌ Erro ao baixar agent-manager.ts" "Red"
+    Write-Color "  ❌ Erro ao baixar agent-smith.ts" "Red"
     exit 1
 }
 
@@ -145,14 +145,14 @@ $installedAt = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
 $config = @"
 {
   "ecc_repo": "https://github.com/affaan-m/ECC",
-  "bridge_repo": "https://github.com/PuraForja/freebuff-ecc-bridge",
+  "bridge_repo": "https://github.com/PuraForja/freebuff-agent-smith",
   "installed_skills": [],
   "installed_agents": [],
   "installed_rules": [],
   "last_sync": null,
   "installed_at": "$installedAt",
   "version": "1.0.0",
-  "note": "Use @agent-manager no Codebuff/Freebuff para instalar recursos do ECC"
+  "note": "Use @agent-smith no Codebuff/Freebuff para instalar recursos do ECC"
 }
 "@
 
@@ -186,13 +186,13 @@ $gitignoreFile = "$INSTALL_DIR\.gitignore"
 if (Test-Path $gitignoreFile) {
     $content = Get-Content $gitignoreFile -Raw
     if ($content -notmatch "\.agents/installed/") {
-        Add-Content -Path $gitignoreFile -Value "`n# ECC Bridge - conteúdo instalado (runtime)`n.agents/installed/"
+        Add-Content -Path $gitignoreFile -Value "`n# Freebuff Agente Smit - conteúdo instalado (runtime)`n.agents/installed/"
         Write-Color "  ✅ Entrada adicionada ao .gitignore" "Green"
     } else {
         Write-Color "  ⚠️  .gitignore já contém a entrada" "Yellow"
     }
 } else {
-    Set-Content -Path $gitignoreFile -Value "# ECC Bridge - conteúdo instalado (runtime)`n.agents/installed/"
+    Set-Content -Path $gitignoreFile -Value "# Freebuff Agente Smit - conteúdo instalado (runtime)`n.agents/installed/"
     Write-Color "  ✅ .gitignore criado" "Green"
 }
 
@@ -206,7 +206,7 @@ Write-Color "║                     ✅  INSTALAÇÃO CONCLUÍDA               
 Write-Color "╚═══════════════════════════════════════════════════════════════╝" "Blue"
 Write-Color ""
 Write-Color "   📁 Projeto: $INSTALL_DIR" "Green"
-Write-Color "   🤖 Agent Manager: .agents\agent-manager.ts" "Green"
+Write-Color "   🤖 Agent Manager: .agents\agent-smith.ts" "Green"
 Write-Color "   📝 Tipos: $downloaded baixados, $failed não encontrados" "Green"
 Write-Color "   📄 Config: .ecc-config.json" "Green"
 Write-Color "   📖 Knowledge: knowledge.md" "Green"
@@ -232,9 +232,9 @@ if (Test-FreebuffInstalled) {
     Write-Color "   1. Instale o Freebuff: npm install -g freebuff"
     Write-Color "   2. Navegue até este diretório: cd $INSTALL_DIR"
     Write-Color "   3. Execute: freebuff"
-    Write-Color "   4. Use: @agent-manager instale python-patterns"
+    Write-Color "   4. Use: @agent-smith instale python-patterns"
 }
 
 Write-Color ""
-Write-Color "   💡 O @agent-manager lê o ECC via GitHub API (sem baixar para sua máquina)." "Yellow"
+Write-Color "   💡 O @agent-smith lê o ECC via GitHub API (sem baixar para sua máquina)." "Yellow"
 Write-Color ""

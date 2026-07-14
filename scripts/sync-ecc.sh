@@ -564,7 +564,7 @@ PYEOF
 # ═══════════════════════════════════════════════════════════════
 
 echo -e "${BLUE}╔═══════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║      🔄  ECC Bridge — Sincronizador Freebuff                  ║${NC}"
+echo -e "${BLUE}║      🔄  Freebuff Agente Smit — Sincronizador Freebuff                  ║${NC}"
 echo -e "${BLUE}╚═══════════════════════════════════════════════════════════════╝${NC}"
 echo -e "   Workspace: ${CYAN}${WORKSPACE_DIR}${NC}"
 echo -e "   Bridge:    ${CYAN}${BRIDGE_DIR}${NC}"

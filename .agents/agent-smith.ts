@@ -1,6 +1,6 @@
 export default {
-  id: 'agent-manager',
-  displayName: 'Agent Manager',
+  id: 'agent-smith',
+  displayName: 'Freebuff Agente Smit',
   model: 'openai/gpt-5-nano',
   toolNames: ['read_files', 'run_terminal_command', 'end_turn'],
   instructionsPrompt: `

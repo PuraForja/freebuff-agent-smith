@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # ═══════════════════════════════════════════════════════════════
-#  install.sh — Instalador Leve do ECC Bridge
+#  install.sh — Instalador Leve do Freebuff Agente Smit
 # ═══════════════════════════════════════════════════════════════
-#  Baixa APENAS o @agent-manager e configura o ambiente.
-#  O @agent-manager é quem faz o trabalho pesado (lê ECC via API).
+#  Baixa APENAS o @agent-smith e configura o ambiente.
+#  O @agent-smith é quem faz o trabalho pesado (lê ECC via API).
 #
-#  Uso: curl -fsSL https://raw.githubusercontent.com/PuraForja/freebuff-ecc-bridge/master/install.sh | bash
+#  Uso: curl -fsSL https://raw.githubusercontent.com/PuraForja/freebuff-agent-smith/master/install.sh | bash
 #  Ou:  bash install.sh
 # ═══════════════════════════════════════════════════════════════
 
@@ -16,7 +16,7 @@ RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
 BLUE='\033[0;34m'; CYAN='\033[0;36m'; NC='\033[0m'
 
 # Configurações
-BRIDGE_REPO="https://github.com/PuraForja/freebuff-ecc-bridge"
+BRIDGE_REPO="https://github.com/PuraForja/freebuff-agent-smith"
 RAW_BASE="${BRIDGE_REPO}/raw/master"
 INSTALL_DIR="$(pwd)"
 TYPES_DOWNLOADED=0
@@ -56,8 +56,8 @@ check_freebuff() {
 }
 
 echo -e "${BLUE}╔═══════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║      🔄  ECC BRIDGE — Instalador Leve                       ║${NC}"
-echo -e "${BLUE}║      Baixa apenas o @agent-manager (sem baixar ECC)         ║${NC}"
+echo -e "${BLUE}║      🔄  FREEBUFF AGENTE SMIT — Instalador Leve                       ║${NC}"
+echo -e "${BLUE}║      Baixa apenas o @agent-smith (sem baixar ECC)         ║${NC}"
 echo -e "${BLUE}╚═══════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
@@ -89,20 +89,20 @@ echo -e "  ${GREEN}✅${NC} Estrutura criada em ${INSTALL_DIR}/.agents/"
 echo ""
 
 # ═══════════════════════════════════════════════════════════════
-# STEP 3: BAIXAR @AGENT-MANAGER (APENAS 1 ARQUIVO)
+# STEP 3: BAIXAR @AGENT-SMITH (APENAS 1 ARQUIVO)
 # ═══════════════════════════════════════════════════════════════
-echo -e "${CYAN}[3/6] Baixando @agent-manager...${NC}"
+echo -e "${CYAN}[3/6] Baixando @agent-smith...${NC}"
 
-if download_file "${RAW_BASE}/.agents/agent-manager.ts" "${INSTALL_DIR}/.agents/agent-manager.ts"; then
-    if verify_typescript "${INSTALL_DIR}/.agents/agent-manager.ts"; then
-        echo -e "  ${GREEN}✅${NC} @agent-manager.ts baixado e verificado"
+if download_file "${RAW_BASE}/.agents/agent-smith.ts" "${INSTALL_DIR}/.agents/agent-smith.ts"; then
+    if verify_typescript "${INSTALL_DIR}/.agents/agent-smith.ts"; then
+        echo -e "  ${GREEN}✅${NC} @agent-smith.ts baixado e verificado"
     else
         echo -e "  ${RED}❌${NC} Arquivo baixado não é TypeScript válido"
-        rm -f "${INSTALL_DIR}/.agents/agent-manager.ts"
+        rm -f "${INSTALL_DIR}/.agents/agent-smith.ts"
         exit 1
     fi
 else
-    echo -e "  ${RED}❌${NC} Erro ao baixar @agent-manager"
+    echo -e "  ${RED}❌${NC} Erro ao baixar @agent-smith"
     exit 1
 fi
 
@@ -142,14 +142,14 @@ INSTALLED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 cat > "${INSTALL_DIR}/.ecc-config.json" << CONFIG_EOF
 {
   "ecc_repo": "https://github.com/affaan-m/ECC",
-  "bridge_repo": "https://github.com/PuraForja/freebuff-ecc-bridge",
+  "bridge_repo": "https://github.com/PuraForja/freebuff-agent-smith",
   "installed_skills": [],
   "installed_agents": [],
   "installed_rules": [],
   "last_sync": null,
   "installed_at": "${INSTALLED_AT}",
   "version": "1.0.0",
-  "note": "Use @agent-manager no Codebuff/Freebuff para instalar recursos do ECC"
+  "note": "Use @agent-smith no Codebuff/Freebuff para instalar recursos do ECC"
 }
 CONFIG_EOF
 
@@ -179,14 +179,14 @@ GITIGNORE_FILE="${INSTALL_DIR}/.gitignore"
 if [ -f "$GITIGNORE_FILE" ]; then
     if ! grep -q "^\.agents/installed/" "$GITIGNORE_FILE" 2>/dev/null; then
         echo "" >> "$GITIGNORE_FILE"
-        echo "# ECC Bridge - conteúdo instalado (runtime)" >> "$GITIGNORE_FILE"
+        echo "# Freebuff Agente Smit - conteúdo instalado (runtime)" >> "$GITIGNORE_FILE"
         echo ".agents/installed/" >> "$GITIGNORE_FILE"
         echo -e "  ${GREEN}✅${NC} Entrada adicionada ao .gitignore"
     else
         echo -e "  ${YELLOW}⚠️${NC} .gitignore já contém a entrada"
     fi
 else
-    echo "# ECC Bridge - conteúdo instalado (runtime)" > "$GITIGNORE_FILE"
+    echo "# Freebuff Agente Smit - conteúdo instalado (runtime)" > "$GITIGNORE_FILE"
     echo ".agents/installed/" >> "$GITIGNORE_FILE"
     echo -e "  ${GREEN}✅${NC} .gitignore criado"
 fi
@@ -201,7 +201,7 @@ echo -e "${BLUE}║                     ✅  INSTALAÇÃO CONCLUÍDA            
 echo -e "${BLUE}╚═══════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 echo -e "   📁 ${GREEN}Projeto:${NC} ${INSTALL_DIR}"
-echo -e "   🤖 ${GREEN}Agent Manager:${NC} .agents/agent-manager.ts"
+echo -e "   🤖 ${GREEN}Agent Manager:${NC} .agents/agent-smith.ts"
 echo -e "   📝 ${GREEN}Tipos:${NC} ${TYPES_DOWNLOADED} baixados, ${TYPES_FAILED} não encontrados"
 echo -e "   📄 ${GREEN}Config:${NC} .ecc-config.json"
 echo -e "   📖 ${GREEN}Knowledge:${NC} knowledge.md"
@@ -221,7 +221,7 @@ echo ""
 echo -e "   ${CYAN}📋 Próximos passos:${NC}"
 echo -e "   1. Instale o Freebuff (se não tiver): npm install -g freebuff"
 echo -e "   2. Execute: ${YELLOW}freebuff${NC}"
-echo -e "   3. Use: ${YELLOW}@agent-manager instale python-patterns${NC}"
+echo -e "   3. Use: ${YELLOW}@agent-smith instale python-patterns${NC}"
 echo ""
-echo -e "   ${YELLOW}💡 O @agent-manager lê o ECC via GitHub API (sem baixar para sua máquina).${NC}"
+echo -e "   ${YELLOW}💡 O @agent-smith lê o ECC via GitHub API (sem baixar para sua máquina).${NC}"
 echo ""

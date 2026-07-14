@@ -1,4 +1,4 @@
-# 📓 Registro de Sessão — Freebuff ECC Bridge
+# 📓 Registro de Sessão — Freebuff Freebuff Agente Smit
 
 > **Última atualização:** 02/07/2026 (tarde)
 > **Propósito:** Preservar contexto, decisões e estado para continuidade entre sessões.
@@ -29,7 +29,7 @@ e o **Codebuff**, permitindo usar skills, agentes e conceitos do ECC dentro do C
 │   ├── docs/       (1496 arquivos)    ← Documentação massiva
 │   └── CHANGELOG.md                  ← Histórico de versões
 │
-├── freebuff-ecc-bridge/              ← 🎯 PROJETO ATIVO (bridge adaptada)
+├── freebuff-agent-smith/              ← 🎯 PROJETO ATIVO (bridge adaptada)
 │   ├── .codebuff/
 │   │   └── instructions.md           ← ⚠️ Integração automática bridge (rewrite 02/07)
 │   ├── CATALOGO.md                   ← 📋 Catálogo completo de recursos
@@ -138,7 +138,7 @@ O `.codebuff/instructions.md` foi reescrito com um **protocolo de integração a
 **Regra fundamental:** "NÃO pergunte 'quer que eu carregue X?' — Apenas FAÇA.
 MAS SEMPRE anuncie o que está usando."
 
-Quando o usuário mencionar "ECC", entender como "bridge" (freebuff-ecc-bridge).
+Quando o usuário mencionar "ECC", entender como "bridge" (freebuff-agent-smith).
 
 ### 9. catalog.js do ECC NÃO é equivalente ao gerar-catalogo.sh
 
@@ -220,13 +220,13 @@ ferramentas para revisar nosso código:
 Estas linhas foram adicionadas ao final do `~/.bashrc`:
 
 ```bash
-# 🔄 ECC Bridge — Sincronização Automática
-ECC_BRIDGE_AUTOSYNC="$HOME/freebuff-workspace/freebuff-ecc-bridge/scripts/auto-sync-check.sh"
-if [ -f "$ECC_BRIDGE_AUTOSYNC" ]; then
-    bash "$ECC_BRIDGE_AUTOSYNC"
+# 🔄 Freebuff Agente Smit — Sincronização Automática
+AGENT_SMITH_AUTOSYNC="$HOME/freebuff-workspace/freebuff-agent-smith/scripts/auto-sync-check.sh"
+if [ -f "$AGENT_SMITH_AUTOSYNC" ]; then
+    bash "$AGENT_SMITH_AUTOSYNC"
 fi
 
-alias sync-ecc='bash $HOME/freebuff-workspace/freebuff-ecc-bridge/scripts/sync-ecc.sh'
+alias sync-ecc='bash $HOME/freebuff-workspace/freebuff-agent-smith/scripts/sync-ecc.sh'
 ```
 
 ---
@@ -237,7 +237,7 @@ alias sync-ecc='bash $HOME/freebuff-workspace/freebuff-ecc-bridge/scripts/sync-e
 
 1. **Abra o Codebuff** na pasta da bridge:
    ```bash
-   cd ~/freebuff-workspace/freebuff-ecc-bridge
+   cd ~/freebuff-workspace/freebuff-agent-smith
    ```
 
 2. **Diga para a IA:**

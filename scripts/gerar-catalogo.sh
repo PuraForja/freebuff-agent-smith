@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ═══════════════════════════════════════════════════════════════
-#  gerar-catalogo.sh — Gerador do Catálogo ECC Bridge
+#  gerar-catalogo.sh — Gerador do Catálogo Freebuff Agente Smit
 # ═══════════════════════════════════════════════════════════════
 #  Atualiza o CATALOGO.md com TODOS os agentes e skills
 #  disponíveis na bridge e no ECC (incluindo descrições).
@@ -27,7 +27,7 @@ echo ""
 
 # ─── Início do catálogo ───────────────────────────────────
 cat > "$CATALOGO" << EOF
-# 📋 Catálogo — ECC Bridge
+# 📋 Catálogo — Freebuff Agente Smit
 
 > **Última atualização:** $TIMESTAMP
 > **Propósito:** Listar TODOS os agentes, skills e recursos disponíveis na bridge e no ECC.

@@ -1,4 +1,4 @@
-# 📋 Catálogo — ECC Bridge
+# 📋 Catálogo — Freebuff Agente Smit
 
 > **Última atualização:** 03/07/2026
 > **Propósito:** Listar TODOS os agentes, skills e recursos disponíveis na bridge e no ECC.
