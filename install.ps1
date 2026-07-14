@@ -21,6 +21,16 @@ function Write-Color {
     Write-Host $Text -ForegroundColor $Color
 }
 
+# Função para verificar se arquivo é TypeScript válido
+function Test-TypeScript {
+    param([string]$FilePath)
+    if (Test-Path $FilePath) {
+        $firstLines = Get-Content $FilePath -Head 5 -ErrorAction SilentlyContinue
+        return ($firstLines -match "export default|export const|// ")
+    }
+    return $false
+}
+
 Write-Color ""
 Write-Color "╔═══════════════════════════════════════════════════════════════╗" "Cyan"
 Write-Color "║      🔄  ECC BRIDGE — Instalador Leve (Windows)             ║" "Cyan"
@@ -31,7 +41,7 @@ Write-Color ""
 # ═══════════════════════════════════════════════════════════════
 # STEP 1: VERIFICAR PREREQUISITOS
 # ═══════════════════════════════════════════════════════════════
-Write-Color "[1/5] Verificando pré-requisitos..." "Cyan"
+Write-Color "[1/6] Verificando pré-requisitos..." "Cyan"
 
 try {
     $ProgressPreference = "SilentlyContinue"
@@ -47,7 +57,7 @@ Write-Color ""
 # ═══════════════════════════════════════════════════════════════
 # STEP 2: CRIAR ESTRUTURA DE DIRETÓRIOS
 # ═══════════════════════════════════════════════════════════════
-Write-Color "[2/5] Criando estrutura..." "Cyan"
+Write-Color "[2/6] Criando estrutura..." "Cyan"
 
 $dirs = @(
     "$INSTALL_DIR\.agents\types",
@@ -69,12 +79,19 @@ Write-Color ""
 # ═══════════════════════════════════════════════════════════════
 # STEP 3: BAIXAR @AGENT-MANAGER (APENAS 1 ARQUIVO)
 # ═══════════════════════════════════════════════════════════════
-Write-Color "[3/5] Baixando @agent-manager..." "Cyan"
+Write-Color "[3/6] Baixando @agent-manager..." "Cyan"
 
 try {
     $ProgressPreference = "SilentlyContinue"
     Invoke-WebRequest -Uri "$RAW_BASE/.agents/agent-manager.ts" -OutFile "$INSTALL_DIR\.agents\agent-manager.ts" -UseBasicParsing
-    Write-Color "  ✅ agent-manager.ts baixado" "Green"
+    
+    if (Test-TypeScript "$INSTALL_DIR\.agents\agent-manager.ts") {
+        Write-Color "  ✅ agent-manager.ts baixado e verificado" "Green"
+    } else {
+        Write-Color "  ❌ Arquivo baixado não é TypeScript válido" "Red"
+        Remove-Item "$INSTALL_DIR\.agents\agent-manager.ts" -Force -ErrorAction SilentlyContinue
+        exit 1
+    }
 } catch {
     Write-Color "  ❌ Erro ao baixar agent-manager.ts" "Red"
     exit 1
@@ -85,7 +102,7 @@ Write-Color ""
 # ═══════════════════════════════════════════════════════════════
 # STEP 4: BAIXAR TIPOS TYPESCRIPT
 # ═══════════════════════════════════════════════════════════════
-Write-Color "[4/5] Baixando tipos TypeScript..." "Cyan"
+Write-Color "[4/6] Baixando tipos TypeScript..." "Cyan"
 
 $types = @("agent-definition.ts", "tools.ts", "util-types.ts")
 $downloaded = 0
@@ -95,8 +112,15 @@ foreach ($type_file in $types) {
     try {
         $ProgressPreference = "SilentlyContinue"
         Invoke-WebRequest -Uri "$RAW_BASE/.agents/types/$type_file" -OutFile "$INSTALL_DIR\.agents\types\$type_file" -UseBasicParsing
-        Write-Color "  ✅ $type_file baixado" "Green"
-        $downloaded++
+        
+        if (Test-TypeScript "$INSTALL_DIR\.agents\types\$type_file") {
+            Write-Color "  ✅ $type_file baixado" "Green"
+            $downloaded++
+        } else {
+            Write-Color "  ⚠️  $type_file baixado mas conteúdo inválido" "Yellow"
+            Remove-Item "$INSTALL_DIR\.agents\types\$type_file" -Force -ErrorAction SilentlyContinue
+            $failed++
+        }
     } catch {
         Write-Color "  ⚠️  $type_file não encontrado (opcional)" "Yellow"
         $failed++
@@ -108,7 +132,7 @@ Write-Color ""
 # ═══════════════════════════════════════════════════════════════
 # STEP 5: CRIAR ARQUIVO DE CONFIGURAÇÃO
 # ═══════════════════════════════════════════════════════════════
-Write-Color "[5/5] Criando configuração..." "Cyan"
+Write-Color "[5/6] Criando configuração..." "Cyan"
 
 $installedAt = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
 
@@ -131,6 +155,28 @@ Write-Color "  ✅ Arquivo de configuração criado" "Green"
 Write-Color ""
 
 # ═══════════════════════════════════════════════════════════════
+# STEP 6: ATUALIZAR .GITIGNORE
+# ═══════════════════════════════════════════════════════════════
+Write-Color "[6/6] Atualizando .gitignore..." "Cyan"
+
+$gitignoreFile = "$INSTALL_DIR\.gitignore"
+
+if (Test-Path $gitignoreFile) {
+    $content = Get-Content $gitignoreFile -Raw
+    if ($content -notmatch "\.agents/installed/") {
+        Add-Content -Path $gitignoreFile -Value "`n# ECC Bridge - conteúdo instalado (runtime)`n.agents/installed/"
+        Write-Color "  ✅ Entrada adicionada ao .gitignore" "Green"
+    } else {
+        Write-Color "  ⚠️  .gitignore já contém a entrada" "Yellow"
+    }
+} else {
+    Set-Content -Path $gitignoreFile -Value "# ECC Bridge - conteúdo instalado (runtime)`n.agents/installed/"
+    Write-Color "  ✅ .gitignore criado" "Green"
+}
+
+Write-Color ""
+
+# ═══════════════════════════════════════════════════════════════
 # RESUMO FINAL
 # ═══════════════════════════════════════════════════════════════
 Write-Color "╔═══════════════════════════════════════════════════════════════╗" "Blue"
@@ -141,6 +187,7 @@ Write-Color "   📁 Projeto: $INSTALL_DIR" "Green"
 Write-Color "   🤖 Agent Manager: .agents\agent-manager.ts" "Green"
 Write-Color "   📝 Tipos: $downloaded baixados, $failed não encontrados" "Green"
 Write-Color "   📄 Config: .ecc-config.json" "Green"
+Write-Color "   📋 Gitignore: .agents\installed\ ignorado" "Green"
 Write-Color ""
 Write-Color "   📋 Próximos passos:" "Cyan"
 Write-Color "   1. Abra o Freebuff/Codebuff no diretório do projeto"

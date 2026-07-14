@@ -5,7 +5,7 @@
 #  Baixa APENAS o @agent-manager e configura o ambiente.
 #  O @agent-manager é quem faz o trabalho pesado (lê ECC via API).
 #
-#  Uso: curl -fsSL https://raw.githubusercontent.com/PuraForja/freebuff-ecc-bridge/main/install.sh | bash
+#  Uso: curl -fsSL https://raw.githubusercontent.com/PuraForja/freebuff-ecc-bridge/master/install.sh | bash
 #  Ou:  bash install.sh
 # ═══════════════════════════════════════════════════════════════
 
@@ -17,7 +17,7 @@ BLUE='\033[0;34m'; CYAN='\033[0;36m'; NC='\033[0m'
 
 # Configurações
 BRIDGE_REPO="https://github.com/PuraForja/freebuff-ecc-bridge"
-RAW_BASE="${BRIDGE_REPO}/raw/main"
+RAW_BASE="${BRIDGE_REPO}/raw/master"
 INSTALL_DIR="$(pwd)"
 TYPES_DOWNLOADED=0
 TYPES_FAILED=0
@@ -34,6 +34,17 @@ download_file() {
     else
         return 1
     fi
+}
+
+# Função para verificar se arquivo é TypeScript válido
+verify_typescript() {
+    local file="$1"
+    if [ -f "$file" ]; then
+        if head -5 "$file" | grep -qE "(export default|export const|// )"; then
+            return 0
+        fi
+    fi
+    return 1
 }
 
 echo -e "${BLUE}╔═══════════════════════════════════════════════════════════════╗${NC}"
@@ -75,7 +86,13 @@ echo ""
 echo -e "${CYAN}[3/6] Baixando @agent-manager...${NC}"
 
 if download_file "${RAW_BASE}/.agents/agent-manager.ts" "${INSTALL_DIR}/.agents/agent-manager.ts"; then
-    echo -e "  ${GREEN}✅${NC} @agent-manager.ts baixado"
+    if verify_typescript "${INSTALL_DIR}/.agents/agent-manager.ts"; then
+        echo -e "  ${GREEN}✅${NC} @agent-manager.ts baixado e verificado"
+    else
+        echo -e "  ${RED}❌${NC} Arquivo baixado não é TypeScript válido"
+        rm -f "${INSTALL_DIR}/.agents/agent-manager.ts"
+        exit 1
+    fi
 else
     echo -e "  ${RED}❌${NC} Erro ao baixar @agent-manager"
     exit 1
@@ -91,17 +108,19 @@ echo -e "${CYAN}[4/6] Baixando tipos TypeScript...${NC}"
 TYPES=("agent-definition.ts" "tools.ts" "util-types.ts")
 for type_file in "${TYPES[@]}"; do
     if download_file "${RAW_BASE}/.agents/types/${type_file}" "${INSTALL_DIR}/.agents/types/${type_file}"; then
-        echo -e "  ${GREEN}✅${NC} ${type_file} baixado"
-        TYPES_DOWNLOADED=$((TYPES_DOWNLOADED + 1))
+        if verify_typescript "${INSTALL_DIR}/.agents/types/${type_file}"; then
+            echo -e "  ${GREEN}✅${NC} ${type_file} baixado"
+            TYPES_DOWNLOADED=$((TYPES_DOWNLOADED + 1))
+        else
+            echo -e "  ${YELLOW}⚠️${NC} ${type_file} baixado mas conteúdo inválido"
+            rm -f "${INSTALL_DIR}/.agents/types/${type_file}"
+            TYPES_FAILED=$((TYPES_FAILED + 1))
+        fi
     else
         echo -e "  ${YELLOW}⚠️${NC} ${type_file} não encontrado (opcional)"
         TYPES_FAILED=$((TYPES_FAILED + 1))
     fi
 done
-
-if [ "$TYPES_DOWNLOADED" -eq 0 ] && [ "$TYPES_FAILED" -gt 0 ]; then
-    echo -e "  ${YELLOW}⚠️${NC} Nenhum tipo baixado. Verifique o repositório."
-fi
 
 echo ""
 
@@ -136,7 +155,6 @@ echo -e "${CYAN}[6/6] Atualizando .gitignore...${NC}"
 
 GITIGNORE_FILE="${INSTALL_DIR}/.gitignore"
 
-# Verificar se .gitignore existe e se já tem a entrada
 if [ -f "$GITIGNORE_FILE" ]; then
     if ! grep -q "^\.agents/installed/" "$GITIGNORE_FILE" 2>/dev/null; then
         echo "" >> "$GITIGNORE_FILE"
