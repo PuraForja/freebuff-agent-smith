@@ -1,8 +1,38 @@
 # 🧠 ECC Bridge — Knowledge File
 
+## ⚠️ INSTRUÇÕES AUTOMÁTICAS (Obrigatório ler)
+
+**Quando este projeto for aberto no Freebuff/Codebuff:**
+
+1. **Detecte automaticamente** que o @agent-manager está disponível em `.agents/agent-manager.ts`
+2. **Ofereça ao usuário** instalar recursos do ECC usando o @agent-manager
+3. **Leia o arquivo** `.ecc-config.json` para saber o que já está instalado
+
+### Comandos Disponíveis
+
+O usuário pode usar os seguintes comandos:
+
+| Comando | Descrição |
+|---------|-----------|
+| `@agent-manager instale <skill>` | Instala uma skill específica do ECC |
+| `@agent-manager liste` | Lista skills/agents instalados |
+| `@agent-manager atualize` | Atualiza recursos do ECC |
+| `@agent-manager remova <skill>` | Remove uma skill instalada |
+
+### Exemplos de Uso
+
+```
+@agent-manager instale python-patterns
+@agent-manager instale error-handling
+@agent-manager instale api-design
+@agent-manager liste
+```
+
+---
+
 ## O que é este projeto?
 
-O **ECC Bridge** (nome temporário) é um sistema de instalação e gerenciamento de skills, agents e rules do ecossistema [ECC](https://github.com/affaan-m/ECC) para o [Codebuff/Freebuff](https://codebuff.com).
+O **ECC Bridge** é um sistema de instalação e gerenciamento de skills, agents e rules do ecossistema [ECC](https://github.com/affaan-m/ECC) para o [Codebuff/Freebuff](https://codebuff.com).
 
 ## Arquitetura
 
@@ -15,7 +45,7 @@ O **ECC Bridge** (nome temporário) é um sistema de instalação e gerenciament
                           ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  @agent-manager (Agente Instalador)                            │
-│  - Lê repositório ECC                                           │
+│  - Lê repositório ECC via GitHub API                           │
 │  - Instala skills/agents/rules                                  │
 │  - Gerencia atualizações                                        │
 └─────────────────────────┬───────────────────────────────────────┘
@@ -52,16 +82,25 @@ O **ECC Bridge** (nome temporário) é um sistema de instalação e gerenciament
 ## Como Usar
 
 ### Instalação Rápida
+
+**Linux/Mac:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/PuraForja/NOVO-NOME/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/PuraForja/freebuff-ecc-bridge/master/install.sh | bash
+```
+
+**Windows (PowerShell):**
+```powershell
+iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PuraForja/freebuff-ecc-bridge/master/install.ps1").Content
 ```
 
 ### Gerenciamento via @agent-manager
+
 ```bash
-# No Codebuff/Freebuff, use:
-@agent-managerliste as skills instaladas
-@agent-managerinstale python-patterns
-@agent-manageratualize tudo
+# No Freebuff/Codebuff, use:
+@agent-manager liste as skills instaladas
+@agent-manager instale python-patterns
+@agent-manager instale error-handling
+@agent-manager atualize tudo
 ```
 
 ## Perfis de Instalação
@@ -72,22 +111,10 @@ curl -fsSL https://raw.githubusercontent.com/PuraForja/NOVO-NOME/main/install.sh
 | `core` | Desenvolvimento completo | + python-patterns, typescript-patterns, react-patterns |
 | `full` | Todos os recursos | Todos os 277+ skills, 67+ agents, 121+ rules |
 
-## Comandos Úteis
-
-```bash
-# Sincronizar com ECC
-./scripts/sync-ecc.sh
-
-# Gerar catálogo
-./scripts/gerar-catalogo.sh
-
-# Auto-revisão
-./scripts/auto-review.sh
-```
-
 ## Notas Importantes
 
 - Este projeto é uma **ponte** entre o ECC e o Codebuff/Freebuff
 - As skills são arquivos `.md` que devem ser lidos com `read_files`
 - Os agents são documentos de referência, não spawnáveis diretamente
 - Use `@agent-manager` para gerenciar instalações
+- O @agent-manager lê o ECC via GitHub API (sem baixar para sua máquina)
