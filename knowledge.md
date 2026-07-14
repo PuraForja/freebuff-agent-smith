@@ -4,8 +4,8 @@
 
 **Quando este projeto for aberto no Freebuff/Codebuff:**
 
-1. **Detecte automaticamente** que o @agent-smith está disponível em `.agents/agent-smith.ts`
-2. **Ofereça ao usuário** instalar recursos do ECC usando o @agent-smith
+1. **Detecte automaticamente** que o `@agent-smith` está disponível em `.agents/agent-smith.ts`
+2. **Ofereça ao usuário** instalar recursos do ECC usando o `@agent-smith`
 3. **Leia o arquivo** `.ecc-config.json` para saber o que já está instalado
 
 ### Comandos Disponíveis
@@ -32,19 +32,19 @@ O usuário pode usar os seguintes comandos:
 
 ## O que é este projeto?
 
-O **Freebuff Agente Smit** é um sistema de instalação e gerenciamento de skills, agents e rules do ecossistema [ECC](https://github.com/affaan-m/ECC) para o [Codebuff/Freebuff](https://codebuff.com).
+O **Freebuff Agente Smit** é um agente que instala e gerencia skills, agents e rules do [ECC](https://github.com/affaan-m/ECC) (224k+ ⭐) para o [Freebuff](https://freebuff.com) e [Codebuff](https://codebuff.com).
 
-## Arquitetura
+## Como Funciona
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │  USUÁRIO                                                        │
-│  Executa install.sh ou usa @agent-smith                       │
+│  Executa install.sh ou install.ps1                              │
 └─────────────────────────┬───────────────────────────────────────┘
                           │
                           ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│  @agent-smith (Agente Instalador)                            │
+│  @agent-smith (Agente Instalador)                               │
 │  - Lê repositório ECC via GitHub API                           │
 │  - Instala skills/agents/rules                                  │
 │  - Gerencia atualizações                                        │
@@ -62,21 +62,18 @@ O **Freebuff Agente Smit** é um sistema de instalação e gerenciamento de skil
 ## Estrutura de Diretórios
 
 ```
-.projeto/
+.seu-projeto/
 ├── .agents/
-│   ├── agent-smith.ts        ← Agente gerenciador
-│   ├── types/
-│   │   ├── agent-definition.ts
-│   │   ├── tools.ts
-│   │   └── util-types.ts
+│   ├── agent-smith.ts         ← O agente instalador
+│   ├── types/                 ← Tipos TypeScript
 │   └── installed/
-│       ├── ecc-skills/         ← Skills do ECC
-│       ├── ecc-agents/         ← Agents do ECC
-│       ├── ecc-rules/          ← Rules do ECC
-│       └── custom/             ← Seus resources personalizados
-├── .ecc-config.json            ← Configuração e registro
-├── knowledge.md                ← Este arquivo
-└── install.sh                  ← Script de instalação
+│       ├── ecc-skills/        ← Skills do ECC
+│       ├── ecc-agents/        ← Agents do ECC
+│       ├── ecc-rules/         ← Rules do ECC
+│       └── custom/            ← Seus resources personalizados
+├── .ecc-config.json           ← Configuração e registro
+├── knowledge.md               ← Este arquivo
+└── .gitignore                 ← Ignora .agents/installed/
 ```
 
 ## Como Usar
@@ -97,23 +94,27 @@ iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PuraForja/freebuf
 
 ```bash
 # No Freebuff/Codebuff, use:
-@agent-smith liste as skills instaladas
 @agent-smith instale python-patterns
 @agent-smith instale error-handling
-@agent-smith atualize tudo
+@agent-smith liste
+@agent-smith atualize
 ```
 
-## Perfis de Instalação
+## Recursos Disponíveis
 
-| Perfil | Descrição | Recursos |
-|--------|-----------|----------|
-| `minimal` | Apenas essenciais | coding-standards, error-handling, git-workflow |
-| `core` | Desenvolvimento completo | + python-patterns, typescript-patterns, react-patterns |
-| `full` | Todos os recursos | Todos os 277+ skills, 67+ agents, 121+ rules |
+| Categoria | Quantidade |
+|-----------|:----------:|
+| 🧠 Skills | 277 |
+| 🎯 Agents | 67 |
+| 📏 Rules | 121 |
+| ⚡ Commands | 92 |
+| 🔌 Hooks | 3 |
+| 📝 Contexts | 3 |
+| **Total** | **563** |
 
 ## Notas Importantes
 
-- Este projeto é uma **ponte** entre o ECC e o Codebuff/Freebuff
+- Este projeto instala e gerencia recursos do ECC para Freebuff/Codebuff
 - As skills são arquivos `.md` que devem ser lidos com `read_files`
 - Os agents são documentos de referência, não spawnáveis diretamente
 - Use `@agent-smith` para gerenciar instalações

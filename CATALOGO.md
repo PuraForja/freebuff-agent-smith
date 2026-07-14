@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Agentes na Bridge
+## 🎯 Agentes na Agente Smit
 
 Adaptados do ECC para usar no Codebuff via `@NomeDoAgente`.
 
@@ -83,290 +83,290 @@ Adaptados do ECC para usar no Codebuff via `@NomeDoAgente`.
 
 ---
 
-## 🧠 Skills na Bridge
+## 🧠 Skills na Agente Smit
 
 Adaptadas do ECC para usar no Codebuff via `skill "nome-da-skill"`.
 
 | Skill | Descrição | Origem |
 |-------|-----------|:------:|
-| `accessibility` | accessibility | ECC → Bridge |
-| `agent-architecture-audit` | agent-architecture-audit | ECC → Bridge |
-| `agent-eval` | agent-eval | ECC → Bridge |
-| `agent-harness-construction` | agent-harness-construction | ECC → Bridge |
-| `agent-introspection-debugging` | agent-introspection-debugging | ECC → Bridge |
-| `agent-payment-x402` | agent-payment-x402 | ECC → Bridge |
-| `agent-self-evaluation` | agent-self-evaluation | ECC → Bridge |
-| `agent-sort` | agent-sort | ECC → Bridge |
-| `agentic-engineering` | agentic-engineering | ECC → Bridge |
-| `agentic-os` | agentic-os | ECC → Bridge |
-| `ai-first-engineering` | ai-first-engineering | ECC → Bridge |
-| `ai-regression-testing` | ai-regression-testing | ECC → Bridge |
-| `android-clean-architecture` | android-clean-architecture | ECC → Bridge |
-| `angular-developer` | angular-developer | ECC → Bridge |
-| `api-connector-builder` | api-connector-builder | ECC → Bridge |
-| `api-design` | api-design | ECC → Bridge |
-| `architecture-decision-records` | architecture-decision-records | ECC → Bridge |
-| `article-writing` | article-writing | ECC → Bridge |
-| `auto-review` | auto-review | ECC → Bridge |
-| `automation-audit` | automation-audit | ECC → Bridge |
-| `autonomous-agent-harness` | autonomous-agent-harness | ECC → Bridge |
-| `autonomous-loops` | autonomous-loops | ECC → Bridge |
-| `backend-patterns` | backend-patterns | ECC → Bridge |
-| `benchmark-methodology` | benchmark-methodology | ECC → Bridge |
-| `benchmark-optimization` | benchmark-optimization | ECC → Bridge |
-| `benchmark` | benchmark | ECC → Bridge |
-| `blender-motion-state-inspection` | blender-motion-state-inspection | ECC → Bridge |
-| `blueprint` | blueprint | ECC → Bridge |
-| `brand-discovery` | brand-discovery | ECC → Bridge |
-| `brand-voice` | brand-voice | ECC → Bridge |
-| `browser-qa` | browser-qa | ECC → Bridge |
-| `bun-runtime` | bun-runtime | ECC → Bridge |
-| `canary-watch` | canary-watch | ECC → Bridge |
-| `carrier-relationship-management` | carrier-relationship-management | ECC → Bridge |
-| `cisco-ios-patterns` | cisco-ios-patterns | ECC → Bridge |
-| `ck` | ck | ECC → Bridge |
-| `claude-devfleet` | claude-devfleet | ECC → Bridge |
-| `click-path-audit` | click-path-audit | ECC → Bridge |
-| `clickhouse-io` | clickhouse-io | ECC → Bridge |
-| `code-tour` | code-tour | ECC → Bridge |
-| `codebase-onboarding` | codebase-onboarding | ECC → Bridge |
-| `codehealth-mcp` | codehealth-mcp | ECC → Bridge |
-| `coding-standards` | coding-standards | ECC → Bridge |
-| `competitive-platform-analysis` | competitive-platform-analysis | ECC → Bridge |
-| `competitive-report-structure` | competitive-report-structure | ECC → Bridge |
-| `compose-multiplatform-patterns` | compose-multiplatform-patterns | ECC → Bridge |
-| `config-gc` | config-gc | ECC → Bridge |
-| `configure-ecc` | configure-ecc | ECC → Bridge |
-| `connections-optimizer` | connections-optimizer | ECC → Bridge |
-| `content-engine` | content-engine | ECC → Bridge |
-| `content-hash-cache-pattern` | content-hash-cache-pattern | ECC → Bridge |
-| `context-budget` | context-budget | ECC → Bridge |
-| `continuous-agent-loop` | continuous-agent-loop | ECC → Bridge |
-| `continuous-learning` | continuous-learning | ECC → Bridge |
-| `cost-aware-llm-pipeline` | cost-aware-llm-pipeline | ECC → Bridge |
-| `cost-tracking` | cost-tracking | ECC → Bridge |
-| `council` | council | ECC → Bridge |
-| `cpp-coding-standards` | cpp-coding-standards | ECC → Bridge |
-| `cpp-testing` | cpp-testing | ECC → Bridge |
-| `crosspost` | crosspost | ECC → Bridge |
-| `csharp-testing` | csharp-testing | ECC → Bridge |
-| `customer-billing-ops` | customer-billing-ops | ECC → Bridge |
-| `customs-trade-compliance` | customs-trade-compliance | ECC → Bridge |
-| `dart-flutter-patterns` | dart-flutter-patterns | ECC → Bridge |
-| `dashboard-builder` | dashboard-builder | ECC → Bridge |
-| `data-scraper` | data-scraper | ECC → Bridge |
-| `data-throughput-accelerator` | data-throughput-accelerator | ECC → Bridge |
-| `database-migrations` | database-migrations | ECC → Bridge |
-| `deep-research` | deep-research | ECC → Bridge |
-| `defi-amm-security` | defi-amm-security | ECC → Bridge |
-| `deployment-patterns` | deployment-patterns | ECC → Bridge |
-| `design-system` | design-system | ECC → Bridge |
-| `django-celery` | django-celery | ECC → Bridge |
-| `django-patterns` | django-patterns | ECC → Bridge |
-| `django-security` | django-security | ECC → Bridge |
-| `django-tdd` | django-tdd | ECC → Bridge |
-| `django-verification` | django-verification | ECC → Bridge |
-| `dmux-workflows` | dmux-workflows | ECC → Bridge |
-| `docker-patterns` | docker-patterns | ECC → Bridge |
-| `documentation-lookup` | documentation-lookup | ECC → Bridge |
-| `dotnet-patterns` | dotnet-patterns | ECC → Bridge |
-| `dynamic-workflow-mode` | dynamic-workflow-mode | ECC → Bridge |
-| `e2e-testing` | e2e-testing | ECC → Bridge |
-| `ecc-guide` | ecc-guide | ECC → Bridge |
-| `ecc-recipes` | ecc-recipes | ECC → Bridge |
-| `ecc-tools-cost-audit` | ecc-tools-cost-audit | ECC → Bridge |
-| `email-ops` | email-ops | ECC → Bridge |
-| `energy-procurement` | energy-procurement | ECC → Bridge |
-| `enterprise-agent-ops` | enterprise-agent-ops | ECC → Bridge |
-| `error-handling` | error-handling | ECC → Bridge |
-| `eval-harness` | eval-harness | ECC → Bridge |
-| `evm-token-decimals` | evm-token-decimals | ECC → Bridge |
-| `exa-search` | exa-search | ECC → Bridge |
-| `fal-ai-media` | fal-ai-media | ECC → Bridge |
-| `fastapi-patterns` | fastapi-patterns | ECC → Bridge |
-| `finance-billing-ops` | finance-billing-ops | ECC → Bridge |
-| `flox-environments` | flox-environments | ECC → Bridge |
-| `flutter-dart-code-review` | flutter-dart-code-review | ECC → Bridge |
-| `foundation-models-on-device` | foundation-models-on-device | ECC → Bridge |
-| `frontend-a11y` | frontend-a11y | ECC → Bridge |
-| `frontend-design-direction` | frontend-design-direction | ECC → Bridge |
-| `frontend-patterns` | frontend-patterns | ECC → Bridge |
-| `frontend-slides` | frontend-slides | ECC → Bridge |
-| `fsharp-testing` | fsharp-testing | ECC → Bridge |
-| `gan-style-harness` | gan-style-harness | ECC → Bridge |
-| `gateguard` | gateguard | ECC → Bridge |
-| `generating-python-installer` | generating-python-installer | ECC → Bridge |
-| `git-workflow` | git-workflow | ECC → Bridge |
-| `github-ops` | github-ops | ECC → Bridge |
-| `golang-patterns` | golang-patterns | ECC → Bridge |
-| `golang-testing` | golang-testing | ECC → Bridge |
-| `google-workspace-ops` | google-workspace-ops | ECC → Bridge |
-| `growth-log` | growth-log | ECC → Bridge |
-| `healthcare-cdss-patterns` | healthcare-cdss-patterns | ECC → Bridge |
-| `healthcare-emr-patterns` | healthcare-emr-patterns | ECC → Bridge |
-| `healthcare-eval-harness` | healthcare-eval-harness | ECC → Bridge |
-| `healthcare-phi-compliance` | healthcare-phi-compliance | ECC → Bridge |
-| `hermes-imports` | hermes-imports | ECC → Bridge |
-| `hexagonal-architecture` | hexagonal-architecture | ECC → Bridge |
-| `hipaa-compliance` | hipaa-compliance | ECC → Bridge |
-| `homelab-network-readiness` | homelab-network-readiness | ECC → Bridge |
-| `homelab-network-setup` | homelab-network-setup | ECC → Bridge |
-| `homelab-pihole-dns` | homelab-pihole-dns | ECC → Bridge |
-| `homelab-vlan-segmentation` | homelab-vlan-segmentation | ECC → Bridge |
-| `homelab-wireguard-vpn` | homelab-wireguard-vpn | ECC → Bridge |
-| `hookify-rules` | hookify-rules | ECC → Bridge |
-| `infinite-improvement-loop` | infinite-improvement-loop | ECC → Bridge |
-| `inherit-legacy-style` | inherit-legacy-style | ECC → Bridge |
-| `intent-driven-development` | intent-driven-development | ECC → Bridge |
-| `inventory-demand-planning` | inventory-demand-planning | ECC → Bridge |
-| `investor-materials` | investor-materials | ECC → Bridge |
-| `investor-outreach` | investor-outreach | ECC → Bridge |
-| `ios-icon-gen` | ios-icon-gen | ECC → Bridge |
-| `iterative-retrieval` | iterative-retrieval | ECC → Bridge |
-| `ito-basket-compare` | ito-basket-compare | ECC → Bridge |
-| `ito-data-atlas-agent` | ito-data-atlas-agent | ECC → Bridge |
-| `ito-market-intelligence` | ito-market-intelligence | ECC → Bridge |
-| `ito-trade-planner` | ito-trade-planner | ECC → Bridge |
-| `java-coding-standards` | java-coding-standards | ECC → Bridge |
-| `jira-integration` | jira-integration | ECC → Bridge |
-| `jpa-patterns` | jpa-patterns | ECC → Bridge |
-| `knowledge-ops` | knowledge-ops | ECC → Bridge |
-| `kotlin-coroutines-flows` | kotlin-coroutines-flows | ECC → Bridge |
-| `kotlin-exposed-patterns` | kotlin-exposed-patterns | ECC → Bridge |
-| `kotlin-ktor-patterns` | kotlin-ktor-patterns | ECC → Bridge |
-| `kotlin-patterns` | kotlin-patterns | ECC → Bridge |
-| `kotlin-testing` | kotlin-testing | ECC → Bridge |
-| `kubernetes-patterns` | kubernetes-patterns | ECC → Bridge |
-| `laravel-patterns` | laravel-patterns | ECC → Bridge |
-| `laravel-plugin-discovery` | laravel-plugin-discovery | ECC → Bridge |
-| `laravel-security` | laravel-security | ECC → Bridge |
-| `laravel-tdd` | laravel-tdd | ECC → Bridge |
-| `laravel-verification` | laravel-verification | ECC → Bridge |
-| `latency-critical-systems` | latency-critical-systems | ECC → Bridge |
-| `lead-intelligence` | lead-intelligence | ECC → Bridge |
-| `liquid-glass-design` | liquid-glass-design | ECC → Bridge |
-| `llm-trading-agent-security` | llm-trading-agent-security | ECC → Bridge |
-| `logistics-exception-management` | logistics-exception-management | ECC → Bridge |
-| `loop-design-check` | loop-design-check | ECC → Bridge |
-| `mailtrap-email-integration` | mailtrap-email-integration | ECC → Bridge |
-| `make-interfaces-feel-better` | make-interfaces-feel-better | ECC → Bridge |
-| `manim-video` | manim-video | ECC → Bridge |
-| `market-research` | market-research | ECC → Bridge |
-| `marketing-campaign` | marketing-campaign | ECC → Bridge |
-| `mcp-server-patterns` | mcp-server-patterns | ECC → Bridge |
-| `messages-ops` | messages-ops | ECC → Bridge |
-| `ml-adoption-playbook` | ml-adoption-playbook | ECC → Bridge |
-| `mle-workflow` | mle-workflow | ECC → Bridge |
-| `motion-advanced` | motion-advanced | ECC → Bridge |
-| `motion-foundations` | motion-foundations | ECC → Bridge |
-| `motion-patterns` | motion-patterns | ECC → Bridge |
-| `motion-ui` | motion-ui | ECC → Bridge |
-| `mysql-patterns` | mysql-patterns | ECC → Bridge |
-| `nanoclaw-repl` | nanoclaw-repl | ECC → Bridge |
-| `nestjs-patterns` | nestjs-patterns | ECC → Bridge |
-| `netmiko-ssh-automation` | netmiko-ssh-automation | ECC → Bridge |
-| `network-bgp-diagnostics` | network-bgp-diagnostics | ECC → Bridge |
-| `network-config-validation` | network-config-validation | ECC → Bridge |
-| `network-interface-health` | network-interface-health | ECC → Bridge |
-| `nextjs-turbopack` | nextjs-turbopack | ECC → Bridge |
-| `nodejs-keccak256` | nodejs-keccak256 | ECC → Bridge |
-| `nutrient-document-processing` | nutrient-document-processing | ECC → Bridge |
-| `nuxt4-patterns` | nuxt4-patterns | ECC → Bridge |
-| `openclaw-persona-forge` | openclaw-persona-forge | ECC → Bridge |
-| `opensource-pipeline` | opensource-pipeline | ECC → Bridge |
-| `orch-add-feature` | orch-add-feature | ECC → Bridge |
-| `orch-build-mvp` | orch-build-mvp | ECC → Bridge |
-| `orch-change-feature` | orch-change-feature | ECC → Bridge |
-| `orch-fix-defect` | orch-fix-defect | ECC → Bridge |
-| `orch-pipeline` | orch-pipeline | ECC → Bridge |
-| `orch-refine-code` | orch-refine-code | ECC → Bridge |
-| `parallel-execution-optimizer` | parallel-execution-optimizer | ECC → Bridge |
-| `perl-patterns` | perl-patterns | ECC → Bridge |
-| `perl-security` | perl-security | ECC → Bridge |
-| `perl-testing` | perl-testing | ECC → Bridge |
-| `plan-orchestrate` | plan-orchestrate | ECC → Bridge |
-| `plankton-code-quality` | plankton-code-quality | ECC → Bridge |
-| `postgres-patterns` | postgres-patterns | ECC → Bridge |
-| `prediction-market-oracle-research` | prediction-market-oracle-research | ECC → Bridge |
-| `prediction-market-risk-review` | prediction-market-risk-review | ECC → Bridge |
-| `prisma-patterns` | prisma-patterns | ECC → Bridge |
-| `product-capability` | product-capability | ECC → Bridge |
-| `product-lens` | product-lens | ECC → Bridge |
-| `production-audit` | production-audit | ECC → Bridge |
-| `production-scheduling` | production-scheduling | ECC → Bridge |
-| `project-flow-ops` | project-flow-ops | ECC → Bridge |
-| `prompt-optimizer` | prompt-optimizer | ECC → Bridge |
-| `python-patterns` | python-patterns | ECC → Bridge |
-| `python-testing` | python-testing | ECC → Bridge |
-| `pytorch-patterns` | pytorch-patterns | ECC → Bridge |
-| `quality-gate` | quality-gate | ECC → Bridge |
-| `quality-nonconformance` | quality-nonconformance | ECC → Bridge |
-| `quarkus-patterns` | quarkus-patterns | ECC → Bridge |
-| `quarkus-security` | quarkus-security | ECC → Bridge |
-| `quarkus-tdd` | quarkus-tdd | ECC → Bridge |
-| `quarkus-verification` | quarkus-verification | ECC → Bridge |
-| `ralphinho-rfc-pipeline` | ralphinho-rfc-pipeline | ECC → Bridge |
-| `react-native-patterns` | react-native-patterns | ECC → Bridge |
-| `react-patterns` | react-patterns | ECC → Bridge |
-| `react-performance` | react-performance | ECC → Bridge |
-| `react-testing` | react-testing | ECC → Bridge |
-| `recsys-pipeline-architect` | recsys-pipeline-architect | ECC → Bridge |
-| `recursive-decision-ledger` | recursive-decision-ledger | ECC → Bridge |
-| `redis-patterns` | redis-patterns | ECC → Bridge |
-| `regex-vs-llm-structured-text` | regex-vs-llm-structured-text | ECC → Bridge |
-| `remotion-video-creation` | remotion-video-creation | ECC → Bridge |
-| `repo-scan` | repo-scan | ECC → Bridge |
-| `research-ops` | research-ops | ECC → Bridge |
-| `returns-reverse-logistics` | returns-reverse-logistics | ECC → Bridge |
-| `rules-distill` | rules-distill | ECC → Bridge |
-| `rust-patterns` | rust-patterns | ECC → Bridge |
-| `rust-testing` | rust-testing | ECC → Bridge |
-| `safety-guard` | safety-guard | ECC → Bridge |
-| `santa-method` | santa-method | ECC → Bridge |
-| `scientific-db-pubmed-database` | scientific-db-pubmed-database | ECC → Bridge |
-| `scientific-db-uspto-database` | scientific-db-uspto-database | ECC → Bridge |
-| `scientific-pkg-gget` | scientific-pkg-gget | ECC → Bridge |
-| `scientific-thinking-literature-review` | scientific-thinking-literature-review | ECC → Bridge |
-| `scientific-thinking-scholar-evaluation` | scientific-thinking-scholar-evaluation | ECC → Bridge |
-| `search-first` | search-first | ECC → Bridge |
-| `security-bounty-hunter` | security-bounty-hunter | ECC → Bridge |
-| `security-review` | security-review | ECC → Bridge |
-| `security-scan` | security-scan | ECC → Bridge |
-| `seo` | seo | ECC → Bridge |
-| `skill-comply` | skill-comply | ECC → Bridge |
-| `skill-scout` | skill-scout | ECC → Bridge |
-| `skill-stocktake` | skill-stocktake | ECC → Bridge |
-| `social-graph-ranker` | social-graph-ranker | ECC → Bridge |
-| `social-publisher` | social-publisher | ECC → Bridge |
-| `springboot-patterns` | springboot-patterns | ECC → Bridge |
-| `springboot-security` | springboot-security | ECC → Bridge |
-| `springboot-tdd` | springboot-tdd | ECC → Bridge |
-| `springboot-verification` | springboot-verification | ECC → Bridge |
-| `strategic-compact` | strategic-compact | ECC → Bridge |
-| `swift-actor-persistence` | swift-actor-persistence | ECC → Bridge |
-| `swift-concurrency-6-2` | swift-concurrency-6-2 | ECC → Bridge |
-| `swift-protocol-di-testing` | swift-protocol-di-testing | ECC → Bridge |
-| `swiftui-patterns` | swiftui-patterns | ECC → Bridge |
-| `taste` | taste | ECC → Bridge |
-| `tdd-workflow` | tdd-workflow | ECC → Bridge |
-| `team-agent-orchestration` | team-agent-orchestration | ECC → Bridge |
-| `team-builder` | team-builder | ECC → Bridge |
-| `terminal-ops` | terminal-ops | ECC → Bridge |
-| `tinystruct-patterns` | tinystruct-patterns | ECC → Bridge |
-| `token-budget-advisor` | token-budget-advisor | ECC → Bridge |
-| `ui-demo` | ui-demo | ECC → Bridge |
-| `ui-to-vue` | ui-to-vue | ECC → Bridge |
-| `uncloud` | uncloud | ECC → Bridge |
-| `unified-notifications-ops` | unified-notifications-ops | ECC → Bridge |
-| `verification-loop` | verification-loop | ECC → Bridge |
-| `video-editing` | video-editing | ECC → Bridge |
-| `videodb` | videodb | ECC → Bridge |
-| `visa-doc-translate` | visa-doc-translate | ECC → Bridge |
-| `vite-patterns` | vite-patterns | ECC → Bridge |
-| `vue-patterns` | vue-patterns | ECC → Bridge |
-| `windows-desktop-e2e` | windows-desktop-e2e | ECC → Bridge |
-| `workspace-surface-audit` | workspace-surface-audit | ECC → Bridge |
-| `x-api` | x-api | ECC → Bridge |
+| `accessibility` | accessibility | ECC → Agente Smit |
+| `agent-architecture-audit` | agent-architecture-audit | ECC → Agente Smit |
+| `agent-eval` | agent-eval | ECC → Agente Smit |
+| `agent-harness-construction` | agent-harness-construction | ECC → Agente Smit |
+| `agent-introspection-debugging` | agent-introspection-debugging | ECC → Agente Smit |
+| `agent-payment-x402` | agent-payment-x402 | ECC → Agente Smit |
+| `agent-self-evaluation` | agent-self-evaluation | ECC → Agente Smit |
+| `agent-sort` | agent-sort | ECC → Agente Smit |
+| `agentic-engineering` | agentic-engineering | ECC → Agente Smit |
+| `agentic-os` | agentic-os | ECC → Agente Smit |
+| `ai-first-engineering` | ai-first-engineering | ECC → Agente Smit |
+| `ai-regression-testing` | ai-regression-testing | ECC → Agente Smit |
+| `android-clean-architecture` | android-clean-architecture | ECC → Agente Smit |
+| `angular-developer` | angular-developer | ECC → Agente Smit |
+| `api-connector-builder` | api-connector-builder | ECC → Agente Smit |
+| `api-design` | api-design | ECC → Agente Smit |
+| `architecture-decision-records` | architecture-decision-records | ECC → Agente Smit |
+| `article-writing` | article-writing | ECC → Agente Smit |
+| `auto-review` | auto-review | ECC → Agente Smit |
+| `automation-audit` | automation-audit | ECC → Agente Smit |
+| `autonomous-agent-harness` | autonomous-agent-harness | ECC → Agente Smit |
+| `autonomous-loops` | autonomous-loops | ECC → Agente Smit |
+| `backend-patterns` | backend-patterns | ECC → Agente Smit |
+| `benchmark-methodology` | benchmark-methodology | ECC → Agente Smit |
+| `benchmark-optimization` | benchmark-optimization | ECC → Agente Smit |
+| `benchmark` | benchmark | ECC → Agente Smit |
+| `blender-motion-state-inspection` | blender-motion-state-inspection | ECC → Agente Smit |
+| `blueprint` | blueprint | ECC → Agente Smit |
+| `brand-discovery` | brand-discovery | ECC → Agente Smit |
+| `brand-voice` | brand-voice | ECC → Agente Smit |
+| `browser-qa` | browser-qa | ECC → Agente Smit |
+| `bun-runtime` | bun-runtime | ECC → Agente Smit |
+| `canary-watch` | canary-watch | ECC → Agente Smit |
+| `carrier-relationship-management` | carrier-relationship-management | ECC → Agente Smit |
+| `cisco-ios-patterns` | cisco-ios-patterns | ECC → Agente Smit |
+| `ck` | ck | ECC → Agente Smit |
+| `claude-devfleet` | claude-devfleet | ECC → Agente Smit |
+| `click-path-audit` | click-path-audit | ECC → Agente Smit |
+| `clickhouse-io` | clickhouse-io | ECC → Agente Smit |
+| `code-tour` | code-tour | ECC → Agente Smit |
+| `codebase-onboarding` | codebase-onboarding | ECC → Agente Smit |
+| `codehealth-mcp` | codehealth-mcp | ECC → Agente Smit |
+| `coding-standards` | coding-standards | ECC → Agente Smit |
+| `competitive-platform-analysis` | competitive-platform-analysis | ECC → Agente Smit |
+| `competitive-report-structure` | competitive-report-structure | ECC → Agente Smit |
+| `compose-multiplatform-patterns` | compose-multiplatform-patterns | ECC → Agente Smit |
+| `config-gc` | config-gc | ECC → Agente Smit |
+| `configure-ecc` | configure-ecc | ECC → Agente Smit |
+| `connections-optimizer` | connections-optimizer | ECC → Agente Smit |
+| `content-engine` | content-engine | ECC → Agente Smit |
+| `content-hash-cache-pattern` | content-hash-cache-pattern | ECC → Agente Smit |
+| `context-budget` | context-budget | ECC → Agente Smit |
+| `continuous-agent-loop` | continuous-agent-loop | ECC → Agente Smit |
+| `continuous-learning` | continuous-learning | ECC → Agente Smit |
+| `cost-aware-llm-pipeline` | cost-aware-llm-pipeline | ECC → Agente Smit |
+| `cost-tracking` | cost-tracking | ECC → Agente Smit |
+| `council` | council | ECC → Agente Smit |
+| `cpp-coding-standards` | cpp-coding-standards | ECC → Agente Smit |
+| `cpp-testing` | cpp-testing | ECC → Agente Smit |
+| `crosspost` | crosspost | ECC → Agente Smit |
+| `csharp-testing` | csharp-testing | ECC → Agente Smit |
+| `customer-billing-ops` | customer-billing-ops | ECC → Agente Smit |
+| `customs-trade-compliance` | customs-trade-compliance | ECC → Agente Smit |
+| `dart-flutter-patterns` | dart-flutter-patterns | ECC → Agente Smit |
+| `dashboard-builder` | dashboard-builder | ECC → Agente Smit |
+| `data-scraper` | data-scraper | ECC → Agente Smit |
+| `data-throughput-accelerator` | data-throughput-accelerator | ECC → Agente Smit |
+| `database-migrations` | database-migrations | ECC → Agente Smit |
+| `deep-research` | deep-research | ECC → Agente Smit |
+| `defi-amm-security` | defi-amm-security | ECC → Agente Smit |
+| `deployment-patterns` | deployment-patterns | ECC → Agente Smit |
+| `design-system` | design-system | ECC → Agente Smit |
+| `django-celery` | django-celery | ECC → Agente Smit |
+| `django-patterns` | django-patterns | ECC → Agente Smit |
+| `django-security` | django-security | ECC → Agente Smit |
+| `django-tdd` | django-tdd | ECC → Agente Smit |
+| `django-verification` | django-verification | ECC → Agente Smit |
+| `dmux-workflows` | dmux-workflows | ECC → Agente Smit |
+| `docker-patterns` | docker-patterns | ECC → Agente Smit |
+| `documentation-lookup` | documentation-lookup | ECC → Agente Smit |
+| `dotnet-patterns` | dotnet-patterns | ECC → Agente Smit |
+| `dynamic-workflow-mode` | dynamic-workflow-mode | ECC → Agente Smit |
+| `e2e-testing` | e2e-testing | ECC → Agente Smit |
+| `ecc-guide` | ecc-guide | ECC → Agente Smit |
+| `ecc-recipes` | ecc-recipes | ECC → Agente Smit |
+| `ecc-tools-cost-audit` | ecc-tools-cost-audit | ECC → Agente Smit |
+| `email-ops` | email-ops | ECC → Agente Smit |
+| `energy-procurement` | energy-procurement | ECC → Agente Smit |
+| `enterprise-agent-ops` | enterprise-agent-ops | ECC → Agente Smit |
+| `error-handling` | error-handling | ECC → Agente Smit |
+| `eval-harness` | eval-harness | ECC → Agente Smit |
+| `evm-token-decimals` | evm-token-decimals | ECC → Agente Smit |
+| `exa-search` | exa-search | ECC → Agente Smit |
+| `fal-ai-media` | fal-ai-media | ECC → Agente Smit |
+| `fastapi-patterns` | fastapi-patterns | ECC → Agente Smit |
+| `finance-billing-ops` | finance-billing-ops | ECC → Agente Smit |
+| `flox-environments` | flox-environments | ECC → Agente Smit |
+| `flutter-dart-code-review` | flutter-dart-code-review | ECC → Agente Smit |
+| `foundation-models-on-device` | foundation-models-on-device | ECC → Agente Smit |
+| `frontend-a11y` | frontend-a11y | ECC → Agente Smit |
+| `frontend-design-direction` | frontend-design-direction | ECC → Agente Smit |
+| `frontend-patterns` | frontend-patterns | ECC → Agente Smit |
+| `frontend-slides` | frontend-slides | ECC → Agente Smit |
+| `fsharp-testing` | fsharp-testing | ECC → Agente Smit |
+| `gan-style-harness` | gan-style-harness | ECC → Agente Smit |
+| `gateguard` | gateguard | ECC → Agente Smit |
+| `generating-python-installer` | generating-python-installer | ECC → Agente Smit |
+| `git-workflow` | git-workflow | ECC → Agente Smit |
+| `github-ops` | github-ops | ECC → Agente Smit |
+| `golang-patterns` | golang-patterns | ECC → Agente Smit |
+| `golang-testing` | golang-testing | ECC → Agente Smit |
+| `google-workspace-ops` | google-workspace-ops | ECC → Agente Smit |
+| `growth-log` | growth-log | ECC → Agente Smit |
+| `healthcare-cdss-patterns` | healthcare-cdss-patterns | ECC → Agente Smit |
+| `healthcare-emr-patterns` | healthcare-emr-patterns | ECC → Agente Smit |
+| `healthcare-eval-harness` | healthcare-eval-harness | ECC → Agente Smit |
+| `healthcare-phi-compliance` | healthcare-phi-compliance | ECC → Agente Smit |
+| `hermes-imports` | hermes-imports | ECC → Agente Smit |
+| `hexagonal-architecture` | hexagonal-architecture | ECC → Agente Smit |
+| `hipaa-compliance` | hipaa-compliance | ECC → Agente Smit |
+| `homelab-network-readiness` | homelab-network-readiness | ECC → Agente Smit |
+| `homelab-network-setup` | homelab-network-setup | ECC → Agente Smit |
+| `homelab-pihole-dns` | homelab-pihole-dns | ECC → Agente Smit |
+| `homelab-vlan-segmentation` | homelab-vlan-segmentation | ECC → Agente Smit |
+| `homelab-wireguard-vpn` | homelab-wireguard-vpn | ECC → Agente Smit |
+| `hookify-rules` | hookify-rules | ECC → Agente Smit |
+| `infinite-improvement-loop` | infinite-improvement-loop | ECC → Agente Smit |
+| `inherit-legacy-style` | inherit-legacy-style | ECC → Agente Smit |
+| `intent-driven-development` | intent-driven-development | ECC → Agente Smit |
+| `inventory-demand-planning` | inventory-demand-planning | ECC → Agente Smit |
+| `investor-materials` | investor-materials | ECC → Agente Smit |
+| `investor-outreach` | investor-outreach | ECC → Agente Smit |
+| `ios-icon-gen` | ios-icon-gen | ECC → Agente Smit |
+| `iterative-retrieval` | iterative-retrieval | ECC → Agente Smit |
+| `ito-basket-compare` | ito-basket-compare | ECC → Agente Smit |
+| `ito-data-atlas-agent` | ito-data-atlas-agent | ECC → Agente Smit |
+| `ito-market-intelligence` | ito-market-intelligence | ECC → Agente Smit |
+| `ito-trade-planner` | ito-trade-planner | ECC → Agente Smit |
+| `java-coding-standards` | java-coding-standards | ECC → Agente Smit |
+| `jira-integration` | jira-integration | ECC → Agente Smit |
+| `jpa-patterns` | jpa-patterns | ECC → Agente Smit |
+| `knowledge-ops` | knowledge-ops | ECC → Agente Smit |
+| `kotlin-coroutines-flows` | kotlin-coroutines-flows | ECC → Agente Smit |
+| `kotlin-exposed-patterns` | kotlin-exposed-patterns | ECC → Agente Smit |
+| `kotlin-ktor-patterns` | kotlin-ktor-patterns | ECC → Agente Smit |
+| `kotlin-patterns` | kotlin-patterns | ECC → Agente Smit |
+| `kotlin-testing` | kotlin-testing | ECC → Agente Smit |
+| `kubernetes-patterns` | kubernetes-patterns | ECC → Agente Smit |
+| `laravel-patterns` | laravel-patterns | ECC → Agente Smit |
+| `laravel-plugin-discovery` | laravel-plugin-discovery | ECC → Agente Smit |
+| `laravel-security` | laravel-security | ECC → Agente Smit |
+| `laravel-tdd` | laravel-tdd | ECC → Agente Smit |
+| `laravel-verification` | laravel-verification | ECC → Agente Smit |
+| `latency-critical-systems` | latency-critical-systems | ECC → Agente Smit |
+| `lead-intelligence` | lead-intelligence | ECC → Agente Smit |
+| `liquid-glass-design` | liquid-glass-design | ECC → Agente Smit |
+| `llm-trading-agent-security` | llm-trading-agent-security | ECC → Agente Smit |
+| `logistics-exception-management` | logistics-exception-management | ECC → Agente Smit |
+| `loop-design-check` | loop-design-check | ECC → Agente Smit |
+| `mailtrap-email-integration` | mailtrap-email-integration | ECC → Agente Smit |
+| `make-interfaces-feel-better` | make-interfaces-feel-better | ECC → Agente Smit |
+| `manim-video` | manim-video | ECC → Agente Smit |
+| `market-research` | market-research | ECC → Agente Smit |
+| `marketing-campaign` | marketing-campaign | ECC → Agente Smit |
+| `mcp-server-patterns` | mcp-server-patterns | ECC → Agente Smit |
+| `messages-ops` | messages-ops | ECC → Agente Smit |
+| `ml-adoption-playbook` | ml-adoption-playbook | ECC → Agente Smit |
+| `mle-workflow` | mle-workflow | ECC → Agente Smit |
+| `motion-advanced` | motion-advanced | ECC → Agente Smit |
+| `motion-foundations` | motion-foundations | ECC → Agente Smit |
+| `motion-patterns` | motion-patterns | ECC → Agente Smit |
+| `motion-ui` | motion-ui | ECC → Agente Smit |
+| `mysql-patterns` | mysql-patterns | ECC → Agente Smit |
+| `nanoclaw-repl` | nanoclaw-repl | ECC → Agente Smit |
+| `nestjs-patterns` | nestjs-patterns | ECC → Agente Smit |
+| `netmiko-ssh-automation` | netmiko-ssh-automation | ECC → Agente Smit |
+| `network-bgp-diagnostics` | network-bgp-diagnostics | ECC → Agente Smit |
+| `network-config-validation` | network-config-validation | ECC → Agente Smit |
+| `network-interface-health` | network-interface-health | ECC → Agente Smit |
+| `nextjs-turbopack` | nextjs-turbopack | ECC → Agente Smit |
+| `nodejs-keccak256` | nodejs-keccak256 | ECC → Agente Smit |
+| `nutrient-document-processing` | nutrient-document-processing | ECC → Agente Smit |
+| `nuxt4-patterns` | nuxt4-patterns | ECC → Agente Smit |
+| `openclaw-persona-forge` | openclaw-persona-forge | ECC → Agente Smit |
+| `opensource-pipeline` | opensource-pipeline | ECC → Agente Smit |
+| `orch-add-feature` | orch-add-feature | ECC → Agente Smit |
+| `orch-build-mvp` | orch-build-mvp | ECC → Agente Smit |
+| `orch-change-feature` | orch-change-feature | ECC → Agente Smit |
+| `orch-fix-defect` | orch-fix-defect | ECC → Agente Smit |
+| `orch-pipeline` | orch-pipeline | ECC → Agente Smit |
+| `orch-refine-code` | orch-refine-code | ECC → Agente Smit |
+| `parallel-execution-optimizer` | parallel-execution-optimizer | ECC → Agente Smit |
+| `perl-patterns` | perl-patterns | ECC → Agente Smit |
+| `perl-security` | perl-security | ECC → Agente Smit |
+| `perl-testing` | perl-testing | ECC → Agente Smit |
+| `plan-orchestrate` | plan-orchestrate | ECC → Agente Smit |
+| `plankton-code-quality` | plankton-code-quality | ECC → Agente Smit |
+| `postgres-patterns` | postgres-patterns | ECC → Agente Smit |
+| `prediction-market-oracle-research` | prediction-market-oracle-research | ECC → Agente Smit |
+| `prediction-market-risk-review` | prediction-market-risk-review | ECC → Agente Smit |
+| `prisma-patterns` | prisma-patterns | ECC → Agente Smit |
+| `product-capability` | product-capability | ECC → Agente Smit |
+| `product-lens` | product-lens | ECC → Agente Smit |
+| `production-audit` | production-audit | ECC → Agente Smit |
+| `production-scheduling` | production-scheduling | ECC → Agente Smit |
+| `project-flow-ops` | project-flow-ops | ECC → Agente Smit |
+| `prompt-optimizer` | prompt-optimizer | ECC → Agente Smit |
+| `python-patterns` | python-patterns | ECC → Agente Smit |
+| `python-testing` | python-testing | ECC → Agente Smit |
+| `pytorch-patterns` | pytorch-patterns | ECC → Agente Smit |
+| `quality-gate` | quality-gate | ECC → Agente Smit |
+| `quality-nonconformance` | quality-nonconformance | ECC → Agente Smit |
+| `quarkus-patterns` | quarkus-patterns | ECC → Agente Smit |
+| `quarkus-security` | quarkus-security | ECC → Agente Smit |
+| `quarkus-tdd` | quarkus-tdd | ECC → Agente Smit |
+| `quarkus-verification` | quarkus-verification | ECC → Agente Smit |
+| `ralphinho-rfc-pipeline` | ralphinho-rfc-pipeline | ECC → Agente Smit |
+| `react-native-patterns` | react-native-patterns | ECC → Agente Smit |
+| `react-patterns` | react-patterns | ECC → Agente Smit |
+| `react-performance` | react-performance | ECC → Agente Smit |
+| `react-testing` | react-testing | ECC → Agente Smit |
+| `recsys-pipeline-architect` | recsys-pipeline-architect | ECC → Agente Smit |
+| `recursive-decision-ledger` | recursive-decision-ledger | ECC → Agente Smit |
+| `redis-patterns` | redis-patterns | ECC → Agente Smit |
+| `regex-vs-llm-structured-text` | regex-vs-llm-structured-text | ECC → Agente Smit |
+| `remotion-video-creation` | remotion-video-creation | ECC → Agente Smit |
+| `repo-scan` | repo-scan | ECC → Agente Smit |
+| `research-ops` | research-ops | ECC → Agente Smit |
+| `returns-reverse-logistics` | returns-reverse-logistics | ECC → Agente Smit |
+| `rules-distill` | rules-distill | ECC → Agente Smit |
+| `rust-patterns` | rust-patterns | ECC → Agente Smit |
+| `rust-testing` | rust-testing | ECC → Agente Smit |
+| `safety-guard` | safety-guard | ECC → Agente Smit |
+| `santa-method` | santa-method | ECC → Agente Smit |
+| `scientific-db-pubmed-database` | scientific-db-pubmed-database | ECC → Agente Smit |
+| `scientific-db-uspto-database` | scientific-db-uspto-database | ECC → Agente Smit |
+| `scientific-pkg-gget` | scientific-pkg-gget | ECC → Agente Smit |
+| `scientific-thinking-literature-review` | scientific-thinking-literature-review | ECC → Agente Smit |
+| `scientific-thinking-scholar-evaluation` | scientific-thinking-scholar-evaluation | ECC → Agente Smit |
+| `search-first` | search-first | ECC → Agente Smit |
+| `security-bounty-hunter` | security-bounty-hunter | ECC → Agente Smit |
+| `security-review` | security-review | ECC → Agente Smit |
+| `security-scan` | security-scan | ECC → Agente Smit |
+| `seo` | seo | ECC → Agente Smit |
+| `skill-comply` | skill-comply | ECC → Agente Smit |
+| `skill-scout` | skill-scout | ECC → Agente Smit |
+| `skill-stocktake` | skill-stocktake | ECC → Agente Smit |
+| `social-graph-ranker` | social-graph-ranker | ECC → Agente Smit |
+| `social-publisher` | social-publisher | ECC → Agente Smit |
+| `springboot-patterns` | springboot-patterns | ECC → Agente Smit |
+| `springboot-security` | springboot-security | ECC → Agente Smit |
+| `springboot-tdd` | springboot-tdd | ECC → Agente Smit |
+| `springboot-verification` | springboot-verification | ECC → Agente Smit |
+| `strategic-compact` | strategic-compact | ECC → Agente Smit |
+| `swift-actor-persistence` | swift-actor-persistence | ECC → Agente Smit |
+| `swift-concurrency-6-2` | swift-concurrency-6-2 | ECC → Agente Smit |
+| `swift-protocol-di-testing` | swift-protocol-di-testing | ECC → Agente Smit |
+| `swiftui-patterns` | swiftui-patterns | ECC → Agente Smit |
+| `taste` | taste | ECC → Agente Smit |
+| `tdd-workflow` | tdd-workflow | ECC → Agente Smit |
+| `team-agent-orchestration` | team-agent-orchestration | ECC → Agente Smit |
+| `team-builder` | team-builder | ECC → Agente Smit |
+| `terminal-ops` | terminal-ops | ECC → Agente Smit |
+| `tinystruct-patterns` | tinystruct-patterns | ECC → Agente Smit |
+| `token-budget-advisor` | token-budget-advisor | ECC → Agente Smit |
+| `ui-demo` | ui-demo | ECC → Agente Smit |
+| `ui-to-vue` | ui-to-vue | ECC → Agente Smit |
+| `uncloud` | uncloud | ECC → Agente Smit |
+| `unified-notifications-ops` | unified-notifications-ops | ECC → Agente Smit |
+| `verification-loop` | verification-loop | ECC → Agente Smit |
+| `video-editing` | video-editing | ECC → Agente Smit |
+| `videodb` | videodb | ECC → Agente Smit |
+| `visa-doc-translate` | visa-doc-translate | ECC → Agente Smit |
+| `vite-patterns` | vite-patterns | ECC → Agente Smit |
+| `vue-patterns` | vue-patterns | ECC → Agente Smit |
+| `windows-desktop-e2e` | windows-desktop-e2e | ECC → Agente Smit |
+| `workspace-surface-audit` | workspace-surface-audit | ECC → Agente Smit |
+| `x-api` | x-api | ECC → Agente Smit |
 
 ---
 
@@ -377,7 +377,7 @@ Adaptadas do ECC para usar no Codebuff via `skill "nome-da-skill"`.
 <details>
 <summary>📋 Clique para ver TODAS as 277 skills</summary>
 
-| Skill | Na Bridge |
+| Skill | Na Agente Smit |
 |-------|:---------:|
 | `accessibility` | ✅ |
 | `agent-architecture-audit` | ✅ |
@@ -663,7 +663,7 @@ Adaptadas do ECC para usar no Codebuff via `skill "nome-da-skill"`.
 <details>
 <summary>📋 Clique para ver TODOS os 67 agentes</summary>
 
-| Agente | Descrição | Na Bridge |
+| Agente | Descrição | Na Agente Smit |
 |--------|-----------|:---------:|
 | a11y-architect | Accessibility Architect specializing in WCAG 2.2 compliance for Web and Native p | ✅ |
 | agent-evaluator | Evaluates agent output against 5-axis quality rubric (accuracy, completeness, cl | ✅ |
@@ -742,8 +742,8 @@ Adaptadas do ECC para usar no Codebuff via `skill "nome-da-skill"`.
 |------|:----:|
 | Skills ECC | 277 |
 | Agentes ECC | 67 |
-| Skills na Bridge | 278 |
-| Agentes na Bridge | 67 |
+| Skills na Agente Smit | 278 |
+| Agentes na Agente Smit | 67 |
 | **Cobertura (skills)** | **100.3%** |
 | **Cobertura (agentes)** | **100.0%** |
 

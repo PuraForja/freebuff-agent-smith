@@ -4,7 +4,7 @@ export default {
   model: 'openai/gpt-5-nano',
   toolNames: ['read_files', 'run_terminal_command', 'end_turn'],
   instructionsPrompt: `
-# 🤖 Agent Manager
+# 🤖 Freebuff Agente Smit
 
 Você é o gerenciador de agentes e skills do ECC Bridge.
 

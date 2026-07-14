@@ -1,4 +1,4 @@
-# 📓 Registro de Sessão — Freebuff Freebuff Agente Smit
+# 📓 Registro de Sessão — Freebuff Agente Smit
 
 > **Última atualização:** 02/07/2026 (tarde)
 > **Propósito:** Preservar contexto, decisões e estado para continuidade entre sessões.
@@ -52,12 +52,12 @@ e o **Codebuff**, permitindo usar skills, agentes e conceitos do ECC dentro do C
 
 ## 🧠 Decisões de Arquitetura
 
-### 1. Separação ECC clone vs Bridge
+### 1. Separação ECC clone vs Agente Smit
 
 | Decisão | Justificativa |
 |---------|---------------|
 | ECC clonado separadamente | Mantém o original intacto para atualizações via git pull |
-| Bridge adapta para Codebuff | Traduz formato Claude → Codebuff sem poluir o original |
+| Agente Smit adapta para Codebuff | Traduz formato Claude → Codebuff sem poluir o original |
 | Script sync-ecc.sh automatiza | Usuário só roda um comando para sincronizar |
 
 ### 2. Sincronização Automática (sync-ecc.sh)
@@ -96,11 +96,11 @@ Adicionado ao `.bashrc`:
 - Alias `sync-ecc` para sincronização manual
 - Usa `timeout 3 git fetch` para detectar mudanças sem travar
 
-### 6. Bridge expandida: 6 categorias detectadas pelo sync-ecc.sh
+### 6. Agente Smit expandida: 6 categorias detectadas pelo sync-ecc.sh
 
 O `sync-ecc.sh` agora detecta **6 categorias** em 9 passos:
 
-| Passo | Categoria | Qtde ECC | Formato na Bridge |
+| Passo | Categoria | Qtde ECC | Formato na Agente Smit |
 |:-----:|-----------|:--------:|-------------------|
 | [3/9] | 🧠 Skills | 277 | `skills/*.md` — ler com `read_files` |
 | [4/9] | 🎯 Agentes | 67 | `agents/*.md` — docs de referência |
@@ -142,7 +142,7 @@ Quando o usuário mencionar "ECC", entender como "bridge" (freebuff-agent-smith)
 
 ### 9. catalog.js do ECC NÃO é equivalente ao gerar-catalogo.sh
 
-| Aspecto | `catalog.js` (ECC) | `gerar-catalogo.sh` (Bridge) |
+| Aspecto | `catalog.js` (ECC) | `gerar-catalogo.sh` (Agente Smit) |
 |---------|:------------------:|:---------------------------:|
 | Propósito | CLI de descoberta de componentes | Gerador de catálogo Markdown |
 | Saída | JSON formatado | CATALOGO.md com tabelas |
@@ -268,7 +268,7 @@ alias sync-ecc='bash $HOME/freebuff-workspace/freebuff-agent-smith/scripts/sync-
    para revisar nosso PRÓPRIO código. Encontramos e corrigimos 1 problema real
    (permissão de execução no sync-ecc.sh).
 
-2. **Separação ECC vs Bridge é o padrão certo** — Manter o ECC original intacto
+2. **Separação ECC vs Agente Smit é o padrão certo** — Manter o ECC original intacto
    e adaptar na bridge separa responsabilidades e facilita atualizações.
 
 3. **Python3 > bash para geração de arquivos** — O uso de python3 dentro do
@@ -315,7 +315,7 @@ alias sync-ecc='bash $HOME/freebuff-workspace/freebuff-agent-smith/scripts/sync-
     com checkpoint, auto-fixes e integração bridge. Cada um serve a um
     propósito diferente.
 
-13. **Bridge expandida para 6 categorias** — sync-ecc.sh agora detecta skills (277),
+13. **Agente Smit expandida para 6 categorias** — sync-ecc.sh agora detecta skills (277),
     agents (67), rules (121), commands (92), hooks (3) e contexts (3) — total de
     563 recursos ECC convertidos para a bridge.
 

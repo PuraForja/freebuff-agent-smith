@@ -201,7 +201,7 @@ echo -e "${BLUE}║                     ✅  INSTALAÇÃO CONCLUÍDA            
 echo -e "${BLUE}╚═══════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 echo -e "   📁 ${GREEN}Projeto:${NC} ${INSTALL_DIR}"
-echo -e "   🤖 ${GREEN}Agent Manager:${NC} .agents/agent-smith.ts"
+echo -e "   🤖 ${GREEN}Freebuff Agente Smit:${NC} .agents/agent-smith.ts"
 echo -e "   📝 ${GREEN}Tipos:${NC} ${TYPES_DOWNLOADED} baixados, ${TYPES_FAILED} não encontrados"
 echo -e "   📄 ${GREEN}Config:${NC} .ecc-config.json"
 echo -e "   📖 ${GREEN}Knowledge:${NC} knowledge.md"

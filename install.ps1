@@ -206,7 +206,7 @@ Write-Color "║                     ✅  INSTALAÇÃO CONCLUÍDA               
 Write-Color "╚═══════════════════════════════════════════════════════════════╝" "Blue"
 Write-Color ""
 Write-Color "   📁 Projeto: $INSTALL_DIR" "Green"
-Write-Color "   🤖 Agent Manager: .agents\agent-smith.ts" "Green"
+Write-Color "   🤖 Freebuff Agente Smit: .agents\agent-smith.ts" "Green"
 Write-Color "   📝 Tipos: $downloaded baixados, $failed não encontrados" "Green"
 Write-Color "   📄 Config: .ecc-config.json" "Green"
 Write-Color "   📖 Knowledge: knowledge.md" "Green"
