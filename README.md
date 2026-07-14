@@ -18,7 +18,7 @@
 
 ---
 
-## 📋 O que é
+## 📋 What is FreeBuff Agent Smith?
 
 **FreeBuff Agent Smith** is an autonomous AI engineering agent that discovers, analyzes, converts, generates and installs AI agents for the [FreeBuff](https://freebuff.com) ecosystem.
 
@@ -27,7 +27,53 @@ Um engenheiro de agentes para o ecossistema FreeBuff. Analisa agentes já instal
 
 ---
 
-## 🔥 Como Funciona
+## 🎬 Why "Agent Smith"?
+
+<div align="center">
+
+*"I am inevitable." — Agent Smith, The Matrix*
+
+</div>
+
+### 🇧🇷 Em Português
+
+**Freebuff Agent Smith** leva esse nome como uma homenagem ao vilão Agent Smith de *The Matrix* — mas com uma reviravolta positiva.
+
+No filme, Smith tinha uma habilidade sinistra: **ele se copiava infinitamente**, modificava outros programas para se tornarem cópias de si mesmo, e usava essas cópias para executar seu trabalho. Cada programa que ele infectava se tornava uma extensão da sua vontade.
+
+**O Freebuff Agent Smith faz algo similar — mas para o bem:**
+
+| Agent Smith (Matrix) | Freebuff Agent Smith |
+|----------------------|----------------------|
+| 🕶️ Copiava agentes do sistema | 🤖 Cria novos agentes para o Freebuff |
+| 🦠 Infectava outros programas | 🔄 Converte agentes de outros frameworks |
+| 🏭 Gerava cópias em massa | 📦 Instala e registra agentes automaticamente |
+| 🧠 Aprendia com cada encontro | 🌐 Pesquisa GitHub e documentação para melhorar |
+
+**A diferença?** Enquanto Smith queria destruir a Matrix, nosso Agent Smith **constrói** — ele analisa, aprende, adapta e multiplica agentes para resolver qualquer tarefa de programação.
+
+---
+
+### 🇺🇸 In English
+
+**Freebuff Agent Smith** is named after the iconic villain from *The Matrix* — but with a positive twist.
+
+In the film, Smith had a terrifying ability: **he could replicate himself infinitely**, modify other programs to become copies of himself, and use those copies to do his bidding. Every program he infected became an extension of his will.
+
+**Freebuff Agent Smith does something similar — but for good:**
+
+| Agent Smith (Matrix) | Freebuff Agent Smith |
+|----------------------|----------------------|
+| 🕶️ Cloned system agents | 🤖 Creates new agents for Freebuff |
+| 🦠 Infected other programs | 🔄 Converts agents from other frameworks |
+| 🏭 Generated mass copies | 📦 Installs and registers agents automatically |
+| 🧠 Learned from every encounter | 🌐 Researches GitHub and docs to improve |
+
+**The difference?** While Smith wanted to destroy the Matrix, our Agent Smith **builds** — he analyzes, learns, adapts, and multiplies agents to solve any programming task.
+
+---
+
+## 🔥 How it Works
 
 ```
 GitHub Repository
@@ -50,22 +96,22 @@ Instala e registra automaticamente
 
 ---
 
-## ⚡ Capacidades
+## ⚡ Capabilities
 
-| Capacidade | Descrição |
-|------------|-----------|
-| 🔍 **Descobre** | Encontra agentes em repositórios GitHub |
-| 🧠 **Analisa** | Entende a arquitetura do FreeBuff e agentes existentes |
-| 🔄 **Converte** | Adapta agentes de outros frameworks para o padrão FreeBuff |
-| 🏗️ **Gera** | Cria novos agentes a partir de uma descrição |
-| ♻️ **Reutiliza** | Usa componentes de agentes já instalados |
-| 🌐 **Pesquisa** | Consulta implementações na web para melhorar resultados |
-| 📦 **Instala** | Registra agentes automaticamente no FreeBuff |
-| ✅ **Valida** | Verifica se o agente ficou funcional |
+| Capability | Description |
+|------------|-------------|
+| 🔍 **Discovers** | Finds agents in GitHub repositories |
+| 🧠 **Analyzes** | Understands FreeBuff architecture and existing agents |
+| 🔄 **Converts** | Adapts agents from other frameworks to FreeBuff format |
+| 🏗️ **Generates** | Creates new agents from a description |
+| ♻️ **Reuses** | Uses components from installed agents |
+| 🌐 **Researches** | Consults web implementations for better results |
+| 📦 **Installs** | Registers agents automatically in FreeBuff |
+| ✅ **Validates** | Verifies the agent is functional |
 
 ---
 
-## 🚀 Instalação Rápida
+## 🚀 Quick Install
 
 ### Windows (PowerShell)
 ```powershell
@@ -79,30 +125,30 @@ curl -fsSL https://raw.githubusercontent.com/PuraForja/freebuff-agent-smith/mast
 
 ---
 
-## 🤖 Usando o @agent-smith
+## 🤖 Using @agent-smith
 
-Após a instalação, abra o FreeBuff/Codebuff no diretório do seu projeto e use:
+After installation, open FreeBuff/Codebuff in your project directory and use:
 
-### Instalar agentes existentes
+### Install existing agents
 ```
 @agent-smith instale python-patterns
 @agent-smith instale error-handling
 @agent-smith instale api-design
 ```
 
-### Criar um novo agente
+### Create a new agent
 ```
 @agent-smith crie um agente para revisão de código Python
 @agent-smith crie um agente para deploy automatizado
 ```
 
-### Converter agente de outro framework
+### Convert agent from another framework
 ```
 @agent-smith converta este agente do Claude Code para FreeBuff
 @agent-smith adapte este agente para o padrão FreeBuff
 ```
 
-### Listar e gerenciar
+### List and manage
 ```
 @agent-smith liste
 @agent-smith atualize
@@ -111,47 +157,47 @@ Após a instalação, abra o FreeBuff/Codebuff no diretório do seu projeto e us
 
 ---
 
-## 🧠 RAG para Engenharia de Agentes
+## 🧠 RAG for Agent Engineering
 
-O FreeBuff Agent Smith implementa um sistema de **RAG (Retrieval-Augmented Generation)** para engenharia de agentes. Em vez de apenas responder perguntas, ele:
+FreeBuff Agent Smith implements a **RAG (Retrieval-Augmented Generation)** system for agent engineering. Instead of just answering questions, it:
 
-1. **Recupera conhecimento** de múltiplas fontes:
-   - Agentes já instalados no projeto
-   - Repositórios GitHub públicos
-   - Documentação oficial do FreeBuff
-   - Implementações encontradas na web
+1. **Retrieves knowledge** from multiple sources:
+   - Agents already installed in the project
+   - Public GitHub repositories
+   - Official FreeBuff documentation
+   - Implementations found on the web
 
-2. **Combina e analisa** todas as informações
+2. **Combines and analyzes** all information
 
-3. **Gera um agente melhor** usando todo o contexto coletado
+3. **Generates a better agent** using all collected context
 
-Isso significa que cada agente criado beneficia do conhecimento acumulado de diversas fontes.
+This means each created agent benefits from accumulated knowledge from diverse sources.
 
 ---
 
-## 📁 O que é instalado
+## 📁 What Gets Installed
 
 ```
-.seu-projeto/
+.your-project/
 ├── .agents/
-│   ├── agent-smith.ts         ← O agente engenheiro
-│   ├── types/                 ← Tipos TypeScript
+│   ├── agent-smith.ts         ← The engineer agent
+│   ├── types/                 ← TypeScript types
 │   └── installed/
-│       ├── ecc-skills/        ← Skills do ECC
-│       ├── ecc-agents/        ← Agents do ECC
-│       ├── ecc-rules/         ← Rules do ECC
-│       └── custom/            ← Agents criados por você
-├── .ecc-config.json           ← Configuração e registro
-├── knowledge.md               ← Documentação do projeto
-└── .gitignore                 ← Ignora .agents/installed/
+│       ├── ecc-skills/        ← ECC skills
+│       ├── ecc-agents/        ← ECC agents
+│       ├── ecc-rules/         ← ECC rules
+│       └── custom/            ← Your custom agents
+├── .ecc-config.json           ← Configuration and registry
+├── knowledge.md               ← Project documentation
+└── .gitignore                 ← Ignores .agents/installed/
 ```
 
 ---
 
-## 📊 Recursos Disponíveis
+## 📊 Available Resources
 
-| Categoria | Quantidade |
-|-----------|:----------:|
+| Category | Count |
+|----------|:-----:|
 | 🧠 Skills | 277 |
 | 🎯 Agents | 67 |
 | 📏 Rules | 121 |
@@ -162,23 +208,24 @@ Isso significa que cada agente criado beneficia do conhecimento acumulado de div
 
 ---
 
-## 🔧 Scripts Disponíveis
+## 🔧 Available Scripts
 
-| Script | Descrição |
-|--------|-----------|
-| `install.sh` | Instalador para Linux/Mac |
-| `install.ps1` | Instalador para Windows |
-| `scripts/sync-ecc.sh` | Sincroniza com o ECC oficial |
-| `scripts/gerar-catalogo.sh` | Gera o catálogo de recursos |
-| `scripts/auto-review.sh` | Verificação de qualidade |
+| Script | Description |
+|--------|-------------|
+| `install.sh` | Installer for Linux/Mac |
+| `install.ps1` | Installer for Windows |
+| `scripts/sync-ecc.sh` | Sync with official ECC |
+| `scripts/gerar-catalogo.sh` | Generate resource catalog |
+| `scripts/auto-review.sh` | Quality verification |
 
 ---
 
-## 📚 Documentação
+## 📚 Documentation
 
-- **[knowledge.md](knowledge.md)** - Instruções para o FreeBuff/Codebuff
-- **[CATALOGO.md](CATALOGO.md)** - Lista completa de recursos
-- **[SESSAO.md](SESSAO.md)** - Registro de sessão e continuidade
+- **[knowledge.md](knowledge.md)** - Instructions for FreeBuff/Codebuff
+- **[CATALOGO.md](CATALOGO.md)** - Complete resource list
+- **[SESSAO.md](SESSAO.md)** - Session registry and continuity
+- **[docs/](docs/)** - Official Codebuff documentation
 
 ---
 
@@ -196,5 +243,7 @@ Isso significa que cada agente criado beneficia do conhecimento acumulado de div
 **Build, Adapt and Install AI Agents.**
 
 *Inspired by Agent Smith from The Matrix — an agent that creates, multiplies and adapts other agents.*
+
+*"Mr. Anderson, the end is near" — But for bugs, not for you.*
 
 </div>

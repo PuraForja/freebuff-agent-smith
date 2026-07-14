@@ -119,3 +119,24 @@ iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PuraForja/freebuf
 - Os agents são documentos de referência, não spawnáveis diretamente
 - Use `@agent-smith` para gerenciar instalações
 - O @agent-smith lê o ECC via GitHub API (sem baixar para sua máquina)
+
+## 📚 Documentação Disponível
+
+O @agent-smith tem acesso à documentação oficial do Codebuff na pasta docs/:
+
+| Arquivo | Descrição |
+|---------|----------|
+| docs/creating-first-agent.md | Guia para criar seu primeiro agente |
+| docs/creating-new-agents.md | Padrões avançados de criação |
+| docs/agents-overview.md | Visão geral da arquitetura |
+| docs/quick-start.md | Guia de início rápido |
+
+### Como Criar um Novo Agente
+
+Ao usar \`@agent-smith\`, ele:
+1. Lê a documentação em docs/
+2. Analisa agentes existentes em .agents/
+3. Consulta GitHub para inspiração
+4. Gera o novo agente seguindo padrões oficiais
+5. Instala e registra automaticamente
+
