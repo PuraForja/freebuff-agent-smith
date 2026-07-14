@@ -31,6 +31,11 @@ function Test-TypeScript {
     return $false
 }
 
+# Função para verificar se Freebuff está instalado
+function Test-FreebuffInstalled {
+    return [bool](Get-Command freebuff -ErrorAction SilentlyContinue)
+}
+
 Write-Color ""
 Write-Color "╔═══════════════════════════════════════════════════════════════╗" "Cyan"
 Write-Color "║      🔄  ECC BRIDGE — Instalador Leve (Windows)             ║" "Cyan"
@@ -130,10 +135,11 @@ foreach ($type_file in $types) {
 Write-Color ""
 
 # ═══════════════════════════════════════════════════════════════
-# STEP 5: CRIAR ARQUIVO DE CONFIGURAÇÃO
+# STEP 5: CRIAR ARQUIVO DE CONFIGURAÇÃO E KNOWLEDGE
 # ═══════════════════════════════════════════════════════════════
 Write-Color "[5/6] Criando configuração..." "Cyan"
 
+# Criar .ecc-config.json
 $installedAt = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
 
 $config = @"
@@ -152,6 +158,22 @@ $config = @"
 
 $config | Out-File -FilePath "$INSTALL_DIR\.ecc-config.json" -Encoding UTF8
 Write-Color "  ✅ Arquivo de configuração criado" "Green"
+
+# Baixar knowledge.md se não existir
+$knowledgeFile = "$INSTALL_DIR\knowledge.md"
+if (-not (Test-Path $knowledgeFile)) {
+    Write-Color "  Baixando knowledge.md..." "Cyan"
+    try {
+        $ProgressPreference = "SilentlyContinue"
+        Invoke-WebRequest -Uri "$RAW_BASE/knowledge.md" -OutFile $knowledgeFile -UseBasicParsing
+        Write-Color "  ✅ knowledge.md baixado" "Green"
+    } catch {
+        Write-Color "  ⚠️  knowledge.md não encontrado no repositório" "Yellow"
+    }
+} else {
+    Write-Color "  ✅ knowledge.md já existe" "Green"
+}
+
 Write-Color ""
 
 # ═══════════════════════════════════════════════════════════════
@@ -187,12 +209,32 @@ Write-Color "   📁 Projeto: $INSTALL_DIR" "Green"
 Write-Color "   🤖 Agent Manager: .agents\agent-manager.ts" "Green"
 Write-Color "   📝 Tipos: $downloaded baixados, $failed não encontrados" "Green"
 Write-Color "   📄 Config: .ecc-config.json" "Green"
+Write-Color "   📖 Knowledge: knowledge.md" "Green"
 Write-Color "   📋 Gitignore: .agents\installed\ ignorado" "Green"
 Write-Color ""
-Write-Color "   📋 Próximos passos:" "Cyan"
-Write-Color "   1. Abra o Freebuff/Codebuff no diretório do projeto"
-Write-Color "   2. Use @agent-manager para instalar recursos do ECC"
-Write-Color "   3. Exemplo: @agent-manager instale python-patterns"
+
+# Verificar se Freebuff está instalado e oferecer para abrir
+if (Test-FreebuffInstalled) {
+    Write-Color "   🚀 Freebuff detectado!" "Cyan"
+    Write-Color ""
+    $response = Read-Host "   Deseja abrir o Freebuff agora? (S/N)"
+    if ($response -eq "S" -or $response -eq "s") {
+        Write-Color "   Abrindo Freebuff..." "Green"
+        Start-Process freebuff
+    } else {
+        Write-Color "   Para abrir depois, execute: freebuff" "Yellow"
+    }
+} else {
+    Write-Color "   📦 Freebuff não encontrado" "Yellow"
+    Write-Color "   Para instalar: npm install -g freebuff" "Yellow"
+    Write-Color ""
+    Write-Color "   📋 Próximos passos:" "Cyan"
+    Write-Color "   1. Instale o Freebuff: npm install -g freebuff"
+    Write-Color "   2. Navegue até este diretório: cd $INSTALL_DIR"
+    Write-Color "   3. Execute: freebuff"
+    Write-Color "   4. Use: @agent-manager instale python-patterns"
+}
+
 Write-Color ""
 Write-Color "   💡 O @agent-manager lê o ECC via GitHub API (sem baixar para sua máquina)." "Yellow"
 Write-Color ""

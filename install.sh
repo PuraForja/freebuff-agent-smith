@@ -47,6 +47,14 @@ verify_typescript() {
     return 1
 }
 
+# Função para verificar se Freebuff está instalado
+check_freebuff() {
+    if command -v freebuff &> /dev/null; then
+        return 0
+    fi
+    return 1
+}
+
 echo -e "${BLUE}╔═══════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${BLUE}║      🔄  ECC BRIDGE — Instalador Leve                       ║${NC}"
 echo -e "${BLUE}║      Baixa apenas o @agent-manager (sem baixar ECC)         ║${NC}"
@@ -125,7 +133,7 @@ done
 echo ""
 
 # ═══════════════════════════════════════════════════════════════
-# STEP 5: CRIAR ARQUIVO DE CONFIGURAÇÃO
+# STEP 5: CRIAR ARQUIVO DE CONFIGURAÇÃO E KNOWLEDGE
 # ═══════════════════════════════════════════════════════════════
 echo -e "${CYAN}[5/6] Criando configuração...${NC}"
 
@@ -146,6 +154,19 @@ cat > "${INSTALL_DIR}/.ecc-config.json" << CONFIG_EOF
 CONFIG_EOF
 
 echo -e "  ${GREEN}✅${NC} Arquivo de configuração criado"
+
+# Baixar knowledge.md se não existir
+if [ ! -f "${INSTALL_DIR}/knowledge.md" ]; then
+    echo -e "  ${CYAN}📥 Baixando knowledge.md...${NC}"
+    if download_file "${RAW_BASE}/knowledge.md" "${INSTALL_DIR}/knowledge.md"; then
+        echo -e "  ${GREEN}✅${NC} knowledge.md baixado"
+    else
+        echo -e "  ${YELLOW}⚠️${NC} knowledge.md não encontrado no repositório"
+    fi
+else
+    echo -e "  ${GREEN}✅${NC} knowledge.md já existe"
+fi
+
 echo ""
 
 # ═══════════════════════════════════════════════════════════════
@@ -183,12 +204,24 @@ echo -e "   📁 ${GREEN}Projeto:${NC} ${INSTALL_DIR}"
 echo -e "   🤖 ${GREEN}Agent Manager:${NC} .agents/agent-manager.ts"
 echo -e "   📝 ${GREEN}Tipos:${NC} ${TYPES_DOWNLOADED} baixados, ${TYPES_FAILED} não encontrados"
 echo -e "   📄 ${GREEN}Config:${NC} .ecc-config.json"
+echo -e "   📖 ${GREEN}Knowledge:${NC} knowledge.md"
 echo -e "   📋 ${GREEN}Gitignore:${NC} .agents/installed/ ignorado"
 echo ""
+
+# Verificar se Freebuff está instalado
+if check_freebuff; then
+    echo -e "   ${CYAN}🚀 Freebuff detectado!${NC}"
+    echo -e "   Para usar: ${YELLOW}freebuff${NC}"
+else
+    echo -e "   ${YELLOW}📦 Freebuff não encontrado${NC}"
+    echo -e "   Para instalar: ${YELLOW}npm install -g freebuff${NC}"
+fi
+
+echo ""
 echo -e "   ${CYAN}📋 Próximos passos:${NC}"
-echo -e "   1. Abra o Freebuff/Codebuff no diretório do projeto"
-echo -e "   2. Use ${YELLOW}@agent-manager${NC} para instalar recursos do ECC"
-echo -e "   3. Exemplo: ${YELLOW}@agent-manager instale python-patterns${NC}"
+echo -e "   1. Instale o Freebuff (se não tiver): npm install -g freebuff"
+echo -e "   2. Execute: ${YELLOW}freebuff${NC}"
+echo -e "   3. Use: ${YELLOW}@agent-manager instale python-patterns${NC}"
 echo ""
 echo -e "   ${YELLOW}💡 O @agent-manager lê o ECC via GitHub API (sem baixar para sua máquina).${NC}"
 echo ""
