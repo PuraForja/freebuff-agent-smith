@@ -1,0 +1,227 @@
+#!/usr/bin/env bash
+# ═══════════════════════════════════════════════════════════════
+#  install.sh — Instalador Leve do Freebuff Agente Smit
+# ═══════════════════════════════════════════════════════════════
+#  Baixa APENAS o @agent-smith e configura o ambiente.
+#  O @agent-smith é quem faz o trabalho pesado (lê ECC via API).
+#
+#  Uso: curl -fsSL https://raw.githubusercontent.com/PuraForja/freebuff-agent-smith/master/install.sh | bash
+#  Ou:  bash install.sh
+# ═══════════════════════════════════════════════════════════════
+
+set -euo pipefail
+
+# Cores
+RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
+BLUE='\033[0;34m'; CYAN='\033[0;36m'; NC='\033[0m'
+
+# Configurações
+BRIDGE_REPO="https://github.com/PuraForja/freebuff-agent-smith"
+RAW_BASE="${BRIDGE_REPO}/raw/master"
+INSTALL_DIR="$(pwd)"
+TYPES_DOWNLOADED=0
+TYPES_FAILED=0
+
+# Função para baixar arquivo
+download_file() {
+    local url="$1"
+    local dest="$2"
+    
+    if command -v curl &> /dev/null; then
+        curl -fsSL "$url" -o "$dest" 2>/dev/null
+    elif command -v wget &> /dev/null; then
+        wget -q "$url" -O "$dest" 2>/dev/null
+    else
+        return 1
+    fi
+}
+
+# Função para verificar se arquivo é TypeScript válido
+verify_typescript() {
+    local file="$1"
+    if [ -f "$file" ]; then
+        if head -5 "$file" | grep -qE "(export default|export const|// )"; then
+            return 0
+        fi
+    fi
+    return 1
+}
+
+# Função para verificar se Freebuff está instalado
+check_freebuff() {
+    if command -v freebuff &> /dev/null; then
+        return 0
+    fi
+    return 1
+}
+
+echo -e "${BLUE}╔═══════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║      🔄  FREEBUFF AGENTE SMIT — Instalador Leve                       ║${NC}"
+echo -e "${BLUE}║      Baixa apenas o @agent-smith (sem baixar ECC)         ║${NC}"
+echo -e "${BLUE}╚═══════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+# ═══════════════════════════════════════════════════════════════
+# STEP 1: VERIFICAR PREREQUISITOS
+# ═══════════════════════════════════════════════════════════════
+echo -e "${CYAN}[1/6] Verificando pré-requisitos...${NC}"
+
+if ! command -v curl &> /dev/null && ! command -v wget &> /dev/null; then
+    echo -e "  ${RED}❌${NC} curl ou wget necessário"
+    exit 1
+fi
+
+echo -e "  ${GREEN}✅${NC} Ferramenta de download encontrada"
+echo ""
+
+# ═══════════════════════════════════════════════════════════════
+# STEP 2: CRIAR ESTRUTURA DE DIRETÓRIOS
+# ═══════════════════════════════════════════════════════════════
+echo -e "${CYAN}[2/6] Criando estrutura...${NC}"
+
+mkdir -p "${INSTALL_DIR}/.agents/types"
+mkdir -p "${INSTALL_DIR}/.agents/installed/ecc-skills"
+mkdir -p "${INSTALL_DIR}/.agents/installed/ecc-agents"
+mkdir -p "${INSTALL_DIR}/.agents/installed/ecc-rules"
+mkdir -p "${INSTALL_DIR}/.agents/installed/custom"
+
+echo -e "  ${GREEN}✅${NC} Estrutura criada em ${INSTALL_DIR}/.agents/"
+echo ""
+
+# ═══════════════════════════════════════════════════════════════
+# STEP 3: BAIXAR @AGENT-SMITH (APENAS 1 ARQUIVO)
+# ═══════════════════════════════════════════════════════════════
+echo -e "${CYAN}[3/6] Baixando @agent-smith...${NC}"
+
+if download_file "${RAW_BASE}/.agents/agent-smith.ts" "${INSTALL_DIR}/.agents/agent-smith.ts"; then
+    if verify_typescript "${INSTALL_DIR}/.agents/agent-smith.ts"; then
+        echo -e "  ${GREEN}✅${NC} @agent-smith.ts baixado e verificado"
+    else
+        echo -e "  ${RED}❌${NC} Arquivo baixado não é TypeScript válido"
+        rm -f "${INSTALL_DIR}/.agents/agent-smith.ts"
+        exit 1
+    fi
+else
+    echo -e "  ${RED}❌${NC} Erro ao baixar @agent-smith"
+    exit 1
+fi
+
+echo ""
+
+# ═══════════════════════════════════════════════════════════════
+# STEP 4: BAIXAR TIPOS TYPESCRIPT
+# ═══════════════════════════════════════════════════════════════
+echo -e "${CYAN}[4/6] Baixando tipos TypeScript...${NC}"
+
+TYPES=("agent-definition.ts" "tools.ts" "util-types.ts")
+for type_file in "${TYPES[@]}"; do
+    if download_file "${RAW_BASE}/.agents/types/${type_file}" "${INSTALL_DIR}/.agents/types/${type_file}"; then
+        if verify_typescript "${INSTALL_DIR}/.agents/types/${type_file}"; then
+            echo -e "  ${GREEN}✅${NC} ${type_file} baixado"
+            TYPES_DOWNLOADED=$((TYPES_DOWNLOADED + 1))
+        else
+            echo -e "  ${YELLOW}⚠️${NC} ${type_file} baixado mas conteúdo inválido"
+            rm -f "${INSTALL_DIR}/.agents/types/${type_file}"
+            TYPES_FAILED=$((TYPES_FAILED + 1))
+        fi
+    else
+        echo -e "  ${YELLOW}⚠️${NC} ${type_file} não encontrado (opcional)"
+        TYPES_FAILED=$((TYPES_FAILED + 1))
+    fi
+done
+
+echo ""
+
+# ═══════════════════════════════════════════════════════════════
+# STEP 5: CRIAR ARQUIVO DE CONFIGURAÇÃO E KNOWLEDGE
+# ═══════════════════════════════════════════════════════════════
+echo -e "${CYAN}[5/6] Criando configuração...${NC}"
+
+INSTALLED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+cat > "${INSTALL_DIR}/.ecc-config.json" << CONFIG_EOF
+{
+  "ecc_repo": "https://github.com/affaan-m/ECC",
+  "bridge_repo": "https://github.com/PuraForja/freebuff-agent-smith",
+  "installed_skills": [],
+  "installed_agents": [],
+  "installed_rules": [],
+  "last_sync": null,
+  "installed_at": "${INSTALLED_AT}",
+  "version": "1.0.0",
+  "note": "Use @agent-smith no Codebuff/Freebuff para instalar recursos do ECC"
+}
+CONFIG_EOF
+
+echo -e "  ${GREEN}✅${NC} Arquivo de configuração criado"
+
+# Baixar knowledge.md se não existir
+if [ ! -f "${INSTALL_DIR}/knowledge.md" ]; then
+    echo -e "  ${CYAN}📥 Baixando knowledge.md...${NC}"
+    if download_file "${RAW_BASE}/knowledge.md" "${INSTALL_DIR}/knowledge.md"; then
+        echo -e "  ${GREEN}✅${NC} knowledge.md baixado"
+    else
+        echo -e "  ${YELLOW}⚠️${NC} knowledge.md não encontrado no repositório"
+    fi
+else
+    echo -e "  ${GREEN}✅${NC} knowledge.md já existe"
+fi
+
+echo ""
+
+# ═══════════════════════════════════════════════════════════════
+# STEP 6: ATUALIZAR .GITIGNORE
+# ═══════════════════════════════════════════════════════════════
+echo -e "${CYAN}[6/6] Atualizando .gitignore...${NC}"
+
+GITIGNORE_FILE="${INSTALL_DIR}/.gitignore"
+
+if [ -f "$GITIGNORE_FILE" ]; then
+    if ! grep -q "^\.agents/installed/" "$GITIGNORE_FILE" 2>/dev/null; then
+        echo "" >> "$GITIGNORE_FILE"
+        echo "# Freebuff Agente Smit - conteúdo instalado (runtime)" >> "$GITIGNORE_FILE"
+        echo ".agents/installed/" >> "$GITIGNORE_FILE"
+        echo -e "  ${GREEN}✅${NC} Entrada adicionada ao .gitignore"
+    else
+        echo -e "  ${YELLOW}⚠️${NC} .gitignore já contém a entrada"
+    fi
+else
+    echo "# Freebuff Agente Smit - conteúdo instalado (runtime)" > "$GITIGNORE_FILE"
+    echo ".agents/installed/" >> "$GITIGNORE_FILE"
+    echo -e "  ${GREEN}✅${NC} .gitignore criado"
+fi
+
+echo ""
+
+# ═══════════════════════════════════════════════════════════════
+# RESUMO FINAL
+# ═══════════════════════════════════════════════════════════════
+echo -e "${BLUE}╔═══════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║                     ✅  INSTALAÇÃO CONCLUÍDA                  ║${NC}"
+echo -e "${BLUE}╚═══════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+echo -e "   📁 ${GREEN}Projeto:${NC} ${INSTALL_DIR}"
+echo -e "   🤖 ${GREEN}Freebuff Agente Smit:${NC} .agents/agent-smith.ts"
+echo -e "   📝 ${GREEN}Tipos:${NC} ${TYPES_DOWNLOADED} baixados, ${TYPES_FAILED} não encontrados"
+echo -e "   📄 ${GREEN}Config:${NC} .ecc-config.json"
+echo -e "   📖 ${GREEN}Knowledge:${NC} knowledge.md"
+echo -e "   📋 ${GREEN}Gitignore:${NC} .agents/installed/ ignorado"
+echo ""
+
+# Verificar se Freebuff está instalado
+if check_freebuff; then
+    echo -e "   ${CYAN}🚀 Freebuff detectado!${NC}"
+    echo -e "   Para usar: ${YELLOW}freebuff${NC}"
+else
+    echo -e "   ${YELLOW}📦 Freebuff não encontrado${NC}"
+    echo -e "   Para instalar: ${YELLOW}npm install -g freebuff${NC}"
+fi
+
+echo ""
+echo -e "   ${CYAN}📋 Próximos passos:${NC}"
+echo -e "   1. Instale o Freebuff (se não tiver): npm install -g freebuff"
+echo -e "   2. Execute: ${YELLOW}freebuff${NC}"
+echo -e "   3. Use: ${YELLOW}@agent-smith instale python-patterns${NC}"
+echo ""
+echo -e "   ${YELLOW}💡 O @agent-smith lê o ECC via GitHub API (sem baixar para sua máquina).${NC}"
+echo ""

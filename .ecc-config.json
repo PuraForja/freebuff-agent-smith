@@ -1,0 +1,25 @@
+{
+  "ecc_repo": "https://github.com/affaan-m/ECC",
+  "bridge_name": "freebuff-agent-smith",
+  "bridge_version": "1.0.0",
+  "installed_skills": [],
+  "installed_agents": [],
+  "installed_rules": [],
+  "last_sync": null,
+  "created_at": "2026-07-14",
+  "profiles": {
+    "minimal": {
+      "description": "Apenas skills essenciais",
+      "skills": ["coding-standards", "error-handling", "git-workflow"]
+    },
+    "core": {
+      "description": "Skills principais para desenvolvimento",
+      "skills": ["coding-standards", "error-handling", "git-workflow", "python-patterns", "typescript-patterns", "react-patterns"]
+    },
+    "full": {
+      "description": "Todos os recursos do ECC",
+      "skills": "all"
+    }
+  },
+  "current_profile": null
+}
