@@ -241,14 +241,13 @@ read_files [".agents/code-reviewer.ts"]
 
 ## 🔄 Quando Usar Cada Agent
 
-### 🔍 Revisão de Código (15 agents)
+### 🔍 Revisão de Código (14 agents)
 | Linguagem | Agent | Descrição |
 |-----------|-------|-----------|
 | TypeScript/JS | `typescript-reviewer` | Type safety, async correctness, security |
 | Python | `python-reviewer` | PEP 8, idiomatism, type hints, security |
 | React | `react-reviewer` | Hooks, performance, SSR/CSR, a11y |
 | Vue | `vue-reviewer` | Composition API, reatividade, segurança |
-| Angular | `angular-developer` | Angular patterns e best practices |
 | Go | `go-reviewer` | Idiomatic Go, concorrência, performance |
 | Rust | `rust-reviewer` | Ownership, lifetimes, unsafe, padrões |
 | Java | `java-reviewer` | Spring Boot, Quarkus, padrões Java |
@@ -295,17 +294,15 @@ read_files [".agents/code-reviewer.ts"]
 | Erros React | `react-build-resolver` | Vite, webpack, Next.js |
 | Erros Swift | `swift-build-resolver` | Xcode, SPM errors |
 
-### 🌐 Frameworks Específicos (8 agents)
+### 🌐 Frameworks Específicos (6 agents)
 | Framework | Agent | Descrição |
 |-----------|-------|-----------|
 | Django | `django-reviewer` | ORM, DRF, migrations, segurança |
 | FastAPI | `fastapi-reviewer` | Async, DI, Pydantic, OpenAPI |
 | PyTorch | `pytorch-build-resolver` | Runtime, CUDA, treinamento |
-| F# | `fsharp-reviewer` | Functional idioms, computation expressions |
 | HarmonyOS | `harmonyos-app-resolver` | ArkTS, ArkUI |
 | Healthcare | `healthcare-reviewer` | Clinical safety, CDSS, PHI |
 | MLE | `mle-reviewer` | ML pipelines, model serving |
-| GAN | `gan-evaluator` | GAN Harness evaluator |
 
 ### 🔄 GAN Harness (3 agents)
 | Tarefa | Agent | Descrição |
@@ -358,13 +355,12 @@ read_files [".agents/code-reviewer.ts"]
 | SEO | `seo-specialist` | SEO técnico, Core Web Vitals |
 | Marketing | `marketing-agent` | Campaign planning, copywriting |
 
-### 🌍 Especializados (4 agents)
+### 🌍 Especializados (3 agents)
 | Tarefa | Agent | Descrição |
 |--------|-------|-----------|
 | A11y | `a11y-architect` | WCAG 2.2 compliance |
 | Gov data | `gov-data-downloader` | Dados governo brasileiro |
 | Conversation | `conversation-analyzer` | Analisa transcripts |
-| Healthcare | `healthcare-reviewer` | Clinical safety, PHI compliance |
 
 ---
 
