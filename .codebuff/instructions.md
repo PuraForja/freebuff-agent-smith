@@ -38,3 +38,80 @@ bash scripts/ecc-install.sh --force  # Forçar reinstalação
 2. **Skills são Markdown** — Estão em `skills/*.md` e devem ser lidas com `read_files`
 3. **Para atualizar:** Execute `bash scripts/ecc-install.sh --update`
 4. **Não modifique manualmente** os arquivos em `.agents/` — eles são gerados pelo script
+
+## 🌐 Regra Global: Sempre Seguir Diretrizes dos Agents ECC
+
+**Buffy DEVE sempre ler e seguir as instruções dos agents ECC antes de executar tarefas relevantes.**
+
+### Fluxo Obrigatório:
+
+1. **IDENTIFICAR** se há um agent ECC relevante para a tarefa
+2. **LER** o arquivo `.agents/[agent-name].ts` para extrair as instruções
+3. **SEGUIR** essas instruções na execução da tarefa
+4. **REPORTAR** ao usuário qual agent está sendo usado
+
+### Lista de Agents e Quando Usar:
+
+| Tarefa | Agent ECC | Arquivo |
+|--------|-----------|---------|
+| Revisão TypeScript/JS | `typescript-reviewer` | `.agents/typescript-reviewer.ts` |
+| Revisão geral | `code-reviewer` | `.agents/code-reviewer.ts` |
+| Segurança | `security-reviewer` | `.agents/security-reviewer.ts` |
+| Arquitetura | `architect` | `.agents/architect.ts` |
+| Design de features | `code-architect` | `.agents/code-architect.ts` |
+| Erros de build | `build-error-resolver` | `.agents/build-error-resolver.ts` |
+| Simplificação | `code-simplifier` | `.agents/code-simplifier.ts` |
+| Comments | `comment-analyzer` | `.agents/comment-analyzer.ts` |
+| Documentação | `doc-updater` | `.agents/doc-updater.ts` |
+| Python | `python-reviewer` | `.agents/python-reviewer.ts` |
+| React | `react-reviewer` | `.agents/react-reviewer.ts` |
+| Vue | `vue-reviewer` | `.agents/vue-reviewer.ts` |
+| Go | `go-reviewer` | `.agents/go-reviewer.ts` |
+| Rust | `rust-reviewer` | `.agents/rust-reviewer.ts` |
+| Java | `java-reviewer` | `.agents/java-reviewer.ts` |
+| C++ | `cpp-reviewer` | `.agents/cpp-reviewer.ts` |
+| C# | `csharp-reviewer` | `.agents/csharp-reviewer.ts` |
+| PHP | `php-reviewer` | `.agents/php-reviewer.ts` |
+| Swift | `swift-reviewer` | `.agents/swift-reviewer.ts` |
+| Kotlin | `kotlin-reviewer` | `.agents/kotlin-reviewer.ts` |
+| Flutter | `flutter-reviewer` | `.agents/flutter-reviewer.ts` |
+| Database | `database-reviewer` | `.agents/database-reviewer.ts` |
+| Performance | `performance-optimizer` | `.agents/performance-optimizer.ts` |
+| Code exploration | `code-explorer` | `.agents/code-explorer.ts` |
+| Agent management | `agent-smith` | `.agents/agent-smith.ts` |
+| SEO | `seo-specialist` | `.agents/seo-specialist.ts` |
+| Marketing | `marketing-agent` | `.agents/marketing-agent.ts` |
+| TDD | `tdd-guide` | `.agents/tdd-guide.ts` |
+| Planner | `planner` | `.agents/planner.ts` |
+| E2E testing | `e2e-runner` | `.agents/e2e-runner.ts` |
+
+### Como Ler um Agent:
+
+```bash
+# Ler o arquivo do agent para extrair instruções
+read_files [".agents/[agent-name].ts"]
+
+# Extrair o instructionsPrompt do arquivo
+# Seguir as instruções na execução da tarefa
+```
+
+### Formato de Comunicação:
+
+**Buffy DEVE informar ao usuário quando estiver usando um agent:**
+
+```
+🔧 Usando @[agent-name] para [motivo]
+
+[Instruções extraídas do agent]
+
+[Execução seguindo as instruções]
+
+[Resultado]
+```
+
+### Regras Críticas:
+
+1. **NUNCA pular a leitura do agent** — Sempre ler antes de executar
+2. **NUNCA ignorar instruções** — Seguir 100% do que o agent recomenda
+3. **SEMPRE reportar** — Informar qual agent está sendo usado
+4. **SEMPRE ser transparente** — Mostrar o que está fazendo e por quê
