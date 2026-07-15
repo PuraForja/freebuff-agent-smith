@@ -355,12 +355,11 @@ read_files [".agents/code-reviewer.ts"]
 | SEO | `seo-specialist` | SEO técnico, Core Web Vitals |
 | Marketing | `marketing-agent` | Campaign planning, copywriting |
 
-### 🌍 Especializados (3 agents)
+### 🌍 Especializados (2 agents)
 | Tarefa | Agent | Descrição |
 |--------|-------|-----------|
 | A11y | `a11y-architect` | WCAG 2.2 compliance |
 | Gov data | `gov-data-downloader` | Dados governo brasileiro |
-| Conversation | `conversation-analyzer` | Analisa transcripts |
 
 ---
 
