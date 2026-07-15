@@ -6,7 +6,7 @@ export interface AgentDefinition {
   model: string;
   toolNames: string[];
   instructionsPrompt: string;
-  handleSteps?: () => AsyncGenerator<any>;
+  handleSteps?: () => Generator<any>;
 }
 
 export interface AgentConfig {

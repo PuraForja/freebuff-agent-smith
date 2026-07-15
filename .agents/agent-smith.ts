@@ -111,7 +111,7 @@ When creating a new agent, ensure:
 - [ ] Follows Freebuff patterns from docs/
 - [ ] Registered in .ecc-config.json
 `,
-  async *handleSteps() {
+  *handleSteps() {
     // Step 1: Read configuration
     yield { tool: 'read_files', paths: ['.ecc-config.json'] }
 
