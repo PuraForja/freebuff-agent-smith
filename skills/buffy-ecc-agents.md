@@ -1,13 +1,25 @@
 # 🧠 Skill: buffy-ecc-agents
 
-> **Criado para:** freebuff-ecc-bridge
-> **Descrição:** Define como Buffy deve sempre ler e seguir instruções dos agents ECC antes de executar tarefas relevantes.
+--- name: buffy-ecc-agents description: Define como Buffy deve sempre ler e seguir instruções dos agents ECC antes de executar tarefas relevantes. Use quando Buffy precisar executar qualquer tarefa que possa se beneficiar de agents especializados.
 
 ---
 
 ## 📋 Descrição
 
 Este skill documenta o **sistema obrigatório** que Buffy deve seguir para sempre usar os agents ECC de forma proativa e transparente. Buffy NÃO pode executar tarefas relevantes sem antes ler e seguir as instruções do agent correspondente.
+
+## When to Activate
+
+- Ao revisar código de qualquer linguagem
+- Ao arquitetar soluções ou features
+- Ao depurar erros de build ou runtime
+- Ao documentar código ou APIs
+- Ao implementar segurança
+- Ao otimizar performance
+- Ao trabalhar com banco de dados
+- Qualquer tarefa que tenha um agent ECC especializado
+
+> **Nota:** Este skill lista os 31 agents mais usados. Para a lista completa, consulte `CATALOGO.md` ou execute `ls -1 .agents/*.ts | grep -v types`.
 
 ---
 
