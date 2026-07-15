@@ -1,6 +1,6 @@
 # 📋 Catálogo — ECC Bridge
 
-> **Última atualização:** $(date '+%d/%m/%Y')
+> **Última atualização:** 14/07/2026
 > **Repositório ECC:** https://github.com/affaan-m/ECC
 > **Gerado por:** `scripts/ecc-install.sh`
 
@@ -10,9 +10,8 @@
 
 | Categoria | Quantidade |
 |-----------|:----------:|
-| 🎯 Agentes TypeScript | $(ls .agents/*.ts 2>/dev/null | wc -l) |
-| `agent-manager` | `mimo/mimo-v2.5` | Instalador universal de agents e skills - analisa GitHub repos, detecta formatos (Freebuff, Claude Code, Cursor, ECC), converte e importa recursos |
-| 🧠 Skills Markdown | $(ls skills/*.md 2>/dev/null | wc -l) |
+| 🎯 Agentes TypeScript | 68 |
+| 🧠 Skills Markdown | 278 |
 
 ---
 
@@ -22,6 +21,7 @@
 |--------|--------|-----------|
 | `a11y-architect` | `mimo/mimo-v2.5` | --- name: a11y-architect description: Accessibility Architect specializing in WCAG 2 |
 | `agent-evaluator` | `mimo/mimo-v2.5` | --- name: agent-evaluator description: Evaluates agent output against 5-axis quality rubric (accuracy, completeness, clarity, actionability, conciseness) |
+| `agent-smith` | `mimo/mimo-v2.5` | Freebuff Agent Smith - Importa do GitHub, cria novos agents, busca soluções, sincroniza recursos ECC e gerencia instalações |
 | `architect` | `mimo/mimo-v2.5` | --- name: architect description: Software architecture specialist for system design, scalability, and technical decision-making |
 | `build-error-resolver` | `deepseek/deepseek-v4-flash` | --- name: build-error-resolver description: Build and TypeScript error resolution specialist |
 | `chief-of-staff` | `mimo/mimo-v2.5` | --- name: chief-of-staff description: Personal communication chief of staff that triages email, Slack, LINE, and Messenger |
@@ -45,6 +45,7 @@
 | `flutter-reviewer` | `mimo/mimo-v2.5` | --- name: flutter-reviewer description: Flutter and Dart code reviewer |
 | `fsharp-reviewer` | `mimo/mimo-v2.5` | --- name: fsharp-reviewer description: Expert F# code reviewer specializing in functional idioms, type safety, pattern matching, computation expressions, and performance |
 | `gan-evaluator` | `mimo/mimo-v2.5` | --- name: gan-evaluator description: \"GAN Harness — Evaluator agent |
+| `gov-data-downloader` | `mimo/mimo-v2.5` | --- name: gov-data-downloader description: Downloads official Brazilian government data directly from sources (INEP, DataSUS, SICONFI, MJSP, IBGE) - independent, asks user where to save |
 | `gan-generator` | `mimo/mimo-v2.5` | --- name: gan-generator description: \"GAN Harness — Generator agent |
 | `gan-planner` | `mimo/mimo-v2.5` | --- name: gan-planner description: \"GAN Harness — Planner agent |
 | `go-build-resolver` | `deepseek/deepseek-v4-flash` | --- name: go-build-resolver description: Go build, vet, and compilation error resolution specialist |
@@ -380,7 +381,7 @@
 
 | Recurso | Quantidade |
 |---------|:----------:|
-| Agentes TypeScript | 67 |
+| Agentes TypeScript | 68 |
 | Skills Markdown | 278 |
 
 *Catálogo gerado em 12/07/2026. Para atualizar: `bash scripts/ecc-install.sh`*

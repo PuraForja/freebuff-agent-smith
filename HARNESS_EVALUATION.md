@@ -24,7 +24,7 @@ Avaliar um reviewer como se fosse um harness completo é INCORRETO.
 
 | `a11y-architect` | Architect | E:0 T:1 C:1 S:0 L:1 V:0 | ✅ Apropriado | Architect simplificado - OK |
 | `agent-evaluator` | Reviewer | E:0 T:1 C:1 S:0 L:0 V:1 | ✅ Apropriado | Reviewer simplificado - OK |
-| `agent-manager` | Manager | E:1 T:1 C:1 S:1 L:1 V:1 | ✅ Apropriado | Manager com todos os componentes - correto |
+| `agent-smith` | Manager | E:1 T:1 C:1 S:1 L:1 V:1 | ✅ Apropriado | Manager com todos os componentes - correto |
 | `architect` | Architect | E:0 T:1 C:1 S:0 L:0 V:0 | ✅ Apropriado | Architect simplificado - OK |
 | `build-error-resolver` | Build Resolver | E:0 T:1 C:1 S:0 L:0 V:0 | ✅ Apropriado | Build resolver simplificado - OK |
 | `chief-of-staff` | Specialist | E:1 T:1 C:1 S:0 L:1 V:0 | ✅ Apropriado | Specialist com tools - correto |

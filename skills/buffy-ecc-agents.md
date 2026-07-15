@@ -37,41 +37,7 @@ Antes de QUALQUER tarefa, Buffy deve perguntar:
 
 > "Existe um agent ECC que possa auxiliar nesta tarefa?"
 
-**Lista de agents e quando usar:**
-
-| Tarefa | Agent ECC | Arquivo |
-|--------|-----------|---------|
-| Revisão TypeScript/JavaScript | `typescript-reviewer` | `.agents/typescript-reviewer.ts` |
-| Revisão de código geral | `code-reviewer` | `.agents/code-reviewer.ts` |
-| Revisão de segurança | `security-reviewer` | `.agents/security-reviewer.ts` |
-| Arquitetura de software | `architect` | `.agents/architect.ts` |
-| Design de features | `code-architect` | `.agents/code-architect.ts` |
-| Erros de build TypeScript | `build-error-resolver` | `.agents/build-error-resolver.ts` |
-| Simplificação de código | `code-simplifier` | `.agents/code-simplifier.ts` |
-| Análise de comments | `comment-analyzer` | `.agents/comment-analyzer.ts` |
-| Documentação | `doc-updater` | `.agents/doc-updater.ts` |
-| Python review | `python-reviewer` | `.agents/python-reviewer.ts` |
-| React review | `react-reviewer` | `.agents/react-reviewer.ts` |
-| Vue review | `vue-reviewer` | `.agents/vue-reviewer.ts` |
-| Angular | `code-reviewer` | Revisão geral para Angular |
-| Go review | `go-reviewer` | `.agents/go-reviewer.ts` |
-| Rust review | `rust-reviewer` | `.agents/rust-reviewer.ts` |
-| Java review | `java-reviewer` | `.agents/java-reviewer.ts` |
-| C++ review | `cpp-reviewer` | `.agents/cpp-reviewer.ts` |
-| C# review | `csharp-reviewer` | `.agents/csharp-reviewer.ts` |
-| PHP review | `php-reviewer` | `.agents/php-reviewer.ts` |
-| Swift review | `swift-reviewer` | `.agents/swift-reviewer.ts` |
-| Kotlin review | `kotlin-reviewer` | `.agents/kotlin-reviewer.ts` |
-| Flutter/Dart review | `flutter-reviewer` | `.agents/flutter-reviewer.ts` |
-| Database review | `database-reviewer` | `.agents/database-reviewer.ts` |
-| Performance optimization | `performance-optimizer` | `.agents/performance-optimizer.ts` |
-| Code exploration | `code-explorer` | `.agents/code-explorer.ts` |
-| Agent management | `agent-smith` | `.agents/agent-smith.ts` |
-| SEO | `seo-specialist` | `.agents/seo-specialist.ts` |
-| Marketing | `marketing-agent` | `.agents/marketing-agent.ts` |
-| TDD | `tdd-guide` | `.agents/tdd-guide.ts` |
-| Planner | `planner` | `.agents/planner.ts` |
-| E2E testing | `e2e-runner` | `.agents/e2e-runner.ts` |
+**Consulte a seção "Quando Usar Cada Agent" abaixo para a lista completa de 67 agents organizados por categoria.**
 
 ---
 

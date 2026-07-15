@@ -20,7 +20,7 @@
 |---|--------|------|---------------------|--------|
 | 1 | a11y-architect | Architect |   instructionsPrompt: `--- name: a11y-architect description:... | ⚠️ |
 | 2 | agent-evaluator | Evaluator |   instructionsPrompt: `--- name: agent-evaluator description... | ⚠️ |
-| 3 | agent-manager | Architect | ## Architecture Reference (H = E, T, C, S, L, V)  Based on t... | ⚠️ |
+| 3 | agent-smith | Manager | ## Architecture Reference (H = E, T, C, S, L, V)  Based on t... | ✅ |
 | 4 | architect | Architect |   instructionsPrompt: `--- name: architect description: Soft... | ⚠️ |
 | 5 | build-error-resolver | Specialist |   instructionsPrompt: `--- name: build-error-resolver descri... | ⚠️ |
 | 6 | chief-of-staff | Specialist |   instructionsPrompt: `--- name: chief-of-staff description:... | ⚠️ |
@@ -94,15 +94,15 @@
 | Métrica | Valor |
 |---------|-------|
 | **Total avaliado** | 68 agents |
-| **✅ Ajuda** | 0 |
-| **⚠️ Neutro** | 68 |
+| **✅ Ajuda** | 1 |
+| **⚠️ Neutro** | 67 |
 | **❌ Prejudica** | 0 |
 
 ## 💡 Conclusão
 
 ### Agents que PODEM receber melhorias:
 
-- **Manager** (agent-manager, chief-of-staff): Beneficiam-se de state store e lifecycle hooks
+- **Manager** (agent-smith, chief-of-staff): Beneficiam-se de state store e lifecycle hooks
 
 ### Agents que NÃO devem receber melhorias genéricas:
 

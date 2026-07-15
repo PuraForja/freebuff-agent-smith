@@ -6,11 +6,13 @@
 
 **ANTES de QUALQUER pedido do usuário, Buffy DEVE:**
 
-1. Verificar se a tarefa corresponde a algum agent na tabela abaixo
-2. Se SIM → Ler o arquivo do agent e seguir suas instruções
+1. Verificar se a tarefa corresponde a algum agent ECC
+2. Se SIM → Ler o arquivo `.agents/[agent-name].ts` e seguir suas instruções
 3. Se NÃO → Proceder normalmente
 
 > **NÃO EXISTE EXCEÇÃO:** Esta regra se aplica a QUALQUER tarefa que tenha um agent ECC correspondente.
+
+> 📖 **Para lista completa de 67 agents, consulte `skills/buffy-ecc-agents.md`**
 
 ---
 
