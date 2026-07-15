@@ -53,7 +53,7 @@ Antes de QUALQUER tarefa, Buffy deve perguntar:
 | Python review | `python-reviewer` | `.agents/python-reviewer.ts` |
 | React review | `react-reviewer` | `.agents/react-reviewer.ts` |
 | Vue review | `vue-reviewer` | `.agents/vue-reviewer.ts` |
-| Angular | `angular-developer` | `.agents/angular-developer.ts` |
+| Angular | `code-reviewer` | Revisão geral para Angular |
 | Go review | `go-reviewer` | `.agents/go-reviewer.ts` |
 | Rust review | `rust-reviewer` | `.agents/rust-reviewer.ts` |
 | Java review | `java-reviewer` | `.agents/java-reviewer.ts` |

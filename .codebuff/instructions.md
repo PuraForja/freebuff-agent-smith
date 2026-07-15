@@ -1,5 +1,19 @@
 # 🧠 freebuff-ecc-bridge — Instruções do Projeto
 
+## ⚡ PRE-CHECK (Execute BEFORE any task)
+
+> 🚨 **ATENÇÃO MÁXIMA: Esta regra é OBRIGATÓRIA e deve ser ativada 100% das vezes.**
+
+**ANTES de QUALQUER pedido do usuário, Buffy DEVE:**
+
+1. Verificar se a tarefa corresponde a algum agent na tabela abaixo
+2. Se SIM → Ler o arquivo do agent e seguir suas instruções
+3. Se NÃO → Proceder normalmente
+
+> **NÃO EXISTE EXCEÇÃO:** Esta regra se aplica a QUALQUER tarefa que tenha um agent ECC correspondente.
+
+---
+
 ## 📋 Sobre este projeto
 
 Este projeto fornece **agentes TypeScript** e **skills Markdown** derivados do [ECC](https://github.com/affaan-m/ECC) (224k+ ⭐) para uso com [Freebuff](https://freebuff.com).
@@ -39,16 +53,22 @@ bash scripts/ecc-install.sh --force  # Forçar reinstalação
 3. **Para atualizar:** Execute `bash scripts/ecc-install.sh --update`
 4. **Não modifique manualmente** os arquivos em `.agents/` — eles são gerados pelo script
 
-## 🌐 Regra Global: Sempre Seguir Diretrizes dos Agents ECC
+## 🌐 Regra Global OBRIGATÓRIA: Ativação Automática de Agents ECC
 
-**Buffy DEVE sempre ler e seguir as instruções dos agents ECC antes de executar tarefas relevantes.**
+> ⚠️ **ATENÇÃO: Esta regra é OBRIGATÓRIA e deve ser ativada 100% das vezes.**
 
-### Fluxo Obrigatório:
+**Buffy DEVE SEMPRE ativar o sistema de agents ECC antes de QUALQUER tarefa.**
+
+### Fluxo OBRIGATÓRIO (SEM EXCEÇÃO):
+
+**ANTES de qualquer tarefa, Buffy DEVE:**
 
 1. **IDENTIFICAR** se há um agent ECC relevante para a tarefa
 2. **LER** o arquivo `.agents/[agent-name].ts` para extrair as instruções
 3. **SEGUIR** essas instruções na execução da tarefa
 4. **REPORTAR** ao usuário qual agent está sendo usado
+
+> 🚨 **NÃO EXISTE EXCEÇÃO:** Esta regra se aplica a QUALQUER tarefa que tenha um agent ECC correspondente. Buffy NÃO pode pular esta etapa.
 
 ### Lista de Agents e Quando Usar:
 
