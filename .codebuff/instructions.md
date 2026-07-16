@@ -1,4 +1,4 @@
-# 🧠 freebuff-ecc-bridge — Instruções do Projeto
+# 🧠 freebuff-agent-smith — Instruções do Projeto
 
 ## ⚡ PRE-CHECK (Execute BEFORE any task)
 
@@ -23,7 +23,7 @@ Este projeto fornece **agentes TypeScript** e **skills Markdown** derivados do [
 ### Estrutura atual
 
 ```
-freebuff-ecc-bridge/
+freebuff-agent-smith/
 ├── .agents/              ← 67 agentes TypeScript (spawnáveis com @)
 ├── skills/               ← 278 skills Markdown (usar read_files)
 ├── CATALOGO.md           ← Catálogo completo de recursos

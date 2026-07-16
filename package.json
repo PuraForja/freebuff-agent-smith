@@ -1,0 +1,29 @@
+{
+  "name": "freebuff-agent-smith",
+  "version": "1.0.0",
+  "description": "Build, Adapt and Install AI Agents for the Freebuff ecosystem",
+  "main": ".agents/agent-smith.ts",
+  "scripts": {
+    "install:ecc": "bash scripts/ecc-install.sh",
+    "update:ecc": "bash scripts/ecc-install.sh --update",
+    "force:ecc": "bash scripts/ecc-install.sh --force",
+    "sync": "bash scripts/sync-ecc.sh",
+    "review": "bash scripts/auto-review.sh"
+  },
+  "keywords": [
+    "freebuff",
+    "codebuff",
+    "ai-agents",
+    "ecc",
+    "typescript"
+  ],
+  "author": "PuraForja",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
