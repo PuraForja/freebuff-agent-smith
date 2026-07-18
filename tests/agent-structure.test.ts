@@ -17,9 +17,9 @@ const REQUIRED_FIELDS = ['id', 'displayName', 'model', 'toolNames', 'instruction
 const VALID_MODELS = ['mimo/mimo-v2.5', 'deepseek/deepseek-v4-flash']
 
 describe('Estrutura dos Agentes', () => {
-  const agentFiles = globSync('*.ts', { cwd: join(AGENTS_DIR, 'ecc') })
-    .concat(globSync('*.ts', { cwd: join(AGENTS_DIR, 'custom') }))
-    .filter(f => !f.includes('types/'))
+  const eccFiles = globSync('*.ts', { cwd: join(AGENTS_DIR, 'ecc') }).map(f => `ecc/${f}`)
+  const customFiles = globSync('*.ts', { cwd: join(AGENTS_DIR, 'custom') }).map(f => `custom/${f}`)
+  const agentFiles = [...eccFiles, ...customFiles].filter(f => !f.includes('types/'))
 
   test('todos os agentes existem', () => {
     expect(agentFiles.length).toBeGreaterThan(0)
@@ -27,7 +27,9 @@ describe('Estrutura dos Agentes', () => {
   })
 
   test.each(agentFiles)('agente %s exporta AgentDefinition', (file) => {
-    const content = readFileSync(join(AGENTS_DIR, file.startsWith('ecc/') || file.startsWith('custom/') ? '' : 'ecc', file), 'utf-8')
+    const parts = file.split('/')
+    const dir = parts[0] // 'ecc' ou 'custom'
+    const content = readFileSync(join(AGENTS_DIR, dir, parts[1]), 'utf-8')
     
     // Verifica import do AgentDefinition
     expect(content).toContain("import type { AgentDefinition }")
@@ -48,8 +50,9 @@ describe('Estrutura dos Agentes', () => {
 
   test('todos os modelos de agentes são válidos', () => {
     for (const file of agentFiles) {
-      const dir = file.startsWith('custom/') ? 'custom' : 'ecc'
-      const content = readFileSync(join(AGENTS_DIR, dir, file), 'utf-8')
+      const parts = file.split('/')
+      const dir = parts[0] // 'ecc' ou 'custom'
+      const content = readFileSync(join(AGENTS_DIR, dir, parts[1]), 'utf-8')
       const modelMatch = content.match(/model: '([^']+)'/)
       
       if (modelMatch) {

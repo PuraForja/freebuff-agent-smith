@@ -154,6 +154,17 @@ iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PuraForja/freebuf
 
 ---
 
+## 🔧 Variáveis de Ambiente do Smith
+
+| Variável | Descrição | Default |
+|----------|-----------|---------|
+| `SMITH_KNOWLEDGE_DIR` | Diretório da biblioteca de conhecimento | `./knowledge/` |
+| `SMITH_PATCHES_DIR` | Diretório de patches | `./patches/` |
+| `SMITH_WORKSPACE_DIR` | Diretório temporário | `./workspace/` |
+| `SMITH_LINEAGE_DIR` | Diretório de linhagens | `./knowledge/lineage/` |
+| `SMITH_CONFIDENCE_THRESHOLD` | Threshold mínimo de confiança (0.0-1.0) | `0.70` |
+| `SMITH_PROACTIVE_INTERVAL` | Intervalo entre verificações (segundos) | `3600` |
+
 ## 📖 Regras Globais do Workspace
 
 O arquivo `knowledge.md` na **raiz do workspace** contém regras OBRIGATÓRIAS que se aplicam a todos os projetos:
@@ -166,7 +177,7 @@ Define como apresentar agentes consultados nas respostas:
 ### 🧠 Regra Global: Consulta Multi-Agente Obrigatória
 - **Sempre usar TODOS os agentes correlacionados** (não apenas 2-3)
 - Catálogo completo de agentes por categoria
-- Proteção anti-loop (máx 2 rodadas, máx 10 agentes)
+- Proteção anti-loop (máx 2 rodadas, máx 22 agentes)
 - Erros fatais a evitar
 
 **⚠️ Leia sempre o `knowledge.md` da raiz para garantir conformidade com as regras globais.**

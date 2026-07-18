@@ -1,0 +1,11 @@
+{
+  "concept": "Grounding First",
+  "description": "Antes de qualquer resposta, recomendação ou geração de artefato, verificar se os dados utilizados têm fontes reais e verificáveis. Se não tem fonte: não invente, diga 'não sei' ou 'não encontrado'.",
+  "type": "engineering-principle",
+  "origin": "solucao-medica (Camada 0 do pipeline anti-alucinação)",
+  "quality": 9.5,
+  "confidence": 0.98,
+  "applicableTo": ["any-llm", "any-agent", "any-context"],
+  "relatedPatterns": ["anti-hallucination-pipeline"],
+  "maxim": "Se o dado não está na fonte, a IA não deve inventá-lo."
+}

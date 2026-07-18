@@ -80,6 +80,39 @@ import vueReviewer from './ecc/vue-reviewer'
 import agentSmith from './custom/agent-smith'
 import govDataDownloader from './custom/gov-data-downloader'
 
+// F1a: Smith Types (Artifact, Lineage, Patch, Knowledge)
+export type { Artifact } from './types/artifact'
+export type { Lineage, LineageStore } from './types/lineage'
+export { InMemoryLineageStore, registerLineage, getLineage, listLineages } from './types/lineage'
+export type { Patch, PatchSummary } from './types/patch'
+export { toPatchSummary, isPatchRemovable } from './types/patch'
+export type { Knowledge } from './types/knowledge'
+export { createKnowledge, validateQuality, validateConfidence, knowledgeToJSON } from './types/knowledge'
+
+// F2: Destilador de Conhecimento (DNA Extractor)
+export type { DnaExtractionResult } from './types/extract-dna'
+export { extractAgentDna, extractDnaFromContent, batchExtractDna, extractAllDna, dnaToKnowledge } from './types/extract-dna'
+
+// F2: Descobridor Remoto (GitHub API)
+export type { RepoIdentifier, RemoteAgentFile, DiscoverOptions } from './types/discover-remote'
+export { parseGitHubUrl, discoverRemoteAgents, clearDiscoveryCache } from './types/discover-remote'
+
+// F2: Comparacao e Recomendacao
+export type { AgentOption, ComparisonResult } from './types/compare-options'
+export { compareOptions, sortByQuality, suggestBestOption, formatComparisonTable, calculateCompositeScore } from './types/compare-options'
+
+// F3: Patch Manager
+export type { CreatePatchData, PatchFilter, CompatibilityResult, PatchStore } from './types/patch-manager'
+export { createPatch, listPatches, getPatch, removePatch, checkCompatibility, verifyAllPatches, applyPatch, InMemoryPatchStore, FileSystemPatchStore } from './types/patch-manager'
+
+// F3: Diagnostico de Agentes
+export type { DiagnosisResult, DiagnosisIssue } from './types/diagnose-agent'
+export { diagnoseAgent } from './types/diagnose-agent'
+
+// F4: Observador de Ecossistema
+export type { EcosystemReport, EcosystemResult, DuplicateInfo } from './types/ecosystem-observer'
+export { analyzeEcosystem, findDuplicates, generateHealthReport, checkEcosystem } from './types/ecosystem-observer'
+
 // Combined registry
 export const agents: AgentDefinition[] = [
   // ECC Agents

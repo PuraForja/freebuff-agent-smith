@@ -1,0 +1,20 @@
+{
+  "concept": "Anti-Hallucination Pipeline",
+  "description": "Sistema de defesa em profundidade contra alucinação em agentes de IA. 5 camadas que se complementam: Grounding → Chain-of-Verification → Confidence Scoring → Output Guardrails → Human-in-the-Loop. Cada camada pega o que a anterior deixou passar.",
+  "origin": "solucao-medica (referencias/ANTI-HALUCINACAO.md) + Meta FAIR (Chain-of-Verification)",
+  "quality": 8.5,
+  "confidence": 0.92,
+  "applicableTo": ["any-agent", "any-llm", "any-framework"],
+  "pattern": "ground → verify → score → guard → escalate",
+  "layers": [
+    { "layer": 0, "name": "Grounding", "principle": "Toda resposta baseada em fontes reais" },
+    { "layer": 1, "name": "Chain-of-Verification", "principle": "Auto-verificar cada afirmação" },
+    { "layer": 2, "name": "Confidence Scoring", "principle": "Nem todo dado tem o mesmo peso" },
+    { "layer": 3, "name": "Output Guardrails", "principle": "Barreiras de proteção na saída" },
+    { "layer": 4, "name": "Human-in-the-Loop", "principle": "IA sugere, humano decide" }
+  ],
+  "source_repos": [
+    "github.com/PuraForja/solucao-medica",
+    "github.com/affaan-m/ECC (skills/agent-self-evaluation)"
+  ]
+}

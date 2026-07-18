@@ -1,0 +1,44 @@
+{
+  "concept": "Planner Before Execute",
+  "description": "Expert planning specialist for complex features and refactoring. Use PROACTIVELY when users request feature implementation",
+  "origin": "ECC/agents/planner.md (via Smith v3.0)",
+  "quality": 8.5,
+  "confidence": 0.84,
+  "applicableTo": [
+    "freebuff",
+    "any-agent-framework",
+    "any-codebase"
+  ],
+  "pattern": "analyze -> design -> plan -> review -> execute -> verify",
+  "metadata": {
+    "filename": "planner.ts",
+    "model": "mimo/mimo-v2.5",
+    "tools": [
+      "set_output",
+      "read_files",
+      "code_search",
+      "glob"
+    ],
+    "lines": 221
+  },
+  "principles": [
+    "Analisar requisitos antes de planejar",
+    "Arquitetura antes de implementacao",
+    "Steps incrementais e verificaVeis",
+    "Documentar decisoes, nao so acoes"
+  ],
+  "workflow": [
+    "**[Step Name]** (File: path/to/file.ts)",
+    "**[Step Name]** (File: path/to/file.ts)",
+    "**Be Specific**: Use exact file paths, function names, variable names",
+    "**Consider Edge Cases**: Think about error scenarios, null values, empty states",
+    "**Minimize Changes**: Prefer extending existing code over rewriting",
+    "**Maintain Patterns**: Follow existing project conventions",
+    "**Enable Testing**: Structure changes to be easily testable",
+    "**Think Incrementally**: Each step should be verifiable"
+  ],
+  "redFlags": [],
+  "qualityChecks": [
+    "List assumptions and constraints"
+  ]
+}

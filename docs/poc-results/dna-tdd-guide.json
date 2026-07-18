@@ -1,0 +1,59 @@
+{
+  "concept": "Test-Driven Development (Red-Green-Refactor)",
+  "description": "Test-Driven Development specialist enforcing write-tests-first methodology. Use PROACTIVELY when writing new features",
+  "origin": "ECC/agents/tdd-guide.md (via Smith v3.0)",
+  "quality": 8.0,
+  "confidence": 0.82,
+  "applicableTo": [
+    "freebuff",
+    "any-agent-framework",
+    "any-codebase"
+  ],
+  "pattern": "red -> green -> refactor -> verify",
+  "metadata": {
+    "filename": "tdd-guide.ts",
+    "model": "deepseek/deepseek-v4-flash",
+    "tools": [
+      "set_output",
+      "read_files",
+      "write_file",
+      "str_replace",
+      "run_terminal_command",
+      "code_search"
+    ],
+    "lines": 100
+  },
+  "principles": [
+    "Testes primeiro, codigo depois",
+    "Minimo codigo para passar no teste",
+    "Refatorar so com testes verdes"
+  ],
+  "workflow": [
+    "**Null/Undefined** input",
+    "**Empty** arrays/strings",
+    "**Invalid types** passed",
+    "**Boundary values** (min/max)",
+    "**Error paths** (network failures, DB errors)",
+    "**Race conditions** (concurrent operations)",
+    "**Large data** (performance with 10k+ items)",
+    "**Special characters** (Unicode, emojis, SQL chars)"
+  ],
+  "redFlags": [
+    "Testing implementation details (internal state) instead of behavior",
+    "Tests depending on each other (shared state)",
+    "Asserting too little (passing tests that don't verify anything)",
+    "Not mocking external dependencies (Supabase, Redis, OpenAI, etc.)"
+  ],
+  "qualityChecks": [
+    "All public functions have unit tests",
+    "All API endpoints have integration tests",
+    "Critical user flows have E2E tests",
+    "Edge cases covered (null, empty, invalid)",
+    "Error paths tested (not just happy path)",
+    "Mocks used for external dependencies",
+    "Tests are independent (no shared state)",
+    "Assertions are specific and meaningful",
+    "Coverage is 80%+",
+    "For detailed mocking patterns and framework-specific examples, see \\`skill: tdd-workflow\\`."
+  ]
+}

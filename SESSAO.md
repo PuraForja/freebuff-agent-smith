@@ -154,8 +154,9 @@ O nome **"Agent Smith"** vem do Agent Smith do Matrix:
 |------------|:-----:|:------:|
 | Agents com conteúdo completo | 1/68 | **67/68** |
 | Agents com 1 linha | 67/68 | **0/68** |
-| PRD | Não existia | ✅ v3.0 |
-| SPEC | Não existia | ✅ v3.0 |
+| PRD | v3.0 | ✅ **v3.1 (feedback incorporado)** |
+| SPEC | v3.0 | ✅ **v3.1 (feedback incorporado)** |
+| PLAN | Não existia | ✅ **v3.1** |
 | Script de conversão | Não existia | ✅ v4 funcional |
 | Tool Mapping tables | Presentes em 40+ agents | **Removidas** |
 | Referências Claude/Anthropic | Não adaptadas | **Todas adaptadas** |
@@ -163,22 +164,58 @@ O nome **"Agent Smith"** vem do Agent Smith do Matrix:
 
 ---
 
+## 📊 Sessão 16/07/2026 (2) — Feedback + PLAN
+
+### 💬 Feedback do Rolim
+- **PRD:** Proatividade com contexto, revalidação de agents, 2 tipos de integração Git, métrica 85%→92%, anti-alucinação
+- **SPEC:** "etc" nas fontes, artefatos definidos, Biblioteca Smith detalhada, PR=contribuir de volta, projetos de referência, opções com explicação, anti-alucinação do solucao-medica
+
+### 📝 O que foi feito
+- ✅ PRD v3.1 — incorporados: proatividade, US-08 revalidação, US-09 proatividade contextual, 2 modos Git, métricas refinadas, anti-alucinação
+- ✅ SPEC v3.1 — incorporados: artefatos definidos, Biblioteca Smith detalhada, ADR-005 anti-alucinação, ADR-006 git bimodal, fluxo 6.3 revalidação, guardrails, etc.
+- ✅ PLAN v3.1 — 6 fases com milestones, dependências, riscos, prioridades, Definition of Done
+- ✅ Revisão multi-documento com code-reviewer (5 melhorias aplicadas)
+
+## 📊 Sessão 16/07/2026 (3) — Biblioteca Anti-Alucinação Populada 🧠
+
+### 💡 Ideia do Rolim
+> "Esse sistema anti-alucinação já poderia entrar na biblioteca do Smith, né?"
+
+**Resposta:** SIM! ✅ E já foi feito! O conhecimento do `solucao-medica` foi destilado para a Biblioteca Smith.
+
+### 📦 O que foi criado
+
+| Arquivo | Tipo | Conteúdo |
+|---------|:----:|----------|
+| `knowledge/anti-hallucination/grounding-rules.md` | Técnica | Camada 0 — Grounding (fonte da verdade) |
+| `knowledge/anti-hallucination/chain-of-verification.md` | Técnica | Camada 1 — CoVe (auto-verificação) |
+| `knowledge/anti-hallucination/confidence-scoring.md` | Técnica | Camada 2 — Confidence Scoring |
+| `knowledge/anti-hallucination/output-guardrails.md` | Técnica | Camada 3 — Guardrails de saída |
+| `knowledge/anti-hallucination/human-in-the-loop.md` | Técnica | Camada 4 — HITL |
+| `knowledge/patterns/anti-hallucination-pipeline.json` | Padrão | Pipeline 5 camadas (JSON) |
+| `knowledge/principles/grounding-first.json` | Princípio | Grounding First (JSON) |
+| `knowledge/index.json` | Índice | Busca pesquisável (7 artefatos) |
+| `skills/anti-hallucination-baseline.md` | Skill | Skill reutilizável para agents |
+
+### Documentos atualizados
+- ✅ `02-SPEC.md` — seção 4.4 atualizada: "Biblioteca já populada"
+- ✅ `03-PLAN.md` — fase transversal: "já populado"
+
 ## 🔄 Workflow em Andamento
 
 ```
-✅ 01-PRD.md    →  Escrito (aguardando aprovação)
-✅ 02-SPEC.md   →  Escrito (aguardando aprovação)
-⬜ 03-PLAN.md   →  Próximo — PLANO DE AÇÃO
-⬜ 04-TASKS.md  →  Após PLAN — LISTA DE TAREFAS
+✅ 01-PRD.md    →  v3.1 (feedback do Rolim incorporado)
+✅ 02-SPEC.md   →  v3.1 (feedback do Rolim incorporado)
+✅ 03-PLAN.md   →  v3.1 (escrito e alinhado)
+⬜ 04-TASKS.md  →  Próximo — LISTA DE TAREFAS
 ⬜ 05-REVIEW.md →  Após implementação
+⬜ IMPLEMENT   →  Fase 1: Fundação
 ```
 
 ### Próximos passos
-1. Aprovar PRD e SPEC (GATE 1)
-2. Escrever 03-PLAN.md com fases de implementação
-3. Escrever 04-TASKS.md com tarefas detalhadas
-4. Implementar mudanças
-5. Revisar (GATE 2)
+1. Revisar PRD + SPEC + PLAN e aprovar (GATE 1)
+2. Escrever 04-TASKS.md com tarefas detalhadas da Fase 1
+3. Implementar Fase 1: Tipos de artefato, estrutura de diretórios, sistema de linhagem
 
 ---
 
@@ -223,6 +260,18 @@ python3 scripts/convert-ecc-agents.py --dry-run
 
 ---
 
+## 📋 Regras Extraídas da Conversa
+
+> 🤖 **Achado de:** `@conversation-analyzer`
+
+Analisando o padrão de interação com Rolim, as seguintes regras foram identificadas:
+
+| # | Regra | Origem |
+|---|-------|--------|
+| R1 | **Sempre oferecer revisão multi-agente** antes de considerar documentos finalizados. Mínimo de **22 agentes** correlacionados (padrão fixo por rodada). | Rolim sempre pede revisão completa antes de aprovar |
+| R2 | **Preservar contexto entre sessões.** Todo progresso deve ser registrado no SESSAO.md para continuidade. | Sessões longas com múltiplas rodadas de refinamento |
+| R3 | **Aplicar feedback incrementalmente.** Cada rodada de feedback deve resultar em melhorias concretas nos documentos ou código. | Múltiplas rodadas de revisão → aplicação → nova revisão |
+
 ## 🔧 Issues Conhecidos (Não Bloqueantes)
 
 | Issue | Severidade | Notas |
@@ -243,3 +292,4 @@ python3 scripts/convert-ecc-agents.py --dry-run
 ---
 
 *Documento atualizado em 16/07/2026 — sessão de readequação completa do Smith v4.0*
+*Regras R1-R3 extraídas por @conversation-analyzer em 16/07/2026 (2)*

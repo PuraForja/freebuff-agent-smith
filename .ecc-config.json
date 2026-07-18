@@ -7,5 +7,14 @@
   "last_sync": null,
   "installed_at": "2026-07-15T17:29:42Z",
   "version": "1.0.0",
-  "note": "Use @agent-smith no Codebuff/Freebuff para instalar recursos do ECC"
+  "note": "Use @agent-smith no Codebuff/Freebuff para instalar recursos do ECC",
+  "smith": {
+    "version": "3.1.0",
+    "knowledgeDir": "./knowledge/",
+    "patchesDir": "./patches/",
+    "workspaceDir": "./workspace/",
+    "lineageDir": "./knowledge/lineage/",
+    "confidenceThreshold": 0.70,
+    "proactiveInterval": 3600
+  }
 }

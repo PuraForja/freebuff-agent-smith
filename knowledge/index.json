@@ -1,0 +1,101 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-07-16",
+  "totalArtifacts": 7,
+  "categories": {
+    "anti-hallucination": {
+      "label": "🧠 Anti-Alucinação",
+      "count": 5,
+      "artifacts": [
+        {
+          "id": "smith-knowledge-ah-001",
+          "title": "Grounding Rules (Camada 0)",
+          "path": "anti-hallucination/grounding-rules.md",
+          "type": "technique",
+          "quality": 0.95,
+          "tags": ["anti-hallucination", "grounding", "source-of-truth"]
+        },
+        {
+          "id": "smith-knowledge-ah-002",
+          "title": "Chain-of-Verification / CoVe (Camada 1)",
+          "path": "anti-hallucination/chain-of-verification.md",
+          "type": "technique",
+          "quality": 0.92,
+          "tags": ["anti-hallucination", "verification", "self-check"]
+        },
+        {
+          "id": "smith-knowledge-ah-003",
+          "title": "Confidence Scoring (Camada 2)",
+          "path": "anti-hallucination/confidence-scoring.md",
+          "type": "technique",
+          "quality": 0.90,
+          "tags": ["anti-hallucination", "confidence", "scoring"]
+        },
+        {
+          "id": "smith-knowledge-ah-004",
+          "title": "Output Guardrails (Camada 3)",
+          "path": "anti-hallucination/output-guardrails.md",
+          "type": "technique",
+          "quality": 0.90,
+          "tags": ["anti-hallucination", "guardrails", "validation"]
+        },
+        {
+          "id": "smith-knowledge-ah-005",
+          "title": "Human-in-the-Loop / HITL (Camada 4)",
+          "path": "anti-hallucination/human-in-the-loop.md",
+          "type": "principle",
+          "quality": 0.95,
+          "tags": ["anti-hallucination", "hitl", "ethics"]
+        }
+      ]
+    },
+    "patterns": {
+      "label": "📐 Padrões de Engenharia",
+      "count": 1,
+      "artifacts": [
+        {
+          "id": "smith-pattern-001",
+          "title": "Anti-Hallucination Pipeline",
+          "path": "patterns/anti-hallucination-pipeline.json",
+          "type": "pattern",
+          "quality": 0.92,
+          "tags": ["pipeline", "anti-hallucination", "5-layers"]
+        }
+      ]
+    },
+    "principles": {
+      "label": "⚖️ Princípios de Engenharia",
+      "count": 1,
+      "artifacts": [
+        {
+          "id": "smith-principle-001",
+          "title": "Grounding First",
+          "path": "principles/grounding-first.json",
+          "type": "principle",
+          "quality": 0.98,
+          "tags": ["engineering-principle", "grounding", "source-of-truth"]
+        }
+      ]
+    }
+  },
+  "searchTerms": {
+    "alucinação": ["smith-knowledge-ah-001", "smith-knowledge-ah-002", "smith-knowledge-ah-003", "smith-knowledge-ah-004", "smith-knowledge-ah-005", "smith-pattern-001", "smith-principle-001"],
+    "hallucination": ["smith-knowledge-ah-001", "smith-knowledge-ah-002", "smith-knowledge-ah-003", "smith-knowledge-ah-004", "smith-knowledge-ah-005", "smith-pattern-001", "smith-principle-001"],
+    "grounding": ["smith-knowledge-ah-001", "smith-principle-001"],
+    "verification": ["smith-knowledge-ah-002"],
+    "verificação": ["smith-knowledge-ah-002"],
+    "confidence": ["smith-knowledge-ah-003"],
+    "confiança": ["smith-knowledge-ah-003"],
+    "guardrails": ["smith-knowledge-ah-004"],
+    "validação": ["smith-knowledge-ah-004"],
+    "validation": ["smith-knowledge-ah-004"],
+    "hitl": ["smith-knowledge-ah-005"],
+    "human": ["smith-knowledge-ah-005"],
+    "humano": ["smith-knowledge-ah-005"],
+    "pipeline": ["smith-pattern-001"],
+    "principles": ["smith-principle-001"],
+    "principios": ["smith-principle-001"],
+    "fonte": ["smith-knowledge-ah-001", "smith-principle-001"],
+    "source": ["smith-knowledge-ah-001", "smith-principle-001"]
+  }
+}
