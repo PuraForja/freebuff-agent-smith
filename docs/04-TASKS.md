@@ -1,6 +1,6 @@
 # 📋 TASKS — Fase 1: Fundação (Artefatos + Linhagem)
 
-> **Projeto:** Freebuff Agent Smith v3.1
+> **Projeto:** Freebuff Agent Smith V2 v3.1
 > **Documentos de referência:** `01-PRD.md`, `02-SPEC.md`, `03-PLAN.md`
 > **Workflow:** PRD → SPEC → PLAN → ✅ **TASKS** → IMPLEMENT → REVIEW (GATE 2)
 > **Estimativa:** 10 dias corridos (dias 1-10)
@@ -23,7 +23,7 @@
 ## 🗺️ Mapa de Arquivos
 
 ```
-freebuff-agent-smith/
+freebuff-agent-smith-v2/
 ├── .agents/types/                    ← JÁ EXISTE (4 arquivos)
 │   ├── agent-definition.ts           ← JÁ EXISTE
 │   ├── tools.ts                      ← JÁ EXISTE
@@ -341,7 +341,7 @@ await registerLineage(storage, {
   lineage: {
     origin: { repo: 'ECC', version: '2.1', path: 'agents/planner.md' },
     transformation: { date: '2026-07-17', action: 'cloned' as const, description: 'Convertido para Freebuff' },
-    destination: { repo: 'freebuff-agent-smith', path: '.agents/ecc/planner.ts' }
+    destination: { repo: 'freebuff-agent-smith-v2', path: '.agents/ecc/planner.ts' }
   }
 })
 // → Salva em knowledge/lineage/planner.json
@@ -511,7 +511,7 @@ describe('Lineage Integration', () => {
     const lineage = await registerLineage(storage, agent.id, {
       origin: { repo: 'test', version: '1.0', path: 'test.md' },
       transformation: { date: '2026-07-17', action: 'created', description: 'Test' },
-      destination: { repo: 'freebuff-agent-smith', path: '.agents/ecc/test.ts' }
+      destination: { repo: 'freebuff-agent-smith-v2', path: '.agents/ecc/test.ts' }
     })
     
     expect(lineage.origin.repo).toBe('test')

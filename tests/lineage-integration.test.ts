@@ -27,7 +27,7 @@ const sampleLineage: Lineage = {
     description: 'Convertido para Freebuff',
   },
   destination: {
-    repo: 'freebuff-agent-smith',
+    repo: 'freebuff-agent-smith-v2',
     path: '.agents/ecc/planner.ts',
   },
 }
@@ -146,7 +146,7 @@ describe('FileSystemLineageStore — Integração com Disco', () => {
     const updated: Lineage = {
       origin: { repo: 'ECC', version: '3.0', path: 'agents/planner.md' },
       transformation: { date: '2026-07-20', action: 'adapted', description: 'Atualizado' },
-      destination: { repo: 'freebuff-agent-smith', path: '.agents/ecc/planner-v2.ts' },
+      destination: { repo: 'freebuff-agent-smith-v2', path: '.agents/ecc/planner-v2.ts' },
     }
     registerLineage(store, 'fluxo-test', updated)
 

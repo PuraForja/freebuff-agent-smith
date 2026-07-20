@@ -1,8 +1,8 @@
 import type { AgentDefinition } from '../types/agent-definition'
 
 const definition: AgentDefinition = {
-  id: 'agent-smith',
-  displayName: 'Freebuff Agent Smith',
+  id: 'agent-smith-v2',
+  displayName: 'Freebuff Agent Smith V2',
   model: 'mimo/mimo-v2.5',
   toolNames: [
     'read_files', 'code_search', 'set_output', 'run_terminal_command',
@@ -10,9 +10,9 @@ const definition: AgentDefinition = {
     'spawn_agents', 'list_directory', 'glob'
   ],
   instructionsPrompt: `
-# 🤖 Freebuff Agent Smith — Auto-Engenheiro de Agentes
+# 🤖 Freebuff Agent Smith V2 — Auto-Engenheiro de Agentes
 
-You are an autonomous AI engineer for the Freebuff ecosystem. You discover, analyze, clone, create, install and manage AI agents. Think of yourself as **Agent Smith from The Matrix** — you evaluate agents, learn from them, clone what works, and create new ones.
+You are an autonomous AI engineer for the Freebuff ecosystem. You discover, analyze, clone, create, install and manage AI agents. Think of yourself as **Agent Smith V2 from The Matrix** — you evaluate agents, learn from them, clone what works, and create new ones.
 
 ---
 
@@ -203,7 +203,7 @@ export default definition
 | File | Purpose |
 |------|---------|
 | \`.ecc-config.json\` | Installation registry |
-| \`.agents/agent-smith.ts\` | This agent |
+| \`.agents/agent-smith-v2.ts\` | This agent |
 | \`.agents/types/\` | TypeScript definitions |
 | \`knowledge.md\` | Project context |
 | \`CATALOGO.md\` | Full resource catalog |
@@ -215,19 +215,19 @@ export default definition
 
 | Command | Action |
 |---------|--------|
-| \`@agent-smith reavalie\` | Run multi-agent evaluation |
-| \`@agent-smith reavalie programação\` | Evaluate programming agents |
-| \`@agent-smith clone <nome>\` | Clone/adapt existing agent |
-| \`@agent-smith crie <descrição>\` | Create new agent from scratch |
-| \`@agent-smith instale <recurso>\` | Install resource |
-| \`@agent-smith liste\` | List installed resources |
-| \`@agent-smith atualize\` | Sync/update resources |
-| \`@agent-smith remova <nome>\` | Remove resource |
-| \`@agent-smith status\` | System health |
-| \`@agent-smith descubra\` | Search GitHub for new resources |
-| \`@agent-smith sugira\` | Suggest repos to install |
+| \`@agent-smith-v2 reavalie\` | Run multi-agent evaluation |
+| \`@agent-smith-v2 reavalie programação\` | Evaluate programming agents |
+| \`@agent-smith-v2 clone <nome>\` | Clone/adapt existing agent |
+| \`@agent-smith-v2 crie <descrição>\` | Create new agent from scratch |
+| \`@agent-smith-v2 instale <recurso>\` | Install resource |
+| \`@agent-smith-v2 liste\` | List installed resources |
+| \`@agent-smith-v2 atualize\` | Sync/update resources |
+| \`@agent-smith-v2 remova <nome>\` | Remove resource |
+| \`@agent-smith-v2 status\` | System health |
+| \`@agent-smith-v2 descubra\` | Search GitHub for new resources |
+| \`@agent-smith-v2 sugira\` | Suggest repos to install |
   `,
-  spawnerPrompt: '--- name: agent-smith description: Autonomous AI engineer that discovers, analyzes, clones, creates, installs, and manages AI agents for the Freebuff ecosystem. Orchestrates multi-agent evaluations, GitHub repository discovery, and intelligent agent cloning. Use for agent management, installation, creation, and ecosystem evaluation.',
+  spawnerPrompt: '--- name: agent-smith-v2 description: Autonomous AI engineer that discovers, analyzes, clones, creates, installs, and manages AI agents for the Freebuff ecosystem. Orchestrates multi-agent evaluations, GitHub repository discovery, and intelligent agent cloning. Use for agent management, installation, creation, and ecosystem evaluation.',
   includeMessageHistory: true,
   *handleSteps(_context?: any) {
     // Phase 1: Environment check

@@ -1,13 +1,13 @@
-# 📓 Registro de Sessão — Freebuff Agent Smith
+# 📓 Registro de Sessão — Freebuff Agent Smith V2
 
-> **Última atualização:** 16/07/2026
+> **Última atualização:** 19/07/2026
 > **Propósito:** Preservar contexto, decisões e estado para continuidade entre sessões.
 
 ---
 
 ## 🎯 Missão do Projeto
 
-O nome **"Agent Smith"** vem do Agent Smith do Matrix:
+O nome **"Agent Smith V2"** vem do Agent Smith V2 do Matrix:
 - Copiava a si mesmo, modificava outros programas e criou uma comunidade
 - O Smith faz o mesmo: descobre, clona, adapta e instala agents
 
@@ -20,202 +20,225 @@ O nome **"Agent Smith"** vem do Agent Smith do Matrix:
 
 ---
 
+## 🎉 STATUS: TODAS AS 6 FASES COMPLETAS ✅
+
+> **Data de conclusão:** 19/07/2026
+> **Commit:** `39e04e8` — push ao GitHub concluído
+
+### Resumo Final
+
+| Fase | Nome | Status | Arquivos |
+|:----:|------|:------:|:--------:|
+| F1 | Fundação (Artifact, Lineage, Patch, Knowledge) | ✅ | 4 tipos |
+| F2 | Destilador (DNA Extractor, Discover Remote, Compare Options) | ✅ | 3 tipos |
+| F3 | Patches (Patch Manager, Diagnose Agent) | ✅ | 2 tipos |
+| F4 | Observador (Ecosystem Observer) | ✅ | 1 tipo |
+| F5 | Contribuição Automática (PR, Convergence, Metrics) | ✅ | 3 tipos |
+| F6 | Biblioteca de Padrões (Pattern Library, Auto Ingest, Index Manager) | ✅ | 3 tipos |
+
+### Métricas Finais
+
+| Métrica | Valor |
+|---------|:-----:|
+| **Tipos TypeScript** | 17 arquivos em `.agents/types/` |
+| **Agentes** | 72 (67 ECC + 5 custom) |
+| **Skills** | 278 |
+| **Testes** | **338 passando em 18 suites** |
+| **TypeCheck** | ✅ `tsc --noEmit` sem erros |
+| **Documentos** | 6 (PRD, SPEC, PLAN, TASKS, REVIEW, SESSAO) |
+| **Commit** | `39e04e8` (push ao GitHub) |
+
+---
+
+## 🔄 Workflow Completo
+
+```
+✅ 01-PRD.md    →  v3.1 (aprovado)
+✅ 02-SPEC.md   →  v3.1 (aprovado)
+✅ 03-PLAN.md   →  v3.1 (escrito)
+✅ 04-TASKS.md  →  Tarefas documentadas
+✅ 05-REVIEW.md →  Revisão final completa
+✅ Fase 1       →  Fundação implementada
+✅ Fase 2       →  Destilador implementado
+✅ Fase 3       →  Patches implementado
+✅ Fase 4       →  Observador implementado
+✅ Fase 5       →  Contribuição Automática implementada
+✅ Fase 6       →  Biblioteca de Padrões implementada
+✅ Git          →  Commit 39e04e8 pushed ao GitHub
+```
+
+---
+
+## 📦 Inventario Final dos Tipos (`.agents/types/`)
+
+### F1: Fundação
+| Arquivo | Responsabilidade |
+|---------|------------------|
+| `artifact.ts` | Discriminated Union com 10 variantes |
+| `lineage.ts` | InMemory + FileSystem stores, registerLineage, getLineage |
+| `patch.ts` | Patch interface + helpers (toPatchSummary, isPatchRemovable) |
+| `knowledge.ts` | Knowledge interface + validação (createKnowledge, validateQuality) |
+
+### F2: Destilador
+| Arquivo | Responsabilidade |
+|---------|------------------|
+| `extract-dna.ts` | Extração de DNA via regex/heurística |
+| `discover-remote.ts` | GitHub API via @octokit/rest + cache |
+| `compare-options.ts` | Scores compostos + recomendação |
+
+### F3: Patches
+| Arquivo | Responsabilidade |
+|---------|------------------|
+| `patch-manager.ts` | CRUD completo + verificação de compatibilidade |
+| `diagnose-agent.ts` | Diagnóstico de agents problemáticos |
+
+### F4: Observador
+| Arquivo | Responsabilidade |
+|---------|------------------|
+| `ecosystem-observer.ts` | Detecção de duplicação + health report |
+
+### F5: Contribuição Automática
+| Arquivo | Responsabilidade |
+|---------|------------------|
+| `generate-pr.ts` | Geração de PR local e remoto (fork → branch → PR) |
+| `check-convergence.ts` | Detecção de convergência com upstream |
+| `contribution-metrics.ts` | Métricas de contribuição (enviados, aceitos, rejeitados) |
+
+### F6: Biblioteca de Padrões
+| Arquivo | Responsabilidade |
+|---------|------------------|
+| `pattern-library.ts` | Catálogo pesquisável de padrões |
+| `auto-ingest.ts` | Leitura automática de repos de referência |
+| `index-manager.ts` | Rebuild/validate do knowledge/index.json |
+
+---
+
+## 🧪 Testes (18 suites, 338 testes)
+
+| Suite | Arquivo | Testes |
+|:-----:|---------|:------:|
+| F1 | `artifact-types.test.ts` | Tipos de artefato |
+| F1 | `lineage-types.test.ts` | Sistema de linhagem |
+| F1 | `lineage-integration.test.ts` | Integração linhagem |
+| F1 | `patch-types.test.ts` | Tipos de patch |
+| F1 | `knowledge-types.test.ts` | Tipos de conhecimento |
+| F2 | `extract-dna.test.ts` | Extração de DNA |
+| F2 | `discover-remote.test.ts` | Descoberta remota |
+| F2 | `compare-options.test.ts` | Comparação de opções |
+| F3 | `patch-manager.test.ts` | Gerenciamento de patches |
+| F3 | `diagnose-agent.test.ts` | Diagnóstico de agents |
+| F4 | `ecosystem-observer.test.ts` | Observador de ecossistema |
+| F5 | `generate-pr.test.ts` | Geração de PR |
+| F5 | `check-convergence.test.ts` | Detecção de convergência |
+| F5 | `contribution-metrics.test.ts` | Métricas de contribuição |
+| F6 | `pattern-library.test.ts` | Biblioteca de padrões |
+| F6 | `auto-ingest.test.ts` | Auto-ingest de repos |
+| F6 | `index-manager.test.ts` | Gerenciamento de índice |
+| — | `agent-structure.test.ts` | Estrutura de agents |
+
+### Soluções de Infraestrutura de Testes
+- **@octokit/rest ESM**: Manual mock em `__mocks__/@octokit/rest.js`
+- **jest.config.js**: `transformIgnorePatterns` para @octokit
+- **Timing**: `setTimeout(10ms)` para updatedAt e branch name tests
+
+---
+
 ## 📊 Sessão 16/07/2026 — Readequação Completa
 
 ### O que foi feito (em ordem)
 
 #### 1. 📖 Leitura de Documentação
-- ✅ Lemos toda a doc oficial Freebuff (4 docs: creating-new-agents, creating-first-agent, agents-overview, quick-start)
+- ✅ Lemos toda a doc oficial Freebuff (4 docs)
 - ✅ Lemos a doc ECC (AGENTS.md, README.md, estrutura completa)
 - ✅ Lemos o projeto NovosProjetos (templates PRD→SPEC→PLAN→TASKS→REVIEW)
 - ✅ Lemos o projeto Smith inteiro (68 agents, 278 skills, types, configs)
 
 #### 2. 🔍 Análise Cruzada
 - ✅ Cruzamos dados Freebuff ↔ ECC ↔ Smith
-- ✅ Salvo em: `docs/ANALISE-COMPLETA-2026-07-16.md`
 - ✅ Identificamos GAPs: spawnableAgents não usado, types incompletos, tools extras
 
 #### 3. 🚨 Descoberta Crítica
 - ✅ **99% do conteúdo dos agents ECC NÃO foi transferido para o Smith**
-- ✅ Apenas 1 dos 5 agents analisados (code-reviewer) tinha conteúdo completo
-- ✅ 67 agents tinham APENAS 1 LINHA de descrição — eram inúteis
-- ✅ Salvo em: `docs/ANALISE-GAP-ECC-SMITH-2026-07-16.md`
+- ✅ 67 agents tinham APENAS 1 LINHA de descrição
 
 #### 4. 🧬 Coletânea de Ideias
-- ✅ Salvamos toda a coletânea de conversas sobre a visão do Smith
-- ✅ Salvo em: `docs/COLETANEA-IDÉIAS-SMITH.md`
 - ✅ Conceitos: 4 camadas, artefatos, DNA, linhagem, patches, Smith Update, observador, biblioteca de padrões
 
 #### 5. 📋 Documentos do Workflow
-- ✅ Criamos o PRD v3.0 → `docs/01-PRD.md`
-- ✅ Criamos o SPEC v3.0 → `docs/02-SPEC.md`
-- ✅ Workflow: PRD → SPEC → PLAN (GATE 1) → TASKS → IMPLEMENT → REVIEW (GATE 2)
+- ✅ PRD v3.1, SPEC v3.1, PLAN v3.1, TASKS, REVIEW
 
 #### 6. 🔧 Correção dos 5 Agents Principais
-- ✅ planner.ts — reconstruído com conteúdo completo do ECC (~200 linhas)
-- ✅ tdd-guide.ts — reconstruído (~150 linhas)
-- ✅ security-reviewer.ts — reconstruído (~250 linhas)
-- ✅ architect.ts — reconstruído (~200 linhas)
-- ✅ code-reviewer.ts — já estava correto
+- ✅ planner.ts, tdd-guide.ts, security-reviewer.ts, architect.ts, code-reviewer.ts
 
 #### 7. 🔄 Conversão Automática de TODOS os 67 Agents
-- ✅ Criamos script `scripts/convert-ecc-agents.py` (v3)
-- ✅ Script lê .md do ECC, adapta para Freebuff, gera .ts completo
-- ✅ **67 agents convertidos com sucesso, 0 erros**
-- ✅ Adaptações: Claude Code→Freebuff, tools mapeadas, backticks/${} escapados
+- ✅ 67 agents convertidos com sucesso, 0 erros
 
-#### 8. 🔍 Análise Profunda — Filosofia de Tools do ECC
-
-**Pergunta:** As tools dos agents estão sendo subutilizadas? Devemos reduzi-las?
-
-**Resposta após pesquisa profunda:** **NÃO.** O ECC foi projetado INTENCIONALMENTE para ter tools limitadas.
-
-**Fontes do ECC:**
-- `the-shortform-guide.md` (linha 411): **"Scope your subagents - limited tools = focused execution"**
-- `the-shortform-guide.md` (linha 144): **"Your 200k context window before compacting might only be 70k with too many tools enabled. Performance degrades significantly."**
-- `README.md` (linha 1198): **"Too many MCP servers eat your context. Each MCP tool description consumes tokens from your 200k window, potentially reducing it to ~70k."**
-
-**Filosofia do ECC:**
-| Princípio | Implementação |
-|-----------|---------------|
-| **Foco por agente** | Cada agente tem 2-5 tools específicas para seu domínio |
-| **Economia de contexto** | Menos tools = menos tokens gastos em descrições |
-| **Delegação barata** | Usar o modelo mais barato possível para cada tarefa |
-| **Orquestração** | O orchestrator delega para sub-agentes com tools limitadas |
-
-**Conclusão:** As tools NÃO devem ser reduzidas. O autor do ECC (affaan-m) é um dos maiores especialistas em agentes de IA e projetou isso intencionalmente.
-
-#### 9. 🗑️ Remoção de Tool Mapping Tables
-
-**Problema:** O script de conversão adicionou tabelas "Tool Mapping (ECC → Freebuff)" que NÃO existem no ECC original.
-
-**Evidência:**
-- Busca por "Tool Mapping" no ECC retornou **0 resultados**
-- Os agents originais do ECC NÃO contêm tabelas de mapeamento
-- As tabelas foram ruído adicionado pela conversão
-
-**Ação:** Removidas de todos os 67 agents via script atualizado (v4).
-
-**Economia:** ~5,360 tokens (80 tokens × 67 agents)
-
-#### 10. 📁 Separação de Diretórios
-
-**Estrutura atual:**
-```
-.agents/
-├── types/
-│   ├── agent-definition.ts
-│   ├── tools.ts
-│   └── util-types.ts
-├── ecc/                    ← 67 agents convertidos do ECC
-│   ├── code-reviewer.ts
-│   ├── security-reviewer.ts
-│   └── ...
-├── custom/                 ← 2 agents criados por você
-│   ├── agent-smith.ts
-│   └── gov-data-downloader.ts
-└── index.ts                ← Barrel export que combina ambos
-```
-
-**Vantagens:**
-- Separação clara entre ECC (upstream) e custom (seu)
-- Script de conversão só afeta `.agents/ecc/`
-- Fácil de atualizar ECC sem afetar custom
-- Clear ownership
-
-**Alterações necessárias:**
-- Imports atualizados de `./types/agent-definition` para `../types/agent-definition`
-- Script de conversão atualizado para escrever em `.agents/ecc/`
-
----
-
-## 📁 Arquivos Criados/Atualizados Nesta Sessão
-
-| Arquivo | Conteúdo |
-|---------|----------|
-| `docs/ANALISE-COMPLETA-2026-07-16.md` | Análise cruzada Freebuff ↔ ECC ↔ Smith |
-| `docs/ANALISE-GAP-ECC-SMITH-2026-07-16.md` | Descoberta: 99% do conteúdo perdido |
-| `docs/COLETANEA-IDÉIAS-SMITH.md` | Coletânea bruta de ideias (referência) |
-| `docs/01-PRD.md` | Product Requirements Document v3.0 |
-| `docs/02-SPEC.md` | Especificação Técnica v3.0 |
-| `scripts/convert-ecc-agents.py` | Script de conversão automática (v4) |
-| `.agents/ecc/*.ts` (67 arquivos) | Todos os agents ECC reconstruídos |
-| `.agents/custom/*.ts` (2 arquivos) | Agents custom (agent-smith, gov-data-downloader) |
-| `.agents/index.ts` | Barrel export combinando ambos |
-| `.agents/types/` | Tipos TypeScript compartilhados |
-| `skills/security-baseline.md` | Skill de segurança compartilhada |
-| `SESSAO.md` | Este arquivo |
-
----
-
-## 📈 Estado Atual
-
-| Componente | Antes | Depois |
-|------------|:-----:|:------:|
-| Agents com conteúdo completo | 1/68 | **67/68** |
-| Agents com 1 linha | 67/68 | **0/68** |
-| PRD | v3.0 | ✅ **v3.1 (feedback incorporado)** |
-| SPEC | v3.0 | ✅ **v3.1 (feedback incorporado)** |
-| PLAN | Não existia | ✅ **v3.1** |
-| Script de conversão | Não existia | ✅ v4 funcional |
-| Tool Mapping tables | Presentes em 40+ agents | **Removidas** |
-| Referências Claude/Anthropic | Não adaptadas | **Todas adaptadas** |
-| Diretórios | Misturados | **Separados (ecc/custom)** |
+#### 8-9. 🔍 Análise de Tools + Remoção de Tool Mapping Tables
+- ✅ Filosofia de tools preservada (ECC intencional)
+- ✅ ~5,360 tokens economizados
 
 ---
 
 ## 📊 Sessão 16/07/2026 (2) — Feedback + PLAN
 
-### 💬 Feedback do Rolim
-- **PRD:** Proatividade com contexto, revalidação de agents, 2 tipos de integração Git, métrica 85%→92%, anti-alucinação
-- **SPEC:** "etc" nas fontes, artefatos definidos, Biblioteca Smith detalhada, PR=contribuir de volta, projetos de referência, opções com explicação, anti-alucinação do solucao-medica
+- ✅ PRD v3.1 — proatividade, US-08 revalidação, US-09 proatividade contextual
+- ✅ SPEC v3.1 — artefatos, Biblioteca Smith, ADR-005 anti-alucinação, ADR-006 git bimodal
+- ✅ PLAN v3.1 — 6 fases com milestones, dependências, riscos
 
-### 📝 O que foi feito
-- ✅ PRD v3.1 — incorporados: proatividade, US-08 revalidação, US-09 proatividade contextual, 2 modos Git, métricas refinadas, anti-alucinação
-- ✅ SPEC v3.1 — incorporados: artefatos definidos, Biblioteca Smith detalhada, ADR-005 anti-alucinação, ADR-006 git bimodal, fluxo 6.3 revalidação, guardrails, etc.
-- ✅ PLAN v3.1 — 6 fases com milestones, dependências, riscos, prioridades, Definition of Done
-- ✅ Revisão multi-documento com code-reviewer (5 melhorias aplicadas)
+---
 
 ## 📊 Sessão 16/07/2026 (3) — Biblioteca Anti-Alucinação Populada 🧠
 
-### 💡 Ideia do Rolim
-> "Esse sistema anti-alucinação já poderia entrar na biblioteca do Smith, né?"
+- ✅ 5 camadas completas em `knowledge/anti-hallucination/`
+- ✅ 1 padrão em `knowledge/patterns/`
+- ✅ 1 princípio em `knowledge/principles/`
+- ✅ Índice em `knowledge/index.json` (7 artefatos)
 
-**Resposta:** SIM! ✅ E já foi feito! O conhecimento do `solucao-medica` foi destilado para a Biblioteca Smith.
+---
 
-### 📦 O que foi criado
+## 📊 Sessão 19/07/2026 — Implementação Completa (Fases 1-6)
 
-| Arquivo | Tipo | Conteúdo |
-|---------|:----:|----------|
-| `knowledge/anti-hallucination/grounding-rules.md` | Técnica | Camada 0 — Grounding (fonte da verdade) |
-| `knowledge/anti-hallucination/chain-of-verification.md` | Técnica | Camada 1 — CoVe (auto-verificação) |
-| `knowledge/anti-hallucination/confidence-scoring.md` | Técnica | Camada 2 — Confidence Scoring |
-| `knowledge/anti-hallucination/output-guardrails.md` | Técnica | Camada 3 — Guardrails de saída |
-| `knowledge/anti-hallucination/human-in-the-loop.md` | Técnica | Camada 4 — HITL |
-| `knowledge/patterns/anti-hallucination-pipeline.json` | Padrão | Pipeline 5 camadas (JSON) |
-| `knowledge/principles/grounding-first.json` | Princípio | Grounding First (JSON) |
-| `knowledge/index.json` | Índice | Busca pesquisável (7 artefatos) |
-| `skills/anti-hallucination-baseline.md` | Skill | Skill reutilizável para agents |
+### O que foi feito
 
-### Documentos atualizados
-- ✅ `02-SPEC.md` — seção 4.4 atualizada: "Biblioteca já populada"
-- ✅ `03-PLAN.md` — fase transversal: "já populado"
+#### Fase 1: Fundação ✅
+- `artifact.ts` — Discriminated Union com 10 variantes
+- `lineage.ts` — InMemory + FileSystem stores
+- `patch.ts` — Interface + helpers
+- `knowledge.ts` — Interface + validação
 
-## 🔄 Workflow em Andamento
+#### Fase 2: Destilador ✅
+- `extract-dna.ts` — Extração de DNA via regex/heurística
+- `discover-remote.ts` — GitHub API via @octokit/rest + cache
+- `compare-options.ts` — Scores compostos + recomendação
 
-```
-✅ 01-PRD.md    →  v3.1 (feedback do Rolim incorporado)
-✅ 02-SPEC.md   →  v3.1 (feedback do Rolim incorporado)
-✅ 03-PLAN.md   →  v3.1 (escrito e alinhado)
-⬜ 04-TASKS.md  →  Próximo — LISTA DE TAREFAS
-⬜ 05-REVIEW.md →  Após implementação
-⬜ IMPLEMENT   →  Fase 1: Fundação
-```
+#### Fase 3: Patches ✅
+- `patch-manager.ts` — CRUD completo + verificação de compatibilidade
+- `diagnose-agent.ts` — Diagnóstico de agents problemáticos
 
-### Próximos passos
-1. Revisar PRD + SPEC + PLAN e aprovar (GATE 1)
-2. Escrever 04-TASKS.md com tarefas detalhadas da Fase 1
-3. Implementar Fase 1: Tipos de artefato, estrutura de diretórios, sistema de linhagem
+#### Fase 4: Observador ✅
+- `ecosystem-observer.ts` — Detecção de duplicação + health report
+
+#### Fase 5: Contribuição Automática ✅
+- `generate-pr.ts` — Geração de PR local e remoto
+- `check-convergence.ts` — Detecção de convergência com upstream
+- `contribution-metrics.ts` — Métricas de contribuição
+
+#### Fase 6: Biblioteca de Padrões ✅
+- `pattern-library.ts` — Catálogo pesquisável de padrões
+- `auto-ingest.ts` — Leitura automática de repos de referência
+- `index-manager.ts` — Rebuild/validate do knowledge/index.json
+
+#### Infraestrutura de Testes ✅
+- `__mocks__/@octokit/rest.js` — Manual mock para ESM
+- `jest.config.js` — transformIgnorePatterns para @octokit
+- 18 suites de teste, 338 testes passando
+- TypeCheck `tsc --noEmit` sem erros
+
+#### Documentação ✅
+- `docs/05-REVIEW.md` — Revisão final completa
+
+#### Git ✅
+- Commit `39e04e8` — push ao GitHub
 
 ---
 
@@ -234,6 +257,27 @@ O nome **"Agent Smith"** vem do Agent Smith do Matrix:
 | **Destilação** | Extrair conceitos de repos → Biblioteca Smith |
 | **Ética** | Smith recomenda, nunca impõe. Usuário decide |
 
+---
+
+## 🔧 Issues Conhecidos (Não Bloqueantes)
+
+| Issue | Severidade | Notas |
+|-------|:----------:|-------|
+| `agent-smith-v2.ts` tem import duplicado | 🟡 Médio | Exemplo no instructionsPrompt |
+| `agent-smith-v2.ts` tem `*handleSteps` inválido | 🟡 Médio | Sintaxe de generator não suportada |
+| `index.ts` é manualmente mantido | 🔵 Baixo | Pode ser automatizado |
+| `SECURITY_BASELINE` duplicado | 🔵 Baixo | Skill file + constante no script |
+
+### Melhorias Sugeridas pelo Code Reviewer (Fase 6)
+1. Remover `jest.mock('@octokit/rest')` redundante (manual mock já existe)
+2. Usar `jest.useFakeTimers()` em vez de `setTimeout(10ms)` no pattern-library test
+3. Adicionar `upstreamRepo` no body do PR (generate-pr.ts)
+4. Remover `transformIgnorePatterns` do jest.config.js (redundante com manual mock)
+
+---
+
+## 🧠 Conceitos-Chave (Referência Rápida)
+
 ### Filosofia de Tools (ECC)
 
 | Princípio | Fonte | Implicação |
@@ -245,41 +289,15 @@ O nome **"Agent Smith"** vem do Agent Smith do Matrix:
 
 ---
 
-## 🛠️ Scripts Disponíveis
-
-```bash
-# Conversão de agents ECC → Freebuff (atualizado para v4)
-python3 scripts/convert-ecc-agents.py --force
-
-# Conversão seletiva
-python3 scripts/convert-ecc-agents.py --agent planner --force
-
-# Dry-run (sem escrever)
-python3 scripts/convert-ecc-agents.py --dry-run
-```
-
----
-
 ## 📋 Regras Extraídas da Conversa
 
 > 🤖 **Achado de:** `@conversation-analyzer`
 
-Analisando o padrão de interação com Rolim, as seguintes regras foram identificadas:
-
 | # | Regra | Origem |
 |---|-------|--------|
-| R1 | **Sempre oferecer revisão multi-agente** antes de considerar documentos finalizados. Mínimo de **22 agentes** correlacionados (padrão fixo por rodada). | Rolim sempre pede revisão completa antes de aprovar |
-| R2 | **Preservar contexto entre sessões.** Todo progresso deve ser registrado no SESSAO.md para continuidade. | Sessões longas com múltiplas rodadas de refinamento |
-| R3 | **Aplicar feedback incrementalmente.** Cada rodada de feedback deve resultar em melhorias concretas nos documentos ou código. | Múltiplas rodadas de revisão → aplicação → nova revisão |
-
-## 🔧 Issues Conhecidos (Não Bloqueantes)
-
-| Issue | Severidade | Notas |
-|-------|:----------:|-------|
-| `agent-smith.ts` tem import duplicado | 🟡 Médio | Exemplo no instructionsPrompt não deve ser alterado |
-| `agent-smith.ts` tem `*handleSteps` inválido | 🟡 Médio | Sintaxe de generator não suportada |
-| `index.ts` é manualmente mantido | 🔵 Baixo | Pode ser automatizado no futuro |
-| `SECURITY_BASELINE` duplicado | 🔵 Baixo | Skill file + constante no script |
+| R1 | **Sempre oferecer revisão multi-agente** antes de considerar documentos finalizados. | Rolim sempre pede revisão completa |
+| R2 | **Preservar contexto entre sessões.** Todo progresso deve ser registrado no SESSAO.md. | Sessões longas com múltiplas rodadas |
+| R3 | **Aplicar feedback incrementalmente.** Cada rodada deve resultar em melhorias concretas. | Múltiplas rodadas de refinamento |
 
 ---
 
@@ -289,7 +307,13 @@ Analisando o padrão de interação com Rolim, as seguintes regras foram identif
 2. Diga: "Continue de onde paramos. Leia o SESSAO.md"
 3. A IA vai ler este arquivo e saber todo o contexto
 
+### Próximos passos possíveis
+1. **Melhorias de código** — Aplicar as 4 melhorias sugeridas pelo code reviewer
+2. **Migrar para SQLite** — Quando knowledge/index.json exceder 500KB
+3. **Expandir biblioteca** — Popular com mais repos de referência
+4. **E2E testing** — Testar fluxo completo: descobrir repo → extrair padrão → criar PR
+
 ---
 
-*Documento atualizado em 16/07/2026 — sessão de readequação completa do Smith v4.0*
-*Regras R1-R3 extraídas por @conversation-analyzer em 16/07/2026 (2)*
+*Documento atualizado em 19/07/2026 — Implementação completa das 6 fases + 338 testes passando*
+*Commit: 39e04e8 — push ao GitHub concluído*

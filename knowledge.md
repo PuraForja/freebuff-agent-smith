@@ -1,11 +1,11 @@
-# 🧠 Freebuff Agent Smith — Knowledge File v2.0
+# 🧠 Freebuff Agent Smith V2 — Knowledge File v2.0
 
 ## ⚠️ INSTRUÇÕES AUTOMÁTICAS (Obrigatório ler)
 
 **Quando este projeto for aberto no Freebuff/Codebuff:**
 
-1. **Detecte automaticamente** que o `@agent-smith` está disponível em `.agents/agent-smith.ts`
-2. **Ofereça ao usuário** as capacidades completas do Agent Smith:
+1. **Detecte automaticamente** que o `@agent-smith-v2` está disponível em `.agents/agent-smith-v2.ts`
+2. **Ofereça ao usuário** as capacidades completas do Agent Smith V2:
    - Reavaliar agentes (multi-agente)
    - Descobrir repositórios no GitHub
    - Clonar/criar agentes novos
@@ -15,15 +15,15 @@
 
 ---
 
-## 🚀 O que é o Freebuff Agent Smith?
+## 🚀 O que é o Freebuff Agent Smith V2?
 
-**Agent Smith** é um **auto-engenheiro de agentes AI** para o ecossistema Freebuff.
+**Agent Smith V2** é um **auto-engenheiro de agentes AI** para o ecossistema Freebuff.
 
 Ele é um **agente híbrido**:
 - **`handleSteps`**: Fluxos determinísticos (setup, instalação, verificação)
 - **LLM + spawn_agents**: Decisões inteligentes, avaliação multi-agente
 
-### Filosofia: "Agent Smith do Matrix"
+### Filosofia: "Agent Smith V2 do Matrix"
 
 Assim como o Agente Smith do Matrix, este agente:
 - **Avalia** agentes disponíveis e encontra padrões
@@ -38,26 +38,26 @@ Assim como o Agente Smith do Matrix, este agente:
 
 | Comando | Descrição |
 |---------|-----------|
-| `@agent-smith reavalie` | Reavalia multi-agente de todos os agentes |
-| `@agent-smith reavalie programação` | Reavalia agentes de programação especificamente |
-| `@agent-smith liste` | Lista todos os agentes instalados |
-| `@agent-smith crie <descrição>` | Cria um novo agente (pesquisa local + GitHub) |
-| `@agent-smith clone <nome>` | Clona e adapta um agente existente |
-| `@agent-smith instale <recurso>` | Instala recursos do ECC |
-| `@agent-smith descubra` | Pesquisa GitHub por novos repositórios |
-| `@agent-smith sugira` | Sugere repositórios para instalar |
-| `@agent-smith atualize` | Atualiza recursos instalados |
-| `@agent-smith remova <nome>` | Remove recurso instalado |
-| `@agent-smith status` | Mostra saúde do sistema |
+| `@agent-smith-v2 reavalie` | Reavalia multi-agente de todos os agentes |
+| `@agent-smith-v2 reavalie programação` | Reavalia agentes de programação especificamente |
+| `@agent-smith-v2 liste` | Lista todos os agentes instalados |
+| `@agent-smith-v2 crie <descrição>` | Cria um novo agente (pesquisa local + GitHub) |
+| `@agent-smith-v2 clone <nome>` | Clona e adapta um agente existente |
+| `@agent-smith-v2 instale <recurso>` | Instala recursos do ECC |
+| `@agent-smith-v2 descubra` | Pesquisa GitHub por novos repositórios |
+| `@agent-smith-v2 sugira` | Sugere repositórios para instalar |
+| `@agent-smith-v2 atualize` | Atualiza recursos instalados |
+| `@agent-smith-v2 remova <nome>` | Remove recurso instalado |
+| `@agent-smith-v2 status` | Mostra saúde do sistema |
 
 ### Exemplos de Uso
 
 ```
-@agent-smith reavalie
-@agent-smith reavalie programação
-@agent-smith crie um revisor de código Rust
-@agent-smith descubra
-@agent-smith instale python-patterns
+@agent-smith-v2 reavalie
+@agent-smith-v2 reavalie programação
+@agent-smith-v2 crie um revisor de código Rust
+@agent-smith-v2 descubra
+@agent-smith-v2 instale python-patterns
 ```
 
 ---
@@ -67,12 +67,12 @@ Assim como o Agente Smith do Matrix, este agente:
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │  USUÁRIO                                                            │
-│  @agent-smith [comando]                                             │
+│  @agent-smith-v2 [comando]                                             │
 └──────────────────────────┬──────────────────────────────────────────┘
                            │
                            ▼
 ┌─────────────────────────────────────────────────────────────────────┐
-│  @agent-smith (Orquestrador Híbrido v2.0)                          │
+│  @agent-smith-v2 (Orquestrador Híbrido v2.0)                          │
 │                                                                     │
 │  ┌──────────────┐  ┌──────────────┐  ┌────────────────────┐        │
 │  │ handleSteps  │  │  LLM (mimo) │  │  spawn_agents      │        │
@@ -96,7 +96,7 @@ Assim como o Agente Smith do Matrix, este agente:
 ```
 .seu-projeto/
 ├── .agents/
-│   ├── agent-smith.ts         ← Orquestrador híbrido (v2.0)
+│   ├── agent-smith-v2.ts         ← Orquestrador híbrido (v2.0)
 │   ├── types/                 ← Tipos TypeScript
 │   ├── *.ts                   ← 67 agentes TypeScript
 │   └── .ecc-version           ← Versão do ECC instalado
@@ -122,12 +122,12 @@ Assim como o Agente Smith do Matrix, este agente:
 
 **Linux/Mac:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/PuraForja/freebuff-agent-smith/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/PuraForja/freebuff-agent-smith-v2/master/install.sh | bash
 ```
 
 **Windows (PowerShell):**
 ```powershell
-iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PuraForja/freebuff-agent-smith/master/install.ps1").Content
+iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PuraForja/freebuff-agent-smith-v2/master/install.ps1").Content
 ```
 
 ---
@@ -136,7 +136,7 @@ iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PuraForja/freebuf
 
 | Categoria | Quantidade |
 |-----------|:----------:|
-| 🎯 Agentes TypeScript | 68 (incluindo agent-smith) |
+| 🎯 Agentes TypeScript | 68 (incluindo agent-smith-v2) |
 | 🧠 Skills Markdown | 278 |
 
 ### 🏗️ Arquitetura dos Agentes

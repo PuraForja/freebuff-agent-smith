@@ -23,7 +23,7 @@ const sampleLineage: Lineage = {
     description: 'Convertido para Freebuff',
   },
   destination: {
-    repo: 'freebuff-agent-smith',
+    repo: 'freebuff-agent-smith-v2',
     path: '.agents/ecc/planner.ts',
   },
 }
@@ -54,7 +54,7 @@ describe('Lineage — InMemoryLineageStore', () => {
     expect(result).not.toBeNull()
     expect(result!.origin.repo).toBe('ECC')
     expect(result!.transformation.action).toBe('cloned')
-    expect(result!.destination.repo).toBe('freebuff-agent-smith')
+    expect(result!.destination.repo).toBe('freebuff-agent-smith-v2')
   })
 
   // ============================================================

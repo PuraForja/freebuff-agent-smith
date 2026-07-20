@@ -110,7 +110,7 @@ const definition: AgentDefinition = {
     ``,
     `### 6. INTEGRAÇÃO COM AGENT SMITH`,
     ``,
-    `- Usar @agent-smith para criar/instalar novos agents no workspace`,
+    `- Usar @agent-smith-v2 para criar/instalar novos agents no workspace`,
     `- Agentes do workspace ficam em .agents/ dentro de cada projeto`,
     `- Garantir que agents sigam o padrão AgentDefinition`,
     ``,

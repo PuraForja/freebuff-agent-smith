@@ -2,7 +2,6 @@
  * Tests for generate-pr.ts — Fase 5: Contribuição Automática
  */
 
-jest.mock('@octokit/rest')
 
 import {
   generatePrBody,
@@ -36,7 +35,7 @@ const mockMetadata = {
     tokenReduction: '28%',
     filesModified: ['skills/pdf-reader.md', 'skills/pdf-reader.test.md'],
   },
-  author: 'Agent Smith',
+  author: 'Agent Smith V2',
   createdAt: '2026-07-19',
   upstreamRepo: 'affaan-m/ECC',
 }
@@ -49,14 +48,14 @@ describe('generatePrBody', () => {
   it('should generate a valid PR body with all fields', () => {
     const body = generatePrBody(mockMetadata)
 
-    expect(body).toContain('Auto-generated contribution by FreeBuff Agent Smith')
+    expect(body).toContain('Auto-generated contribution by FreeBuff Agent Smith V2')
     expect(body).toContain('Adicionar suporte a UTF-8')
     expect(body).toContain('| Lines changed | 12 |')
     expect(body).toContain('| Token reduction | 28% |')
     expect(body).toContain('| Files modified | 2 |')
     expect(body).toContain('patch-001')
     expect(body).toContain('ECC/skills/pdf-reader')
-    expect(body).toContain('Agent Smith')
+    expect(body).toContain('Agent Smith V2')
     expect(body).toContain('Checklist')
   })
 
@@ -95,13 +94,16 @@ describe('generatePrTemplate', () => {
     expect(template.labels).toContain('smith-contribution')
   })
 
-  it('should generate unique branch names', (done) => {
-    const template1 = generatePrTemplate(mockMetadata)
-    setTimeout(() => {
+  it('should generate unique branch names' , () => {
+    jest.useFakeTimers()
+    try {
+      const template1 = generatePrTemplate(mockMetadata)
+      jest.advanceTimersByTime(1)
       const template2 = generatePrTemplate(mockMetadata)
       expect(template1.head).not.toBe(template2.head)
-      done()
-    }, 10)
+    } finally {
+      jest.useRealTimers()
+    }
   })
 })
 
@@ -114,7 +116,7 @@ describe('generatePrLocal', () => {
         tokenReduction: '28%',
         filesModified: ['skills/pdf-reader.md'],
       },
-      author: 'Agent Smith',
+      author: 'Agent Smith V2',
       upstreamRepo: 'affaan-m/ECC',
     })
 

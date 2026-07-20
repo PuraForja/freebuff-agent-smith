@@ -2,7 +2,6 @@
  * Tests for check-convergence.ts — Fase 5: Detecção de Convergência
  */
 
-jest.mock('@octokit/rest')
 
 import {
   checkConvergence,

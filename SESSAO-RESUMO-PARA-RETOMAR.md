@@ -1,6 +1,6 @@
 # 📋 Sessão 17/07/2026 — Resumo para Retomar
 
-> **Projeto:** Freebuff Agent Smith v3.1
+> **Projeto:** Freebuff Agent Smith V2 v3.1
 > **Git:** Commit `7f9e858` — branch `master` — já pusheado no GitHub
 > **Status:** F1 a F4 completas (233/233 testes ✅)
 > **Para retomar:** Cole este arquivo no Freebuff e diga "Continue de onde paramos"
@@ -10,7 +10,7 @@
 ## 📊 Status Atual
 
 ```
-📦 freebuff-agent-smith — 233/233 testes ✅ (12 suites)
+📦 freebuff-agent-smith-v2 — 233/233 testes ✅ (12 suites)
   ├── F1a: Tipos (artifact, lineage, patch, knowledge)    46 ✅
   ├── F1c: Integração (FileSystemStore)                    7 ✅
   ├── F2: Destilador (extract, discover, compare)         54 ✅
@@ -75,14 +75,14 @@ O Jest usa `babel-jest` para compilar TypeScript. Regex literais (`/pattern/g`) 
 
 ### Pendências Técnicas
 - Refinar estilo do `ecosystem-observer.ts` (restaurar template literals e emojis)
-- Os 67 agentes ECC + `@agent-smith` continuam funcionando normalmente
+- Os 67 agentes ECC + `@agent-smith-v2` continuam funcionando normalmente
 
 ---
 
 ## 🔑 Comandos Úteis
 
 ```bash
-cd /home/rolim/freebuff-workspace/freebuff-agent-smith
+cd /home/rolim/freebuff-workspace/freebuff-agent-smith-v2
 
 # Rodar testes completos
 npx jest --no-cache --verbose

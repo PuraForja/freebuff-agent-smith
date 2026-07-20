@@ -60,16 +60,19 @@ describe('Pattern Library', () => {
       expect(store.getPattern('non-existent')).toBeUndefined();
     });
 
-    test('should update pattern', (done) => {
-      const added = store.addPattern(createTestPattern());
-      setTimeout(() => {
-        const updated = store.updatePattern(added.id, { title: 'Updated Title', quality: 0.95 });
+    test('should update pattern' , () => {
+      jest.useFakeTimers()
+      try {
+        const added = store.addPattern(createTestPattern());
+        jest.advanceTimersByTime(1)
+        const updated = store.updatePattern(added.id, { title: 'Updated Title' , quality: 0.95 });
         expect(updated).toBeDefined();
-        expect(updated!.title).toBe('Updated Title');
+        expect(updated!.title).toBe('Updated Title' );
         expect(updated!.quality).toBe(0.95);
         expect(updated!.updatedAt).not.toBe(added.createdAt);
-        done();
-      }, 10);
+      } finally {
+        jest.useRealTimers();
+      }
     });
 
     test('should return undefined when updating non-existent pattern', () => {

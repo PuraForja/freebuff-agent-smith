@@ -1,8 +1,8 @@
 {
-  "name": "freebuff-agent-smith",
+  "name": "freebuff-agent-smith-v2",
   "version": "2.0.0",
   "description": "Build, Adapt and Install AI Agents for the Freebuff ecosystem — Hybrid v2.0",
-  "main": ".agents/agent-smith.ts",
+  "main": ".agents/agent-smith-v2.ts",
   "scripts": {
     "install:ecc": "bash scripts/ecc-install.sh",
     "update:ecc": "bash scripts/ecc-install.sh --update",
@@ -11,7 +11,7 @@
     "review": "bash scripts/auto-review.sh",
     "test": "jest",
     "test:watch": "jest --watch",
-    "status": "node -e \"console.log('Agent Smith v2.0 - 68 agents, 278 skills')\"",
+    "status": "node -e \"console.log('Agent Smith V2 v2.0 - 68 agents, 278 skills')\"",
     "agents:list": "ls .agents/ecc/*.ts .agents/custom/*.ts 2>/dev/null | grep -v types | wc -l",
     "agents:models": "grep -r 'model:' .agents/ecc/*.ts .agents/custom/*.ts 2>/dev/null | sort | uniq -c | sort -rn"
   },
@@ -19,7 +19,7 @@
     "freebuff",
     "codebuff",
     "ai-agents",
-    "agent-smith",
+    "agent-smith-v2",
     "ecc",
     "typescript",
     "agentes",
@@ -43,7 +43,7 @@
     "ts-jest": "^29.1.0",
     "typescript": "^7.0.2"
   },
-  "agent-smith": {
+  "agent-smith-v2": {
     "version": "2.0.0",
     "model": "mimo/mimo-v2.5",
     "type": "hybrid",

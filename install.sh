@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # ═══════════════════════════════════════════════════════════════
-#  install.sh — Instalador Interativo do Freebuff Agent Smith v2.0
+#  install.sh — Instalador Interativo do Freebuff Agent Smith V2 v2.0
 # ═══════════════════════════════════════════════════════════════
 #  Uso: curl -fsSL https://raw.githubusercontent.com/.../install.sh | bash
 #  Ou:  bash install.sh
 #
 #  Funciona em 3 etapas:
-#    1. Instala o @agent-smith (sempre)
+#    1. Instala o @agent-smith-v2 (sempre)
 #    2. PERGUNTA: Quer instalar ECC + outros repositórios?
 #    3. Instala os selecionados e adapta para Freebuff
 # ═══════════════════════════════════════════════════════════════
@@ -19,7 +19,7 @@ BLUE='\033[0;34m'; CYAN='\033[0;36m'; MAGENTA='\033[0;35m'
 NC='\033[0m'
 
 # ─── Configurações ──────────────────────────────────────────
-BRIDGE_REPO="https://github.com/PuraForja/freebuff-agent-smith"
+BRIDGE_REPO="https://github.com/PuraForja/freebuff-agent-smith-v2"
 RAW_BASE="${BRIDGE_REPO}/raw/master"
 INSTALL_DIR="$(pwd)"
 TYPES_DOWNLOADED=0
@@ -101,19 +101,19 @@ echo ""
 # ═══════════════════════════════════════════════════════════════
 # STEP 3: BAIXAR @AGENT-SMITH + SCRIPTS (OBRIGATÓRIO)
 # ═══════════════════════════════════════════════════════════════
-echo -e "${CYAN}[3/5] Baixando @agent-smith e scripts...${NC}"
+echo -e "${CYAN}[3/5] Baixando @agent-smith-v2 e scripts...${NC}"
 
-# 3a: Agent Smith
-if download_file "${RAW_BASE}/.agents/agent-smith.ts" "${INSTALL_DIR}/.agents/agent-smith.ts"; then
-    if verify_typescript "${INSTALL_DIR}/.agents/agent-smith.ts"; then
-        echo -e "  ${GREEN}✅${NC} @agent-smith.ts v2.0 baixado e verificado"
+# 3a: Agent Smith V2
+if download_file "${RAW_BASE}/.agents/agent-smith-v2.ts" "${INSTALL_DIR}/.agents/agent-smith-v2.ts"; then
+    if verify_typescript "${INSTALL_DIR}/.agents/agent-smith-v2.ts"; then
+        echo -e "  ${GREEN}✅${NC} @agent-smith-v2.ts v2.0 baixado e verificado"
     else
-        echo -e "  ${RED}❌${NC} @agent-smith.ts inválido"
-        rm -f "${INSTALL_DIR}/.agents/agent-smith.ts"
+        echo -e "  ${RED}❌${NC} @agent-smith-v2.ts inválido"
+        rm -f "${INSTALL_DIR}/.agents/agent-smith-v2.ts"
         exit 1
     fi
 else
-    echo -e "  ${RED}❌${NC} Erro ao baixar @agent-smith"
+    echo -e "  ${RED}❌${NC} Erro ao baixar @agent-smith-v2"
     exit 1
 fi
 
@@ -164,9 +164,9 @@ echo -e "     ${CYAN}⭐ 224k+ stars${NC}"
 echo -e "     📦 277 skills · 67 agents · 121 rules"
 echo -e "     📝 https://github.com/affaan-m/ECC"
 echo ""
-echo -e "  ${YELLOW}2)${NC} ${GREEN}Freebuff Agent Smith (apenas)${NC}"
-echo -e "     📦 Só o @agent-smith (já baixado)"
-echo -e "     💡 Use @agent-smith para instalar mais depois"
+echo -e "  ${YELLOW}2)${NC} ${GREEN}Freebuff Agent Smith V2 (apenas)${NC}"
+echo -e "     📦 Só o @agent-smith-v2 (já baixado)"
+echo -e "     💡 Use @agent-smith-v2 para instalar mais depois"
 echo ""
 echo -e "  ${YELLOW}3)${NC} ${GREEN}ECC + Agentes de Programação${NC}"
 echo -e "     📦 67 agentes TypeScript (reviewers, build-resolvers, etc)"
@@ -180,7 +180,7 @@ echo ""
 echo -e "${YELLOW}❓ O que você quer instalar?${NC}"
 echo -e "   (Digite o número e pressione Enter)"
 echo -e "   ${CYAN}Pode digitar múltiplos separados por espaço (ex: 1 3)${NC}"
-echo -e "   Ou ${YELLOW}0${NC} para pular e instalar só o @agent-smith"
+echo -e "   Ou ${YELLOW}0${NC} para pular e instalar só o @agent-smith-v2"
 echo ""
 eval "read -p '   Sua escolha: ' USER_CHOICE $STDIN_TTY"
 echo ""
@@ -193,9 +193,9 @@ SKIP_EXTRA=false
 
 for choice in $USER_CHOICE; do
     case $choice in
-        0) SKIP_EXTRA=true; echo -e "  ${YELLOW}⏭️  Apenas @agent-smith. Use 'scripts/ecc-install.sh' depois.${NC}" ;;
+        0) SKIP_EXTRA=true; echo -e "  ${YELLOW}⏭️  Apenas @agent-smith-v2. Use 'scripts/ecc-install.sh' depois.${NC}" ;;
         1) INSTALL_ECC=true ;;
-        2) SKIP_EXTRA=true; echo -e "  ${YELLOW}⏭️  Apenas @agent-smith. OK!${NC}" ;;
+        2) SKIP_EXTRA=true; echo -e "  ${YELLOW}⏭️  Apenas @agent-smith-v2. OK!${NC}" ;;
         3) INSTALL_ECC=true; INSTALL_PROGRAMMING=true ;;
         4) INSTALL_FULL=true ;;
         *) echo -e "  ${RED}❌ Opção inválida: $choice. Ignorando.${NC}" ;;
@@ -208,9 +208,9 @@ echo ""
 # STEP 4B: EXECUTAR INSTALAÇÕES ESCOLHIDAS
 # ═══════════════════════════════════════════════════════════════
 if [ "$SKIP_EXTRA" = true ]; then
-    echo -e "${YELLOW}⏭️  Apenas @agent-smith instalado.${NC}"
+    echo -e "${YELLOW}⏭️  Apenas @agent-smith-v2 instalado.${NC}"
     echo -e "   Você pode instalar mais depois com:"
-    echo -e "   • @agent-smith instale <recurso>"
+    echo -e "   • @agent-smith-v2 instale <recurso>"
     echo -e "   • bash scripts/ecc-install.sh"
 elif [ "$INSTALL_FULL" = true ]; then
     echo -e "${GREEN}📦 Instalação COMPLETA selecionada!${NC}"
@@ -255,7 +255,7 @@ ECC_INSTALLED=$(ls "${INSTALL_DIR}/.agents"/*.ts 2>/dev/null | wc -l || echo 1)
 cat > "${INSTALL_DIR}/.ecc-config.json" << CONFIG_EOF
 {
   "ecc_repo": "https://github.com/affaan-m/ECC",
-  "bridge_repo": "https://github.com/PuraForja/freebuff-agent-smith",
+  "bridge_repo": "https://github.com/PuraForja/freebuff-agent-smith-v2",
   "installed_skills": [],
   "installed_agents": [],
   "installed_rules": [],
@@ -263,7 +263,7 @@ cat > "${INSTALL_DIR}/.ecc-config.json" << CONFIG_EOF
   "installed_at": "${INSTALLED_AT}",
   "version": "2.0.0",
   "agents_count": ${ECC_INSTALLED},
-  "note": "Agent Smith v2.0 - Use @agent-smith para gerenciar. 'descubra' para achar repos. 'reavalie' para multi-avaliação."
+  "note": "Agent Smith V2 v2.0 - Use @agent-smith-v2 para gerenciar. 'descubra' para achar repos. 'reavalie' para multi-avaliação."
 }
 CONFIG_EOF
 echo -e "  ${GREEN}✅${NC} Configuração salva (.ecc-config.json)"
@@ -281,7 +281,7 @@ GITIGNORE_FILE="${INSTALL_DIR}/.gitignore"
 if ! grep -q "\.agents/types/" "$GITIGNORE_FILE" 2>/dev/null; then
     {
         echo ""
-        echo "# Freebuff Agent Smith"
+        echo "# Freebuff Agent Smith V2"
         echo ".agents/types/"
         echo "skills/"
         echo "CATALOGO.md"
@@ -301,7 +301,7 @@ echo ""
 echo -e "   ${CYAN}📋 Resumo da Instalação:${NC}"
 echo -e "   ─────────────────────────────────────────────"
 echo -e "   📁 ${GREEN}Projeto:${NC}       ${INSTALL_DIR}"
-echo -e "   🤖 ${GREEN}Agent Smith:${NC}    .agents/agent-smith.ts ${MAGENTA}v2.0${NC}"
+echo -e "   🤖 ${GREEN}Agent Smith V2:${NC}    .agents/agent-smith-v2.ts ${MAGENTA}v2.0${NC}"
 echo -e "   📝 ${GREEN}Tipos:${NC}          ${TYPES_DOWNLOADED}/3 baixados"
 echo -e "   📖 ${GREEN}Knowledge:${NC}      knowledge.md"
 echo -e "   ⚙️  ${GREEN}Config:${NC}        .ecc-config.json"
@@ -310,12 +310,12 @@ echo -e "   🌐 ${GREEN}Freebuff:${NC}       $([ "$(check_freebuff && echo '✅
 echo ""
 echo -e "   ${YELLOW}💡 Comandos Rápidos (dentro do Freebuff):${NC}"
 echo -e "   ─────────────────────────────────────────────"
-echo -e "   ${GREEN}@agent-smith reavalie${NC}        → Reavaliar todos os agentes"
-echo -e "   ${GREEN}@agent-smith descubra${NC}        → Pesquisar GitHub por novos repos"
-echo -e "   ${GREEN}@agent-smith crie <desc>${NC}     → Criar novo agente"
-echo -e "   ${GREEN}@agent-smith clone <nome>${NC}    → Clonar agente existente"
-echo -e "   ${GREEN}@agent-smith liste${NC}           → Listar agentes instalados"
-echo -e "   ${GREEN}@agent-smith status${NC}          → Saúde do sistema"
+echo -e "   ${GREEN}@agent-smith-v2 reavalie${NC}        → Reavaliar todos os agentes"
+echo -e "   ${GREEN}@agent-smith-v2 descubra${NC}        → Pesquisar GitHub por novos repos"
+echo -e "   ${GREEN}@agent-smith-v2 crie <desc>${NC}     → Criar novo agente"
+echo -e "   ${GREEN}@agent-smith-v2 clone <nome>${NC}    → Clonar agente existente"
+echo -e "   ${GREEN}@agent-smith-v2 liste${NC}           → Listar agentes instalados"
+echo -e "   ${GREEN}@agent-smith-v2 status${NC}          → Saúde do sistema"
 echo ""
 
 # Instalar Freebuff se não tiver
@@ -331,6 +331,6 @@ fi
 
 echo ""
 echo -e "${GREEN}╔═══════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║         O @agent-smith está pronto! Use freebuff!           ║${NC}"
+echo -e "${GREEN}║         O @agent-smith-v2 está pronto! Use freebuff!           ║${NC}"
 echo -e "${GREEN}╚═══════════════════════════════════════════════════════════════╝${NC}"
 echo ""

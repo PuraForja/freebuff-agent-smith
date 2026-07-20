@@ -1,4 +1,4 @@
-# PRD — Freebuff Agent Smith v3.0
+# PRD — Freebuff Agent Smith V2 v3.0
 
 > **Product Requirements Document**
 > Versão: 3.1 · Data: 16/07/2026 · Autor: Rolim + Buffy (IA)
@@ -12,7 +12,7 @@
 
 > **Por que o Smith existe?**
 
-O Freebuff Agent Smith é um **auto-engenheiro de agentes AI** inspirado no Agent Smith do Matrix. Assim como o vilão copiava a si mesmo, modificava outros programas e criou uma comunidade inteira, o Smith:
+O Freebuff Agent Smith V2 é um **auto-engenheiro de agentes AI** inspirado no Agent Smith V2 do Matrix. Assim como o vilão copiava a si mesmo, modificava outros programas e criou uma comunidade inteira, o Smith:
 
 - **Descobre** agents em repositórios (GitHub, ECC, CrewAI, Hermes, LangGraph, entre outros)
 - **Analisa** e extrai conhecimento (CONCEITOS, não código)
@@ -254,7 +254,7 @@ A Biblioteca Smith já contém o conhecimento destilado — consulte `knowledge/
 - [Freebuff Docs - Criando Agents](https://freebuff.com/docs/creating-new-agents)
 - [Freebuff Docs - Agents Overview](https://freebuff.com/docs/agents-overview)
 - [ECC Repository](https://github.com/affaan-m/ECC)
-- [Freebuff Agent Smith](https://github.com/PuraForja/freebuff-agent-smith)
+- [Freebuff Agent Smith V2](https://github.com/PuraForja/freebuff-agent-smith-v2)
 - [solucao-medica (Anti-Hallucination Reference)](https://github.com/PuraForja/solucao-medica)
 - [Chain-of-Verification Paper (Meta FAIR, 2024)](https://arxiv.org/abs/2309.11495)
 

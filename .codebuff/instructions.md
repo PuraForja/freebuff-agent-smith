@@ -1,4 +1,4 @@
-# 🧠 freebuff-agent-smith — Instruções do Projeto
+# 🧠 freebuff-agent-smith-v2 — Instruções do Projeto
 
 ## ⚡ PRE-CHECK (Execute BEFORE any task)
 
@@ -23,7 +23,7 @@ Este projeto fornece **agentes TypeScript** e **skills Markdown** derivados do [
 ### Estrutura atual
 
 ```
-freebuff-agent-smith/
+freebuff-agent-smith-v2/
 ├── .agents/              ← 67 agentes TypeScript (spawnáveis com @)
 ├── skills/               ← 278 skills Markdown (usar read_files)
 ├── CATALOGO.md           ← Catálogo completo de recursos
@@ -100,7 +100,7 @@ bash scripts/ecc-install.sh --force  # Forçar reinstalação
 | Database | `database-reviewer` | `.agents/database-reviewer.ts` |
 | Performance | `performance-optimizer` | `.agents/performance-optimizer.ts` |
 | Code exploration | `code-explorer` | `.agents/code-explorer.ts` |
-| Agent management | `agent-smith` | `.agents/agent-smith.ts` |
+| Agent management | `agent-smith-v2` | `.agents/agent-smith-v2.ts` |
 | SEO | `seo-specialist` | `.agents/seo-specialist.ts` |
 | Marketing | `marketing-agent` | `.agents/marketing-agent.ts` |
 | TDD | `tdd-guide` | `.agents/tdd-guide.ts` |

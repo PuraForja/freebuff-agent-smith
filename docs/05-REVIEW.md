@@ -1,4 +1,4 @@
-# 📋 REVIEW — Freebuff Agent Smith v3.0
+# 📋 REVIEW — Freebuff Agent Smith V2 v3.0
 
 > **Revisão Final da Implementação**
 > Versão: 3.1 · Data: 19/07/2026 · Autor: Rolim + Buffy (IA)
@@ -55,7 +55,7 @@
 
 | Arquivo | Responsabilidade |
 |---------|------------------|
-| `agent-smith.ts` | Agente principal — orquestrador do sistema |
+| `agent-smith-v2.ts` | Agente principal — orquestrador do sistema |
 | `gov-data-downloader.ts` | Download de dados governamentais |
 | `ai-workspace-manager.ts` | Gerenciamento de workspace AI |
 | `infrastructure-manager.ts` | Gerenciamento de infraestrutura |

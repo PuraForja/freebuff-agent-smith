@@ -1,4 +1,4 @@
-# SPEC — Freebuff Agent Smith v3.0
+# SPEC — Freebuff Agent Smith V2 v3.0
 
 > **Especificação Técnica**
 > Versão: 3.1 · Data: 16/07/2026 · Autor: Rolim + Buffy (IA)
@@ -223,9 +223,9 @@ Todos os artefatos compartilham operações comuns: **criar, clonar, adaptar, in
 ## 3. Estrutura do Projeto
 
 ```
-freebuff-agent-smith/
+freebuff-agent-smith-v2/
 ├── .agents/
-│   ├── agent-smith.ts              ← Agente principal (v3.0)
+│   ├── agent-smith-v2.ts              ← Agente principal (v3.0)
 │   ├── types/
 │   │   ├── agent-definition.ts     ← Tipos de agent
 │   │   ├── artifact.ts             ← NOVO: Tipos de artefato
@@ -458,7 +458,7 @@ knowledge/
 │   ├── grounding-first.json           ← Populado via solucao-medica
 │   └── ...
 ├── lineage/
-│   ├── agent-smith.json               ← Linhagem do agent-smith
+│   ├── agent-smith-v2.json               ← Linhagem do agent-smith-v2
 │   ├── code-reviewer.json
 │   └── ...
 ├── anti-hallucination/                ← Populado com 5 camadas!
@@ -769,7 +769,7 @@ O Smith depende de APIs externas que podem falhar. Cada operação deve ter fall
 - [Freebuff Docs - Criando Agents](https://freebuff.com/docs/creating-new-agents)
 - [Freebuff Docs - Agents Overview](https://freebuff.com/docs/agents-overview)
 - [ECC Repository](https://github.com/affaan-m/ECC)
-- [Freebuff Agent Smith](https://github.com/PuraForja/freebuff-agent-smith)
+- [Freebuff Agent Smith V2](https://github.com/PuraForja/freebuff-agent-smith-v2)
 - [solucao-medica (Anti-Hallucination Reference)](https://github.com/PuraForja/solucao-medica)
 - [Chain-of-Verification Paper (Meta FAIR, 2024)](https://arxiv.org/abs/2309.11495)
 

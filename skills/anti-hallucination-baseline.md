@@ -1,7 +1,7 @@
 # 🧠 Skill: anti-hallucination-baseline
 
 > **Fonte original:** `solucao-medica/referencias/ANTI-HALUCINACAO.md`
-> **Adaptada para:** Freebuff Agent Smith
+> **Adaptada para:** Freebuff Agent Smith V2
 > **Tipo:** Skill de Qualidade
 
 ---

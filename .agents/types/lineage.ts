@@ -11,7 +11,7 @@ import { join } from 'path'
  *   const lineage = registerLineage('planner', {
  *     origin: { repo: 'ECC', version: '2.1', path: 'agents/planner.md' },
  *     transformation: { date: '2026-07-17', action: 'cloned', description: 'Convertido' },
- *     destination: { repo: 'freebuff-agent-smith', path: '.agents/ecc/planner.ts' }
+ *     destination: { repo: 'freebuff-agent-smith-v2', path: '.agents/ecc/planner.ts' }
  *   })
  *
  *   const found = getLineage('planner')

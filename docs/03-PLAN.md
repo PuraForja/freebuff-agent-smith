@@ -1,4 +1,4 @@
-# 📋 PLAN — Freebuff Agent Smith v3.0
+# 📋 PLAN — Freebuff Agent Smith V2 v3.0
 
 > **Plano de Implementação**
 > Versão: 3.1 · Data: 16/07/2026 · Autor: Rolim + Buffy (IA)
@@ -10,7 +10,7 @@
 
 ## 1. Resumo Executivo
 
-**Objetivo:** Evoluir o Freebuff Agent Smith de um orquestrador de agents para um **auto-engenheiro de agentes AI** completo — com destilação de conhecimento, observação proativa, sistema de patches, revalidação de agents, biblioteca de padrões e anti-alucinação.
+**Objetivo:** Evoluir o Freebuff Agent Smith V2 de um orquestrador de agents para um **auto-engenheiro de agentes AI** completo — com destilação de conhecimento, observação proativa, sistema de patches, revalidação de agents, biblioteca de padrões e anti-alucinação.
 
 **Duração estimada:** ~10 semanas (6 fases)
 **Escopo do MVP:** Fases 1-2 (Fundação + Destilador) são o **MVP Core**. Fases 3-6 são **Expansão** — podem ser postergadas sem invalidar o MVP.
@@ -480,7 +480,7 @@ Cada fase é considerada completa quando:
 
 - [Freebuff Docs](https://freebuff.com/docs)
 - [ECC Repository](https://github.com/affaan-m/ECC)
-- [Freebuff Agent Smith](https://github.com/PuraForja/freebuff-agent-smith)
+- [Freebuff Agent Smith V2](https://github.com/PuraForja/freebuff-agent-smith-v2)
 
 ---
 

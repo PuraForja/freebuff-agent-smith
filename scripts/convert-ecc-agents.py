@@ -65,7 +65,7 @@ AGENT_MODEL_OVERRIDES = {
     "healthcare-reviewer": "mimo/mimo-v2.5",
     "homelab-architect": "mimo/mimo-v2.5",
     "gov-data-downloader": "mimo/mimo-v2.5",
-    "agent-smith": "mimo/mimo-v2.5",
+    "agent-smith-v2": "mimo/mimo-v2.5",
     "agent-evaluator": "mimo/mimo-v2.5",
     "planner": "mimo/mimo-v2.5",
     "chief-of-staff": "mimo/mimo-v2.5",

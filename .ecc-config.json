@@ -1,13 +1,13 @@
 {
   "ecc_repo": "https://github.com/affaan-m/ECC",
-  "bridge_repo": "https://github.com/PuraForja/freebuff-agent-smith",
+  "bridge_repo": "https://github.com/PuraForja/freebuff-agent-smith-v2",
   "installed_skills": [],
   "installed_agents": [],
   "installed_rules": [],
   "last_sync": null,
   "installed_at": "2026-07-15T17:29:42Z",
   "version": "1.0.0",
-  "note": "Use @agent-smith no Codebuff/Freebuff para instalar recursos do ECC",
+  "note": "Use @agent-smith-v2 no Codebuff/Freebuff para instalar recursos do ECC",
   "smith": {
     "version": "3.1.0",
     "knowledgeDir": "./knowledge/",

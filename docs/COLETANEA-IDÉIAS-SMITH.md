@@ -1,4 +1,4 @@
-# 🧬 Coletânea de Ideias — Freebuff Agent Smith
+# 🧬 Coletânea de Ideias — Freebuff Agent Smith V2
 
 > **Fonte:** Conversas acumuladas sobre a visão do Smith
 > **Data de compilação:** 16/07/2026
@@ -14,9 +14,9 @@
 
 ## 🧠 O que é o Smith
 
-O nome vem do **Agent Smith do Matrix**:
-- O Agent Smith copiava a si mesmo, modificava outros programas e criou uma comunidade inteira
-- O Freebuff Agent Smith faz o mesmo: descobre, clona, adapta e instala agents
+O nome vem do **Agent Smith V2 do Matrix**:
+- O Agent Smith V2 copiava a si mesmo, modificava outros programas e criou uma comunidade inteira
+- O Freebuff Agent Smith V2 faz o mesmo: descobre, clona, adapta e instala agents
 
 ### Duas funções principais
 

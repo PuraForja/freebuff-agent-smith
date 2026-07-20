@@ -77,7 +77,7 @@ import typescriptReviewer from './ecc/typescript-reviewer'
 import vueReviewer from './ecc/vue-reviewer'
 
 // Custom agents (created for Freebuff)
-import agentSmith from './custom/agent-smith'
+import agentSmith from './custom/agent-smith-v2'
 import govDataDownloader from './custom/gov-data-downloader'
 import aiWorkspaceManager from './custom/ai-workspace-manager'
 import infrastructureManager from './custom/infrastructure-manager'
@@ -230,7 +230,7 @@ export function listAgentIds(): string[] {
 }
 
 // Categorized exports
-const customIds = ['agent-smith', 'gov-data-downloader', 'ai-workspace-manager', 'infrastructure-manager', 'workstation-architect']
+const customIds = ['agent-smith-v2', 'gov-data-downloader', 'ai-workspace-manager', 'infrastructure-manager', 'workstation-architect']
 export const eccAgents = agents.filter(a => !customIds.includes(a.id))
 export const customAgents = agents.filter(a => customIds.includes(a.id))
 

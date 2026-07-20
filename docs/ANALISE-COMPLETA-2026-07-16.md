@@ -1,4 +1,4 @@
-# 📊 Análise Completa — Freebuff Agent Smith
+# 📊 Análise Completa — Freebuff Agent Smith V2
 > **Data:** 16/07/2026
 > **Objetivo:** Cruzar documentação oficial Freebuff, ECC e projeto Smith para mapear gaps e melhorias
 
@@ -73,7 +73,7 @@ ECC/
 | **Open Source** | 3 | opensource-forker, opensource-sanitizer, opensource-packager |
 | **GAN Harness** | 3 | gan-planner, gan-generator, gan-evaluator |
 | **Outros** | 2 | a11y-architect, gov-data-downloader |
-| **TOTAL** | **68** | incluindo agent-smith |
+| **TOTAL** | **68** | incluindo agent-smith-v2 |
 
 ---
 
@@ -83,7 +83,7 @@ ECC/
 - ✅ 68 agents TypeScript em `.agents/*.ts`
 - ✅ 278 skills Markdown em `skills/`
 - ✅ Types TypeScript definidos (`types/agent-definition.ts`, `types/tools.ts`, `types/util-types.ts`)
-- ✅ `agent-smith.ts` — agente principal (v2.0, modelo híbrido)
+- ✅ `agent-smith-v2.ts` — agente principal (v2.0, modelo híbrido)
 - ✅ `knowledge.md` — documentação do projeto (v2.0)
 - ✅ `CATALOGO.md` — catálogo completo
 - ✅ `HARNESS_EVALUATION_ALL.md` — avaliação de todos os 68 agents
@@ -122,7 +122,7 @@ export default definition
 ### 4.1 Tipo de Agent — Smith usa 100% LLM-based
 A documentação oficial Freebuff descreve **dois tipos**: LLM-based e Programmatic (generator). O Smith usa **apenas LLM-based** com `spawnerPrompt`. 
 
-**Única exceção:** `agent-smith.ts` tem `*handleSteps()` que faz:
+**Única exceção:** `agent-smith-v2.ts` tem `*handleSteps()` que faz:
 ```typescript
 *handleSteps(_context?: any) {
   yield { tool: 'read_files', paths: ['.ecc-config.json', 'CATALOGO.md'] }
@@ -156,7 +156,7 @@ O Smith usa tools que **não estão na documentação oficial**:
 A doc oficial mostra `spawnableAgents: ['codebuff/reviewer', 'codebuff/basher']` para coordenação entre agents. **Nenhum agent do Smith usa esse campo.**
 
 **Oportunidade:** Definir cadeias de agents:
-- `agent-smith` → pode spawnar `code-reviewer`, `architect`, `planner`
+- `agent-smith-v2` → pode spawnar `code-reviewer`, `architect`, `planner`
 - `planner` → pode spawnar `tdd-guide`, `code-architect`
 - `security-reviewer` → pode spawnar `build-error-resolver`
 
@@ -189,7 +189,7 @@ Criar agents com `handleSteps` para workflows determinísticos:
 ### 5.2 Cadeias de Spawn (médio impacto)
 Adicionar `spawnableAgents` para orquestração:
 ```typescript
-// agent-smith.ts
+// agent-smith-v2.ts
 spawnableAgents: ['code-reviewer', 'architect', 'planner', 'security-reviewer']
 ```
 
@@ -227,7 +227,7 @@ Algumas skills do ECC poderiam ser convertidas em agents TypeScript:
 ## 6. Inventário Completo de Agents por Modelo
 
 ### mimo/mimo-v2.5 (45 agents)
-a11y-architect, agent-smith, architect, code-architect, code-explorer, code-reviewer, conversation-analyzer, cpp-reviewer, csharp-reviewer, database-reviewer, django-reviewer, docs-lookup, fastapi-reviewer, flutter-reviewer, fsharp-reviewer, gan-evaluator, gan-generator, gan-planner, go-reviewer, healthcare-reviewer, homelab-architect, java-reviewer, kotlin-reviewer, marketing-agent, mle-reviewer, network-architect, network-config-reviewer, performance-optimizer, php-reviewer, planner, pr-test-analyzer, python-reviewer, react-reviewer, rust-reviewer, security-reviewer, silent-failure-hunter, spec-miner, swift-reviewer, typescript-reviewer, vue-reviewer, chief-of-staff, comment-analyzer
+a11y-architect, agent-smith-v2, architect, code-architect, code-explorer, code-reviewer, conversation-analyzer, cpp-reviewer, csharp-reviewer, database-reviewer, django-reviewer, docs-lookup, fastapi-reviewer, flutter-reviewer, fsharp-reviewer, gan-evaluator, gan-generator, gan-planner, go-reviewer, healthcare-reviewer, homelab-architect, java-reviewer, kotlin-reviewer, marketing-agent, mle-reviewer, network-architect, network-config-reviewer, performance-optimizer, php-reviewer, planner, pr-test-analyzer, python-reviewer, react-reviewer, rust-reviewer, security-reviewer, silent-failure-hunter, spec-miner, swift-reviewer, typescript-reviewer, vue-reviewer, chief-of-staff, comment-analyzer
 
 ### deepseek/deepseek-v4-flash (23 agents)
 build-error-resolver, code-simplifier, comment-analyzer, cpp-build-resolver, dart-build-resolver, django-build-resolver, doc-updater, e2e-runner, go-build-resolver, harness-optimizer, java-build-resolver, kotlin-build-resolver, loop-operator, marketing-agent, network-troubleshooter, opensource-forker, opensource-sanitizer, opensource-packager, pytorch-build-resolver, react-build-resolver, rust-build-resolver, seo-specialist, swift-build-resolver, tdd-guide
@@ -242,7 +242,7 @@ Alguns agents aparecem nas duas listas — verificar se há duplicação ou se �
 | # | Ação | Prioridade | Esforço |
 |---|------|:----------:|:-------:|
 | 1 | Atualizar `types/agent-definition.ts` com campos da doc oficial | 🔴 Alto | Baixo |
-| 2 | Adicionar `spawnableAgents` ao agent-smith e key agents | 🔴 Alto | Baixo |
+| 2 | Adicionar `spawnableAgents` ao agent-smith-v2 e key agents | 🔴 Alto | Baixo |
 | 3 | Criar 1-2 agents programáticos com handleSteps | 🟡 Médio | Médio |
 | 4 | Atualizar docs com campos extras descobertos | 🟡 Médio | Baixo |
 | 5 | Verificar spawn_agent vs spawn_agents (singular vs plural) | 🔴 Alto | Baixo |

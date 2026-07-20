@@ -306,7 +306,7 @@ read_files [".agents/code-reviewer.ts"]
 ### 📋 Gestão e Planejamento (5 agents)
 | Tarefa | Agent | Descrição |
 |--------|-------|-----------|
-| Agent management | `agent-smith` | Import/create/manage agents |
+| Agent management | `agent-smith-v2` | Import/create/manage agents |
 | Planner | `planner` | Feature planning, refactoring |
 | Chief of staff | `chief-of-staff` | Triage comunicações |
 | Loop operator | `loop-operator` | Autonomous agent loops |
