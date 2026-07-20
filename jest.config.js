@@ -6,4 +6,7 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'babel-jest',
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(@octokit)/)',
+  ],
 }

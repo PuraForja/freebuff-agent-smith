@@ -79,6 +79,9 @@ import vueReviewer from './ecc/vue-reviewer'
 // Custom agents (created for Freebuff)
 import agentSmith from './custom/agent-smith'
 import govDataDownloader from './custom/gov-data-downloader'
+import aiWorkspaceManager from './custom/ai-workspace-manager'
+import infrastructureManager from './custom/infrastructure-manager'
+import workstationArchitect from './custom/workstation-architect'
 
 // F1a: Smith Types (Artifact, Lineage, Patch, Knowledge)
 export type { Artifact } from './types/artifact'
@@ -112,6 +115,30 @@ export { diagnoseAgent } from './types/diagnose-agent'
 // F4: Observador de Ecossistema
 export type { EcosystemReport, EcosystemResult, DuplicateInfo } from './types/ecosystem-observer'
 export { analyzeEcosystem, findDuplicates, generateHealthReport, checkEcosystem } from './types/ecosystem-observer'
+
+// F5: Contribuição Automática — PR Generation
+export type { PrTemplate, PrMetadata, PrResult, PrStore } from './types/generate-pr'
+export { generatePrBody, generatePrTemplate, generatePrLocal, InMemoryPrStore } from './types/generate-pr'
+
+// F5: Contribuição Automática — Convergence Detection
+export type { ConvergenceResult, ConvergenceDetail, ConvergenceOptions, ConvergenceStore } from './types/check-convergence'
+export { checkConvergence, checkConvergenceBatch, generateConvergenceReport, InMemoryConvergenceStore } from './types/check-convergence'
+
+// F5: Contribuição Automática — Contribution Metrics
+export type { ContributionRecord, ContributionSummary, ContributionFilter, ContributionStore } from './types/contribution-metrics'
+export { recordContribution, updateContributionStatus, getContributionSummary, generateMetricsReport, extractLessonLearned, InMemoryContributionStore } from './types/contribution-metrics'
+
+// F6: Biblioteca de Padrões — Pattern Library
+export type { Pattern, PatternCategory, PatternFilter, SearchResult, PatternStore } from './types/pattern-library'
+export { searchPatterns, getPattern, listPatterns, addPattern, updatePattern, removePattern, countPatterns, InMemoryPatternStore } from './types/pattern-library'
+
+// F6: Biblioteca de Padrões — Auto Ingest
+export type { ReferenceRepo, IngestResult, BatchIngestResult, AutoIngestConfig, AutoIngestStore } from './types/auto-ingest'
+export { extractPatternsFromReadme, validateReferenceRepo, generateIngestReport, DEFAULT_REFERENCE_REPOS, DEFAULT_AUTO_INGEST_CONFIG, InMemoryAutoIngestStore, getAutoIngestConfig, updateAutoIngestConfig, getIngestHistory, addIngestResult } from './types/auto-ingest'
+
+// F6: Biblioteca de Padrões — Index Manager
+export type { IndexEntry, IndexCategory, KnowledgeIndex, ValidationResult, ValidationError, IndexManagerConfig, IndexManagerStore } from './types/index-manager'
+export { createEmptyIndex, rebuildIndex, validateIndex, createInitialPatterns, generateValidationReport, InMemoryIndexManagerStore, rebuildKnowledgeIndex, validateKnowledgeIndex, getCurrentIndex, validationReport } from './types/index-manager'
 
 // Combined registry
 export const agents: AgentDefinition[] = [
@@ -187,6 +214,9 @@ export const agents: AgentDefinition[] = [
   // Custom Agents
   agentSmith,
   govDataDownloader,
+  aiWorkspaceManager,
+  infrastructureManager,
+  workstationArchitect,
 ]
 
 // Helper to find agent by ID
@@ -200,7 +230,8 @@ export function listAgentIds(): string[] {
 }
 
 // Categorized exports
-export const eccAgents = agents.filter(a => !['agent-smith', 'gov-data-downloader'].includes(a.id))
-export const customAgents = agents.filter(a => ['agent-smith', 'gov-data-downloader'].includes(a.id))
+const customIds = ['agent-smith', 'gov-data-downloader', 'ai-workspace-manager', 'infrastructure-manager', 'workstation-architect']
+export const eccAgents = agents.filter(a => !customIds.includes(a.id))
+export const customAgents = agents.filter(a => customIds.includes(a.id))
 
 export default agents
